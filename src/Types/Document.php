@@ -2,6 +2,9 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class Document
  * This object represents a general file (as opposed to photos and audio files).
@@ -9,7 +12,7 @@ namespace tgbot\Api\Types;
  *
  * @package tgbot\Api\Types
  */
-class Document
+class Document implements TypeInterface
 {
     /**
      * Unique identifier for this file
@@ -91,7 +94,12 @@ class Document
      */
     public function setFileSize($fileSize)
     {
-        $this->fileSize = $fileSize;
+        if(is_numeric($fileSize)) {
+            $this->fileSize = $fileSize;
+        }
+        else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -121,8 +129,28 @@ class Document
     /**
      * @param PhotoSize $thumb
      */
-    public function setThumb($thumb)
+    public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['file_id'], $data['thumb'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setFileId($data['file_id']);
+        $instance->setThumb(PhotoSize::fromResponse($data['thumb']));
+
+        if (isset($data['mime_type'])) {
+            $instance->setMimeType($data['mime_type']);
+        }
+        if (isset($data['file_size'])) {
+            $instance->setFileSize($data['file_size']);
+        }
+
+        return $instance;
     }
 }
