@@ -28,7 +28,7 @@ class Message
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \tgbot\Api\Types\User|\tgbot\Api\Types\Group
+     * @var \tgbot\Api\Types\User|\tgbot\Api\Types\GroupChat
      */
     protected $chat;
 
