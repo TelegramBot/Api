@@ -95,6 +95,18 @@ class BotApi
     }
 
 
+    /**
+     * Use this method to send text messages. On success, the sent \tgbot\Api\Types\Message is returned.
+     *
+     * @param int $chatId
+     * @param string $text
+     * @param bool $disablePreviw
+     * @param int $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\Exception
+     */
     public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
     {
         return $this->call('sendMessage', [
@@ -106,14 +118,44 @@ class BotApi
         ]);
     }
 
-    public function sendChatAction($chatId, $action) {
+    /**
+     * Use this method when you need to tell the user that something is happening on the bot's side.
+     * The status is set for 5 seconds or less (when a message arrives from your bot,
+     * Telegram clients clear its typing status).
+     *
+     * We only recommend using this method when a response from the bot will take a noticeable amount of time to arrive.
+     *
+     * Type of action to broadcast. Choose one, depending on what the user is about to receive:
+     * `typing` for text messages, `upload_photo` for photos, `record_video` or `upload_video` for videos,
+     * `record_audio` or upload_audio for audio files, `upload_document` for general files,
+     * `find_location` for location data.
+     *
+     * @param int $chatId
+     * @param string $action
+     *
+     * @return bool
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendChatAction($chatId, $action)
+    {
         return $this->call('sendChatAction', [
             'chat_id' => (int) $chatId,
             'action' => $action
         ]);
     }
 
-    public function getUserProfilePhotos($userId, $offset = 0, $limit = 100) {
+    /**
+     * Use this method to get a list of profile pictures for a user.
+     *
+     * @param int $userId
+     * @param int $offset
+     * @param int $limit
+     *
+     * @return \tgbot\Api\Types\UserProfilePhotos
+     * @throws \tgbot\Api\Exception
+     */
+    public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
+    {
         return $this->call('getUserProfilePhotos', [
             'user_id' => (int) $userId,
             'offset' => $offset,
@@ -143,6 +185,9 @@ class BotApi
         $this->curl and curl_close($this->curl);
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return self::URL_PREFIX . $this->token;
