@@ -113,7 +113,7 @@ class User extends BaseType implements TypeInterface
 
     public static function fromResponse($data)
     {
-        $instance = new User();
+        $instance = new self();
 
         if (!isset($data['id'], $data['first_name'])) {
             throw new InvalidArgumentException();
@@ -124,7 +124,7 @@ class User extends BaseType implements TypeInterface
         if (isset($data['last_name'])) {
             $instance->setLastName($data['last_name']);
         }
-        if (isset($data['last_name'])) {
+        if (isset($data['username'])) {
             $instance->setUsername($data['username']);
         }
 
