@@ -95,19 +95,21 @@ class BotApi
     }
 
 
-    public function sendMessage(
-        $chatId,
-        $text,
-        $disableWebPagePreviw = false,
-        $replyToMessageId = null,
-        $replyMarkup = null
-    ) {
+    public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
+    {
         return $this->call('sendMessage', [
             'chat_id' => (int) $chatId,
             'text' => $text,
-            'disable_web_page_preview' => $disableWebPagePreviw,
+            'disable_web_page_preview' => $disablePreviw,
             'reply_to_message_id' => (int) $replyToMessageId,
             'reply_markup' => $replyMarkup
+        ]);
+    }
+
+    public function sendChatAction($chatId, $action) {
+        return $this->call('sendChatAction', [
+            'chat_id' => (int) $chatId,
+            'action' => $action
         ]);
     }
 
