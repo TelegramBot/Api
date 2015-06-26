@@ -113,6 +113,14 @@ class BotApi
         ]);
     }
 
+    public function getUserProfilePhotos($userId, $offset = 0, $limit = 100) {
+        return $this->call('getUserProfilePhotos', [
+            'user_id' => (int) $userId,
+            'offset' => $offset,
+            'limit' => $limit
+        ]);
+    }
+
     /**
      * Or use that
      *
