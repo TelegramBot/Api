@@ -2,13 +2,16 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class Sticker
  * This object represents a sticker.
  *
  * @package tgbot\Api\Types
  */
-class Sticker
+class Sticker implements TypeInterface
 {
     /**
      * Unique identifier for this file
@@ -74,7 +77,11 @@ class Sticker
      */
     public function setFileSize($fileSize)
     {
-        $this->fileSize = $fileSize;
+        if (is_numeric($fileSize)) {
+            $this->fileSize = $fileSize;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -90,7 +97,11 @@ class Sticker
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        if (is_numeric($height)) {
+            $this->height = $height;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -104,7 +115,7 @@ class Sticker
     /**
      * @param PhotoSize $thumb
      */
-    public function setThumb($thumb)
+    public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
     }
@@ -122,6 +133,29 @@ class Sticker
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        if (is_numeric($width)) {
+            $this->width = $width;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['file_id'], $data['thumb'], $data['width'], $data['height'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setFileId($data['file_id']);
+        $instance->setWidth($data['width']);
+        $instance->setHeight($data['height']);
+        $instance->setThumb(PhotoSize::fromResponse($data['thumb']));
+
+        if (isset($data['file_size'])) {
+            $instance->setFileSize($data['file_size']);
+        }
+
+        return $instance;
     }
 }
