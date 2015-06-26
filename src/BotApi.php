@@ -2,6 +2,8 @@
 
 namespace tgbot\Api;
 
+use tgbot\Api\Types\User;
+
 class BotApi
 {
     /**
@@ -191,7 +193,7 @@ class BotApi
      */
     public function getMe()
     {
-        return $this->call('getMe');
+        return User::fromResponse($this->call('getMe'));
     }
 
     /**

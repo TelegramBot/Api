@@ -2,6 +2,10 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\BaseType;
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 
 /**
  * Class User
@@ -9,7 +13,7 @@ namespace tgbot\Api\Types;
  *
  * @package tgbot\Api\Types
  */
-class User
+class User extends BaseType implements TypeInterface
 {
     /**
      * Unique identifier for this user or bot
@@ -68,7 +72,11 @@ class User
      */
     public function setId($id)
     {
-        $this->id = $id;
+        if (is_numeric($id)) {
+            $this->id = $id;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -101,5 +109,25 @@ class User
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new User();
+
+        if (!isset($data['id'], $data['first_name'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setId($data['id']);
+        $instance->setFirstName($data['first_name']);
+
+        if (isset($data['last_name'])) {
+            $instance->setLastName($data['last_name']);
+        }
+        if (isset($data['last_name'])) {
+            $instance->setUsername($data['username']);
+        }
+
+        return $instance;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace tgbot\Api;
 
-
 abstract class BaseType
 {
     function toCamelCase($string, $capitalizeFirstCharacter = false)

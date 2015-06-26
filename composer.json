@@ -26,7 +26,8 @@
     },
     "autoload": {
         "psr-4": {
-            "tgbot\\Api\\": "src"
+            "tgbot\\Api\\": "src",
+            "tgbot\\Api\\Types\\": "src\\Types"
         }
     },
     "autoload-dev": {
