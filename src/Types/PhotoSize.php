@@ -71,7 +71,12 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        $this->fileSize = $fileSize;
+        if(is_numeric($fileSize)) {
+            $this->fileSize = $fileSize;
+        }
+        else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
