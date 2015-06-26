@@ -15,7 +15,7 @@ class PhotoSize
      *
      * @var string
      */
-    protected $file_id;
+    protected $fileId;
 
     /**
      * Photo width
