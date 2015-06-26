@@ -47,7 +47,8 @@ class Message
     protected $forwardDate;
 
     /**
-     * Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+     * Optional. For replies, the original message. Note that the Message object in this field will not contain further
+     * reply_to_message fields even if it itself is a reply.
      *
      * @var \tgbot\Api\Types\Message
      */
@@ -150,4 +151,340 @@ class Message
      * @var bool
      */
     protected $groupChatCreated;
+
+    /**
+     * @return Audio
+     */
+    public function getAudio()
+    {
+        return $this->audio;
+    }
+
+    /**
+     * @param Audio $audio
+     */
+    public function setAudio($audio)
+    {
+        $this->audio = $audio;
+    }
+
+    /**
+     * @return GroupChat|User
+     */
+    public function getChat()
+    {
+        return $this->chat;
+    }
+
+    /**
+     * @param GroupChat|User $chat
+     */
+    public function setChat($chat)
+    {
+        $this->chat = $chat;
+    }
+
+    /**
+     * @return Contact
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param Contact $contact
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param int $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDeleteChatPhoto()
+    {
+        return $this->deleteChatPhoto;
+    }
+
+    /**
+     * @param boolean $deleteChatPhoto
+     */
+    public function setDeleteChatPhoto($deleteChatPhoto)
+    {
+        $this->deleteChatPhoto = $deleteChatPhoto;
+    }
+
+    /**
+     * @return Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param Document $document
+     */
+    public function setDocument($document)
+    {
+        $this->document = $document;
+    }
+
+    /**
+     * @return int
+     */
+    public function getForwardDate()
+    {
+        return $this->forwardDate;
+    }
+
+    /**
+     * @param int $forwardDate
+     */
+    public function setForwardDate($forwardDate)
+    {
+        $this->forwardDate = $forwardDate;
+    }
+
+    /**
+     * @return User
+     */
+    public function getForwardFrom()
+    {
+        return $this->forwardFrom;
+    }
+
+    /**
+     * @param User $forwardFrom
+     */
+    public function setForwardFrom($forwardFrom)
+    {
+        $this->forwardFrom = $forwardFrom;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isGroupChatCreated()
+    {
+        return $this->groupChatCreated;
+    }
+
+    /**
+     * @param boolean $groupChatCreated
+     */
+    public function setGroupChatCreated($groupChatCreated)
+    {
+        $this->groupChatCreated = $groupChatCreated;
+    }
+
+    /**
+     * @return User
+     */
+    public function getLeftChatParticipant()
+    {
+        return $this->leftChatParticipant;
+    }
+
+    /**
+     * @param User $leftChatParticipant
+     */
+    public function setLeftChatParticipant($leftChatParticipant)
+    {
+        $this->leftChatParticipant = $leftChatParticipant;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMessageId()
+    {
+        return $this->messageId;
+    }
+
+    /**
+     * @param int $messageId
+     */
+    public function setMessageId($messageId)
+    {
+        $this->messageId = $messageId;
+    }
+
+    /**
+     * @return User
+     */
+    public function getNewChatParticipant()
+    {
+        return $this->newChatParticipant;
+    }
+
+    /**
+     * @param User $newChatParticipant
+     */
+    public function setNewChatParticipant($newChatParticipant)
+    {
+        $this->newChatParticipant = $newChatParticipant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewChatPhoto()
+    {
+        return $this->newChatPhoto;
+    }
+
+    /**
+     * @param mixed $newChatPhoto
+     */
+    public function setNewChatPhoto($newChatPhoto)
+    {
+        $this->newChatPhoto = $newChatPhoto;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewChatTitle()
+    {
+        return $this->newChatTitle;
+    }
+
+    /**
+     * @param string $newChatTitle
+     */
+    public function setNewChatTitle($newChatTitle)
+    {
+        $this->newChatTitle = $newChatTitle;
+    }
+
+    /**
+     * @return Photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param Photo $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getReplyToMessage()
+    {
+        return $this->replyToMessage;
+    }
+
+    /**
+     * @param Message $replyToMessage
+     */
+    public function setReplyToMessage($replyToMessage)
+    {
+        $this->replyToMessage = $replyToMessage;
+    }
+
+    /**
+     * @return Sticker
+     */
+    public function getSticker()
+    {
+        return $this->sticker;
+    }
+
+    /**
+     * @param Sticker $sticker
+     */
+    public function setSticker($sticker)
+    {
+        $this->sticker = $sticker;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Video
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * @param Video $video
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+    }
 }

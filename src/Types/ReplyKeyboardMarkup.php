@@ -43,4 +43,68 @@ class ReplyKeyboardMarkup
      * @var bool
      */
     protected $selective;
+
+    /**
+     * @return array
+     */
+    public function getKeyboard()
+    {
+        return $this->keyboard;
+    }
+
+    /**
+     * @param array $keyboard
+     */
+    public function setKeyboard($keyboard)
+    {
+        $this->keyboard = $keyboard;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOneTimeKeyboard()
+    {
+        return $this->oneTimeKeyboard;
+    }
+
+    /**
+     * @param boolean $oneTimeKeyboard
+     */
+    public function setOneTimeKeyboard($oneTimeKeyboard)
+    {
+        $this->oneTimeKeyboard = $oneTimeKeyboard;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isResizeKeyboard()
+    {
+        return $this->resizeKeyboard;
+    }
+
+    /**
+     * @param boolean $resizeKeyboard
+     */
+    public function setResizeKeyboard($resizeKeyboard)
+    {
+        $this->resizeKeyboard = $resizeKeyboard;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSelective()
+    {
+        return $this->selective;
+    }
+
+    /**
+     * @param boolean $selective
+     */
+    public function setSelective($selective)
+    {
+        $this->selective = $selective;
+    }
 }

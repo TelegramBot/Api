@@ -28,4 +28,36 @@ class ForceReply
      * @var bool
      */
     protected $selective;
+
+    /**
+     * @return boolean
+     */
+    public function isForceReply()
+    {
+        return $this->forceReply;
+    }
+
+    /**
+     * @param boolean $forceReply
+     */
+    public function setForceReply($forceReply)
+    {
+        $this->forceReply = $forceReply;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSelective()
+    {
+        return $this->selective;
+    }
+
+    /**
+     * @param boolean $selective
+     */
+    public function setSelective($selective)
+    {
+        $this->selective = $selective;
+    }
 }

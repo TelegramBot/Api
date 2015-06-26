@@ -29,4 +29,36 @@ class ReplyKeyboardHide
      * @var bool
      */
     protected $selective;
+
+    /**
+     * @return boolean
+     */
+    public function isHideKeyboard()
+    {
+        return $this->hideKeyboard;
+    }
+
+    /**
+     * @param boolean $hideKeyboard
+     */
+    public function setHideKeyboard($hideKeyboard)
+    {
+        $this->hideKeyboard = $hideKeyboard;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSelective()
+    {
+        return $this->selective;
+    }
+
+    /**
+     * @param boolean $selective
+     */
+    public function setSelective($selective)
+    {
+        $this->selective = $selective;
+    }
 }
