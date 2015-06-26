@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "League\\Skeleton\\": "src"
+            "tgbot\\Api\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "League\\Skeleton\\Test\\": "tests"
+            "tgbot\\Api\\Test\\": "tests"
         }
     },
     "scripts": {

@@ -23,7 +23,7 @@ $ composer require tgbot/api
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
+$skeleton = new tgbot\Api\BotApi();
 echo $skeleton->echoPhrase('Hello, League!');
 ```
 
