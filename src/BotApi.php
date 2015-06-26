@@ -164,6 +164,23 @@ class BotApi
     }
 
     /**
+     * Use this method to specify a url and receive incoming updates via an outgoing webhook.
+     * Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url,
+     * containing a JSON-serialized Update.
+     * In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
+     *
+     * @param string $url HTTPS url to send updates to. Use an empty string to remove webhook integration
+     *
+     * @return \tgbot\Api\Types\UserProfilePhotos
+     * @throws \tgbot\Api\Exception
+     */
+    public function setWebhook($url = '') {
+        return $this->call('setWebhook', [
+            'url' => $url
+        ]);
+    }
+
+    /**
      * Or use that
      *
      * @param string $name
