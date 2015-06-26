@@ -174,10 +174,24 @@ class BotApi
      * @return \tgbot\Api\Types\UserProfilePhotos
      * @throws \tgbot\Api\Exception
      */
-    public function setWebhook($url = '') {
+    public function setWebhook($url = '')
+    {
         return $this->call('setWebhook', [
             'url' => $url
         ]);
+    }
+
+    /**
+     * A simple method for testing your bot's auth token.Requires no parameters.
+     * Returns basic information about the bot in form of a User object.
+     *
+     * @return \tgbot\Api\Types\User
+     * @throws \tgbot\Api\Exception
+     * @throws \tgbot\Api\InvalidArgumentException
+     */
+    public function getMe()
+    {
+        return $this->call('getMe');
     }
 
     /**
