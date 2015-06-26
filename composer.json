@@ -1,17 +1,19 @@
 {
-    "name": "league/:package_name",
-    "description": ":package_description",
+    "name": "tgbot/api",
+    "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
-        "league",
-        ":package_name"
+        "php",
+        "telegram",
+        "bot",
+        "bot api"
     ],
-    "homepage": "https://github.com/thephpleague/:package_name",
+    "homepage": "https://github.com/tgbot/api",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website",
+            "name": "Ilya Gusev",
+            "email": "mail@igusev.ru",
+            "homepage": "php-cat.com",
             "role": "Developer"
         }
     ],
