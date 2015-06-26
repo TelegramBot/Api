@@ -2,13 +2,17 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\BaseType;
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class PhotoSize
  * This object represents one size of a photo or a file / sticker thumbnail.
  *
  * @package tgbot\Api\Types
  */
-class PhotoSize
+class PhotoSize extends BaseType implements TypeInterface
 {
     /**
      * Unique identifier for this file
@@ -83,7 +87,11 @@ class PhotoSize
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        if (is_numeric($height)) {
+            $this->height = $height;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -99,6 +107,30 @@ class PhotoSize
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        if (is_numeric($width)) {
+            $this->width = $width;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['file_id'], $data['width'], $data['height'])) {
+            throw new InvalidArgumentException();
+        }
+
+        $instance->setFileId($data['file_id']);
+        $instance->setWidth($data['width']);
+        $instance->setHeight($data['height']);
+
+
+        if (isset($data['file_size'])) {
+            $instance->setFileSize($data['file_size']);
+        }
+
+        return $instance;
     }
 }
