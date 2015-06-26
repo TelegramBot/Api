@@ -2,13 +2,17 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\BaseType;
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class GroupChat
  * This object represents a group chat.
  *
  * @package tgbot\Api\Types
  */
-class GroupChat
+class GroupChat extends BaseType implements TypeInterface
 {
     /**
      * Unique identifier for this group chat
@@ -37,7 +41,12 @@ class GroupChat
      */
     public function setId($id)
     {
-        $this->id = $id;
+        if(is_numeric($id)) {
+            $this->id = $id;
+        }
+        else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -54,5 +63,19 @@ class GroupChat
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['id'], $data['title'])) {
+            throw new InvalidArgumentException();
+        }
+
+        $instance->setId($data['id']);
+        $instance->setTitle($data['title']);
+
+        return $instance;
     }
 }
