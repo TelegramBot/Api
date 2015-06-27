@@ -2,7 +2,11 @@
 namespace tgbot\Api\Types;
 
 
-class Message
+use tgbot\Api\BaseType;
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
+class Message extends BaseType implements TypeInterface
 {
     /**
      * Unique message identifier
@@ -16,7 +20,7 @@ class Message
      *
      * @var \tgbot\Api\Types\User
      */
-    protected $user;
+    protected $from;
 
     /**
      * Date the message was sent in Unix time
@@ -163,7 +167,7 @@ class Message
     /**
      * @param Audio $audio
      */
-    public function setAudio($audio)
+    public function setAudio(Audio $audio)
     {
         $this->audio = $audio;
     }
@@ -179,7 +183,7 @@ class Message
     /**
      * @param GroupChat|User $chat
      */
-    public function setChat($chat)
+    public function setChat(TypeInterface $chat)
     {
         $this->chat = $chat;
     }
@@ -195,7 +199,7 @@ class Message
     /**
      * @param Contact $contact
      */
-    public function setContact($contact)
+    public function setContact(Contact $contact)
     {
         $this->contact = $contact;
     }
@@ -213,7 +217,11 @@ class Message
      */
     public function setDate($date)
     {
-        $this->date = $date;
+        if (is_numeric($date)) {
+            $this->date = $date;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -229,7 +237,7 @@ class Message
      */
     public function setDeleteChatPhoto($deleteChatPhoto)
     {
-        $this->deleteChatPhoto = $deleteChatPhoto;
+        $this->deleteChatPhoto = (bool) $deleteChatPhoto;
     }
 
     /**
@@ -261,7 +269,11 @@ class Message
      */
     public function setForwardDate($forwardDate)
     {
-        $this->forwardDate = $forwardDate;
+        if (is_numeric($forwardDate)) {
+            $this->forwardDate = $forwardDate;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -275,7 +287,7 @@ class Message
     /**
      * @param User $forwardFrom
      */
-    public function setForwardFrom($forwardFrom)
+    public function setForwardFrom(User $forwardFrom)
     {
         $this->forwardFrom = $forwardFrom;
     }
@@ -293,7 +305,7 @@ class Message
      */
     public function setGroupChatCreated($groupChatCreated)
     {
-        $this->groupChatCreated = $groupChatCreated;
+        $this->groupChatCreated = (bool) $groupChatCreated;
     }
 
     /**
@@ -323,7 +335,7 @@ class Message
     /**
      * @param Location $location
      */
-    public function setLocation($location)
+    public function setLocation(Location $location)
     {
         $this->location = $location;
     }
@@ -341,7 +353,11 @@ class Message
      */
     public function setMessageId($messageId)
     {
-        $this->messageId = $messageId;
+        if (is_numeric($messageId)) {
+            $this->messageId = $messageId;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -435,7 +451,7 @@ class Message
     /**
      * @param Sticker $sticker
      */
-    public function setSticker($sticker)
+    public function setSticker(Sticker $sticker)
     {
         $this->sticker = $sticker;
     }
@@ -459,17 +475,17 @@ class Message
     /**
      * @return User
      */
-    public function getUser()
+    public function getFrom()
     {
-        return $this->user;
+        return $this->from;
     }
 
     /**
      * @param User $user
      */
-    public function setUser($user)
+    public function setFrom(User $from)
     {
-        $this->user = $user;
+        $this->from = $from;
     }
 
     /**
@@ -483,8 +499,93 @@ class Message
     /**
      * @param Video $video
      */
-    public function setVideo($video)
+    public function setVideo(Video $video)
     {
         $this->video = $video;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['message_id'], $data['from'], $data['date'], $data['chat'])) {
+            throw new InvalidArgumentException();
+        }
+
+        $instance->setMessageId($data['message_id']);
+        $instance->setDate($data['date']);
+        $instance->setFrom(User::fromResponse($data['from']));
+
+        if (isset($data['chat'], $data['chat']['title'])) {
+            $instance->setChat(GroupChat::fromResponse($data['chat']));
+        }
+        if (isset($data['chat'], $data['chat']['first_name'])) {
+            $instance->setChat(User::fromResponse($data['chat']));
+        }
+
+        if (isset($data['audio'])) {
+            $instance->setAudio(Audio::fromResponse($data['document']));
+        }
+        if (isset($data['document'])) {
+            $instance->setDocument(Document::fromResponse($data['document']));
+        }
+        if (isset($data['sticker'])) {
+            $instance->setSticker(Sticker::fromResponse($data['sticker']));
+        }
+        if (isset($data['contact'])) {
+            $instance->setContact(Contact::fromResponse($data['contact']));
+        }
+        if (isset($data['location'])) {
+            $instance->setLocation(Location::fromResponse($data['location']));
+        }
+        if (isset($data['video'])) {
+            $instance->setVideo(Video::fromResponse($data['video']));
+        }
+
+        if (isset($data['reply_to_message'])) {
+            $instance->setReplyToMessage(Message::fromResponse($data['reply_to_message']));
+        }
+
+        if (isset($data['text'])) {
+            $instance->setText($data['text']);
+        }
+        if (isset($data['new_chat_title'])) {
+            $instance->setNewChatTitle($data['new_chat_title']);
+        }
+        if (isset($data['forward_from'])) {
+            $instance->setForwardFrom(User::fromResponse($data['forward_from']));
+        }
+        if (isset($data['forward_date'])) {
+            $instance->setForwardDate($data['forward_date']);
+        }
+        if (isset($data['new_chat_participant'])) {
+            $instance->setNewChatParticipant(User::fromResponse($data['new_chat_participant']));
+        }
+        if (isset($data['left_chat_participant'])) {
+            $instance->setLeftChatParticipant(User::fromResponse($data['left_chat_participant']));
+        }
+
+        if(isset($data['new_chat_photo'])) {
+            $newChatPhoto = [];
+            foreach($data['new_chat_photo'] as $newChatPhotoItem) {
+                $newChatPhoto[] = PhotoSize::fromResponse($newChatPhotoItem);
+            }
+            $instance->setNewChatPhoto($newChatPhoto);
+        }
+
+        if(isset($data['photo'])) {
+            $photo = [];
+            foreach($data['photo'] as $photoItem) {
+                $photo[] = PhotoSize::fromResponse($photoItem);
+            }
+            $instance->setPhoto($photo);
+        }
+
+
+        if (isset($data['group_chat_created'])) {
+            $instance->setGroupChatCreated($data['group_chat_created']);
+        }
+
+        return $instance;
     }
 }
