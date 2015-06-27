@@ -524,7 +524,7 @@ class Message extends BaseType implements TypeInterface
         }
 
         if (isset($data['audio'])) {
-            $instance->setAudio(Audio::fromResponse($data['document']));
+            $instance->setAudio(Audio::fromResponse($data['audio']));
         }
         if (isset($data['document'])) {
             $instance->setDocument(Document::fromResponse($data['document']));
