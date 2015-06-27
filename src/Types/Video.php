@@ -2,13 +2,16 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class Video
  * This object represents a video file.
  *
  * @package tgbot\Api\Types
  */
-class Video
+class Video implements TypeInterface
 {
     /**
      * Unique identifier for this file
@@ -96,7 +99,11 @@ class Video
      */
     public function setDuration($duration)
     {
-        $this->duration = $duration;
+        if (is_numeric($duration)) {
+            $this->duration = $duration;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -128,7 +135,12 @@ class Video
      */
     public function setFileSize($fileSize)
     {
-        $this->fileSize = $fileSize;
+        if(is_numeric($fileSize)) {
+            $this->fileSize = $fileSize;
+        }
+        else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -144,7 +156,11 @@ class Video
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        if (is_numeric($height)) {
+            $this->height = $height;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -174,7 +190,7 @@ class Video
     /**
      * @param PhotoSize $thumb
      */
-    public function setThumb($thumb)
+    public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
     }
@@ -192,6 +208,36 @@ class Video
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        if (is_numeric($width)) {
+            $this->width = $width;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['file_id'], $data['width'], $data['height'], $data['duration'], $data['thumb'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setFileId($data['file_id']);
+        $instance->setWidth($data['width']);
+        $instance->setHeight($data['height']);
+        $instance->setDuration($data['duration']);
+        $instance->setThumb(PhotoSize::fromResponse($data['thumb']));
+
+        if (isset($data['mime_type'])) {
+            $instance->setMimeType($data['mime_type']);
+        }
+        if (isset($data['file_size'])) {
+            $instance->setFileSize($data['file_size']);
+        }
+        if (isset($data['caption'])) {
+            $instance->setCaption($data['caption']);
+        }
+
+        return $instance;
     }
 }
