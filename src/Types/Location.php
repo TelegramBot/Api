@@ -2,13 +2,16 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class Location
  * This object represents a point on the map.
  *
  * @package tgbot\Api\Types
  */
-class Location
+class Location implements TypeInterface
 {
     /**
      * Longitude as defined by sender
@@ -54,5 +57,18 @@ class Location
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['latitude'], $data['longitude'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setLatitude($data['latitude']);
+        $instance->setLongitude($data['longitude']);
+
+        return $instance;
     }
 }
