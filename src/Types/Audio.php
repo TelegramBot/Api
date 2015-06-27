@@ -2,13 +2,16 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class Audio
  * This object represents an audio file (voice note).
  *
  * @package tgbot\Api\Types
  */
-class Audio
+class Audio implements TypeInterface
 {
     /**
      * Unique identifier for this file
@@ -51,7 +54,11 @@ class Audio
      */
     public function setDuration($duration)
     {
-        $this->duration = $duration;
+        if (is_numeric($duration)) {
+            $this->duration = $duration;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -100,5 +107,25 @@ class Audio
     public function setMimeType($mimeType)
     {
         $this->mimeType = $mimeType;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['file_id'], $data['duration'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setFileId($data['file_id']);
+        $instance->setDuration($data['duration']);
+
+        if (isset($data['mime_type'])) {
+            $instance->setMimeType($data['mime_type']);
+        }
+        if (isset($data['file_size'])) {
+            $instance->setFileSize($data['file_size']);
+        }
+
+        return $instance;
     }
 }
