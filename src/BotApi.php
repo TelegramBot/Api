@@ -104,8 +104,8 @@ class BotApi
      * @param int $chatId
      * @param string $text
      * @param bool $disablePreviw
-     * @param int $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply $replyMarkup
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
      *
      * @return \tgbot\Api\Types\Message
      * @throws \tgbot\Api\Exception
@@ -226,6 +226,30 @@ class BotApi
         }
 
         return $response;
+    }
+
+    /**
+     * Use this method to send video files,
+     * Telegram clients support mp4 videos (other formats may be sent as Document).
+     * On success, the sent Message is returned.
+     *
+     * @param int $chatId
+     * @param float $latitude
+     * @param float $longitude
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null) {
+        return Message::fromResponse($this->call('sendLocation', [
+            'chat_id' => (int) $chatId,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
     }
 
     /**
