@@ -2,6 +2,7 @@
 
 namespace tgbot\Api;
 
+use tgbot\Api\Types\Message;
 use tgbot\Api\Types\User;
 
 class BotApi
@@ -111,13 +112,13 @@ class BotApi
      */
     public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
     {
-        return $this->call('sendMessage', [
+        return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => (int) $chatId,
             'text' => $text,
             'disable_web_page_preview' => $disablePreviw,
             'reply_to_message_id' => (int) $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]);
+        ]));
     }
 
     /**
@@ -194,6 +195,37 @@ class BotApi
     public function getMe()
     {
         return User::fromResponse($this->call('getMe'));
+    }
+
+    /**
+     * Use this method to receive incoming updates using long polling.
+     * An Array of Update objects is returned.
+     *
+     * Notes
+     * 1. This method will not work if an outgoing webhook is set up.
+     * 2. In order to avoid getting duplicate updates, recalculate offset after each server response.
+     *
+     * @param int $offset
+     * @param int $limit
+     * @param int $timeout
+     *
+     * @return array
+     * @throws \tgbot\Api\Exception
+     * @throws \tgbot\Api\InvalidArgumentException
+     */
+    public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
+    {
+        $responseRaw = $this->call('getUpdates', [
+            'offset' => $offset,
+            'limit' => $limit,
+            'timeout' => $timeout
+        ]);
+        $response = [];
+        foreach ($responseRaw as $raw) {
+            $response[] = ['update_id' => $raw['update_id'], 'message' => Message::fromResponse($raw['message'])];
+        }
+
+        return $response;
     }
 
     /**
