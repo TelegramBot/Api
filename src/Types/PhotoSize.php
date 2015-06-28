@@ -129,7 +129,7 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     public static function fromResponse($data)
     {
-        self::fromResponse($data);
+        self::validate($data);
         $instance = new self();
 
         $instance->setFileId($data['file_id']);
