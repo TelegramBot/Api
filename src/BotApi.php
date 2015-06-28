@@ -160,7 +160,7 @@ class BotApi
      */
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
-        return UserProfilePhotos::fromResponse($this->call('sendVideo', [
+        return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', [
             'user_id' => (int) $userId,
             'offset' => (int) $offset,
             'limit' => (int) $limit,
@@ -390,6 +390,7 @@ class BotApi
             'reply_markup' => $replyMarkup
         ]));
     }
+
 
 
     /**
