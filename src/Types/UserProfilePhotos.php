@@ -2,13 +2,16 @@
 
 namespace tgbot\Api\Types;
 
+use tgbot\Api\InvalidArgumentException;
+use tgbot\Api\TypeInterface;
+
 /**
  * Class UserProfilePhotos
  * This object represent a user's profile pictures.
  *
  * @package tgbot\Api\Types
  */
-class UserProfilePhotos
+class UserProfilePhotos implements TypeInterface
 {
     /**
      * Total number of profile pictures the target user has
@@ -55,5 +58,26 @@ class UserProfilePhotos
     public function setTotalCount($totalCount)
     {
         $this->totalCount = $totalCount;
+    }
+
+    public static function fromResponse($data)
+    {
+        $instance = new self();
+
+        if (!isset($data['total_count'], $data['photos'])) {
+            throw new InvalidArgumentException();
+        }
+        $instance->setTotalCount($data['total_count']);
+        $photos = [];
+        foreach ($data['photos'] as $key => $photoItems) {
+            $tmpPhotos = [];
+            foreach ($photoItems as $photoItem) {
+                $tmpPhotos[] = PhotoSize::fromResponse($photoItem);
+            }
+            $photos[] = $tmpPhotos;
+        }
+        $instance->setPhotos($photos);
+
+        return $instance;
     }
 }
