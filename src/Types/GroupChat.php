@@ -1,16 +1,16 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\BaseType;
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class GroupChat
  * This object represents a group chat.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class GroupChat extends BaseType implements TypeInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace tgbot\Api;
+namespace TelegramBot\Api;
 
-use tgbot\Api\Types\Message;
-use tgbot\Api\Types\User;
-use tgbot\Api\Types\UserProfilePhotos;
+use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\User;
+use TelegramBot\Api\Types\UserProfilePhotos;
 
 class BotApi
 {
@@ -100,16 +100,16 @@ class BotApi
 
 
     /**
-     * Use this method to send text messages. On success, the sent \tgbot\Api\Types\Message is returned.
+     * Use this method to send text messages. On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
      * @param int $chatId
      * @param string $text
      * @param bool $disablePreviw
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -138,7 +138,7 @@ class BotApi
      * @param string $action
      *
      * @return bool
-     * @throws \tgbot\Api\Exception
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendChatAction($chatId, $action)
     {
@@ -155,8 +155,8 @@ class BotApi
      * @param int $offset
      * @param int $limit
      *
-     * @return \tgbot\Api\Types\UserProfilePhotos
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\UserProfilePhotos
+     * @throws \TelegramBot\Api\Exception
      */
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
@@ -175,8 +175,8 @@ class BotApi
      *
      * @param string $url HTTPS url to send updates to. Use an empty string to remove webhook integration
      *
-     * @return \tgbot\Api\Types\UserProfilePhotos
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\UserProfilePhotos
+     * @throws \TelegramBot\Api\Exception
      */
     public function setWebhook($url = '')
     {
@@ -189,9 +189,9 @@ class BotApi
      * A simple method for testing your bot's auth token.Requires no parameters.
      * Returns basic information about the bot in form of a User object.
      *
-     * @return \tgbot\Api\Types\User
-     * @throws \tgbot\Api\Exception
-     * @throws \tgbot\Api\InvalidArgumentException
+     * @return \TelegramBot\Api\Types\User
+     * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\InvalidArgumentException
      */
     public function getMe()
     {
@@ -211,8 +211,8 @@ class BotApi
      * @param int $timeout
      *
      * @return array
-     * @throws \tgbot\Api\Exception
-     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\InvalidArgumentException
      */
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
     {
@@ -236,10 +236,10 @@ class BotApi
      * @param float $latitude
      * @param float $longitude
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -256,13 +256,13 @@ class BotApi
      * Use this method to send .webp stickers. On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \tgbot\Api\Types\InputFile|string $sticker
+     * @param \TelegramBot\Api\Types\InputFile|string $sticker
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -280,13 +280,13 @@ class BotApi
      * On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \tgbot\Api\Types\InputFile|string $video
+     * @param \TelegramBot\Api\Types\InputFile|string $video
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -306,9 +306,9 @@ class BotApi
      * @param int $fromChatId
      * @param int $messageId
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function forwardMessage($chatId, $fromChatId, $messageId)
     {
@@ -326,13 +326,13 @@ class BotApi
      * On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \tgbot\Api\Types\InputFile|string $audio
+     * @param \TelegramBot\Api\Types\InputFile|string $audio
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -348,14 +348,14 @@ class BotApi
      * Use this method to send photos. On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \tgbot\Api\Types\InputFile|string $photo
+     * @param \TelegramBot\Api\Types\InputFile|string $photo
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null)
     {
@@ -373,13 +373,13 @@ class BotApi
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int $chatId
-     * @param \tgbot\Api\Types\InputFile|string $document
+     * @param \TelegramBot\Api\Types\InputFile|string $document
      * @param int|null $replyToMessageId
-     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return \tgbot\Api\Types\Message
-     * @throws \tgbot\Api\InvalidArgumentException
-     * @throws \tgbot\Api\Exception
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
      */
     public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null)
     {

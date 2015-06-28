@@ -1,6 +1,6 @@
 <?php
 
-namespace tgbot\Api;
+namespace TelegramBot\Api;
 
 abstract class BaseType
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Location
  * This object represents a point on the map.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Location implements TypeInterface
 {

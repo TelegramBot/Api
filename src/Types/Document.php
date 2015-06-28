@@ -1,16 +1,16 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Document
  * This object represents a general file (as opposed to photos and audio files).
  * Telegram users can send files of any type of up to 1.5 GB in size.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Document implements TypeInterface
 {
@@ -24,7 +24,7 @@ class Document implements TypeInterface
     /**
      * Document thumbnail as defined by sender
      *
-     * @var \tgbot\Api\Types\PhotoSize
+     * @var \TelegramBot\Api\Types\PhotoSize
      */
     protected $thumb;
 

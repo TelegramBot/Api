@@ -1,15 +1,15 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Video
  * This object represents a video file.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Video implements TypeInterface
 {
@@ -44,7 +44,7 @@ class Video implements TypeInterface
     /**
      * Video thumbnail
      *
-     * @var \tgbot\Api\Types\PhotoSize
+     * @var \TelegramBot\Api\Types\PhotoSize
      */
     protected $thumb;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace tgbot\Api\Test;
+namespace TelegramBot\Api\Test;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {

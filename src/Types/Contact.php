@@ -1,15 +1,15 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Contact
  * This object represents a sticker.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Contact implements TypeInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
 /**
  * Class ReplyKeyboardMarkup
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class ReplyKeyboardMarkup
 {

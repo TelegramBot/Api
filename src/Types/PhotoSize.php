@@ -1,16 +1,16 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\BaseType;
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class PhotoSize
  * This object represents one size of a photo or a file / sticker thumbnail.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class PhotoSize extends BaseType implements TypeInterface
 {

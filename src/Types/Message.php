@@ -1,10 +1,10 @@
 <?php
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
 
-use tgbot\Api\BaseType;
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 class Message extends BaseType implements TypeInterface
 {
@@ -18,7 +18,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Sender
      *
-     * @var \tgbot\Api\Types\User
+     * @var \TelegramBot\Api\Types\User
      */
     protected $from;
 
@@ -32,14 +32,14 @@ class Message extends BaseType implements TypeInterface
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \tgbot\Api\Types\User|\tgbot\Api\Types\GroupChat
+     * @var \TelegramBot\Api\Types\User|\TelegramBot\Api\Types\GroupChat
      */
     protected $chat;
 
     /**
      * Optional. For forwarded messages, sender of the original message
      *
-     * @var \tgbot\Api\Types\User
+     * @var \TelegramBot\Api\Types\User
      */
     protected $forwardFrom;
 
@@ -54,7 +54,7 @@ class Message extends BaseType implements TypeInterface
      * Optional. For replies, the original message. Note that the Message object in this field will not contain further
      * reply_to_message fields even if it itself is a reply.
      *
-     * @var \tgbot\Api\Types\Message
+     * @var \TelegramBot\Api\Types\Message
      */
     protected $replyToMessage;
 
@@ -68,63 +68,63 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. Message is an audio file, information about the file
      *
-     * @var \tgbot\Api\Types\Audio
+     * @var \TelegramBot\Api\Types\Audio
      */
     protected $audio;
 
     /**
      * Optional. Message is a general file, information about the file
      *
-     * @var \tgbot\Api\Types\Document
+     * @var \TelegramBot\Api\Types\Document
      */
     protected $document;
 
     /**
      * Optional. Message is a photo, available sizes of the photo
      *
-     * @var \tgbot\Api\Types\Photo
+     * @var \TelegramBot\Api\Types\Photo
      */
     protected $photo;
 
     /**
      * Optional. Message is a sticker, information about the sticker
      *
-     * @var \tgbot\Api\Types\Sticker
+     * @var \TelegramBot\Api\Types\Sticker
      */
     protected $sticker;
 
     /**
      * Optional. Message is a video, information about the video
      *
-     * @var \tgbot\Api\Types\Video
+     * @var \TelegramBot\Api\Types\Video
      */
     protected $video;
 
     /**
      * Optional. Message is a shared contact, information about the contact
      *
-     * @var \tgbot\Api\Types\Contact
+     * @var \TelegramBot\Api\Types\Contact
      */
     protected $contact;
 
     /**
      * Optional. Message is a shared location, information about the location
      *
-     * @var \tgbot\Api\Types\Location
+     * @var \TelegramBot\Api\Types\Location
      */
     protected $location;
 
     /**
      * Optional. A new member was added to the group, information about them (this member may be bot itself)
      *
-     * @var \tgbot\Api\Types\User
+     * @var \TelegramBot\Api\Types\User
      */
     protected $newChatParticipant;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be bot itself)
      *
-     * @var \tgbot\Api\Types\User
+     * @var \TelegramBot\Api\Types\User
      */
     protected $leftChatParticipant;
 

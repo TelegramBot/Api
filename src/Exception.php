@@ -1,5 +1,5 @@
 <?php
-namespace tgbot\Api;
+namespace TelegramBot\Api;
 
 
 class Exception extends \Exception {

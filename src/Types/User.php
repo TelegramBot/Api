@@ -1,17 +1,17 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\BaseType;
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 
 /**
  * Class User
  * This object represents a Telegram user or bot.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class User extends BaseType implements TypeInterface
 {

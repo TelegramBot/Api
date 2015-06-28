@@ -1,15 +1,15 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Audio
  * This object represents an audio file (voice note).
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Audio implements TypeInterface
 {

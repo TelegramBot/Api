@@ -1,5 +1,5 @@
 {
-    "name": "tgbot/api",
+    "name": "TelegramBot/Api",
     "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
         "php",
@@ -7,7 +7,7 @@
         "bot",
         "bot api"
     ],
-    "homepage": "https://github.com/tgbot/api",
+    "homepage": "https://github.com/TelegramBot/Api",
     "license": "MIT",
     "authors": [
         {
@@ -26,13 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "tgbot\\Api\\": "src",
-            "tgbot\\Api\\Types\\": "src\\Types"
+            "TelegramBot\\Api\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "tgbot\\Api\\Test\\": "tests"
+            "TelegramBot\\Api\\Test\\": "tests"
         }
     },
     "scripts": {

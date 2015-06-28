@@ -1,15 +1,15 @@
 <?php
 
-namespace tgbot\Api\Types;
+namespace TelegramBot\Api\Types;
 
-use tgbot\Api\InvalidArgumentException;
-use tgbot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Sticker
  * This object represents a sticker.
  *
- * @package tgbot\Api\Types
+ * @package TelegramBot\Api\Types
  */
 class Sticker implements TypeInterface
 {
@@ -37,7 +37,7 @@ class Sticker implements TypeInterface
     /**
      * Document thumbnail as defined by sender
      *
-     * @var \tgbot\Api\Types\PhotoSize
+     * @var \TelegramBot\Api\Types\PhotoSize
      */
     protected $thumb;
 
