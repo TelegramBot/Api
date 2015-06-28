@@ -1,11 +1,11 @@
 # PHP Telegram Bot Api
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/tgbot/api.svg?style=flat-square)](https://packagist.org/packages/tgbot/api)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/telegrambot/api.svg?style=flat-square)](https://packagist.org/packages/telegrambot/api)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/tgbot/api/master.svg?style=flat-square)](https://travis-ci.org/tgbot/api)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/tgbot/api.svg?style=flat-square)](https://scrutinizer-ci.com/g/tgbot/api/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/tgbot/api.svg?style=flat-square)](https://scrutinizer-ci.com/g/tgbot/api)
-[![Total Downloads](https://img.shields.io/packagist/dt/tgbot/api.svg?style=flat-square)](https://packagist.org/packages/tgbot/api)
+[![Build Status](https://img.shields.io/travis/telegrambot/api/master.svg?style=flat-square)](https://travis-ci.org/telegrambot/api)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/telegrambot/api.svg?style=flat-square)](https://scrutinizer-ci.com/g/telegrambot/api/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/telegrambot/api.svg?style=flat-square)](https://scrutinizer-ci.com/g/telegrambot/api)
+[![Total Downloads](https://img.shields.io/packagist/dt/telegrambot/api.svg?style=flat-square)](https://packagist.org/packages/telegrambot/api)
 
 An extended php wrapper for telegram bot api
 
@@ -14,14 +14,15 @@ An extended php wrapper for telegram bot api
 Via Composer
 
 ``` bash
-$ composer require tgbot/api
+$ composer require telegram-bot/api
 ```
 
 ## Usage
 
 ``` php
-$skeleton = new tgbot\Api\BotApi();
-echo $skeleton->echoPhrase('Hello, League!');
+$bot = new TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+
+$bot->sendMessage($chatId, $messageText);
 ```
 
 ## Change log
