@@ -4,6 +4,7 @@ namespace tgbot\Api;
 
 use tgbot\Api\Types\Message;
 use tgbot\Api\Types\User;
+use tgbot\Api\Types\UserProfilePhotos;
 
 class BotApi
 {
@@ -159,11 +160,11 @@ class BotApi
      */
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
-        return $this->call('getUserProfilePhotos', [
+        return UserProfilePhotos::fromResponse($this->call('sendVideo', [
             'user_id' => (int) $userId,
-            'offset' => $offset,
-            'limit' => $limit
-        ]);
+            'offset' => (int) $offset,
+            'limit' => (int) $limit,
+        ]));
     }
 
     /**
@@ -229,9 +230,7 @@ class BotApi
     }
 
     /**
-     * Use this method to send video files,
-     * Telegram clients support mp4 videos (other formats may be sent as Document).
-     * On success, the sent Message is returned.
+     * Use this method to send point on the map. On success, the sent Message is returned.
      *
      * @param int $chatId
      * @param float $latitude
@@ -242,7 +241,8 @@ class BotApi
      * @return \tgbot\Api\Types\Message
      * @throws \tgbot\Api\Exception
      */
-    public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null) {
+    public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null)
+    {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id' => (int) $chatId,
             'latitude' => $latitude,
@@ -253,16 +253,93 @@ class BotApi
     }
 
     /**
-     * Or use that
+     * Use this method to send .webp stickers. On success, the sent Message is returned.
      *
-     * @param string $name
-     * @param array $arguments
+     * @param int $chatId
+     * @param \tgbot\Api\Types\InputFile|string $sticker
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
      *
-     * @return mixed
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
      */
-    function __call($name, $arguments)
+    public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null)
     {
-        return $this->call($name, $arguments ? $arguments[0] : null);
+        return Message::fromResponse($this->call('sendSticker', [
+            'chat_id' => (int) $chatId,
+            'sticker' => $sticker,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
+    }
+
+    /**
+     * Use this method to send video files,
+     * Telegram clients support mp4 videos (other formats may be sent as Document).
+     * On success, the sent Message is returned.
+     *
+     * @param int $chatId
+     * @param \tgbot\Api\Types\InputFile|string $video
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null) {
+        return Message::fromResponse($this->call('sendVideo', [
+            'chat_id' => (int) $chatId,
+            'video' => $video,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
+    }
+
+
+    /**
+     * Use this method to forward messages of any kind. On success, the sent Message is returned.
+     *
+     * @param int $chatId
+     * @param int $fromChatId
+     * @param int $messageId
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
+     */
+    public function forwardMessage($chatId, $fromChatId, $messageId)
+    {
+        return Message::fromResponse($this->call('forwardMessage', [
+            'chat_id' => (int) $chatId,
+            'from_chat_id' => (int) $fromChatId,
+            'message_id' => (int) $messageId,
+        ]));
+    }
+
+    /**
+     * Use this method to send audio files,
+     * if you want Telegram clients to display the file as a playable voice message.
+     * For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document).
+     * On success, the sent Message is returned.
+     *
+     * @param int $chatId
+     * @param \tgbot\Api\Types\InputFile|string $audio
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null) {
+        return Message::fromResponse($this->call('sendAudio', [
+            'chat_id' => (int) $chatId,
+            'audio' => $audio,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
     }
 
 
