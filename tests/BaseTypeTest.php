@@ -18,13 +18,13 @@ class BaseTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testValidate() {
-        $this->assertTrue(\TestBaseType::validate(['test1' => 1, 'test2' => 2, 'test3' => 3]));
+        $this->assertTrue(\TestBaseType::validate(array('test1' => 1, 'test2' => 2, 'test3' => 3)));
     }
 
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testValidateFail() {
-        $this->assertTrue(\TestBaseType::validate(['test1' => 1]));
+        $this->assertTrue(\TestBaseType::validate(array('test1' => 1)));
     }
 }
