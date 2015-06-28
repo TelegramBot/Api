@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,10 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class PhotoSize implements TypeInterface
+class PhotoSize extends BaseType implements TypeInterface
 {
+    static protected $requiredParams = ['file_id', 'width', 'height'];
+
     /**
      * Unique identifier for this file
      *
@@ -117,13 +120,17 @@ class PhotoSize implements TypeInterface
         }
     }
 
+    /**
+     * Static constructor
+     *
+     * @param array $data
+     *
+     * @return \TelegramBot\Api\Types\PhotoSize
+     */
     public static function fromResponse($data)
     {
+        self::fromResponse($data);
         $instance = new self();
-
-        if (!isset($data['file_id'], $data['width'], $data['height'])) {
-            throw new InvalidArgumentException();
-        }
 
         $instance->setFileId($data['file_id']);
         $instance->setWidth($data['width']);
