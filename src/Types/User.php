@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Types;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -13,7 +12,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class User extends BaseType implements TypeInterface
+class User implements TypeInterface
 {
     /**
      * Unique identifier for this user or bot

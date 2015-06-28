@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Types;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -12,7 +11,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class GroupChat extends BaseType implements TypeInterface
+class GroupChat implements TypeInterface
 {
     /**
      * Unique identifier for this group chat
