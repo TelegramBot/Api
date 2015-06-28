@@ -15,7 +15,7 @@ abstract class BaseType
      *
      * @var array
      */
-    protected static $requiredParams = [];
+    protected static $requiredParams = array();
 
     /**
      * Validate input data

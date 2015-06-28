@@ -14,7 +14,7 @@ use TelegramBot\Api\TypeInterface;
  */
 class PhotoSize extends BaseType implements TypeInterface
 {
-    static protected $requiredParams = ['file_id', 'width', 'height'];
+    static protected $requiredParams = array('file_id', 'width', 'height');
 
     /**
      * Unique identifier for this file
