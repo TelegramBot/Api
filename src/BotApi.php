@@ -368,6 +368,29 @@ class BotApi
         ]));
     }
 
+    /**
+     * Use this method to send general files. On success, the sent Message is returned.
+     * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+     *
+     * @param int $chatId
+     * @param \tgbot\Api\Types\InputFile|string $document
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null)
+    {
+        return Message::fromResponse($this->call('sendDocument', [
+            'chat_id' => (int) $chatId,
+            'document' => $document,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
+    }
+
 
     /**
      * Close curl
