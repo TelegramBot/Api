@@ -65,7 +65,6 @@ class Location implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-        }
     }
 
     public static function fromResponse($data)
