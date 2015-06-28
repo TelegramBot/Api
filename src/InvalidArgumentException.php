@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
-class InvalidArgumentException extends \InvalidArgumentException {
+class InvalidArgumentException extends \InvalidArgumentException
+{
 
 }

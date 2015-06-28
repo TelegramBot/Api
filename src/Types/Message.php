@@ -563,17 +563,17 @@ class Message implements TypeInterface
             $instance->setLeftChatParticipant(User::fromResponse($data['left_chat_participant']));
         }
 
-        if(isset($data['new_chat_photo'])) {
+        if (isset($data['new_chat_photo'])) {
             $newChatPhoto = [];
-            foreach($data['new_chat_photo'] as $newChatPhotoItem) {
+            foreach ($data['new_chat_photo'] as $newChatPhotoItem) {
                 $newChatPhoto[] = PhotoSize::fromResponse($newChatPhotoItem);
             }
             $instance->setNewChatPhoto($newChatPhoto);
         }
 
-        if(isset($data['photo'])) {
+        if (isset($data['photo'])) {
             $photo = [];
-            foreach($data['photo'] as $photoItem) {
+            foreach ($data['photo'] as $photoItem) {
                 $photo[] = PhotoSize::fromResponse($photoItem);
             }
             $instance->setPhoto($photo);

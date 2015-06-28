@@ -391,8 +391,6 @@ class BotApi
         ]));
     }
 
-
-
     /**
      * Close curl
      */

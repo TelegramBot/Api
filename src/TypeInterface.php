@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
-interface TypeInterface {
+interface TypeInterface
+{
     public static function fromResponse($data);
 }
