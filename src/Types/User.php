@@ -5,7 +5,6 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-
 /**
  * Class User
  * This object represents a Telegram user or bot.

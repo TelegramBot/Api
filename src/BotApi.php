@@ -14,6 +14,8 @@ class BotApi
     const URL_PREFIX = 'https://api.telegram.org/bot';
 
     /**
+     * CURL object
+     *
      * @var
      */
     protected $curl;
@@ -106,9 +108,10 @@ class BotApi
      * @param string $text
      * @param bool $disablePreviw
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
     public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
@@ -234,7 +237,7 @@ class BotApi
      * @param float $latitude
      * @param float $longitude
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\Exception
@@ -254,9 +257,9 @@ class BotApi
      * Use this method to send .webp stickers. On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \TelegramBot\Api\Types\InputFile|string $sticker
+     * @param \CURLFile|string $sticker
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -278,9 +281,9 @@ class BotApi
      * On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \TelegramBot\Api\Types\InputFile|string $video
+     * @param \CURLFile|string $video
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -324,9 +327,9 @@ class BotApi
      * On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \TelegramBot\Api\Types\InputFile|string $audio
+     * @param \CURLFile|string $audio
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -346,10 +349,10 @@ class BotApi
      * Use this method to send photos. On success, the sent Message is returned.
      *
      * @param int $chatId
-     * @param \TelegramBot\Api\Types\InputFile|string $photo
+     * @param \CURLFile|string $photo
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -371,9 +374,9 @@ class BotApi
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int $chatId
-     * @param \TelegramBot\Api\Types\InputFile|string $document
+     * @param \CURLFile|string $document
      * @param int|null $replyToMessageId
-     * @param \TelegramBot\Api\Types\ReplyKeyboardMarkup|\TelegramBot\Api\Types\ReplyKeyboardHide|\TelegramBot\Api\Types\ForceReply|null $replyMarkup
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
