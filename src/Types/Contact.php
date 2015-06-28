@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,15 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class Contact implements TypeInterface
+class Contact extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('phone_number', 'first_name');
+
     /**
      * Contact's phone number
      *
@@ -107,6 +115,7 @@ class Contact implements TypeInterface
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
 
         if (!isset($data['phone_number'], $data['first_name'])) {

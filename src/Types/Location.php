@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,15 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class Location implements TypeInterface
+class Location extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('latitude', 'longitude');
+
     /**
      * Longitude as defined by sender
      *
@@ -69,11 +77,9 @@ class Location implements TypeInterface
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
 
-        if (!isset($data['latitude'], $data['longitude'])) {
-            throw new InvalidArgumentException();
-        }
         $instance->setLatitude($data['latitude']);
         $instance->setLongitude($data['longitude']);
 

@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,15 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class UserProfilePhotos implements TypeInterface
+class UserProfilePhotos extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('total_count', 'photos');
+
     /**
      * Total number of profile pictures the target user has
      *
@@ -57,16 +65,18 @@ class UserProfilePhotos implements TypeInterface
      */
     public function setTotalCount($totalCount)
     {
-        $this->totalCount = $totalCount;
+        if (is_integer($totalCount)) {
+            $this->totalCount = $totalCount;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
 
-        if (!isset($data['total_count'], $data['photos'])) {
-            throw new InvalidArgumentException();
-        }
         $instance->setTotalCount($data['total_count']);
         $photos = array();
         foreach ($data['photos'] as $key => $photoItems) {

@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,15 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class Audio implements TypeInterface
+class Audio extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('file_id', 'duration');
+
     /**
      * Unique identifier for this file
      *
@@ -111,11 +119,9 @@ class Audio implements TypeInterface
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
 
-        if (!isset($data['file_id'], $data['duration'])) {
-            throw new InvalidArgumentException();
-        }
         $instance->setFileId($data['file_id']);
         $instance->setDuration($data['duration']);
 

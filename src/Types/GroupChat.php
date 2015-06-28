@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
@@ -11,8 +12,15 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types
  */
-class GroupChat implements TypeInterface
+class GroupChat extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('id', 'title');
+
     /**
      * Unique identifier for this group chat
      *
@@ -65,11 +73,8 @@ class GroupChat implements TypeInterface
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
-
-        if (!isset($data['id'], $data['title'])) {
-            throw new InvalidArgumentException();
-        }
 
         $instance->setId($data['id']);
         $instance->setTitle($data['title']);

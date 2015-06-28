@@ -1,11 +1,19 @@
 <?php
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-class Message implements TypeInterface
+class Message extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('message_id', 'from', 'date', 'chat');
+
     /**
      * Unique message identifier
      *
@@ -504,11 +512,8 @@ class Message implements TypeInterface
 
     public static function fromResponse($data)
     {
+        self::validate($data);
         $instance = new self();
-
-        if (!isset($data['message_id'], $data['from'], $data['date'], $data['chat'])) {
-            throw new InvalidArgumentException();
-        }
 
         $instance->setMessageId($data['message_id']);
         $instance->setDate($data['date']);
