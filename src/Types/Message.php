@@ -564,7 +564,7 @@ class Message implements TypeInterface
         }
 
         if (isset($data['new_chat_photo'])) {
-            $newChatPhoto = [];
+            $newChatPhoto = array();
             foreach ($data['new_chat_photo'] as $newChatPhotoItem) {
                 $newChatPhoto[] = PhotoSize::fromResponse($newChatPhotoItem);
             }
@@ -572,7 +572,7 @@ class Message implements TypeInterface
         }
 
         if (isset($data['photo'])) {
-            $photo = [];
+            $photo = array();
             foreach ($data['photo'] as $photoItem) {
                 $photo[] = PhotoSize::fromResponse($photoItem);
             }

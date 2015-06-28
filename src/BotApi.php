@@ -67,12 +67,12 @@ class BotApi
      */
     public function call($method, array $data = null)
     {
-        $options = [
+        $options = array(
             CURLOPT_URL => $this->getUrl() . '/' . $method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null
-        ];
+        );
 
         if ($data) {
             $options[CURLOPT_POST] = true;
@@ -113,13 +113,13 @@ class BotApi
      */
     public function sendMessage($chatId, $text, $disablePreviw = false, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendMessage', [
+        return Message::fromResponse($this->call('sendMessage', array(
             'chat_id' => (int) $chatId,
             'text' => $text,
             'disable_web_page_preview' => $disablePreviw,
             'reply_to_message_id' => (int) $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**
@@ -142,10 +142,10 @@ class BotApi
      */
     public function sendChatAction($chatId, $action)
     {
-        return $this->call('sendChatAction', [
+        return $this->call('sendChatAction', array(
             'chat_id' => (int) $chatId,
             'action' => $action
-        ]);
+        ));
     }
 
     /**
@@ -160,11 +160,11 @@ class BotApi
      */
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
-        return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', [
+        return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', array(
             'user_id' => (int) $userId,
             'offset' => (int) $offset,
             'limit' => (int) $limit,
-        ]));
+        )));
     }
 
     /**
@@ -180,9 +180,7 @@ class BotApi
      */
     public function setWebhook($url = '')
     {
-        return $this->call('setWebhook', [
-            'url' => $url
-        ]);
+        return $this->call('setWebhook', array('url' => $url));
     }
 
     /**
@@ -216,14 +214,14 @@ class BotApi
      */
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
     {
-        $responseRaw = $this->call('getUpdates', [
+        $responseRaw = $this->call('getUpdates', array(
             'offset' => $offset,
             'limit' => $limit,
             'timeout' => $timeout
-        ]);
-        $response = [];
+        ));
+        $response = array();
         foreach ($responseRaw as $raw) {
-            $response[] = ['update_id' => $raw['update_id'], 'message' => Message::fromResponse($raw['message'])];
+            $response[] = array('update_id' => $raw['update_id'], 'message' => Message::fromResponse($raw['message']));
         }
 
         return $response;
@@ -243,13 +241,13 @@ class BotApi
      */
     public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendLocation', [
+        return Message::fromResponse($this->call('sendLocation', array(
             'chat_id' => (int) $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**
@@ -266,12 +264,12 @@ class BotApi
      */
     public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendSticker', [
+        return Message::fromResponse($this->call('sendSticker', array(
             'chat_id' => (int) $chatId,
             'sticker' => $sticker,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**
@@ -290,12 +288,12 @@ class BotApi
      */
     public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendVideo', [
+        return Message::fromResponse($this->call('sendVideo', array(
             'chat_id' => (int) $chatId,
             'video' => $video,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
 
@@ -312,11 +310,11 @@ class BotApi
      */
     public function forwardMessage($chatId, $fromChatId, $messageId)
     {
-        return Message::fromResponse($this->call('forwardMessage', [
+        return Message::fromResponse($this->call('forwardMessage', array(
             'chat_id' => (int) $chatId,
             'from_chat_id' => (int) $fromChatId,
             'message_id' => (int) $messageId,
-        ]));
+        )));
     }
 
     /**
@@ -336,12 +334,12 @@ class BotApi
      */
     public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendAudio', [
+        return Message::fromResponse($this->call('sendAudio', array(
             'chat_id' => (int) $chatId,
             'audio' => $audio,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**
@@ -359,13 +357,13 @@ class BotApi
      */
     public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendPhoto', [
+        return Message::fromResponse($this->call('sendPhoto', array(
             'chat_id' => (int) $chatId,
             'photo' => $photo,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**
@@ -383,12 +381,12 @@ class BotApi
      */
     public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendDocument', [
+        return Message::fromResponse($this->call('sendDocument', array(
             'chat_id' => (int) $chatId,
             'document' => $document,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
-        ]));
+        )));
     }
 
     /**

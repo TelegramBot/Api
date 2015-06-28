@@ -68,9 +68,9 @@ class UserProfilePhotos implements TypeInterface
             throw new InvalidArgumentException();
         }
         $instance->setTotalCount($data['total_count']);
-        $photos = [];
+        $photos = array();
         foreach ($data['photos'] as $key => $photoItems) {
-            $tmpPhotos = [];
+            $tmpPhotos = array();
             foreach ($photoItems as $photoItem) {
                 $tmpPhotos[] = PhotoSize::fromResponse($photoItem);
             }

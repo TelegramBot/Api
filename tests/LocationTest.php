@@ -37,7 +37,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 
     public function testFromResponse()
     {
-        $location = Location::fromResponse(["latitude" => 55.585827, 'longitude' => 37.675309]);
+        $location = Location::fromResponse(array("latitude" => 55.585827, 'longitude' => 37.675309));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Location', $location);
         $this->assertAttributeEquals(55.585827, 'latitude', $location);
         $this->assertAttributeEquals(37.675309, 'longitude', $location);
