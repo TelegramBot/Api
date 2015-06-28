@@ -397,7 +397,7 @@ class BotApi
      */
     public function __destruct()
     {
-        $this->curl and curl_close($this->curl);
+        $this->curl && curl_close($this->curl);
     }
 
     /**
