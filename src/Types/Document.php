@@ -94,7 +94,7 @@ class Document implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_numeric($fileSize)) {
+        if (is_integer($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();

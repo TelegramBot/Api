@@ -54,7 +54,7 @@ class Audio implements TypeInterface
      */
     public function setDuration($duration)
     {
-        if (is_numeric($duration)) {
+        if (is_integer($duration)) {
             $this->duration = $duration;
         } else {
             throw new InvalidArgumentException();

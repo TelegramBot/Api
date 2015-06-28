@@ -40,7 +40,11 @@ class Location implements TypeInterface
      */
     public function setLatitude($latitude)
     {
-        $this->latitude = $latitude;
+        if (is_float($latitude)) {
+            $this->latitude = $latitude;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
@@ -56,7 +60,12 @@ class Location implements TypeInterface
      */
     public function setLongitude($longitude)
     {
-        $this->longitude = $longitude;
+        if (is_float($longitude)) {
+            $this->longitude = $longitude;
+        } else {
+            throw new InvalidArgumentException();
+        }
+        }
     }
 
     public static function fromResponse($data)

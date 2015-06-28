@@ -215,7 +215,7 @@ class Message implements TypeInterface
      */
     public function setDate($date)
     {
-        if (is_numeric($date)) {
+        if (is_integer($date)) {
             $this->date = $date;
         } else {
             throw new InvalidArgumentException();
@@ -267,7 +267,7 @@ class Message implements TypeInterface
      */
     public function setForwardDate($forwardDate)
     {
-        if (is_numeric($forwardDate)) {
+        if (is_integer($forwardDate)) {
             $this->forwardDate = $forwardDate;
         } else {
             throw new InvalidArgumentException();
@@ -351,7 +351,7 @@ class Message implements TypeInterface
      */
     public function setMessageId($messageId)
     {
-        if (is_numeric($messageId)) {
+        if (is_integer($messageId)) {
             $this->messageId = $messageId;
         } else {
             throw new InvalidArgumentException();

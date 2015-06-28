@@ -77,7 +77,7 @@ class Sticker implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_numeric($fileSize)) {
+        if (is_integer($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();
@@ -97,7 +97,7 @@ class Sticker implements TypeInterface
      */
     public function setHeight($height)
     {
-        if (is_numeric($height)) {
+        if (is_integer($height)) {
             $this->height = $height;
         } else {
             throw new InvalidArgumentException();
@@ -133,7 +133,7 @@ class Sticker implements TypeInterface
      */
     public function setWidth($width)
     {
-        if (is_numeric($width)) {
+        if (is_integer($width)) {
             $this->width = $width;
         } else {
             throw new InvalidArgumentException();

@@ -40,7 +40,7 @@ class GroupChat implements TypeInterface
      */
     public function setId($id)
     {
-        if (is_numeric($id)) {
+        if (is_integer($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();
