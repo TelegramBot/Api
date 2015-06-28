@@ -76,7 +76,7 @@ class BotApi
 
         if ($data) {
             $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = http_build_query($data);
+            $options[CURLOPT_POSTFIELDS] = $data;
         }
 
         curl_setopt_array($this->curl, $options);
@@ -247,7 +247,7 @@ class BotApi
             'chat_id' => (int) $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
-            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
         ]));
     }
@@ -269,7 +269,7 @@ class BotApi
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => (int) $chatId,
             'sticker' => $sticker,
-            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
         ]));
     }
@@ -288,11 +288,12 @@ class BotApi
      * @throws \tgbot\Api\InvalidArgumentException
      * @throws \tgbot\Api\Exception
      */
-    public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null) {
+    public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null)
+    {
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => (int) $chatId,
             'video' => $video,
-            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
         ]));
     }
@@ -333,11 +334,36 @@ class BotApi
      * @throws \tgbot\Api\InvalidArgumentException
      * @throws \tgbot\Api\Exception
      */
-    public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null) {
+    public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null)
+    {
         return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => (int) $chatId,
             'audio' => $audio,
-            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => $replyMarkup
+        ]));
+    }
+
+    /**
+     * Use this method to send photos. On success, the sent Message is returned.
+     *
+     * @param int $chatId
+     * @param \tgbot\Api\Types\InputFile|string $photo
+     * @param string|null $caption
+     * @param int|null $replyToMessageId
+     * @param \tgbot\Api\Types\ReplyKeyboardMarkup|\tgbot\Api\Types\ReplyKeyboardHide|\tgbot\Api\Types\ForceReply|null $replyMarkup
+     *
+     * @return \tgbot\Api\Types\Message
+     * @throws \tgbot\Api\InvalidArgumentException
+     * @throws \tgbot\Api\Exception
+     */
+    public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null)
+    {
+        return Message::fromResponse($this->call('sendPhoto', [
+            'chat_id' => (int) $chatId,
+            'photo' => $photo,
+            'caption' => $caption,
+            'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => $replyMarkup
         ]));
     }
@@ -358,5 +384,4 @@ class BotApi
     {
         return self::URL_PREFIX . $this->token;
     }
-
 }
