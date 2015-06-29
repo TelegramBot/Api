@@ -488,7 +488,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param User $user
+     * @param User $from
      */
     public function setFrom(User $from)
     {
