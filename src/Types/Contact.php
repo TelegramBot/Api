@@ -118,9 +118,6 @@ class Contact extends BaseType implements TypeInterface
         self::validate($data);
         $instance = new self();
 
-        if (!isset($data['phone_number'], $data['first_name'])) {
-            throw new InvalidArgumentException();
-        }
         $instance->setPhoneNumber($data['phone_number']);
         $instance->setFirstName($data['first_name']);
 
