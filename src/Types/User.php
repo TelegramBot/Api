@@ -33,14 +33,14 @@ class User extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $first_name;
+    protected $firstName;
 
     /**
      * Optional. User‘s or bot’s last name
      *
      * @var string
      */
-    protected $last_name;
+    protected $lastName;
 
     /**
      * Optional. User‘s or bot’s username
@@ -54,15 +54,15 @@ class User extends BaseType implements TypeInterface
      */
     public function getFirstName()
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
     /**
-     * @param string $first_name
+     * @param string $firstName
      */
-    public function setFirstName($first_name)
+    public function setFirstName($firstName)
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
     }
 
     /**
@@ -90,15 +90,15 @@ class User extends BaseType implements TypeInterface
      */
     public function getLastName()
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
     /**
-     * @param string $last_name
+     * @param string $lastName
      */
-    public function setLastName($last_name)
+    public function setLastName($lastName)
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
     }
 
     /**

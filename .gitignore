@@ -54,3 +54,5 @@ crashlytics-build.properties
 
 # Composer
 vendor/
+
+/*.php
