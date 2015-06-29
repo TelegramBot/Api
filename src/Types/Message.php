@@ -570,26 +570,34 @@ class Message extends BaseType implements TypeInterface
         }
 
         if (isset($data['new_chat_photo'])) {
-            $newChatPhoto = array();
-            foreach ($data['new_chat_photo'] as $newChatPhotoItem) {
-                $newChatPhoto[] = PhotoSize::fromResponse($newChatPhotoItem);
-            }
-            $instance->setNewChatPhoto($newChatPhoto);
+            $instance->setNewChatPhoto(self::generateArrayOfPhotoSize($data['new_chat_photo']));
         }
 
         if (isset($data['photo'])) {
-            $photo = array();
-            foreach ($data['photo'] as $photoItem) {
-                $photo[] = PhotoSize::fromResponse($photoItem);
-            }
-            $instance->setPhoto($photo);
+            $instance->setPhoto(self::generateArrayOfPhotoSize($data['photo']));
         }
-
 
         if (isset($data['group_chat_created'])) {
             $instance->setGroupChatCreated($data['group_chat_created']);
         }
 
         return $instance;
+    }
+
+    /**
+     * Returns array of PhotoSize from raw
+     *
+     * @param $data
+     *
+     * @return array
+     */
+    protected static function generateArrayOfPhotoSize($data)
+    {
+        $arrayOfPhotoSize = array();
+        foreach ($data as $photoSizeItem) {
+            $arrayOfPhotoSize[] = PhotoSize::fromResponse($photoSizeItem);
+        }
+
+        return $arrayOfPhotoSize;
     }
 }
