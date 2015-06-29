@@ -38,7 +38,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \TelegramBot\Api\Types\User|\TelegramBot\Api\Types\GroupChat
+     * @var \TelegramBot\Api\TypeInterface
      */
     protected $chat;
 
@@ -180,7 +180,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return GroupChat|User
+     * @return TypeInterface
      */
     public function getChat()
     {
@@ -188,7 +188,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param GroupChat|User $chat
+     * @param TypeInterface $chat
      */
     public function setChat(TypeInterface $chat)
     {
