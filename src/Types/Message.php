@@ -383,7 +383,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getNewChatPhoto()
     {
@@ -391,7 +391,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param mixed $newChatPhoto
+     * @param array $newChatPhoto
      */
     public function setNewChatPhoto($newChatPhoto)
     {
@@ -415,7 +415,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Photo
+     * @return array
      */
     public function getPhoto()
     {
@@ -423,7 +423,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Photo $photo
+     * @param array $photo
      */
     public function setPhoto($photo)
     {

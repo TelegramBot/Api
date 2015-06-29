@@ -46,7 +46,7 @@ class Document extends BaseType implements TypeInterface
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var int
+     * @var string
      */
     protected $mimeType;
 
@@ -110,7 +110,7 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getMimeType()
     {
@@ -118,7 +118,7 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $mimeType
+     * @param string $mimeType
      */
     public function setMimeType($mimeType)
     {
@@ -151,6 +151,9 @@ class Document extends BaseType implements TypeInterface
 
         if (isset($data['mime_type'])) {
             $instance->setMimeType($data['mime_type']);
+        }
+        if (isset($data['file_name'])) {
+            $instance->setFileName($data['file_name']);
         }
         if (isset($data['file_size'])) {
             $instance->setFileSize($data['file_size']);
