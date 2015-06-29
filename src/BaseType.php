@@ -41,11 +41,13 @@ abstract class BaseType
     public function map($data)
     {
         foreach (static::$map as $key => $item) {
-            $method = 'set' . str_replace(" ", "", ucwords(str_replace("_", " ", $key)));
-            if ($item === true) {
-                $this->$method($data[$key]);
-            } else {
-                $this->$method($item::fromResponse($data[$key]));
+            if (isset($data[$key])) {
+                $method = 'set' . str_replace(" ", "", ucwords(str_replace("_", " ", $key)));
+                if ($item === true) {
+                    $this->$method($data[$key]);
+                } else {
+                    $this->$method($item::fromResponse($data[$key]));
+                }
             }
         }
     }
