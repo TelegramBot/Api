@@ -92,4 +92,13 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetTotalCountException()
+    {
+        $item = new UserProfilePhotos();
+        $item->setTotalCount('s');
+    }
 }

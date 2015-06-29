@@ -43,4 +43,21 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(37.675309, 'longitude', $location);
     }
 
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetLatitudeException()
+    {
+        $item = new Location();
+        $item->setLatitude('s');
+    }
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetLongitudeException()
+    {
+        $item = new Location();
+        $item->setLongitude('s');
+    }
+
 }

@@ -116,4 +116,31 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
         $this->assertAttributeEquals(3, 'fileSize', $sticker);
         $this->assertAttributeEquals($thumb, 'thumb', $sticker);
     }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetFileSizeException()
+    {
+        $item = new Sticker();
+        $item->setFileSize('s');
+    }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetHeightException()
+    {
+        $item = new Sticker();
+        $item->setHeight('s');
+    }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetWidthException()
+    {
+        $item = new Sticker();
+        $item->setWidth('s');
+    }
 }

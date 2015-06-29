@@ -76,4 +76,31 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(2, 'height', $photoSize);
         $this->assertAttributeEquals(3, 'fileSize', $photoSize);
     }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetFileSizeException()
+    {
+        $item = new PhotoSize();
+        $item->setFileSize('s');
+    }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetHeightException()
+    {
+        $item = new PhotoSize();
+        $item->setHeight('s');
+    }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetWidthException()
+    {
+        $item = new PhotoSize();
+        $item->setWidth('s');
+    }
 }
