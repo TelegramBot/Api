@@ -22,6 +22,16 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     static protected $requiredParams = array('total_count', 'photos');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'total_count' => true,
+        'photos' => '\TelegramBot\Api\Types\ArrayOfArrayOfPhotoSize',
+    );
+
+    /**
      * Total number of profile pictures the target user has
      *
      * @var Integer
@@ -70,24 +80,5 @@ class UserProfilePhotos extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setTotalCount($data['total_count']);
-        $photos = array();
-        foreach ($data['photos'] as $key => $photoItems) {
-            $tmpPhotos = array();
-            foreach ($photoItems as $photoItem) {
-                $tmpPhotos[] = PhotoSize::fromResponse($photoItem);
-            }
-            $photos[] = $tmpPhotos;
-        }
-        $instance->setPhotos($photos);
-
-        return $instance;
     }
 }

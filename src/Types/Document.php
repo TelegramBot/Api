@@ -20,6 +20,19 @@ class Document extends BaseType implements TypeInterface
      *
      * @var array
      */
+    static protected $map = array(
+        'file_id' => true,
+        'thumb' => '\TelegramBot\Api\Types\PhotoSize',
+        'file_name' => true,
+        'mime_type' => true,
+        'file_size' => true
+    );
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
     static protected $requiredParams = array('file_id', 'thumb');
 
     /**
@@ -139,26 +152,5 @@ class Document extends BaseType implements TypeInterface
     public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setFileId($data['file_id']);
-        $instance->setThumb(PhotoSize::fromResponse($data['thumb']));
-
-        if (isset($data['mime_type'])) {
-            $instance->setMimeType($data['mime_type']);
-        }
-        if (isset($data['file_name'])) {
-            $instance->setFileName($data['file_name']);
-        }
-        if (isset($data['file_size'])) {
-            $instance->setFileSize($data['file_size']);
-        }
-
-        return $instance;
     }
 }

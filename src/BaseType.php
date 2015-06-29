@@ -18,6 +18,13 @@ abstract class BaseType
     protected static $requiredParams = array();
 
     /**
+     * Map of input data
+     *
+     * @var array
+     */
+    protected static $map = array();
+
+    /**
      * Validate input data
      *
      * @param array $data
@@ -29,5 +36,26 @@ abstract class BaseType
         }
 
         throw new InvalidArgumentException();
+    }
+
+    public function map($data)
+    {
+        foreach (static::$map as $key => $item) {
+            $method = 'set' . str_replace(" ", "", ucwords(str_replace("_", " ", $key)));
+            if ($item === true) {
+                $this->$method($data[$key]);
+            } else {
+                $this->$method($item::fromResponse($data[$key]));
+            }
+        }
+    }
+
+    public static function fromResponse($data)
+    {
+        self::validate($data);
+        $instance = new static();
+        $instance->map($data);
+
+        return $instance;
     }
 }

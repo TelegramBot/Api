@@ -22,6 +22,18 @@ class PhotoSize extends BaseType implements TypeInterface
     static protected $requiredParams = array('file_id', 'width', 'height');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'file_id' => true,
+        'width' => true,
+        'height' => true,
+        'file_size' => true,
+    );
+
+    /**
      * Unique identifier for this file
      *
      * @var string
@@ -123,29 +135,5 @@ class PhotoSize extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-    }
-
-    /**
-     * Static constructor
-     *
-     * @param array $data
-     *
-     * @return \TelegramBot\Api\Types\PhotoSize
-     */
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setFileId($data['file_id']);
-        $instance->setWidth($data['width']);
-        $instance->setHeight($data['height']);
-
-
-        if (isset($data['file_size'])) {
-            $instance->setFileSize($data['file_size']);
-        }
-
-        return $instance;
     }
 }

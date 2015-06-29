@@ -22,6 +22,16 @@ class GroupChat extends BaseType implements TypeInterface
     static protected $requiredParams = array('id', 'title');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'id' => true,
+        'title' => true
+    );
+
+    /**
      * Unique identifier for this group chat
      *
      * @var int
@@ -69,16 +79,5 @@ class GroupChat extends BaseType implements TypeInterface
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setId($data['id']);
-        $instance->setTitle($data['title']);
-
-        return $instance;
     }
 }

@@ -22,6 +22,18 @@ class User extends BaseType implements TypeInterface
     static protected $requiredParams = array('id', 'first_name');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'id' => true,
+        'first_name' => true,
+        'last_name' => true,
+        'username' => true,
+    );
+
+    /**
      * Unique identifier for this user or bot
      *
      * @var int
@@ -115,23 +127,5 @@ class User extends BaseType implements TypeInterface
     public function setUsername($username)
     {
         $this->username = $username;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setId($data['id']);
-        $instance->setFirstName($data['first_name']);
-
-        if (isset($data['last_name'])) {
-            $instance->setLastName($data['last_name']);
-        }
-        if (isset($data['username'])) {
-            $instance->setUsername($data['username']);
-        }
-
-        return $instance;
     }
 }

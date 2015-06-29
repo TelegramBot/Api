@@ -22,6 +22,18 @@ class Contact extends BaseType implements TypeInterface
     static protected $requiredParams = array('phone_number', 'first_name');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'phone_number' => true,
+        'first_name' => true,
+        'last_name' => true,
+        'user_id' => true
+    );
+
+    /**
      * Contact's phone number
      *
      * @var string
@@ -111,23 +123,5 @@ class Contact extends BaseType implements TypeInterface
     public function setUserId($userId)
     {
         $this->userId = $userId;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setPhoneNumber($data['phone_number']);
-        $instance->setFirstName($data['first_name']);
-
-        if (isset($data['last_name'])) {
-            $instance->setLastName($data['last_name']);
-        }
-        if (isset($data['user_id'])) {
-            $instance->setUserId($data['user_id']);
-        }
-
-        return $instance;
     }
 }

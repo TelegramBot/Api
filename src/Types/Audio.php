@@ -22,6 +22,18 @@ class Audio extends BaseType implements TypeInterface
     static protected $requiredParams = array('file_id', 'duration');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'file_id' => true,
+        'duration' => true,
+        'mime_type' => true,
+        'file_size' => true
+    );
+
+    /**
      * Unique identifier for this file
      *
      * @var string
@@ -119,23 +131,5 @@ class Audio extends BaseType implements TypeInterface
     public function setMimeType($mimeType)
     {
         $this->mimeType = $mimeType;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setFileId($data['file_id']);
-        $instance->setDuration($data['duration']);
-
-        if (isset($data['mime_type'])) {
-            $instance->setMimeType($data['mime_type']);
-        }
-        if (isset($data['file_size'])) {
-            $instance->setFileSize($data['file_size']);
-        }
-
-        return $instance;
     }
 }

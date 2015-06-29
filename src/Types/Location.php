@@ -22,6 +22,16 @@ class Location extends BaseType implements TypeInterface
     static protected $requiredParams = array('latitude', 'longitude');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'latitude' => true,
+        'longitude' => true,
+    );
+
+    /**
      * Longitude as defined by sender
      *
      * @var float
@@ -73,16 +83,5 @@ class Location extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setLatitude($data['latitude']);
-        $instance->setLongitude($data['longitude']);
-
-        return $instance;
     }
 }

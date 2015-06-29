@@ -15,6 +15,36 @@ class Message extends BaseType implements TypeInterface
     static protected $requiredParams = array('message_id', 'from', 'date', 'chat');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'message_id' => true,
+        'from' => '\TelegramBot\Api\Types\User',
+        'date' => true,
+        'file_size' => true,
+        'chat' => '\TelegramBot\Api\Types\Chat',
+        'forward_from' => '\TelegramBot\Api\Types\User',
+        'forward_date' => true,
+        'reply_to_message' => '\TelegramBot\Api\Types\Message',
+        'text' => true,
+        'audio' => '\TelegramBot\Api\Types\Audio',
+        'document' => '\TelegramBot\Api\Types\Document',
+        'photo' => '\TelegramBot\Api\Types\ArrayOfPhotoSize',
+        'sticker' => '\TelegramBot\Api\Types\Sticker',
+        'video' => '\TelegramBot\Api\Types\Video',
+        'contact' => '\TelegramBot\Api\Types\Contact',
+        'location' => '\TelegramBot\Api\Types\Location',
+        'new_chat_participant' => '\TelegramBot\Api\Types\User',
+        'left_chat_participant' => '\TelegramBot\Api\Types\User',
+        'new_chat_title' => true,
+        'new_chat_photo' => '\TelegramBot\Api\Types\ArrayOfPhotoSize',
+        'delete_chat_photo' => true,
+        'group_chat_created' => true
+    );
+
+    /**
      * Unique message identifier
      *
      * @var int
@@ -509,95 +539,5 @@ class Message extends BaseType implements TypeInterface
     public function setVideo(Video $video)
     {
         $this->video = $video;
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setMessageId($data['message_id']);
-        $instance->setDate($data['date']);
-        $instance->setFrom(User::fromResponse($data['from']));
-
-        if (isset($data['chat'], $data['chat']['title'])) {
-            $instance->setChat(GroupChat::fromResponse($data['chat']));
-        }
-        if (isset($data['chat'], $data['chat']['first_name'])) {
-            $instance->setChat(User::fromResponse($data['chat']));
-        }
-
-        if (isset($data['audio'])) {
-            $instance->setAudio(Audio::fromResponse($data['audio']));
-        }
-        if (isset($data['document'])) {
-            $instance->setDocument(Document::fromResponse($data['document']));
-        }
-        if (isset($data['sticker'])) {
-            $instance->setSticker(Sticker::fromResponse($data['sticker']));
-        }
-        if (isset($data['contact'])) {
-            $instance->setContact(Contact::fromResponse($data['contact']));
-        }
-        if (isset($data['location'])) {
-            $instance->setLocation(Location::fromResponse($data['location']));
-        }
-        if (isset($data['video'])) {
-            $instance->setVideo(Video::fromResponse($data['video']));
-        }
-
-        if (isset($data['reply_to_message'])) {
-            $instance->setReplyToMessage(Message::fromResponse($data['reply_to_message']));
-        }
-
-        if (isset($data['text'])) {
-            $instance->setText($data['text']);
-        }
-        if (isset($data['new_chat_title'])) {
-            $instance->setNewChatTitle($data['new_chat_title']);
-        }
-        if (isset($data['forward_from'])) {
-            $instance->setForwardFrom(User::fromResponse($data['forward_from']));
-        }
-        if (isset($data['forward_date'])) {
-            $instance->setForwardDate($data['forward_date']);
-        }
-        if (isset($data['new_chat_participant'])) {
-            $instance->setNewChatParticipant(User::fromResponse($data['new_chat_participant']));
-        }
-        if (isset($data['left_chat_participant'])) {
-            $instance->setLeftChatParticipant(User::fromResponse($data['left_chat_participant']));
-        }
-
-        if (isset($data['new_chat_photo'])) {
-            $instance->setNewChatPhoto(self::generateArrayOfPhotoSize($data['new_chat_photo']));
-        }
-
-        if (isset($data['photo'])) {
-            $instance->setPhoto(self::generateArrayOfPhotoSize($data['photo']));
-        }
-
-        if (isset($data['group_chat_created'])) {
-            $instance->setGroupChatCreated($data['group_chat_created']);
-        }
-
-        return $instance;
-    }
-
-    /**
-     * Returns array of PhotoSize from raw
-     *
-     * @param $data
-     *
-     * @return array
-     */
-    protected static function generateArrayOfPhotoSize($data)
-    {
-        $arrayOfPhotoSize = array();
-        foreach ($data as $photoSizeItem) {
-            $arrayOfPhotoSize[] = PhotoSize::fromResponse($photoSizeItem);
-        }
-
-        return $arrayOfPhotoSize;
     }
 }

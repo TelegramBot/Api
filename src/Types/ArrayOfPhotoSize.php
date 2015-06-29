@@ -2,7 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
-abstract class ArrayOfPhotoSize extends \ArrayObject
+abstract class ArrayOfPhotoSize
 {
     public static function fromResponse($data)
     {

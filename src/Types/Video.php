@@ -22,6 +22,22 @@ class Video extends BaseType implements TypeInterface
     static protected $requiredParams = array('file_id', 'width', 'height', 'duration', 'thumb');
 
     /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'file_id' => true,
+        'width' => true,
+        'height' => true,
+        'duration' => true,
+        'thumb' => '\TelegramBot\Api\Types\PhotoSize',
+        'mime_type' => true,
+        'file_size' => true,
+        'caption' => true
+    );
+
+    /**
      * Unique identifier for this file
      *
      * @var string
@@ -220,29 +236,5 @@ class Video extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-    }
-
-    public static function fromResponse($data)
-    {
-        self::validate($data);
-        $instance = new self();
-
-        $instance->setFileId($data['file_id']);
-        $instance->setWidth($data['width']);
-        $instance->setHeight($data['height']);
-        $instance->setDuration($data['duration']);
-        $instance->setThumb(PhotoSize::fromResponse($data['thumb']));
-
-        if (isset($data['mime_type'])) {
-            $instance->setMimeType($data['mime_type']);
-        }
-        if (isset($data['file_size'])) {
-            $instance->setFileSize($data['file_size']);
-        }
-        if (isset($data['caption'])) {
-            $instance->setCaption($data['caption']);
-        }
-
-        return $instance;
     }
 }
