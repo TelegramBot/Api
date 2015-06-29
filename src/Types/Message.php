@@ -87,8 +87,9 @@ class Message extends BaseType implements TypeInterface
 
     /**
      * Optional. Message is a photo, available sizes of the photo
+     * array of \TelegramBot\Api\Types\Photo
      *
-     * @var \TelegramBot\Api\Types\Photo
+     * @var array
      */
     protected $photo;
 
@@ -425,7 +426,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param array $photo
      */
-    public function setPhoto($photo)
+    public function setPhoto(array $photo)
     {
         $this->photo = $photo;
     }
