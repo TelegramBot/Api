@@ -98,7 +98,11 @@ class Audio extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        $this->fileSize = $fileSize;
+        if (is_integer($fileSize)) {
+            $this->fileSize = $fileSize;
+        } else {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**

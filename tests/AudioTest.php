@@ -65,7 +65,7 @@ class AudioTest extends \PHPUnit_Framework_TestCase
     public function testFromResponse()
     {
         $item = Audio::fromResponse(array(
-            "file_id" => 'testFileId1',
+            'file_id' => 'testFileId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
@@ -76,4 +76,45 @@ class AudioTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
         $this->assertAttributeEquals(3, 'fileSize', $item);
     }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testFromResponseException()
+    {
+        $item = Audio::fromResponse(array(
+            'duration' => 1,
+            'mime_type' => 'audio/mp3',
+            'file_size' => 3
+        ));
+    }
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testFromResponseException2()
+    {
+        $item = Audio::fromResponse(array(
+            'file_id' => 'testFileId1',
+            'mime_type' => 'audio/mp3',
+            'file_size' => 3
+        ));
+    }
+
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetDurationException()
+    {
+        $item = new Audio();
+        $item->setDuration('s');
+    }
+    /**
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testSetFileSizeException()
+    {
+        $item = new Audio();
+        $item->setFileSize('s');
+    }
+
 }
