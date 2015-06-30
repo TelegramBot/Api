@@ -33,7 +33,7 @@ class Document extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('file_id', 'thumb');
+    static protected $requiredParams = array('file_id');
 
     /**
      * Unique identifier for this file

@@ -146,17 +146,4 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             )
         ));
     }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException2()
-    {
-        $item = Document::fromResponse(array(
-            'file_id' => 'testFileId1',
-            'file_name' => 'testFileName',
-            'mime_type' => 'audio/mp3',
-            'file_size' => 3
-        ));
-    }
 }
