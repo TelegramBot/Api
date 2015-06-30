@@ -2,6 +2,8 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
+
 /**
  * Class ForceReply
  * Upon receiving a message with this object, Telegram clients will display a reply interface to the user
@@ -10,8 +12,25 @@ namespace TelegramBot\Api\Types;
  *
  * @package TelegramBot\Api\Types
  */
-class ForceReply
+class ForceReply extends BaseType
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('force_reply');
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'force_reply' => true,
+        'selective' => true
+    );
+
     /**
      * Shows reply interface to the user, as if they manually selected the bot‘s message and tapped ’Reply'
      *

@@ -2,6 +2,8 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
+
 /**
  * Class ReplyKeyboardHide
  * Upon receiving a message with this object, Telegram clients will hide the current custom keyboard
@@ -11,8 +13,25 @@ namespace TelegramBot\Api\Types;
  *
  * @package TelegramBot\Api\Types
  */
-class ReplyKeyboardHide
+class ReplyKeyboardHide extends BaseType
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('hide_keyboard');
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'hide_keyboard' => true,
+        'selective' => true
+    );
+
     /**
      * Requests clients to hide the custom keyboard
      *

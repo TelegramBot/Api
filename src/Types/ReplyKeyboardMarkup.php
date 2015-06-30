@@ -2,14 +2,35 @@
 
 namespace TelegramBot\Api\Types;
 
+use TelegramBot\Api\BaseType;
+
 /**
  * Class ReplyKeyboardMarkup
  * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
  *
  * @package TelegramBot\Api\Types
  */
-class ReplyKeyboardMarkup
+class ReplyKeyboardMarkup extends BaseType
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $requiredParams = array('keyboard');
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
+    static protected $map = array(
+        'keyboard' => true,
+        'resize_keyboard' => true,
+        'one_time_keyboard' => true,
+        'selective' => true
+    );
+
     /**
      * Array of button rows, each represented by an Array of Strings
      * Array of Array of String

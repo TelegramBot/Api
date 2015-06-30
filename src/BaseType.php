@@ -42,7 +42,7 @@ abstract class BaseType
     {
         foreach (static::$map as $key => $item) {
             if (isset($data[$key])) {
-                $method = 'set' . str_replace(" ", "", ucwords(str_replace("_", " ", $key)));
+                $method = 'set' . self::toCamelCase($key);
                 if ($item === true) {
                     $this->$method($data[$key]);
                 } else {
@@ -50,6 +50,23 @@ abstract class BaseType
                 }
             }
         }
+    }
+
+    protected static function toCamelCase($str)
+    {
+        return str_replace(" ", "", ucwords(str_replace("_", " ", $str)));
+    }
+
+    public function toJson($inner = false)
+    {
+        $output = array();
+
+        foreach (static::$map as $key => $item)  {
+            $property = lcfirst(self::toCamelCase($key));
+            $output[$key] = $item === true ? $this->$property : $this->$property->toJson(true);
+        }
+
+        return $inner === false ? json_encode($output) : $output;
     }
 
     public static function fromResponse($data)
