@@ -49,6 +49,12 @@ class ReplyKeyboardHide extends BaseType
      */
     protected $selective;
 
+    function __construct($hideKeyboard, $selective)
+    {
+        $this->hideKeyboard = $hideKeyboard;
+        $this->selective = $selective;
+    }
+
     /**
      * @return boolean
      */
