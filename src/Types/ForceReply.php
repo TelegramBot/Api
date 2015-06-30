@@ -48,7 +48,7 @@ class ForceReply extends BaseType
      */
     protected $selective;
 
-    function __construct($forceReply, $selective)
+    function __construct($forceReply = true, $selective = null)
     {
         $this->forceReply = $forceReply;
         $this->selective = $selective;

@@ -65,7 +65,7 @@ class ReplyKeyboardMarkup extends BaseType
      */
     protected $selective;
 
-    function __construct($keyboard, $oneTimeKeyboard, $resizeKeyboard, $selective)
+    function __construct($keyboard, $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null)
     {
         $this->keyboard = $keyboard;
         $this->oneTimeKeyboard = $oneTimeKeyboard;
