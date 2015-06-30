@@ -121,7 +121,7 @@ class BotApi
             'text' => $text,
             'disable_web_page_preview' => $disablePreviw,
             'reply_to_message_id' => (int) $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -249,7 +249,7 @@ class BotApi
             'latitude' => $latitude,
             'longitude' => $longitude,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -271,7 +271,7 @@ class BotApi
             'chat_id' => (int) $chatId,
             'sticker' => $sticker,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -295,7 +295,7 @@ class BotApi
             'chat_id' => (int) $chatId,
             'video' => $video,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -341,7 +341,7 @@ class BotApi
             'chat_id' => (int) $chatId,
             'audio' => $audio,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -365,7 +365,7 @@ class BotApi
             'photo' => $photo,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
@@ -388,7 +388,7 @@ class BotApi
             'chat_id' => (int) $chatId,
             'document' => $document,
             'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => $replyMarkup->toJson()
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
     }
 
