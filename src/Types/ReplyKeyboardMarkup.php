@@ -26,8 +26,8 @@ class ReplyKeyboardMarkup extends BaseType
      */
     static protected $map = array(
         'keyboard' => true,
-        'resize_keyboard' => true,
         'one_time_keyboard' => true,
+        'resize_keyboard' => true,
         'selective' => true
     );
 
