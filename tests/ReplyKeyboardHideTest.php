@@ -1,11 +1,14 @@
 <?php
 
-class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
-{
+namespace TelegramBot\Api\Test;
 
+use TelegramBot\Api\Types\ReplyKeyboardHide;
+
+class ReplyKeyboardHideTest extends \PHPUnit_Framework_TestCase
+{
     public function testConstructor()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide();
+        $item = new ReplyKeyboardHide();
 
         $this->assertAttributeEquals(true, 'hideKeyboard', $item);
         $this->assertAttributeEquals(null, 'selective', $item);
@@ -13,7 +16,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testConstructor2()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true, true);
+        $item = new ReplyKeyboardHide(true, true);
 
         $this->assertAttributeEquals(true, 'hideKeyboard', $item);
         $this->assertAttributeEquals(true, 'selective', $item);
@@ -21,7 +24,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testConstructor3()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(false, true);
+        $item = new ReplyKeyboardHide(false, true);
 
         $this->assertAttributeEquals(false, 'hideKeyboard', $item);
         $this->assertAttributeEquals(true, 'selective', $item);
@@ -29,7 +32,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testConstructor4()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true);
+        $item = new ReplyKeyboardHide(true);
 
         $this->assertAttributeEquals(true, 'hideKeyboard', $item);
         $this->assertAttributeEquals(null, 'selective', $item);
@@ -37,7 +40,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testSetHideKeyboard()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true);
+        $item = new ReplyKeyboardHide(true);
 
         $item->setHideKeyboard(false);
 
@@ -46,7 +49,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testIsHideKeyboard()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true);
+        $item = new ReplyKeyboardHide(true);
 
         $item->setHideKeyboard(false);
 
@@ -55,7 +58,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testSetSelective()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide();
+        $item = new ReplyKeyboardHide();
 
         $item->setSelective(true);
 
@@ -64,7 +67,7 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testIsSelective()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide();
+        $item = new ReplyKeyboardHide();
 
         $item->setSelective(true);
 
@@ -73,31 +76,29 @@ class ReplyKeyboardHideTest extends PHPUnit_Framework_TestCase
 
     public function testToJson()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide();
+        $item = new ReplyKeyboardHide();
 
         $this->assertEquals(json_encode(array('hide_keyboard' => true)), $item->toJson());
     }
 
     public function testToJson2()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide();
+        $item = new ReplyKeyboardHide();
 
         $this->assertEquals(array('hide_keyboard' => true), $item->toJson(true));
     }
 
     public function testToJson3()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true, true);
+        $item = new ReplyKeyboardHide(true, true);
 
         $this->assertEquals(json_encode(array('hide_keyboard' => true, 'selective' => true)), $item->toJson());
     }
 
     public function testToJson4()
     {
-        $item = new \TelegramBot\Api\Types\ReplyKeyboardHide(true, true);
+        $item = new ReplyKeyboardHide(true, true);
 
         $this->assertEquals(array('hide_keyboard' => true, 'selective' => true), $item->toJson(true));
     }
-
-
 }
