@@ -464,6 +464,67 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('testtitle', $item->getNewChatTitle());
     }
 
+    public function testSetText()
+    {
+        $item = new Message();
+        $item->setText('testtitle');
+
+        $this->assertAttributeEquals('testtitle', 'text', $item);
+    }
+
+    public function testGetText()
+    {
+        $item = new Message();
+        $item->setText('testtitle');
+
+        $this->assertEquals('testtitle', $item->getText());
+    }
+
+    public function testSetReplyToMessage()
+    {
+        $item = new Message();
+        $replyMessage = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'title' => 'test chat'
+            )
+        ));
+        $item->setReplyToMessage($replyMessage);
+
+        $this->assertAttributeEquals($replyMessage, 'replyToMessage', $item);
+    }
+
+    public function testGetReplyToMessage()
+    {
+        $item = new Message();
+        $replyMessage = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'title' => 'test chat'
+            )
+        ));
+        $item->setReplyToMessage($replyMessage);
+
+        $this->assertEquals($replyMessage, $item->getReplyToMessage());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Message', $item->getReplyToMessage());
+    }
+
     public function testSetPhoto()
     {
         $item = new Message();
