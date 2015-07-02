@@ -472,7 +472,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Message $replyToMessage
      */
-    public function setReplyToMessage($replyToMessage)
+    public function setReplyToMessage(Message $replyToMessage)
     {
         $this->replyToMessage = $replyToMessage;
     }
