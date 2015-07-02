@@ -7,7 +7,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/telegrambot/api.svg?style=flat-square)](https://scrutinizer-ci.com/g/telegrambot/api)
 [![Total Downloads](https://img.shields.io/packagist/dt/telegram-bot/api.svg?style=flat-square)](https://packagist.org/packages/telegram-bot/api)
 
-An extended php wrapper for telegram bot api
+An extended native php wrapper for [Telegram Bot API](https://core.telegram.org/bots/api) without requirements. Supports all methods and types of responses.
 
 ## Install
 
@@ -20,9 +20,25 @@ $ composer require telegram-bot/api
 ## Usage
 
 ``` php
-$bot = new TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
 
 $bot->sendMessage($chatId, $messageText);
+```
+
+```php
+$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+
+$document = new \CURLFile('document.txt');
+
+$bot->sendDocument($chatId, $document);
+```
+
+```php
+$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+
+$keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "two", "three")), true); // true for one-time keyboard
+
+$bot->sendMessage($chatId, $messageText, false, null, $keyboard);
 ```
 
 ## Change log
