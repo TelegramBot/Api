@@ -8,6 +8,11 @@ use TelegramBot\Api\Types\UserProfilePhotos;
 
 class BotApi
 {
+    /**
+     * HTTP codes
+     *
+     * @var array
+     */
     public static $codes = array(
         // Informational 1xx
         100 => 'Continue',
@@ -57,6 +62,12 @@ class BotApi
         505 => 'HTTP Version Not Supported',
         509 => 'Bandwidth Limit Exceeded'
     );
+
+
+    /**
+     * Default http status code
+     */
+    const DEFAULT_STATUS_CODE = 200;
 
     /**
      * Url prefix
@@ -135,7 +146,7 @@ class BotApi
 
         $result = curl_exec($this->curl);
 
-        if(($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== 200) {
+        if(($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
             throw new HttpException(self::$codes[$httpCode], $httpCode);
         }
 
