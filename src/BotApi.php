@@ -146,7 +146,7 @@ class BotApi
 
         $result = curl_exec($this->curl);
 
-        if(($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
+        if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
             throw new HttpException(self::$codes[$httpCode], $httpCode);
         }
 
