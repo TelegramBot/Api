@@ -142,19 +142,9 @@ class BotApi
             $options[CURLOPT_POSTFIELDS] = $data;
         }
 
-        curl_setopt_array($this->curl, $options);
 
-        $result = curl_exec($this->curl);
+        $response = $this->executeCurl($options);
 
-        if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
-            throw new HttpException(self::$codes[$httpCode], $httpCode);
-        }
-
-        $response = json_decode($result, $this->returnArray);
-
-        if (json_last_error() != JSON_ERROR_NONE) {
-            throw new InvalidJsonException(json_last_error(), json_last_error_msg());
-        }
 
         if ($this->returnArray) {
             if (!$response['ok']) {
@@ -169,6 +159,25 @@ class BotApi
         }
 
         return $response->result;
+    }
+
+    protected function executeCurl(array $options)
+    {
+        curl_setopt_array($this->curl, $options);
+
+        $result = curl_exec($this->curl);
+
+        if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
+            throw new HttpException(self::$codes[$httpCode], $httpCode);
+        }
+
+        $response = json_decode($result, $this->returnArray);
+
+        if (json_last_error() != JSON_ERROR_NONE) {
+            throw new InvalidJsonException(json_last_error(), json_last_error_msg());
+        }
+
+        return $response;
     }
 
 
