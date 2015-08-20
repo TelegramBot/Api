@@ -120,13 +120,17 @@ class BotApi
         return $this;
     }
 
+
     /**
      * Call method
      *
      * @param string $method
-     * @param array $data
+     * @param array|null $data
      *
      * @return mixed
+     * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function call($method, array $data = null)
     {
@@ -142,9 +146,7 @@ class BotApi
             $options[CURLOPT_POSTFIELDS] = $data;
         }
 
-
         $response = $this->executeCurl($options);
-
 
         if ($this->returnArray) {
             if (!$response['ok']) {
@@ -161,6 +163,15 @@ class BotApi
         return $response->result;
     }
 
+    /**
+     * curl_exec wrapper for response validation
+     *
+     * @param array $options
+     *
+     * @return mixed
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
+     */
     protected function executeCurl(array $options)
     {
         curl_setopt_array($this->curl, $options);
