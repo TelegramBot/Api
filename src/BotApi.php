@@ -4,9 +4,15 @@ namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
 
+/**
+ * Class BotApi
+ *
+ * @package TelegramBot\Api
+ */
 class BotApi
 {
     /**
@@ -71,6 +77,11 @@ class BotApi
     const DEFAULT_STATUS_CODE = 200;
 
     /**
+     * Limits for tracked ids
+     */
+    const MAX_TRACKED_EVENTS = 200;
+
+    /**
      * Url prefix
      */
     const URL_PREFIX = 'https://api.telegram.org/bot';
@@ -90,21 +101,41 @@ class BotApi
     protected $token;
 
     /**
+     * Botan tracker
+     *
+     * @var \TelegramBot\Api\Botan
+     */
+    protected $tracker;
+
+    /**
+     * list of event ids
+     *
+     * @var array
+     */
+    protected $trackedEvents = array();
+
+    /**
      * Check whether return associative array
      *
      * @var bool
      */
     protected $returnArray = true;
 
+
     /**
      * Constructor
      *
-     * @param $token
+     * @param string $token             Telegram Bot API token
+     * @param string|null $trackerToken Yandex AppMetrica application api_key
      */
-    public function __construct($token)
+    public function __construct($token, $trackerToken = null)
     {
         $this->curl = curl_init();
         $this->token = $token;
+
+        if ($trackerToken) {
+            $this->tracker = new Botan($trackerToken);
+        }
     }
 
     /**
@@ -333,11 +364,19 @@ class BotApi
      */
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
     {
-        return ArrayOfUpdates::fromResponse($this->call('getUpdates', array(
+        $updates = ArrayOfUpdates::fromResponse($this->call('getUpdates', array(
             'offset' => $offset,
             'limit' => $limit,
             'timeout' => $timeout
         )));
+
+        if ($this->tracker instanceof Botan) {
+            foreach ($updates as $update) {
+                $this->trackUpdate($update);
+            }
+        }
+
+        return $updates;
     }
 
     /**
@@ -516,5 +555,40 @@ class BotApi
     public function getUrl()
     {
         return self::URL_PREFIX . $this->token;
+    }
+
+
+    /**
+     * @param \TelegramBot\Api\Types\Update $update
+     * @param string $eventName
+     *
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function trackUpdate(Update $update, $eventName = 'Message')
+    {
+        if (!in_array($update->getUpdateId(), $this->trackedEvents)) {
+            $this->trackedEvents[] = $update->getUpdateId();
+
+            $this->track($update->getMessage(), $eventName);
+
+            if (count($this->trackedEvents) > self::MAX_TRACKED_EVENTS) {
+                $this->trackedEvents = array_slice($this->trackedEvents, round(self::MAX_TRACKED_EVENTS / 4));
+            }
+        }
+    }
+
+    /**
+     * Wrapper for tracker
+     *
+     * @param \TelegramBot\Api\Types\Message $message
+     * @param string $eventName
+     *
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function track(Message $message, $eventName = 'Message')
+    {
+        if ($this->tracker instanceof Botan) {
+            $this->tracker->track($message, $eventName);
+        }
     }
 }

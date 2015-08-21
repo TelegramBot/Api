@@ -21,7 +21,9 @@ class Botan
 
 
     /**
-     * @var string Yandex AppMetrica application api_key
+     * Yandex AppMetrica application api_key
+     *
+     * @var string
      */
     protected $token;
 
@@ -32,7 +34,7 @@ class Botan
      *
      * @throws \Exception
      */
-    function __construct($token)
+    public function __construct($token)
     {
         if (!function_exists('curl_version')) {
             throw new Exception('CURL not installed');
@@ -47,7 +49,7 @@ class Botan
     }
 
     /**
-     * 
+     * Event tracking
      *
      * @param \TelegramBot\Api\Types\Message $message
      * @param string $eventName
