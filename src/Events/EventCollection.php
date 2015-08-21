@@ -15,6 +15,8 @@ class EventCollection
     protected $events;
 
     /**
+     * Add new event to collection
+     *
      * @param \Closure $event
      * @param \Closure|null $check
      *
@@ -22,9 +24,7 @@ class EventCollection
      */
     public function add(Closure $event, $checker = null)
     {
-
         $this->events[] = new Event($event, $checker);
-        $this->events[] = array('check' => $checker, 'action' => $event);
 
         return $this;
     }

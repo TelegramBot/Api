@@ -52,7 +52,7 @@ class Event
     public function executeChecker(Message $message)
     {
         if (is_callable($this->checker)) {
-            return call_user_func($this->checker);
+            return call_user_func($this->checker, $message);
         }
 
         return false;
@@ -66,7 +66,7 @@ class Event
     public function executeAction(Message $message)
     {
         if (is_callable($this->action)) {
-            return call_user_func($this->action);
+            return call_user_func($this->action, $message);
         }
 
         return false;
