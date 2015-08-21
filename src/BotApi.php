@@ -178,14 +178,24 @@ class BotApi
         curl_setopt_array($this->curl, $options);
 
         $result = curl_exec($this->curl);
-
-        if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
-            throw new HttpException(self::$codes[$httpCode], $httpCode);
-        }
+        self::curlValidate($this->curl);
 
         return self::jsonValidate($result, $this->returnArray);
     }
 
+    /**
+     * Response validation
+     *
+     * @param $curl
+     *
+     * @throws \TelegramBot\Api\HttpException
+     */
+    public static function curlValidate($curl)
+    {
+        if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
+            throw new HttpException(self::$codes[$httpCode], $httpCode);
+        }
+    }
 
     /**
      * JSON validation
@@ -206,7 +216,6 @@ class BotApi
 
         return $json;
     }
-
 
     /**
      * Use this method to send text messages. On success, the sent \TelegramBot\Api\Types\Message is returned.
