@@ -23,7 +23,6 @@ class Message extends BaseType implements TypeInterface
         'message_id' => true,
         'from' => '\TelegramBot\Api\Types\User',
         'date' => true,
-        'file_size' => true,
         'chat' => '\TelegramBot\Api\Types\Chat',
         'forward_from' => '\TelegramBot\Api\Types\User',
         'forward_date' => true,
