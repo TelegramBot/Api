@@ -187,7 +187,8 @@ class BotApi
     }
 
 
-    public static function jsonValidate($jsonString, $asArray) {
+    public static function jsonValidate($jsonString, $asArray)
+    {
         $json = json_decode($jsonString, $asArray);
 
         if (json_last_error() != JSON_ERROR_NONE) {
