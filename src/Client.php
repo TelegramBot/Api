@@ -99,11 +99,11 @@ class Client
     /**
      * Returns event function to handling the command.
      *
-     * @param string $action
+     * @param \Closure $action
      *
      * @return \Closure
      */
-    protected static function getEvent($action)
+    protected static function getEvent(Closure $action)
     {
         return function (Message $message) use ($action) {
             preg_match(self::REGEXP, $message->getText(), $matches);
