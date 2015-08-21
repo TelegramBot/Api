@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
+use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -308,17 +309,11 @@ class BotApi
      */
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
     {
-        $responseRaw = $this->call('getUpdates', array(
+        return ArrayOfUpdates::fromResponse($this->call('getUpdates', array(
             'offset' => $offset,
             'limit' => $limit,
             'timeout' => $timeout
-        ));
-        $response = array();
-        foreach ($responseRaw as $raw) {
-            $response[] = array('update_id' => $raw['update_id'], 'message' => Message::fromResponse($raw['message']));
-        }
-
-        return $response;
+        )));
     }
 
     /**
