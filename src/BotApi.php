@@ -185,7 +185,7 @@ class BotApi
         $response = json_decode($result, $this->returnArray);
 
         if (json_last_error() != JSON_ERROR_NONE) {
-            throw new InvalidJsonException(json_last_error(), json_last_error_msg());
+            throw new InvalidJsonException(json_last_error_msg(), json_last_error());
         }
 
         return $response;
