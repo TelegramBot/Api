@@ -557,7 +557,6 @@ class BotApi
         return self::URL_PREFIX . $this->token;
     }
 
-
     /**
      * @param \TelegramBot\Api\Types\Update $update
      * @param string $eventName

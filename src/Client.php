@@ -8,8 +8,16 @@ use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
+/**
+ * Class Client
+ *
+ * @package TelegramBot\Api
+ */
 class Client
 {
+    /**
+     * RegExp for bot commands
+     */
     const REGEXP = '/^\/([^\s@]+)(@\S+)?\s?(.*)$/';
 
     /**
@@ -23,14 +31,15 @@ class Client
     protected $events;
 
     /**
-     * Client constructor.
+     * Client constructor
      *
-     * @param string $token
+     * @param string $token             Telegram Bot API token
+     * @param string|null $trackerToken Yandex AppMetrica application api_key
      */
-    public function __construct($token)
+    public function __construct($token, $trackerToken = null)
     {
         $this->api = new BotApi($token);
-        $this->events = new EventCollection();
+        $this->events = new EventCollection($trackerToken);
     }
 
     /**
