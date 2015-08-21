@@ -5,8 +5,8 @@ namespace TelegramBot\Api;
 use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
-use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\Update;
 
 class Client
 {
@@ -70,7 +70,7 @@ class Client
     public function handle(array $updates)
     {
         foreach ($updates as $update) {
-            $this->events->handle($update->message);
+            $this->events->handle($update->getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ class Client
     public function run()
     {
         if ($data = BotApi::jsonValidate(file_get_contents('php://input'), true)) {
-            $this->handle(ArrayOfUpdates::fromResponse($data));
+            $this->handle([Update::fromResponse($data)]);
         }
     }
 
