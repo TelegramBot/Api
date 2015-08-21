@@ -72,11 +72,11 @@ class Botan
         );
 
         curl_setopt_array($this->curl, $options);
-        $result = curl_exec($this->curl);
+        $result = BotApi::jsonValidate(curl_exec($this->curl), true);
 
         BotApi::curlValidate($this->curl);
 
-        if ($result['response']['status'] !== 'accepted') {
+        if ($result['status'] !== 'accepted') {
             throw new Exception('Error Processing Request');
         }
     }
