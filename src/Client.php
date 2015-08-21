@@ -5,6 +5,7 @@ namespace TelegramBot\Api;
 use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
+use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Message;
 
 class Client
@@ -62,6 +63,31 @@ class Client
     }
 
     /**
+     * Handle updates
+     *
+     * @param array $updates
+     */
+    public function handle(array $updates)
+    {
+        foreach ($updates as $update) {
+            $this->events->handle($update->message);
+        }
+    }
+
+    /**
+     * Webhook handler
+     *
+     * @return array
+     * @throws \TelegramBot\Api\InvalidJsonException
+     */
+    public function run()
+    {
+        if ($data = BotApi::jsonValidate(file_get_contents('php://input'), true)) {
+            $this->handle(ArrayOfUpdates::fromResponse($data));
+        }
+    }
+
+    /**
      * Returns event function to handling the command.
      *
      * @param string $action
@@ -90,7 +116,6 @@ class Client
             return false;
         };
     }
-
 
     /**
      * Returns check function to handling the command.
