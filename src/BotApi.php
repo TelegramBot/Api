@@ -183,13 +183,18 @@ class BotApi
             throw new HttpException(self::$codes[$httpCode], $httpCode);
         }
 
-        $response = json_decode($result, $this->returnArray);
+        return self::jsonValidate($result, $this->returnArray);
+    }
+
+
+    public static function jsonValidate($jsonString, $asArray) {
+        $json = json_decode($jsonString, $asArray);
 
         if (json_last_error() != JSON_ERROR_NONE) {
             throw new InvalidJsonException(json_last_error_msg(), json_last_error());
         }
 
-        return $response;
+        return $json;
     }
 
 
