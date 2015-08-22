@@ -19,6 +19,9 @@ $ composer require telegram-bot/api
 
 ## Usage
 
+See example [DevAnswerBot](https://github.com/TelegramBot/DevAnswerBot) (russian).
+
+### API Wrapper
 ``` php
 $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
 
@@ -39,6 +42,28 @@ $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
 $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "two", "three")), true); // true for one-time keyboard
 
 $bot->sendMessage($chatId, $messageText, false, null, $keyboard);
+```
+
+### Client
+
+```php
+require_once "vendor/autoload.php";
+
+try {
+    $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
+    // or initialize with botan.io tracker api key
+    // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+    
+
+    $bot->command('ping', function ($message) use ($bot) {
+        $bot->sendMessage($message->getChat()->getId(), 'pong!');
+    });
+    
+    $bot->run();
+
+} catch (\TelegramBot\Api\Exception $e) {
+    $e->getMessage();
+}
 ```
 
 ## Change log
