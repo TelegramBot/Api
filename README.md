@@ -96,7 +96,7 @@ $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API
 $bot->track($message, $eventName);
 ```
 
-_You can use method `getUpdates()` and all incoming messages are automatically tracked as `Message`-event_
+_You can use method `getUpdates()` and all incoming messages will be automatically tracked as `Message`-event_
 
 #### Client
 ```php
