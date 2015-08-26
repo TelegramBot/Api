@@ -542,6 +542,27 @@ class BotApi
     }
 
     /**
+     * Use this method to use Emoji icons in bot messages.
+     *
+     * @param string Normalized name of the Emoji (as listed at http://www.unicode.org)
+     *
+     * @return Emoji icon string or false if unkown error name
+     */
+    public function emoji($icon_name)
+    {
+        include ('Emoji.php');
+
+        $icon_code = '';
+        if (isset($emojis[$icon_name]) && !empty($emojis[$icon_name])) {
+            $tmp_code = explode(' ', $emojis[$icon_name]);
+            foreach ($tmp_code as $code)
+                    $icon_code .= iconv('UCS-4LE', 'UTF-8', pack('V', hexdec($code)));
+        }
+
+        return $icon_code;
+    }
+
+    /**
      * Close curl
      */
     public function __destruct()
