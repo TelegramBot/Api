@@ -555,7 +555,7 @@ class BotApi
         $icon_code = '';
         if (isset($emojis[$icon_name]) && !empty($emojis[$icon_name])) {
             $tmp_code = explode(' ', $emojis[$icon_name]);
-            foreach($tmp_code as $code) {
+            foreach ($tmp_code as $code) {
                     $icon_code .= iconv('UCS-4LE', 'UTF-8', pack('V', hexdec($code)));
             }
         }
