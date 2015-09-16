@@ -264,20 +264,4 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             )
         ));
     }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException5()
-    {
-        $item = Video::fromResponse(array(
-            'file_id' => 'testFileId1',
-            'width' => 1,
-            'height' => 2,
-            'duration' => 3,
-            'mime_type' => 'video/mp4',
-            'file_size' => 4,
-        ));
-    }
-
 }
