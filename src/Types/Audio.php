@@ -29,6 +29,8 @@ class Audio extends BaseType implements TypeInterface
     static protected $map = array(
         'file_id' => true,
         'duration' => true,
+        'performer' => true,
+        'title' => true,
         'mime_type' => true,
         'file_size' => true
     );
@@ -46,6 +48,20 @@ class Audio extends BaseType implements TypeInterface
      * @var int
      */
     protected $duration;
+
+    /**
+     * Optional. Performer of the audio as defined by sender or by audio tags
+     *
+     * @var string
+     */
+    protected $performer;
+
+    /**
+     * Optional. Title of the audio as defined by sender or by audio tags
+     *
+     * @var string
+     */
+    protected $title;
 
     /**
      * Optional. MIME type of the file as defined by sender
@@ -79,6 +95,38 @@ class Audio extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getPerformer()
+    {
+        return $this->performer;
+    }
+
+    /**
+     * @param string $performer
+     */
+    public function setPerformer($performer)
+    {
+        $this->performer = $performer;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 
     /**

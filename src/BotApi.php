@@ -504,12 +504,21 @@ class BotApi
 
     /**
      * Use this method to send audio files,
-     * if you want Telegram clients to display the file as a playable voice message.
-     * For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document).
+     * if you want Telegram clients to display them in the music player.
+     * Your audio must be in the .mp3 format.
      * On success, the sent Message is returned.
+     * Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+     *
+     * For backward compatibility, when the fields title and performer are both empty
+     * and the mime-type of the file to be sent is not audio/mpeg, the file will be sent as a playable voice message.
+     * For this to work, the audio must be in an .ogg file encoded with OPUS.
+     * This behavior will be phased out in the future. For sending voice messages, use the sendVoice method instead.
      *
      * @param int $chatId
      * @param \CURLFile|string $audio
+     * @param int|null $duration
+     * @param string|null $performer
+     * @param string|null $title
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
@@ -517,11 +526,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendAudio($chatId, $audio, $replyToMessageId = null, $replyMarkup = null)
+    public function sendAudio($chatId, $audio, $duration = null, $performer = null, $title = null, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendAudio', array(
             'chat_id' => (int) $chatId,
             'audio' => $audio,
+            'duration' => $duration,
+            'performer' => $performer,
+            'title' => $title,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
