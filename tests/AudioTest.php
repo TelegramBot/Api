@@ -34,6 +34,34 @@ class AudioTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $item->getDuration());
     }
 
+    public function testSetPerformer()
+    {
+        $item = new Audio();
+        $item->setPerformer('test');
+        $this->assertAttributeEquals('test', 'performer', $item);
+    }
+
+    public function testGetPerformer()
+    {
+        $item = new Audio();
+        $item->setPerformer('test');
+        $this->assertEquals('test', $item->getPerformer());
+    }
+
+    public function testSetTitle()
+    {
+        $item = new Audio();
+        $item->setTitle('test');
+        $this->assertAttributeEquals('test', 'title', $item);
+    }
+
+    public function testGetTitle()
+    {
+        $item = new Audio();
+        $item->setTitle('test');
+        $this->assertEquals('test', $item->getTitle());
+    }
+
     public function testSetFileSize()
     {
         $item = new Audio();
@@ -67,12 +95,16 @@ class AudioTest extends \PHPUnit_Framework_TestCase
         $item = Audio::fromResponse(array(
             'file_id' => 'testFileId1',
             'duration' => 1,
+            'performer' => 'testperformer',
+            'title' => 'testtitle',
             'mime_type' => 'audio/mp3',
             'file_size' => 3
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Audio', $item);
         $this->assertAttributeEquals('testFileId1', 'fileId', $item);
         $this->assertAttributeEquals(1, 'duration', $item);
+        $this->assertAttributeEquals('testperformer', 'performer', $item);
+        $this->assertAttributeEquals('testtitle', 'title', $item);
         $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
         $this->assertAttributeEquals(3, 'fileSize', $item);
     }
