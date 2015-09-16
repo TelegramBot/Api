@@ -87,29 +87,6 @@ class Video extends BaseType implements TypeInterface
     protected $fileSize;
 
     /**
-     * Optional. Text description of the video (usually empty)
-     *
-     * @var string
-     */
-    protected $caption;
-
-    /**
-     * @return string
-     */
-    public function getCaption()
-    {
-        return $this->caption;
-    }
-
-    /**
-     * @param string $caption
-     */
-    public function setCaption($caption)
-    {
-        $this->caption = $caption;
-    }
-
-    /**
      * @return int
      */
     public function getDuration()
