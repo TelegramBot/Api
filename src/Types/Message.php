@@ -33,6 +33,7 @@ class Message extends BaseType implements TypeInterface
         'photo' => '\TelegramBot\Api\Types\ArrayOfPhotoSize',
         'sticker' => '\TelegramBot\Api\Types\Sticker',
         'video' => '\TelegramBot\Api\Types\Video',
+        'caption' => true,
         'contact' => '\TelegramBot\Api\Types\Contact',
         'location' => '\TelegramBot\Api\Types\Location',
         'new_chat_participant' => '\TelegramBot\Api\Types\User',

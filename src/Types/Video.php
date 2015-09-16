@@ -33,8 +33,7 @@ class Video extends BaseType implements TypeInterface
         'duration' => true,
         'thumb' => '\TelegramBot\Api\Types\PhotoSize',
         'mime_type' => true,
-        'file_size' => true,
-        'caption' => true
+        'file_size' => true
     );
 
     /**
