@@ -326,11 +326,12 @@ class BotApi
      * In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
      *
      * @param string $url HTTPS url to send updates to. Use an empty string to remove webhook integration
+     * @param \CURLFile|string $certificate Upload your public key certificate
+     *                                      so that the root certificate in use can be checked
      *
-     * @return \TelegramBot\Api\Types\UserProfilePhotos
      * @throws \TelegramBot\Api\Exception
      */
-    public function setWebhook($url = '')
+    public function setWebhook($url = '', $certificate = null)
     {
         return $this->call('setWebhook', array('url' => $url));
     }
