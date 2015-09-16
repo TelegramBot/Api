@@ -339,7 +339,7 @@ class BotApi
      */
     public function setWebhook($url = '', $certificate = null)
     {
-        return $this->call('setWebhook', array('url' => $url));
+        return $this->call('setWebhook', array('url' => $url, 'certificate' => $certificate));
     }
 
     /**
