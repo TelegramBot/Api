@@ -452,6 +452,35 @@ class BotApi
         )));
     }
 
+    /**
+     * Use this method to send audio files,
+     * if you want Telegram clients to display the file as a playable voice message.
+     * For this to work, your audio must be in an .ogg file encoded with OPUS
+     * (other formats may be sent as Audio or Document).
+     * On success, the sent Message is returned.
+     * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+     *
+     * @param int $chatId
+     * @param \CURLFile|string $voice
+     * @param int|null $duration
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendVoice($chatId, $voice, $duration = null, $replyToMessageId = null, $replyMarkup = null)
+    {
+        return Message::fromResponse($this->call('sendVoice', array(
+            'chat_id' => (int) $chatId,
+            'voice' => $voice,
+            'duration' => $duration,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
+        )));
+    }
+
 
     /**
      * Use this method to forward messages of any kind. On success, the sent Message is returned.
