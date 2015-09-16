@@ -431,6 +431,8 @@ class BotApi
      *
      * @param int $chatId
      * @param \CURLFile|string $video
+     * @param int|null $duration
+     * @param string|null $caption
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
      *
@@ -438,11 +440,13 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendVideo($chatId, $video, $replyToMessageId = null, $replyMarkup = null)
+    public function sendVideo($chatId, $video, $duration = null, $caption = null, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendVideo', array(
             'chat_id' => (int) $chatId,
             'video' => $video,
+            'duration' => $duration,
+            'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         )));
