@@ -33,6 +33,7 @@ class Message extends BaseType implements TypeInterface
         'photo' => '\TelegramBot\Api\Types\ArrayOfPhotoSize',
         'sticker' => '\TelegramBot\Api\Types\Sticker',
         'video' => '\TelegramBot\Api\Types\Video',
+        'voice' => '\TelegramBot\Api\Types\Voice',
         'caption' => true,
         'contact' => '\TelegramBot\Api\Types\Contact',
         'location' => '\TelegramBot\Api\Types\Location',
@@ -136,6 +137,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Video
      */
     protected $video;
+
+    /**
+     * Optional. Message is a voice message, information about the file
+     *
+     * @var \TelegramBot\Api\Types\Voice
+     */
+    protected $voice;
 
     /**
      * Optional. Message is a shared contact, information about the contact
@@ -539,5 +547,21 @@ class Message extends BaseType implements TypeInterface
     public function setVideo(Video $video)
     {
         $this->video = $video;
+    }
+
+    /**
+     * @return Voice
+     */
+    public function getVoice()
+    {
+        return $this->voice;
+    }
+
+    /**
+     * @param Voice $voice
+     */
+    public function setVoice($voice)
+    {
+        $this->voice = $voice;
     }
 }
