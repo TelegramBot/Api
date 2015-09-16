@@ -118,20 +118,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, $item->getHeight());
     }
 
-    public function testSetCaption()
-    {
-        $item = new Video();
-        $item->setCaption('test');
-        $this->assertAttributeEquals('test', 'caption', $item);
-    }
-
-    public function testGetCaption()
-    {
-        $item = new Video();
-        $item->setCaption('test');
-        $this->assertEquals('test', $item->getCaption());
-    }
-
     public function testFromResponse()
     {
         $item = Video::fromResponse(array(
@@ -141,7 +127,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -162,7 +147,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(3, 'duration', $item);
         $this->assertAttributeEquals('video/mp4', 'mimeType', $item);
         $this->assertAttributeEquals(4, 'fileSize', $item);
-        $this->assertAttributeEquals('testcaption', 'caption', $item);
         $this->assertAttributeEquals($thumb, 'thumb', $item);
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $item->getThumb());
     }
@@ -213,7 +197,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -233,7 +216,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -254,7 +236,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -275,7 +256,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'height' => 2,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -297,7 +277,6 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
         ));
     }
 
