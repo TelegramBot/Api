@@ -57,7 +57,7 @@ class Contact extends BaseType implements TypeInterface
     /**
      * Optional. Contact's user identifier in Telegram
      *
-     * @var string
+     * @var int
      */
     protected $userId;
 
