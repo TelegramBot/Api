@@ -12,6 +12,7 @@ use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\Video;
+use TelegramBot\Api\Types\Voice;
 
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,6 +29,20 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $item->setMessageId(1);
         $this->assertEquals(1, $item->getMessageId());
+    }
+
+    public function testSetCaption()
+    {
+        $item = new Message();
+        $item->setCaption('test');
+        $this->assertAttributeEquals('test', 'caption', $item);
+    }
+
+    public function testGetCaption()
+    {
+        $item = new Message();
+        $item->setCaption('test');
+        $this->assertEquals('test', $item->getCaption());
     }
 
     public function testSetDate()
@@ -272,6 +287,33 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\TelegramBot\Api\Types\Audio', $item->getAudio());
     }
 
+    public function testSetVoice()
+    {
+        $item = new Message();
+        $voice = Voice::fromResponse(array(
+            'file_id' => 'testFileId1',
+            'duration' => 1,
+            'mime_type' => 'audio/mp3',
+            'file_size' => 3
+        ));
+        $item->setVoice($voice);
+        $this->assertAttributeEquals($voice, 'voice', $item);
+    }
+
+    public function testGetVoice()
+    {
+        $item = new Message();
+        $voice = Voice::fromResponse(array(
+            'file_id' => 'testFileId1',
+            'duration' => 1,
+            'mime_type' => 'audio/mp3',
+            'file_size' => 3
+        ));
+        $item->setVoice($voice);
+        $this->assertEquals($voice, $item->getVoice());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Voice', $item->getVoice());
+    }
+
     public function testSetVideo()
     {
         $item = new Message();
@@ -282,7 +324,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
@@ -304,7 +345,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'caption' => 'testcaption',
             'thumb' => array(
                 'file_id' => 'testFileId1',
                 'width' => 5,
