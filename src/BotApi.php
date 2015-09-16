@@ -125,7 +125,7 @@ class BotApi
     /**
      * Constructor
      *
-     * @param string $token             Telegram Bot API token
+     * @param string $token Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
      */
     public function __construct($token, $trackerToken = null)
@@ -262,8 +262,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendMessage($chatId, $text, $parseMode = null, $disablePreview = false, $replyToMessageId = null, $replyMarkup = null)
-    {
+    public function sendMessage(
+        $chatId,
+        $text,
+        $parseMode = null,
+        $disablePreview = false,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
         return Message::fromResponse($this->call('sendMessage', array(
             'chat_id' => (int) $chatId,
             'text' => $text,
@@ -443,8 +449,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendVideo($chatId, $video, $duration = null, $caption = null, $replyToMessageId = null, $replyMarkup = null)
-    {
+    public function sendVideo(
+        $chatId,
+        $video,
+        $duration = null,
+        $caption = null,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
         return Message::fromResponse($this->call('sendVideo', array(
             'chat_id' => (int) $chatId,
             'video' => $video,
@@ -529,8 +541,15 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendAudio($chatId, $audio, $duration = null, $performer = null, $title = null, $replyToMessageId = null, $replyMarkup = null)
-    {
+    public function sendAudio(
+        $chatId,
+        $audio,
+        $duration = null,
+        $performer = null,
+        $title = null,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
         return Message::fromResponse($this->call('sendAudio', array(
             'chat_id' => (int) $chatId,
             'audio' => $audio,
