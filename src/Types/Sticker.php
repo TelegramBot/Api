@@ -19,7 +19,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('file_id', 'thumb', 'width', 'height');
+    static protected $requiredParams = array('file_id', 'width', 'height');
 
     /**
      * {@inheritdoc}
