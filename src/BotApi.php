@@ -253,6 +253,7 @@ class BotApi
      *
      * @param int $chatId
      * @param string $text
+     * @param string|null $parseMode
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
@@ -261,11 +262,12 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendMessage($chatId, $text, $disablePreview = false, $replyToMessageId = null, $replyMarkup = null)
+    public function sendMessage($chatId, $text, $parseMode = null, $disablePreview = false, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendMessage', array(
             'chat_id' => (int) $chatId,
             'text' => $text,
+            'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_to_message_id' => (int) $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
