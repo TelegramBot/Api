@@ -118,7 +118,7 @@ class Contact extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $userId
+     * @param int $userId
      */
     public function setUserId($userId)
     {

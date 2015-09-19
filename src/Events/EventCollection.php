@@ -40,7 +40,7 @@ class EventCollection
      * Add new event to collection
      *
      * @param \Closure $event
-     * @param \Closure|null $check
+     * @param \Closure|null $checker
      *
      * @return \TelegramBot\Api\Events\EventCollection
      */
