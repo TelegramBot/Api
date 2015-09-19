@@ -21,7 +21,7 @@ class Update extends BaseType implements TypeInterface
      */
     static protected $map = array(
         'update_id' => true,
-        'message' => '\TelegramBot\Api\Types\Message',
+        'message' => \TelegramBot\Api\Types\Message::class,
     );
 
     /**

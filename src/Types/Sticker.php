@@ -30,7 +30,7 @@ class Sticker extends BaseType implements TypeInterface
         'file_id' => true,
         'width' => true,
         'height' => true,
-        'thumb' => '\TelegramBot\Api\Types\PhotoSize',
+        'thumb' => \TelegramBot\Api\Types\PhotoSize::class,
         'file_size' => true,
     );
 
