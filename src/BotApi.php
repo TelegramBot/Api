@@ -217,7 +217,7 @@ class BotApi
     /**
      * Response validation
      *
-     * @param $curl
+     * @param resource $curl
      *
      * @throws \TelegramBot\Api\HttpException
      */
@@ -231,8 +231,8 @@ class BotApi
     /**
      * JSON validation
      *
-     * @param $jsonString
-     * @param $asArray
+     * @param string $jsonString
+     * @param boolean $asArray
      *
      * @return object|array
      * @throws \TelegramBot\Api\InvalidJsonException

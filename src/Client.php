@@ -74,7 +74,7 @@ class Client
     /**
      * Handle updates
      *
-     * @param array $updates
+     * @param Update[] $updates
      */
     public function handle(array $updates)
     {
