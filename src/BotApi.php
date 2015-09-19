@@ -20,7 +20,7 @@ class BotApi
      *
      * @var array
      */
-    public static $codes = array(
+    public static $codes = [
         // Informational 1xx
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -68,7 +68,7 @@ class BotApi
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported',
         509 => 'Bandwidth Limit Exceeded'
-    );
+    ];
 
 
     /**
@@ -112,7 +112,7 @@ class BotApi
      *
      * @var array
      */
-    protected $trackedEvents = array();
+    protected $trackedEvents = [];
 
     /**
      * Check whether return associative array
@@ -166,12 +166,12 @@ class BotApi
      */
     public function call($method, array $data = null)
     {
-        $options = array(
+        $options = [
             CURLOPT_URL => $this->getUrl() . '/' . $method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null
-        );
+        ];
 
         if ($data) {
             $options[CURLOPT_POST] = true;
@@ -270,14 +270,14 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendMessage', array(
+        return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => (int) $chatId,
             'text' => $text,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_to_message_id' => (int) $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -300,10 +300,10 @@ class BotApi
      */
     public function sendChatAction($chatId, $action)
     {
-        return $this->call('sendChatAction', array(
+        return $this->call('sendChatAction', [
             'chat_id' => (int) $chatId,
             'action' => $action
-        ));
+        ]);
     }
 
     /**
@@ -318,11 +318,11 @@ class BotApi
      */
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
-        return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', array(
+        return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', [
             'user_id' => (int) $userId,
             'offset' => (int) $offset,
             'limit' => (int) $limit,
-        )));
+        ]));
     }
 
     /**
@@ -339,7 +339,7 @@ class BotApi
      */
     public function setWebhook($url = '', $certificate = null)
     {
-        return $this->call('setWebhook', array('url' => $url, 'certificate' => $certificate));
+        return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
     }
 
     /**
@@ -373,11 +373,11 @@ class BotApi
      */
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0)
     {
-        $updates = ArrayOfUpdates::fromResponse($this->call('getUpdates', array(
+        $updates = ArrayOfUpdates::fromResponse($this->call('getUpdates', [
             'offset' => $offset,
             'limit' => $limit,
             'timeout' => $timeout
-        )));
+        ]));
 
         if ($this->tracker instanceof Botan) {
             foreach ($updates as $update) {
@@ -402,13 +402,13 @@ class BotApi
      */
     public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendLocation', array(
+        return Message::fromResponse($this->call('sendLocation', [
             'chat_id' => (int) $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -425,12 +425,12 @@ class BotApi
      */
     public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendSticker', array(
+        return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => (int) $chatId,
             'sticker' => $sticker,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -457,14 +457,14 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendVideo', array(
+        return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => (int) $chatId,
             'video' => $video,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -487,13 +487,13 @@ class BotApi
      */
     public function sendVoice($chatId, $voice, $duration = null, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendVoice', array(
+        return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => (int) $chatId,
             'voice' => $voice,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
 
@@ -510,11 +510,11 @@ class BotApi
      */
     public function forwardMessage($chatId, $fromChatId, $messageId)
     {
-        return Message::fromResponse($this->call('forwardMessage', array(
+        return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => (int) $chatId,
             'from_chat_id' => (int) $fromChatId,
             'message_id' => (int) $messageId,
-        )));
+        ]));
     }
 
     /**
@@ -550,7 +550,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendAudio', array(
+        return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => (int) $chatId,
             'audio' => $audio,
             'duration' => $duration,
@@ -558,7 +558,7 @@ class BotApi
             'title' => $title,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -576,13 +576,13 @@ class BotApi
      */
     public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendPhoto', array(
+        return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => (int) $chatId,
             'photo' => $photo,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**
@@ -600,12 +600,12 @@ class BotApi
      */
     public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null)
     {
-        return Message::fromResponse($this->call('sendDocument', array(
+        return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => (int) $chatId,
             'document' => $document,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
-        )));
+        ]));
     }
 
     /**

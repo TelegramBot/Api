@@ -15,14 +15,14 @@ abstract class BaseType
      *
      * @var array
      */
-    protected static $requiredParams = array();
+    protected static $requiredParams = [];
 
     /**
      * Map of input data
      *
      * @var array
      */
-    protected static $map = array();
+    protected static $map = [];
 
     /**
      * Validate input data
@@ -59,7 +59,7 @@ abstract class BaseType
 
     public function toJson($inner = false)
     {
-        $output = array();
+        $output = [];
 
         foreach (static::$map as $key => $item) {
             $property = lcfirst(self::toCamelCase($key));

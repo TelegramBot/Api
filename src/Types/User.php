@@ -19,19 +19,19 @@ class User extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('id', 'first_name');
+    static protected $requiredParams = ['id', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'id' => true,
         'first_name' => true,
         'last_name' => true,
         'username' => true,
-    );
+    ];
 
     /**
      * Unique identifier for this user or bot

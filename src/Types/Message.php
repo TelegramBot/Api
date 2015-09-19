@@ -12,14 +12,14 @@ class Message extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('message_id', 'from', 'date', 'chat');
+    static protected $requiredParams = ['message_id', 'from', 'date', 'chat'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'message_id' => true,
         'from' => \TelegramBot\Api\Types\User::class,
         'date' => true,
@@ -43,7 +43,7 @@ class Message extends BaseType implements TypeInterface
         'new_chat_photo' => \TelegramBot\Api\Types\ArrayOfPhotoSize::class,
         'delete_chat_photo' => true,
         'group_chat_created' => true
-    );
+    ];
 
     /**
      * Unique message identifier

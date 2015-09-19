@@ -19,17 +19,17 @@ class ForceReply extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = array('force_reply');
+    static protected $requiredParams = ['force_reply'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'force_reply' => true,
         'selective' => true
-    );
+    ];
 
     /**
      * Shows reply interface to the user, as if they manually selected the bot‘s message and tapped ’Reply'

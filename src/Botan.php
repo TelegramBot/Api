@@ -61,7 +61,7 @@ class Botan
     {
         $uid = $message->getFrom()->getId();
 
-        $options = array(
+        $options = [
             CURLOPT_URL => self::BASE_URL . "?token={$this->token}&uid={$uid}&name={$eventName}",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
@@ -69,7 +69,7 @@ class Botan
                 'Content-Type: application/json'
             ],
             CURLOPT_POSTFIELDS => $message->toJson()
-        );
+        ];
 
         curl_setopt_array($this->curl, $options);
         $result = BotApi::jsonValidate(curl_exec($this->curl), true);

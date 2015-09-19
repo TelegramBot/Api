@@ -20,20 +20,20 @@ class Document extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'file_id' => true,
         'thumb' => \TelegramBot\Api\Types\PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
         'file_size' => true
-    );
+    ];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $requiredParams = array('file_id');
+    static protected $requiredParams = ['file_id'];
 
     /**
      * Unique identifier for this file

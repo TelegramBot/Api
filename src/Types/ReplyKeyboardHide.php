@@ -20,17 +20,17 @@ class ReplyKeyboardHide extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = array('hide_keyboard');
+    static protected $requiredParams = ['hide_keyboard'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'hide_keyboard' => true,
         'selective' => true
-    );
+    ];
 
     /**
      * Requests clients to hide the custom keyboard

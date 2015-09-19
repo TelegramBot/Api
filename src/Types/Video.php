@@ -19,14 +19,14 @@ class Video extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('file_id', 'width', 'height', 'duration');
+    static protected $requiredParams = ['file_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'file_id' => true,
         'width' => true,
         'height' => true,
@@ -34,7 +34,7 @@ class Video extends BaseType implements TypeInterface
         'thumb' => \TelegramBot\Api\Types\PhotoSize::class,
         'mime_type' => true,
         'file_size' => true
-    );
+    ];
 
     /**
      * Unique identifier for this file

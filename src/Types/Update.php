@@ -12,17 +12,17 @@ class Update extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('update_id');
+    static protected $requiredParams = ['update_id'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'update_id' => true,
         'message' => \TelegramBot\Api\Types\Message::class,
-    );
+    ];
 
     /**
      * The update‘s unique identifier.

@@ -150,9 +150,9 @@ class Client
     public function __call($name, array $arguments)
     {
         if (method_exists($this, $name)) {
-            return call_user_func_array(array($this, $name), $arguments);
+            return call_user_func_array([$this, $name], $arguments);
         } elseif (method_exists($this->api, $name)) {
-            return call_user_func_array(array($this->api, $name), $arguments);
+            return call_user_func_array([$this->api, $name], $arguments);
         }
         throw new BadMethodCallException("Method {$name} not exists");
     }

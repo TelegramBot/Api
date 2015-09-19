@@ -19,17 +19,17 @@ class GroupChat extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = array('id', 'title');
+    static protected $requiredParams = ['id', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = array(
+    static protected $map = [
         'id' => true,
         'title' => true
-    );
+    ];
 
     /**
      * Unique identifier for this group chat
