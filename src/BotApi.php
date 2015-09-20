@@ -3,6 +3,7 @@
 namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfUpdates;
+use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
@@ -606,6 +607,26 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
         ]));
+    }
+
+    /**
+     * Use this method to get basic info about a file and prepare it for downloading.
+     * For the moment, bots can download files of up to 20MB in size.
+     * On success, a File object is returned.
+     * The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>,
+     * where <file_path> is taken from the response.
+     * It is guaranteed that the link will be valid for at least 1 hour.
+     * When the link expires, a new one can be requested by calling getFile again.
+     *
+     * @param $fileId
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function getFile($fileId)
+    {
+        return File::fromResponse($this->call('getFile', ['file_id' => $fileId]));
     }
 
     /**
