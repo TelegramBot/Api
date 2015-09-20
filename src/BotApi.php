@@ -367,7 +367,7 @@ class BotApi
      * @param int $limit
      * @param int $timeout
      *
-     * @return array
+     * @return Update[]
      * @throws \TelegramBot\Api\Exception
      * @throws \TelegramBot\Api\InvalidArgumentException
      */
