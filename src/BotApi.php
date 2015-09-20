@@ -620,7 +620,7 @@ class BotApi
      *
      * @param $fileId
      *
-     * @return \TelegramBot\Api\Types\Message
+     * @return \TelegramBot\Api\Types\File
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
