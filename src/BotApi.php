@@ -182,7 +182,7 @@ class BotApi
         $response = $this->executeCurl($options);
 
         if ($this->returnArray) {
-            if (!$response['ok']) {
+            if (!isset($response['ok'])) {
                 throw new Exception($response['description'], $response['error_code']);
             }
 
