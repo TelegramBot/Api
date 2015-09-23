@@ -78,14 +78,20 @@ class BotApi
     const DEFAULT_STATUS_CODE = 200;
 
     /**
+     * Not Modified http status code
+     */
+    const NOT_MODIFIED_STATUS_CODE = 304;
+
+    /**
      * Limits for tracked ids
      */
     const MAX_TRACKED_EVENTS = 200;
 
     /**
-     * Url prefix
+     * Url prefixes
      */
     const URL_PREFIX = 'https://api.telegram.org/bot';
+    const FILE_URL_PREFIX = 'https://api.telegram.org/file/bot';
 
     /**
      * CURL object
@@ -179,7 +185,7 @@ class BotApi
             $options[CURLOPT_POSTFIELDS] = $data;
         }
 
-        $response = $this->executeCurl($options);
+        $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
         if ($this->returnArray) {
             if (!$response['ok']) {
@@ -212,7 +218,7 @@ class BotApi
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl);
 
-        return self::jsonValidate($result, $this->returnArray);
+        return $result;
     }
 
     /**
@@ -224,7 +230,9 @@ class BotApi
      */
     public static function curlValidate($curl)
     {
-        if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE)) && $httpCode !== self::DEFAULT_STATUS_CODE) {
+        if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
+            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
+        ) {
             throw new HttpException(self::$codes[$httpCode], $httpCode);
         }
     }
@@ -497,7 +505,6 @@ class BotApi
         ]));
     }
 
-
     /**
      * Use this method to forward messages of any kind. On success, the sent Message is returned.
      *
@@ -629,6 +636,19 @@ class BotApi
         return File::fromResponse($this->call('getFile', ['file_id' => $fileId]));
     }
 
+    public function downloadFile($fileId)
+    {
+        $file = $this->getFile($fileId);
+        $options = [
+            CURLOPT_HEADER => 0,
+            CURLOPT_HTTPGET => 1,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $this->getFileUrl() . '/' . $file->getFilePath()
+        ];
+
+        return $this->executeCurl($options);
+    }
+
     /**
      * Close curl
      */
@@ -643,6 +663,14 @@ class BotApi
     public function getUrl()
     {
         return self::URL_PREFIX . $this->token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUrl()
+    {
+        return self::FILE_URL_PREFIX . $this->token;
     }
 
     /**
