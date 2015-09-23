@@ -9,6 +9,14 @@
 
 An extended native php wrapper for [Telegram Bot API](https://core.telegram.org/bots/api) without requirements. Supports all methods and types of responses.
 
+## Bots: An introduction for developers
+>Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats.
+
+>You control your bots using HTTPS requests to [bot API](https://core.telegram.org/bots/api).
+
+>The Bot API is an HTTP-based interface created for developers keen on building bots for Telegram.
+To learn how to create and set up a bot, please consult [Introduction to Bots](https://core.telegram.org/bots) and [Bot FAQ](https://core.telegram.org/bots/faq).
+
 ## Install
 
 Via Composer
