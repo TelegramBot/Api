@@ -208,8 +208,8 @@ class BotApi
      * @param array $options
      *
      * @return mixed
+     *
      * @throws \TelegramBot\Api\HttpException
-     * @throws \TelegramBot\Api\InvalidJsonException
      */
     protected function executeCurl(array $options)
     {
@@ -636,6 +636,15 @@ class BotApi
         return File::fromResponse($this->call('getFile', ['file_id' => $fileId]));
     }
 
+    /**
+     * Get file contents via cURL
+     *
+     * @param $fileId
+     *
+     * @return string
+     *
+     * @throws \TelegramBot\Api\HttpException
+     */
     public function downloadFile($fileId)
     {
         $file = $this->getFile($fileId);
