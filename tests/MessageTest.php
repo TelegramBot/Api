@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Test;
 
+use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Audio;
@@ -130,8 +131,9 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testSetChatGroup()
     {
         $item = new Message();
-        $chat = GroupChat::fromResponse(array(
+        $chat = Chat::fromResponse(array(
             'id' => 1,
+            'type' => 'group',
             'title' => 'test chat'
         ));
         $item->setChat($chat);
@@ -141,13 +143,14 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testGetChatGroup()
     {
         $item = new Message();
-        $chat = GroupChat::fromResponse(array(
+        $chat = Chat::fromResponse(array(
             'id' => 1,
+            'type' => 'group',
             'title' => 'test chat'
         ));
         $item->setChat($chat);
         $this->assertEquals($chat, $item->getChat());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\GroupChat', $item->getChat());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item->getChat());
     }
 
     public function testSetChatUser()
@@ -534,6 +537,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'date' => 2,
             'chat' => array(
                 'id' => 1,
+                'type' => 'group',
                 'title' => 'test chat'
             )
         ));
@@ -556,6 +560,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'date' => 2,
             'chat' => array(
                 'id' => 1,
+                'type' => 'group',
                 'title' => 'test chat'
             )
         ));
