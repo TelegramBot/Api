@@ -69,7 +69,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \TelegramBot\Api\TypeInterface
+     * @var \TelegramBot\Api\Types\Chat
      */
     protected $chat;
 
