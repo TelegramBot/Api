@@ -171,5 +171,4 @@ class Chat extends BaseType implements TypeInterface
     {
         $this->lastName = $lastName;
     }
-
 }
