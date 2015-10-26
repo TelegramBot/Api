@@ -249,9 +249,9 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param TypeInterface $chat
+     * @param Chat $chat
      */
-    public function setChat(TypeInterface $chat)
+    public function setChat(Chat $chat)
     {
         $this->chat = $chat;
     }
