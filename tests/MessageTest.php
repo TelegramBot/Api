@@ -156,8 +156,9 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testSetChatUser()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = Chat::fromResponse(array(
             'id' => 1,
+            'type' => 'private',
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -169,15 +170,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testGetChatUser()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = Chat::fromResponse(array(
             'id' => 1,
+            'type' => 'private',
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
         $item->setChat($user);
         $this->assertEquals($user, $item->getChat());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getChat());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item->getChat());
     }
 
     public function testSetContact()
