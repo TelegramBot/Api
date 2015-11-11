@@ -194,7 +194,9 @@ class BotApi
             CURLOPT_URL => $this->getUrl() . '/' . $method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
-            CURLOPT_POSTFIELDS => null
+            CURLOPT_POSTFIELDS => null,
+            CURLOPT_CONNECTTIMEOUT_MS => 2000, // 2 second.
+            CURLOPT_NOSIGNAL => TRUE,
         ];
 
         if ($data) {
