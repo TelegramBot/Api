@@ -22,7 +22,7 @@ class Document extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
-        'thumb' => \TelegramBot\Api\Types\PhotoSize::class,
+        'thumb' => PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
         'file_size' => true
@@ -45,7 +45,7 @@ class Document extends BaseType implements TypeInterface
     /**
      * Document thumbnail as defined by sender
      *
-     * @var \TelegramBot\Api\Types\PhotoSize
+     * @var PhotoSize
      */
     protected $thumb;
 
@@ -112,6 +112,8 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param int $fileSize
+     *
+     * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
     {
