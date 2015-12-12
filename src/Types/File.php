@@ -82,6 +82,8 @@ class File extends BaseType implements TypeInterface
 
     /**
      * @param int $fileSize
+     *
+     * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
     {
