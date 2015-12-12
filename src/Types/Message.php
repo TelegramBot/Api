@@ -21,26 +21,26 @@ class Message extends BaseType implements TypeInterface
      */
     static protected $map = [
         'message_id' => true,
-        'from' => \TelegramBot\Api\Types\User::class,
+        'from' => User::class,
         'date' => true,
-        'chat' => \TelegramBot\Api\Types\Chat::class,
-        'forward_from' => \TelegramBot\Api\Types\User::class,
+        'chat' => Chat::class,
+        'forward_from' => User::class,
         'forward_date' => true,
-        'reply_to_message' => \TelegramBot\Api\Types\Message::class,
+        'reply_to_message' => Message::class,
         'text' => true,
-        'audio' => \TelegramBot\Api\Types\Audio::class,
-        'document' => \TelegramBot\Api\Types\Document::class,
-        'photo' => \TelegramBot\Api\Types\ArrayOfPhotoSize::class,
-        'sticker' => \TelegramBot\Api\Types\Sticker::class,
-        'video' => \TelegramBot\Api\Types\Video::class,
-        'voice' => \TelegramBot\Api\Types\Voice::class,
+        'audio' => Audio::class,
+        'document' => Document::class,
+        'photo' => ArrayOfPhotoSize::class,
+        'sticker' => Sticker::class,
+        'video' => Video::class,
+        'voice' => Voice::class,
         'caption' => true,
-        'contact' => \TelegramBot\Api\Types\Contact::class,
-        'location' => \TelegramBot\Api\Types\Location::class,
-        'new_chat_participant' => \TelegramBot\Api\Types\User::class,
-        'left_chat_participant' => \TelegramBot\Api\Types\User::class,
+        'contact' =>Contact::class,
+        'location' => Location::class,
+        'new_chat_participant' => User::class,
+        'left_chat_participant' => User::class,
         'new_chat_title' => true,
-        'new_chat_photo' => \TelegramBot\Api\Types\ArrayOfPhotoSize::class,
+        'new_chat_photo' => ArrayOfPhotoSize::class,
         'delete_chat_photo' => true,
         'group_chat_created' => true,
         'supergroup_chat_created' => true,
@@ -317,6 +317,8 @@ class Message extends BaseType implements TypeInterface
 
     /**
      * @param int $date
+     *
+     * @throws InvalidArgumentException
      */
     public function setDate($date)
     {
@@ -340,7 +342,7 @@ class Message extends BaseType implements TypeInterface
      */
     public function setDeleteChatPhoto($deleteChatPhoto)
     {
-        $this->deleteChatPhoto = (bool) $deleteChatPhoto;
+        $this->deleteChatPhoto = (bool)$deleteChatPhoto;
     }
 
     /**
@@ -369,6 +371,8 @@ class Message extends BaseType implements TypeInterface
 
     /**
      * @param int $forwardDate
+     *
+     * @throws InvalidArgumentException
      */
     public function setForwardDate($forwardDate)
     {
@@ -408,7 +412,7 @@ class Message extends BaseType implements TypeInterface
      */
     public function setGroupChatCreated($groupChatCreated)
     {
-        $this->groupChatCreated = (bool) $groupChatCreated;
+        $this->groupChatCreated = (bool)$groupChatCreated;
     }
 
     /**
@@ -453,6 +457,8 @@ class Message extends BaseType implements TypeInterface
 
     /**
      * @param int $messageId
+     *
+     * @throws InvalidArgumentException
      */
     public function setMessageId($messageId)
     {
@@ -654,6 +660,4 @@ class Message extends BaseType implements TypeInterface
     {
         return $this->migrateFromChatId;
     }
-
-
 }
