@@ -28,7 +28,7 @@ class UserProfilePhotos extends BaseType implements TypeInterface
      */
     static protected $map = [
         'total_count' => true,
-        'photos' => \TelegramBot\Api\Types\ArrayOfArrayOfPhotoSize::class,
+        'photos' => ArrayOfArrayOfPhotoSize::class,
     ];
 
     /**
@@ -72,6 +72,8 @@ class UserProfilePhotos extends BaseType implements TypeInterface
 
     /**
      * @param int $totalCount
+     *
+     * @throws InvalidArgumentException
      */
     public function setTotalCount($totalCount)
     {

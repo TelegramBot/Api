@@ -87,6 +87,8 @@ class PhotoSize extends BaseType implements TypeInterface
 
     /**
      * @param int $fileSize
+     *
+     * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
     {
@@ -107,6 +109,8 @@ class PhotoSize extends BaseType implements TypeInterface
 
     /**
      * @param int $height
+     *
+     * @throws InvalidArgumentException
      */
     public function setHeight($height)
     {
@@ -127,6 +131,8 @@ class PhotoSize extends BaseType implements TypeInterface
 
     /**
      * @param int $width
+     *
+     * @throws InvalidArgumentException
      */
     public function setWidth($width)
     {

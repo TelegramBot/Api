@@ -55,6 +55,8 @@ class Location extends BaseType implements TypeInterface
 
     /**
      * @param float $latitude
+     *
+     * @throws InvalidArgumentException
      */
     public function setLatitude($latitude)
     {
@@ -75,6 +77,8 @@ class Location extends BaseType implements TypeInterface
 
     /**
      * @param float $longitude
+     *
+     * @throws InvalidArgumentException
      */
     public function setLongitude($longitude)
     {

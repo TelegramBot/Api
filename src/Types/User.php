@@ -87,6 +87,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param int $id
+     *
+     * @throws InvalidArgumentException
      */
     public function setId($id)
     {

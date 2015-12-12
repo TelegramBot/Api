@@ -28,6 +28,10 @@ abstract class BaseType
      * Validate input data
      *
      * @param array $data
+     *
+     * @return bool
+     *
+     * @throws InvalidArgumentException
      */
     public static function validate($data)
     {

@@ -361,6 +361,8 @@ class BotApi
      * @param \CURLFile|string $certificate Upload your public key certificate
      *                                      so that the root certificate in use can be checked
      *
+     * @return string
+     *
      * @throws \TelegramBot\Api\Exception
      */
     public function setWebhook($url = '', $certificate = null)

@@ -87,6 +87,8 @@ class Voice extends BaseType implements TypeInterface
 
     /**
      * @param int $duration
+     *
+     * @throws InvalidArgumentException
      */
     public function setDuration($duration)
     {
@@ -123,6 +125,8 @@ class Voice extends BaseType implements TypeInterface
 
     /**
      * @param int $fileSize
+     *
+     * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
     {

@@ -21,7 +21,7 @@ class Update extends BaseType implements TypeInterface
      */
     static protected $map = [
         'update_id' => true,
-        'message' => \TelegramBot\Api\Types\Message::class,
+        'message' => Message::class,
     ];
 
     /**
@@ -37,7 +37,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * Optional. New incoming message of any kind — text, photo, sticker, etc.
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var Message
      */
     protected $message;
 
@@ -68,7 +68,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $message
      */
-    public function setMessage($message)
+    public function setMessage(Message $message)
     {
         $this->message = $message;
     }
