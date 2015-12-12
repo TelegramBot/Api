@@ -35,7 +35,7 @@ class Message extends BaseType implements TypeInterface
         'video' => Video::class,
         'voice' => Voice::class,
         'caption' => true,
-        'contact' =>Contact::class,
+        'contact' => Contact::class,
         'location' => Location::class,
         'new_chat_participant' => User::class,
         'left_chat_participant' => User::class,
