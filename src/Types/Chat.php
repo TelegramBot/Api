@@ -37,7 +37,7 @@ class Chat extends BaseType implements TypeInterface
     protected $id;
 
     /**
-     * Type of chat, can be either “private”, or “group”, or “channel”
+     * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
      *
      * @var string
      */

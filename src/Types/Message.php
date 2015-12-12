@@ -42,7 +42,11 @@ class Message extends BaseType implements TypeInterface
         'new_chat_title' => true,
         'new_chat_photo' => \TelegramBot\Api\Types\ArrayOfPhotoSize::class,
         'delete_chat_photo' => true,
-        'group_chat_created' => true
+        'group_chat_created' => true,
+        'supergroup_chat_created' => true,
+        'channel_chat_created' => true,
+        'migrate_to_chat_id' => true,
+        'migrate_from_chat_id' => true,
     ];
 
     /**
@@ -207,6 +211,37 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $caption;
+
+
+    /**
+     * Optional. Service message: the supergroup has been created
+     *
+     * @var bool
+     */
+    protected $supergroupChatCreated;
+
+    /**
+     * Optional. Service message: the channel has been created
+     *
+     * @var bool
+     */
+    protected $channelChatCreated;
+
+    /**
+     * Optional. The group has been migrated to a supergroup with the specified identifier,
+     * not exceeding 1e13 by absolute value
+     *
+     * @var int
+     */
+    protected $migrateToChatId;
+
+    /**
+     * Optional. The supergroup has been migrated from a group with the specified identifier,
+     * not exceeding 1e13 by absolute value
+     *
+     * @var int
+     */
+    protected $migrateFromChatId;
 
     /**
      * @return string
@@ -587,4 +622,38 @@ class Message extends BaseType implements TypeInterface
     {
         $this->voice = $voice;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isSupergroupChatCreated()
+    {
+        return $this->supergroupChatCreated;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isChannelChatCreated()
+    {
+        return $this->channelChatCreated;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMigrateToChatId()
+    {
+        return $this->migrateToChatId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMigrateFromChatId()
+    {
+        return $this->migrateFromChatId;
+    }
+
+
 }
