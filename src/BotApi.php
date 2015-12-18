@@ -277,7 +277,7 @@ class BotApi
     /**
      * Use this method to send text messages. On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
-     * @param int $chatId
+     * @param int|string $chatId
      * @param string $text
      * @param string|null $parseMode
      * @param bool $disablePreview
@@ -297,7 +297,7 @@ class BotApi
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendMessage', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'text' => $text,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
