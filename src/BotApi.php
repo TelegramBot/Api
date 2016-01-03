@@ -193,7 +193,6 @@ class BotApi
         $options = [
             CURLOPT_URL => $this->getUrl() . '/' . $method,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_VERIFYPEER => false,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null
         ];
