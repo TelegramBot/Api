@@ -57,7 +57,7 @@ class Client
 
     /**
      * Use this method to add an event.
-     * If first closure will return true (or if you are passed null instead of closure), second one will be executed.
+     * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
      *
      * @param \Closure $event
      * @param \Closure|null $checker
