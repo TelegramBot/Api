@@ -89,27 +89,6 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
     protected $caption;
 
     /**
-     * Optional. Text of a message to be sent instead of the photo, 1-512 characters
-     *
-     * @var string
-     */
-    protected $messageText;
-
-    /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message.
-     *
-     * @var string
-     */
-    protected $parseMode;
-
-    /**
-     * Optional. Disables link previews for links in the sent message
-     *
-     * @var bool
-     */
-    protected $disableWebPagePreview;
-
-    /**
      * @return string
      */
     public function getPhotoUrl()
@@ -219,53 +198,5 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
     public function setCaption($caption)
     {
         $this->caption = $caption;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessageText()
-    {
-        return $this->messageText;
-    }
-
-    /**
-     * @param string $messageText
-     */
-    public function setMessageText($messageText)
-    {
-        $this->messageText = $messageText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getParseMode()
-    {
-        return $this->parseMode;
-    }
-
-    /**
-     * @param string $parseMode
-     */
-    public function setParseMode($parseMode)
-    {
-        $this->parseMode = $parseMode;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isDisableWebPagePreview()
-    {
-        return $this->disableWebPagePreview;
-    }
-
-    /**
-     * @param boolean $disableWebPagePreview
-     */
-    public function setDisableWebPagePreview($disableWebPagePreview)
-    {
-        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 }

@@ -38,27 +38,6 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
     ];
 
     /**
-     * Text of the message to be sent
-     *
-     * @var string
-     */
-    protected $messageText;
-
-    /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message.
-     *
-     * @var string
-     */
-    protected $parseMode;
-
-    /**
-     * Optional. Disables link previews for links in the sent message
-     *
-     * @var bool
-     */
-    protected $disableWebPagePreview;
-
-    /**
      * Optional. URL of the result
      *
      * @var string
@@ -99,86 +78,6 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
      * @var int
      */
     protected $thumbHeight;
-
-    /**
-     * @return array
-     */
-    public static function getRequiredParams()
-    {
-        return self::$requiredParams;
-    }
-
-    /**
-     * @param array $requiredParams
-     */
-    public static function setRequiredParams($requiredParams)
-    {
-        self::$requiredParams = $requiredParams;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getMap()
-    {
-        return self::$map;
-    }
-
-    /**
-     * @param array $map
-     */
-    public static function setMap($map)
-    {
-        self::$map = $map;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessageText()
-    {
-        return $this->messageText;
-    }
-
-    /**
-     * @param string $messageText
-     */
-    public function setMessageText($messageText)
-    {
-        $this->messageText = $messageText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getParseMode()
-    {
-        return $this->parseMode;
-    }
-
-    /**
-     * @param string $parseMode
-     */
-    public function setParseMode($parseMode)
-    {
-        $this->parseMode = $parseMode;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isDisableWebPagePreview()
-    {
-        return $this->disableWebPagePreview;
-    }
-
-    /**
-     * @param boolean $disableWebPagePreview
-     */
-    public function setDisableWebPagePreview($disableWebPagePreview)
-    {
-        $this->disableWebPagePreview = $disableWebPagePreview;
-    }
 
     /**
      * @return string
