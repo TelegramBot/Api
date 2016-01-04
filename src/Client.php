@@ -33,7 +33,7 @@ class Client
     /**
      * Client constructor
      *
-     * @param string $token             Telegram Bot API token
+     * @param string $token Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
      */
     public function __construct($token, $trackerToken = null)
@@ -53,6 +53,11 @@ class Client
     public function command($name, Closure $action)
     {
         return $this->on(self::getEvent($action), self::getChecker($name));
+    }
+
+    public function inlineQuery(Closure $action)
+    {
+        return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
     }
 
     /**
@@ -79,6 +84,7 @@ class Client
     public function handle(array $updates)
     {
         foreach ($updates as $update) {
+            /* @var \TelegramBot\Api\Types\Update $update */
             $this->events->handle($update);
         }
     }
@@ -127,6 +133,16 @@ class Client
         };
     }
 
+    protected static function getInlineQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            $action = new ReflectionFunction($action);
+            $action->invokeArgs([$update->getInlineQuery()]);
+
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -145,6 +161,18 @@ class Client
             preg_match(self::REGEXP, $message->getText(), $matches);
 
             return !empty($matches) && $matches[1] == $name;
+        };
+    }
+
+    /**
+     * Returns check function to handling the inline queries.
+     *
+     * @return Closure
+     */
+    protected static function getInlineQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getInlineQuery());
         };
     }
 
