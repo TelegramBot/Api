@@ -5,6 +5,13 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
+/**
+ * Class Update
+ * This object represents an incoming update.
+ * Only one of the optional parameters can be present in any given update.
+ *
+ * @package TelegramBot\Api\Types
+ */
 class Update extends BaseType implements TypeInterface
 {
     /**
