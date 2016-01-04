@@ -38,6 +38,13 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
     ];
 
     /**
+     * {@inheritdoc}
+     *
+     * @var string
+     */
+    protected $type = 'article';
+
+    /**
      * Optional. URL of the result
      *
      * @var string

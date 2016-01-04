@@ -40,6 +40,13 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
     ];
 
     /**
+     * {@inheritdoc}
+     *
+     * @var string
+     */
+    protected $type = 'photo';
+
+    /**
      * A valid URL of the photo. Photo size must not exceed 5MB
      *
      * @var string

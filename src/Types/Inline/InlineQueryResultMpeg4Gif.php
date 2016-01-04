@@ -39,6 +39,13 @@ class InlineQueryResultMpeg4Gif extends AbstractInlineQueryResult
     ];
 
     /**
+     * {@inheritdoc}
+     *
+     * @var string
+     */
+    protected $type = 'mpeg4_gif';
+
+    /**
      * A valid URL for the MP4 file. File size must not exceed 1MB
      *
      * @var string

@@ -39,6 +39,13 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
     ];
 
     /**
+     * {@inheritdoc}
+     *
+     * @var string
+     */
+    protected $type = 'gif';
+
+    /**
      * A valid URL for the GIF file. File size must not exceed 1MB
      *
      * @var string

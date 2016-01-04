@@ -39,6 +39,13 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
     ];
 
     /**
+     * {@inheritdoc}
+     *
+     * @var string
+     */
+    protected $type = 'video';
+
+    /**
      * A valid URL for the embedded video player or video file
      *
      * @var string
