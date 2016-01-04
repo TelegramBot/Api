@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
+use TelegramBot\Api\Types\User;
 
 /**
  * Class InlineQuery
