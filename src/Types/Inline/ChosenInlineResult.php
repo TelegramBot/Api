@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramBot\Api\Types;
+namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
 
@@ -50,5 +50,4 @@ class ChosenInlineResult extends BaseType
      * @var string
      */
     protected $query;
-
 }
