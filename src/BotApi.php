@@ -678,6 +678,30 @@ class BotApi
     }
 
     /**
+     * Use this method to send answers to an inline query. On success, True is returned.
+     * No more than 50 results per query are allowed.
+     *
+     * @param string $inlineQueryId
+     * @param \TelegramBot\Api\Types\Inline\AbstractInlineQueryResult[] $results
+     * @param int $cacheTime
+     * @param bool $isPersonal
+     * @param string $nextOffset
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '')
+    {
+        return $this->call('sendMessage', [
+            'inline_query_id' => $inlineQueryId,
+            'results' => json_encode($results),
+            'cache_time' => $cacheTime,
+            'is_personal' => $isPersonal,
+            'next_offset' => $nextOffset,
+        ]);
+    }
+
+    /**
      * Close curl
      */
     public function __destruct()
