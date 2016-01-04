@@ -692,6 +692,10 @@ class BotApi
      */
     public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '')
     {
+        array_walk($results, function($item) {
+            return json_decode($item->toJson(), true);
+        });
+
         return $this->call('sendMessage', [
             'inline_query_id' => $inlineQueryId,
             'results' => json_encode($results),
