@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Types\Inline;
 
-
 /**
  * Class InlineQueryResultVideo
  * Represents link to a page containing an embedded video player or a video file.
