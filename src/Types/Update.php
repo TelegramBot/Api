@@ -4,6 +4,8 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\ChosenInlineResult;
+use TelegramBot\Api\Types\Inline\InlineQuery;
 
 /**
  * Class Update
@@ -29,6 +31,8 @@ class Update extends BaseType implements TypeInterface
     static protected $map = [
         'update_id' => true,
         'message' => Message::class,
+        'inline_query' => InlineQuery::class,
+        'chosen_inline_result' => ChosenInlineResult::class,
     ];
 
     /**
@@ -47,6 +51,20 @@ class Update extends BaseType implements TypeInterface
      * @var Message
      */
     protected $message;
+
+    /**
+     * Optional. New incoming inline query
+     *
+     * @var \TelegramBot\Api\Types\Inline\InlineQuery
+     */
+    protected $inlineQuery;
+
+    /**
+     * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
+     *
+     * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult
+     */
+    protected $chosenInlineResult;
 
     /**
      * @return int
@@ -78,5 +96,37 @@ class Update extends BaseType implements TypeInterface
     public function setMessage(Message $message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return InlineQuery
+     */
+    public function getInlineQuery()
+    {
+        return $this->inlineQuery;
+    }
+
+    /**
+     * @param InlineQuery $inlineQuery
+     */
+    public function setInlineQuery($inlineQuery)
+    {
+        $this->inlineQuery = $inlineQuery;
+    }
+
+    /**
+     * @return ChosenInlineResult
+     */
+    public function getChosenInlineResult()
+    {
+        return $this->chosenInlineResult;
+    }
+
+    /**
+     * @param ChosenInlineResult $chosenInlineResult
+     */
+    public function setChosenInlineResult($chosenInlineResult)
+    {
+        $this->chosenInlineResult = $chosenInlineResult;
     }
 }
