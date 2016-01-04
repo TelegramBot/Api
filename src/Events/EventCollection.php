@@ -60,10 +60,12 @@ class EventCollection
     {
         foreach ($this->events as $event) {
             if ($event->executeChecker($message) === true) {
-                if (false === $event->executeAction($message) && !is_null($this->tracker)) {
+                if (false === $event->executeAction($message)) {
+                    break;
+                }
+                if (!is_null($this->tracker)) {
                     $checker = new ReflectionFunction($event->getChecker());
                     $this->tracker->track($message, $checker->getStaticVariables()['name']);
-                    break;
                 }
             }
         }
