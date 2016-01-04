@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Events;
 
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\Update;
 
 class Event
 {
@@ -45,11 +46,11 @@ class Event
     }
 
     /**
-     * @param \TelegramBot\Api\Types\Message
+     * @param \TelegramBot\Api\Types\Update
      *
      * @return mixed
      */
-    public function executeChecker(Message $message)
+    public function executeChecker(Update $message)
     {
         if (is_callable($this->checker)) {
             return call_user_func($this->checker, $message);
@@ -59,11 +60,11 @@ class Event
     }
 
     /**
-     * @param \TelegramBot\Api\Types\Message
+     * @param \TelegramBot\Api\Types\Update
      *
      * @return mixed
      */
-    public function executeAction(Message $message)
+    public function executeAction(Update $message)
     {
         if (is_callable($this->action)) {
             return call_user_func($this->action, $message);

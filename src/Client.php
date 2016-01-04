@@ -79,7 +79,7 @@ class Client
     public function handle(array $updates)
     {
         foreach ($updates as $update) {
-            $this->events->handle($update->getMessage());
+            $this->events->handle($update);
         }
     }
 
@@ -105,7 +105,8 @@ class Client
      */
     protected static function getEvent(Closure $action)
     {
-        return function (Message $message) use ($action) {
+        return function (Update $update) use ($action) {
+            $message = $update->getMessage();
             preg_match(self::REGEXP, $message->getText(), $matches);
 
             if (isset($matches[3]) && !empty($matches[3])) {
@@ -135,7 +136,8 @@ class Client
      */
     protected static function getChecker($name)
     {
-        return function (Message $message) use ($name) {
+        return function (Update $update) use ($name) {
+            $message = $update->getMessage();
             if (!strlen($message->getText())) {
                 return false;
             }
