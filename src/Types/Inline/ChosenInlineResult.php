@@ -51,4 +51,52 @@ class ChosenInlineResult extends BaseType
      * @var string
      */
     protected $query;
+
+    /**
+     * @return string
+     */
+    public function getResultId()
+    {
+        return $this->resultId;
+    }
+
+    /**
+     * @param string $resultId
+     */
+    public function setResultId($resultId)
+    {
+        $this->resultId = $resultId;
+    }
+
+    /**
+     * @return User
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param User $from
+     */
+    public function setFrom(User $from)
+    {
+        $this->from = $from;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param string $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
 }
