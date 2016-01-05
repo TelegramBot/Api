@@ -34,7 +34,7 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
         'description' => true,
         'thumb_url' => true,
         'thumb_width' => true,
-        'thumb_height' => true
+        'thumb_height' => true,
     ];
 
     /**
@@ -85,6 +85,48 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
      * @var int
      */
     protected $thumbHeight;
+
+    /**
+     * InlineQueryResultArticle constructor.
+     *
+     * @param string $id
+     * @param string $title
+     * @param string $messageText
+     * @param string|null $parseMode
+     * @param string|null $disableWebPagePreview
+     * @param string|null $url
+     * @param bool|null $hideUrl
+     * @param string|null $description
+     * @param string|null $thumbUrl
+     * @param int|null $thumbWidth
+     * @param int|null $thumbHeight
+     */
+    public function __construct(
+        $id,
+        $title,
+        $messageText,
+        $parseMode = null,
+        $disableWebPagePreview = null,
+        $url = null,
+        $hideUrl = null,
+        $description = null,
+        $thumbUrl = null,
+        $thumbWidth = null,
+        $thumbHeight = null
+    ) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+        $this->url = $url;
+        $this->hideUrl = $hideUrl;
+        $this->description = $description;
+        $this->thumbUrl = $thumbUrl;
+        $this->thumbWidth = $thumbWidth;
+        $this->thumbHeight = $thumbHeight;
+    }
+
 
     /**
      * @return string
