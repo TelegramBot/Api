@@ -36,7 +36,7 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
         'caption' => true,
         'message_text' => true,
         'parse_mode' => true,
-        'disable_web_page_preview' => true
+        'disable_web_page_preview' => true,
     ];
 
     /**
@@ -94,6 +94,39 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
      * @var string
      */
     protected $caption;
+
+    /**
+     * InlineQueryResultPhoto constructor.
+     *
+     * @param string $id
+     * @param string $photoUrl
+     * @param string $mimeType
+     * @param int $photoWidth
+     * @param int $photoHeight
+     * @param $thumbUrl
+     * @param string $description
+     * @param string $caption
+     */
+    public function __construct(
+        $id,
+        $photoUrl,
+        $mimeType = null,
+        $photoWidth = null,
+        $photoHeight = null,
+        $thumbUrl = null,
+        $description = null,
+        $caption = null
+    ) {
+        $this->id = $id;
+        $this->photoUrl = $photoUrl;
+        $this->mimeType = $mimeType;
+        $this->photoWidth = $photoWidth;
+        $this->photoHeight = $photoHeight;
+        $this->thumbUrl = $thumbUrl;
+        $this->description = $description;
+        $this->caption = $caption;
+    }
+
 
     /**
      * @return string
