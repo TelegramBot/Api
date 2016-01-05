@@ -100,20 +100,20 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $photoUrl
+     * @param string $thumbUrl
      * @param string $mimeType
      * @param int $photoWidth
      * @param int $photoHeight
-     * @param $thumbUrl
      * @param string $description
      * @param string $caption
      */
     public function __construct(
         $id,
         $photoUrl,
+        $thumbUrl,
         $mimeType = null,
         $photoWidth = null,
         $photoHeight = null,
-        $thumbUrl = null,
         $description = null,
         $caption = null
     ) {
