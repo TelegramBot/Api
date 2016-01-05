@@ -35,7 +35,7 @@ class InlineQueryResultMpeg4Gif extends AbstractInlineQueryResult
         'caption' => true,
         'message_text' => true,
         'parse_mode' => true,
-        'disable_web_page_preview' => true
+        'disable_web_page_preview' => true,
     ];
 
     /**
@@ -79,6 +79,45 @@ class InlineQueryResultMpeg4Gif extends AbstractInlineQueryResult
      * @var string
      */
     protected $caption;
+
+    /**
+     * InlineQueryResultMpeg4Gif constructor.
+     *
+     * @param string $id
+     * @param string $mpeg4Url
+     * @param string $thumbUrl
+     * @param int|null $mpeg4Width
+     * @param int|null $mpeg4Height
+     * @param string|null $caption
+     * @param string|null $title
+     * @param string|null $messageText
+     * @param string|null $parseMode
+     * @param bool|null $disableWebPagePreview
+     */
+    public function __construct(
+        $id,
+        $mpeg4Url,
+        $thumbUrl,
+        $mpeg4Width = null,
+        $mpeg4Height = null,
+        $caption = null,
+        $title = null,
+        $messageText = null,
+        $parseMode = null,
+        $disableWebPagePreview = null
+    ) {
+        $this->id = $id;
+        $this->mpeg4Url = $mpeg4Url;
+        $this->thumbUrl = $thumbUrl;
+        $this->mpeg4Width = $mpeg4Width;
+        $this->mpeg4Height = $mpeg4Height;
+        $this->caption = $caption;
+        $this->title = $title;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+    }
+
 
     /**
      * @return string
