@@ -692,9 +692,11 @@ class BotApi
      */
     public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '')
     {
-        array_walk($results, function($item) {
+        $results = array_map(function ($item) {
+            /* @var \TelegramBot\Api\Types\Inline\AbstractInlineQueryResult $item */
+
             return json_decode($item->toJson(), true);
-        });
+        }, $results);
 
         return $this->call('answerInlineQuery', [
             'inline_query_id' => $inlineQueryId,
