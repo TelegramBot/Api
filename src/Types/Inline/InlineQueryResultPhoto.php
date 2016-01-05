@@ -125,18 +125,15 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
         $parseMode = null,
         $disableWebPagePreview = null
     ) {
-        $this->id = $id;
+        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+
         $this->photoUrl = $photoUrl;
         $this->thumbUrl = $thumbUrl;
         $this->mimeType = $mimeType;
         $this->photoWidth = $photoWidth;
         $this->photoHeight = $photoHeight;
-        $this->title = $title;
         $this->description = $description;
         $this->caption = $caption;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
 

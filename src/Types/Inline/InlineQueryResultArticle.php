@@ -114,11 +114,8 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
         $thumbWidth = null,
         $thumbHeight = null
     ) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
+        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+
         $this->url = $url;
         $this->hideUrl = $hideUrl;
         $this->description = $description;

@@ -56,6 +56,25 @@ class AbstractInlineQueryResult extends BaseType
     protected $disableWebPagePreview;
 
     /**
+     * AbstractInlineQueryResult constructor.
+     *
+     * @param string $id
+     * @param string $title
+     * @param string $messageText
+     * @param string|null $parseMode
+     * @param bool|null $disableWebPagePreview
+     */
+    public function __construct($id, $title, $messageText, $parseMode, $disableWebPagePreview)
+    {
+        $this->id = $id;
+        $this->title = $title;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+    }
+
+
+    /**
      * @return string
      */
     public function getType()

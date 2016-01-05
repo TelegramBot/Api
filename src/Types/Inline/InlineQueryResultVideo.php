@@ -124,17 +124,14 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
         $title = null,
         $description = null
     ) {
-        $this->id = $id;
+        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        
         $this->videoUrl = $videoUrl;
         $this->thumbUrl = $thumbUrl;
         $this->mimeType = $mimeType;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
         $this->videoWidth = $videoWidth;
         $this->videoHeight = $videoHeight;
         $this->videoDuration = $videoDuration;
-        $this->title = $title;
         $this->description = $description;
     }
 

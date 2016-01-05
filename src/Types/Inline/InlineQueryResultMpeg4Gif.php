@@ -106,16 +106,13 @@ class InlineQueryResultMpeg4Gif extends AbstractInlineQueryResult
         $parseMode = null,
         $disableWebPagePreview = null
     ) {
-        $this->id = $id;
+        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+
         $this->mpeg4Url = $mpeg4Url;
         $this->thumbUrl = $thumbUrl;
         $this->mpeg4Width = $mpeg4Width;
         $this->mpeg4Height = $mpeg4Height;
         $this->caption = $caption;
-        $this->title = $title;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
 

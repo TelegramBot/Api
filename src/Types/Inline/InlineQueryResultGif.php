@@ -106,16 +106,13 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
         $parseMode = null,
         $disableWebPagePreview = null
     ) {
-        $this->id = $id;
+        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+
         $this->gifUrl = $gifUrl;
         $this->thumbUrl = $thumbUrl;
         $this->gifWidth = $gifWidth;
         $this->gifHeight = $gifHeight;
         $this->caption = $caption;
-        $this->title = $title;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
     /**
