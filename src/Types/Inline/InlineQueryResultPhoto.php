@@ -101,11 +101,15 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
      * @param string $id
      * @param string $photoUrl
      * @param string $thumbUrl
-     * @param string $mimeType
-     * @param int $photoWidth
-     * @param int $photoHeight
-     * @param string $description
-     * @param string $caption
+     * @param string|null $mimeType
+     * @param int|null $photoWidth
+     * @param int|null $photoHeight
+     * @param string|null $title
+     * @param string|null $description
+     * @param string|null $caption
+     * @param string|null $messageText
+     * @param string|null $parseMode
+     * @param bool|null $disableWebPagePreview
      */
     public function __construct(
         $id,
@@ -114,17 +118,25 @@ class InlineQueryResultPhoto extends AbstractInlineQueryResult
         $mimeType = null,
         $photoWidth = null,
         $photoHeight = null,
+        $title = null,
         $description = null,
-        $caption = null
+        $caption = null,
+        $messageText = null,
+        $parseMode = null,
+        $disableWebPagePreview = null
     ) {
         $this->id = $id;
         $this->photoUrl = $photoUrl;
+        $this->thumbUrl = $thumbUrl;
         $this->mimeType = $mimeType;
         $this->photoWidth = $photoWidth;
         $this->photoHeight = $photoHeight;
-        $this->thumbUrl = $thumbUrl;
+        $this->title = $title;
         $this->description = $description;
         $this->caption = $caption;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
 
