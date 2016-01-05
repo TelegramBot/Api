@@ -696,7 +696,7 @@ class BotApi
             return json_decode($item->toJson(), true);
         });
 
-        return $this->call('sendMessage', [
+        return $this->call('answerInlineQuery', [
             'inline_query_id' => $inlineQueryId,
             'results' => json_encode($results),
             'cache_time' => $cacheTime,
