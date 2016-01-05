@@ -88,7 +88,7 @@ class InlineQuery extends BaseType
     /**
      * @param User $from
      */
-    public function setFrom($from)
+    public function setFrom(User $from)
     {
         $this->from = $from;
     }
