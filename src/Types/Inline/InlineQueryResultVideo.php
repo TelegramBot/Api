@@ -35,7 +35,7 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
         'video_duration' => true,
         'thumb_url' => true,
         'title' => true,
-        'description' => true
+        'description' => true,
     ];
 
     /**
@@ -83,14 +83,14 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
     /**
      * URL of the thumbnail (jpeg only) for the video
      *
-     * @var
+     * @var string
      */
-    protected $thumb_url;
+    protected $thumbUrl;
 
     /**
      * Optional. Short description of the result
      *
-     * @var
+     * @var string
      */
     protected $description;
 
@@ -224,19 +224,19 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
      */
     public function getThumbUrl()
     {
-        return $this->thumb_url;
+        return $this->thumbUrl;
     }
 
     /**
-     * @param mixed $thumb_url
+     * @param mixed $thumbUrl
      */
-    public function setThumbUrl($thumb_url)
+    public function setThumbUrl($thumbUrl)
     {
-        $this->thumb_url = $thumb_url;
+        $this->thumbUrl = $thumbUrl;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -244,7 +244,7 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
     public function setDescription($description)
     {

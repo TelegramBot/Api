@@ -93,7 +93,7 @@ class InlineQueryResultArticle extends AbstractInlineQueryResult
      * @param string $title
      * @param string $messageText
      * @param string|null $parseMode
-     * @param string|null $disableWebPagePreview
+     * @param bool|null $disableWebPagePreview
      * @param string|null $url
      * @param bool|null $hideUrl
      * @param string|null $description

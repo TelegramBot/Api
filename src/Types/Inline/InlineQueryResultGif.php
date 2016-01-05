@@ -89,9 +89,10 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
      * @param int|null $gifWidth
      * @param int|null $gifHeight
      * @param string|null $caption
+     * @param string|null $title
      * @param string|null $messageText
      * @param string|null $parseMode
-     * @param string|null $disableWebPagePreview
+     * @param bool|null $disableWebPagePreview
      */
     public function __construct(
         $id,
@@ -100,6 +101,7 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
         $gifWidth = null,
         $gifHeight = null,
         $caption = null,
+        $title = null,
         $messageText = null,
         $parseMode = null,
         $disableWebPagePreview = null
@@ -110,6 +112,7 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
         $this->gifWidth = $gifWidth;
         $this->gifHeight = $gifHeight;
         $this->caption = $caption;
+        $this->title = $title;
         $this->messageText = $messageText;
         $this->parseMode = $parseMode;
         $this->disableWebPagePreview = $disableWebPagePreview;
