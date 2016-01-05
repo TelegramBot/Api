@@ -81,6 +81,41 @@ class InlineQueryResultGif extends AbstractInlineQueryResult
     protected $caption;
 
     /**
+     * InlineQueryResultGif constructor.
+     *
+     * @param string $id
+     * @param string $gifUrl
+     * @param string $thumbUrl
+     * @param int|null $gifWidth
+     * @param int|null $gifHeight
+     * @param string|null $caption
+     * @param string|null $messageText
+     * @param string|null $parseMode
+     * @param string|null $disableWebPagePreview
+     */
+    public function __construct(
+        $id,
+        $gifUrl,
+        $thumbUrl,
+        $gifWidth = null,
+        $gifHeight = null,
+        $caption = null,
+        $messageText = null,
+        $parseMode = null,
+        $disableWebPagePreview = null
+    ) {
+        $this->id = $id;
+        $this->gifUrl = $gifUrl;
+        $this->thumbUrl = $thumbUrl;
+        $this->gifWidth = $gifWidth;
+        $this->gifHeight = $gifHeight;
+        $this->caption = $caption;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+    }
+
+    /**
      * @return string
      */
     public function getGifUrl()
