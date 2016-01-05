@@ -95,6 +95,51 @@ class InlineQueryResultVideo extends AbstractInlineQueryResult
     protected $description;
 
     /**
+     * InlineQueryResultVideo constructor.
+     *
+     * @param string $id
+     * @param string $videoUrl
+     * @param string $thumbUrl
+     * @param string $mimeType
+     * @param string|null $messageText
+     * @param string|null $parseMode
+     * @param bool|null $disableWebPagePreview
+     * @param int|null $videoWidth
+     * @param int|null $videoHeight
+     * @param int|null $videoDuration
+     * @param string|null $title
+     * @param string|null $description
+     */
+    public function __construct(
+        $id,
+        $videoUrl,
+        $thumbUrl,
+        $mimeType,
+        $messageText = null,
+        $parseMode = null,
+        $disableWebPagePreview = null,
+        $videoWidth = null,
+        $videoHeight = null,
+        $videoDuration = null,
+        $title = null,
+        $description = null
+    ) {
+        $this->id = $id;
+        $this->videoUrl = $videoUrl;
+        $this->thumbUrl = $thumbUrl;
+        $this->mimeType = $mimeType;
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+        $this->videoWidth = $videoWidth;
+        $this->videoHeight = $videoHeight;
+        $this->videoDuration = $videoDuration;
+        $this->title = $title;
+        $this->description = $description;
+    }
+
+
+    /**
      * @return string
      */
     public function getVideoUrl()
