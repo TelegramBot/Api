@@ -6,23 +6,219 @@ use TelegramBot\Api\Types\Inline\InlineQueryResultArticle;
 
 class InlineQueryResultArticleTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConstructor1()
+
+    public function data()
     {
-        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        return [
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                true,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                true,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                false,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                1,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                0,
+                null,
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                true,
+                'Custom description',
+                null,
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                true,
+                'Custom description',
+                'https://github.com/iGusev',
+                null,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                true,
+                'Custom description',
+                'https://github.com/iGusev',
+                1,
+                null,
+            ],
+            [
+                'id1',
+                'title1',
+                'messageText1',
+                'Markdown',
+                false,
+                'https://github.com/iGusev',
+                true,
+                'Custom description',
+                'https://github.com/iGusev',
+                1,
+                2,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider data
+     */
+    public function testConstructor(
+        $id,
+        $title,
+        $messageText,
+        $parseMode,
+        $disableWebPagePreview,
+        $url,
+        $hideUrl,
+        $description,
+        $thumbUrl,
+        $thumbWidth,
+        $thumbHeight
+    ) {
+        $item = new InlineQueryResultArticle($id, $title, $messageText, $parseMode, $disableWebPagePreview, $url,
+            $hideUrl, $description, $thumbUrl, $thumbWidth, $thumbHeight);
 
         $this->assertInstanceOf('\TelegramBot\Api\Types\Inline\InlineQueryResultArticle', $item);
         $this->assertAttributeEquals('article', 'type', $item);
-        $this->assertAttributeEquals('id1', 'id', $item);
-        $this->assertAttributeEquals('title1', 'title', $item);
-        $this->assertAttributeEquals('messageText1', 'messageText', $item);
-        $this->assertAttributeEquals(null, 'parseMode', $item);
-        $this->assertAttributeEquals(null, 'disableWebPagePreview', $item);
-        $this->assertAttributeEquals(null, 'url', $item);
-        $this->assertAttributeEquals(null, 'hideUrl', $item);
-        $this->assertAttributeEquals(null, 'description', $item);
-        $this->assertAttributeEquals(null, 'thumbUrl', $item);
-        $this->assertAttributeEquals(null, 'thumbWidth', $item);
-        $this->assertAttributeEquals(null, 'thumbHeight', $item);
+        $this->assertAttributeEquals($id, 'id', $item);
+        $this->assertAttributeEquals($title, 'title', $item);
+        $this->assertAttributeEquals($messageText, 'messageText', $item);
+        $this->assertAttributeEquals($parseMode, 'parseMode', $item);
+        $this->assertAttributeEquals($disableWebPagePreview, 'disableWebPagePreview', $item);
+        $this->assertAttributeEquals($url, 'url', $item);
+        $this->assertAttributeEquals($hideUrl, 'hideUrl', $item);
+        $this->assertAttributeEquals($description, 'description', $item);
+        $this->assertAttributeEquals($thumbUrl, 'thumbUrl', $item);
+        $this->assertAttributeEquals($thumbWidth, 'thumbWidth', $item);
+        $this->assertAttributeEquals($thumbHeight, 'thumbHeight', $item);
+    }
+
+    public function testConstructor2()
+    {
+
     }
 
     public function testTypeOnCreate()
@@ -84,7 +280,6 @@ class InlineQueryResultArticleTest extends \PHPUnit_Framework_TestCase
     public function testSetParseMode()
     {
         $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1', 'Markdown');
-        $this->assertAttributeEquals('Markdown', 'parseMode', $item);
         $item->setParseMode('Markdown2');
         $this->assertAttributeEquals('Markdown2', 'parseMode', $item);
     }
