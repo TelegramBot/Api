@@ -630,11 +630,27 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @param boolean $supergroupChatCreated
+     */
+    public function setSupergroupChatCreated($supergroupChatCreated)
+    {
+        $this->supergroupChatCreated = $supergroupChatCreated;
+    }
+
+    /**
      * @return boolean
      */
     public function isSupergroupChatCreated()
     {
         return $this->supergroupChatCreated;
+    }
+
+    /**
+     * @param boolean $channelChatCreated
+     */
+    public function setChannelChatCreated($channelChatCreated)
+    {
+        $this->channelChatCreated = $channelChatCreated;
     }
 
     /**
@@ -646,11 +662,27 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @param int $migrateToChatId
+     */
+    public function setMigrateToChatId($migrateToChatId)
+    {
+        $this->migrateToChatId = $migrateToChatId;
+    }
+
+    /**
      * @return int
      */
     public function getMigrateToChatId()
     {
         return $this->migrateToChatId;
+    }
+
+    /**
+     * @param int $migrateFromChatId
+     */
+    public function setMigrateFromChatId($migrateFromChatId)
+    {
+        $this->migrateFromChatId = $migrateFromChatId;
     }
 
     /**
