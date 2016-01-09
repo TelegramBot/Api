@@ -291,4 +291,101 @@ class InlineQueryResultArticleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Markdown2', $item->getParseMode());
     }
 
+    public function testSetDisableWebPagePreview()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1', 'Markdown');
+        $item->setDisableWebPagePreview(true);
+        $this->assertAttributeEquals(true, 'disableWebPagePreview', $item);
+    }
+
+    public function testIsDisableWebPagePreview()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1', 'Markdown', true);
+        $item->setDisableWebPagePreview(false);
+        $this->assertEquals(false, $item->isDisableWebPagePreview());
+    }
+
+    public function testSetUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setUrl('https://github.com/iGusev');
+        $this->assertAttributeEquals('https://github.com/iGusev', 'url', $item);
+    }
+
+    public function testGetUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setUrl('https://github.com/iGusev');
+        $this->assertEquals('https://github.com/iGusev', $item->getUrl());
+    }
+
+    public function testSetThumbUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbUrl('https://github.com/iGusev');
+        $this->assertAttributeEquals('https://github.com/iGusev', 'thumbUrl', $item);
+    }
+
+    public function testGetThumbUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbUrl('https://github.com/iGusev');
+        $this->assertEquals('https://github.com/iGusev', $item->getThumbUrl());
+    }
+
+    public function testSetHideUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setHideUrl(true);
+        $this->assertAttributeEquals(true, 'hideUrl', $item);
+    }
+
+    public function testIsHideUrl()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setHideUrl(false);
+        $this->assertEquals(false, $item->isHideUrl());
+    }
+
+    public function testSetDescription()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setDescription('description1');
+        $this->assertAttributeEquals('description1', 'description', $item);
+    }
+
+    public function testGetDescription()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setDescription('description1');
+        $this->assertEquals('description1', $item->getDescription());
+    }
+
+    public function testSetThumbWidth()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbWidth(1);
+        $this->assertAttributeEquals(1, 'thumbWidth', $item);
+    }
+
+    public function testGetThumbWidth()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbWidth(1);
+        $this->assertEquals('1', $item->getThumbWidth());
+    }
+
+    public function testSetThumbHeight()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbHeight(1);
+        $this->assertAttributeEquals(1, 'thumbHeight', $item);
+    }
+
+    public function testGetThumbHeight()
+    {
+        $item = new InlineQueryResultArticle('id1', 'title1', 'messageText1');
+        $item->setThumbHeight(1);
+        $this->assertEquals('1', $item->getThumbHeight());
+    }
 }
