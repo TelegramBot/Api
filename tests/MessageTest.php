@@ -672,4 +672,122 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $item->setForwardDate('s');
     }
+
+    public function testSetSupergroupChatCreated()
+    {
+        $item = new Message();
+        $item->setSupergroupChatCreated(true);
+
+        $this->assertAttributeEquals(true, 'supergroupChatCreated', $item);
+    }
+
+    public function testIsSupergroupChatCreated()
+    {
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'supergroup_chat_created' => true
+        ));
+
+        $this->assertTrue($item->isSupergroupChatCreated());
+    }
+
+    public function testSetChannelChatCreated()
+    {
+        $item = new Message();
+        $item->setChannelChatCreated(true);
+
+        $this->assertAttributeEquals(true, 'channelChatCreated', $item);
+    }
+
+    public function testIsChannelChatCreated()
+    {
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'channel_chat_created' => true
+        ));
+
+        $this->assertTrue($item->isChannelChatCreated());
+    }
+
+    public function testSetMigrateToChatId()
+    {
+        $item = new Message();
+        $item->setMigrateToChatId(2);
+        $this->assertAttributeEquals(2, 'migrateToChatId', $item);
+    }
+
+    public function testGetMigrateToChatId()
+    {
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'migrate_to_chat_id' => 2
+        ));
+
+        $this->assertEquals(2, $item->getMigrateToChatId());
+    }
+
+    public function testSetMigrateFromChatId()
+    {
+        $item = new Message();
+        $item->setMigrateFromChatId(2);
+        $this->assertAttributeEquals(2, 'migrateFromChatId', $item);
+    }
+
+    public function testGetMigrateFromChatId()
+    {
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'migrate_from_chat_id' => 3
+        ));
+
+        $this->assertEquals(3, $item->getMigrateFromChatId());
+    }
 }
