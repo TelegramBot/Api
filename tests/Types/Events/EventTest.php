@@ -129,6 +129,23 @@ class EventTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider data
      */
+    public function testExecuteCheker($action, $checker, $update)
+    {
+        $item = new Event($action, $checker);
+
+        $result = $item->executeChecker($update);
+
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Update', $result);
+        $this->assertEquals($update, $result);
+    }
+
+    /**
+     * @param \Closure $action
+     * @param \Closure $checker
+     * @param Update $update
+     *
+     * @dataProvider data
+     */
     public function testExecuteCheckerFalse($action, $checker, $update) {
         $item = new Event($action, $checker);
 
