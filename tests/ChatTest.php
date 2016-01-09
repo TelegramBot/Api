@@ -34,6 +34,20 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $chat->getId());
     }
 
+    public function testSetType()
+    {
+        $chat = new Chat();
+        $chat->setType('private');
+        $this->assertAttributeEquals('private', 'type', $chat);
+    }
+
+    public function testGetType()
+    {
+        $chat = new Chat();
+        $chat->setType('private');
+        $this->assertEquals('private', $chat->getType());
+    }
+
     public function testSetTitle()
     {
         $chat = new Chat();
