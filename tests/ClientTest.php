@@ -3,16 +3,15 @@
 namespace TelegramBot\Api\Test;
 
 
+use Symfony\Component\Yaml\Inline;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Client;
+use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected $test;
-
     public function data()
     {
         return [
@@ -251,7 +250,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 return true;
             };
         }
-
         $action->bind($action, $this);
 
         $result = $reflectionMethod->invoke(null, $action);
@@ -267,7 +265,42 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->assertEquals(1, $test);
         }
+    }
 
+    /**
+     * @param Update $update
+     *
+     * @dataProvider data
+     */
+    public function testGetInlineQueryEvent($update)
+    {
+        $reflectionMethod = new \ReflectionMethod('TelegramBot\Api\Client', 'getInlineQueryEvent');
+        $reflectionMethod->setAccessible(true);
+        global $test;
 
+        $test = 1;
+
+        $action = function (InlineQuery $query) {
+            global $test;
+            $test = 2;
+
+            return true;
+        };
+
+        $action->bind($action, $this);
+
+        $result = $reflectionMethod->invoke(null, $action);
+
+        $this->assertInstanceOf('\Closure', $result);
+
+        $mustBeCalled = !is_null($update->getInlineQuery());
+
+        $this->assertEquals(!$mustBeCalled, call_user_func($result, $update));
+
+        if ($mustBeCalled) {
+            $this->assertEquals(2, $test);
+        } else {
+            $this->assertEquals(1, $test);
+        }
     }
 }
