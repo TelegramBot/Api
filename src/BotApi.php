@@ -224,7 +224,7 @@ class BotApi
      *
      * @param array $options
      *
-     * @return mixed
+     * @return string
      *
      * @throws \TelegramBot\Api\HttpException
      */
