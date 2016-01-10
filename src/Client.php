@@ -144,9 +144,12 @@ class Client
     protected static function getInlineQueryEvent(Closure $action)
     {
         return function (Update $update) use ($action) {
+            if (!$update->getInlineQuery()) {
+                return true;
+            }
+
             $reflectionAction = new ReflectionFunction($action);
             $reflectionAction->invokeArgs([$update->getInlineQuery()]);
-
             return false;
         };
     }
