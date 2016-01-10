@@ -17,7 +17,3 @@ before_script:
 script:
   - php vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 src/
   - phpunit --coverage-text --coverage-clover=coverage.clover
-
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then php ocular.phar code-coverage:upload --access-token="ec5719af9c1465a6878b55619b6ebdde22b873dd93da9815ce6a35585f446cfa" --format=php-clover coverage.clover; fi
