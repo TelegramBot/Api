@@ -5,7 +5,6 @@ namespace TelegramBot\Api;
 use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
-use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 /**
