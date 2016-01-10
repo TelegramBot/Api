@@ -96,9 +96,14 @@ class Client
      */
     public function run()
     {
-        if ($data = BotApi::jsonValidate(file_get_contents('php://input'), true)) {
+        if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
             $this->handle([Update::fromResponse($data)]);
         }
+    }
+
+    public function getRawBody()
+    {
+        return file_get_contents('php://input');
     }
 
     /**
@@ -112,6 +117,10 @@ class Client
     {
         return function (Update $update) use ($action) {
             $message = $update->getMessage();
+            if (!$message) {
+                return true;
+            }
+
             preg_match(self::REGEXP, $message->getText(), $matches);
 
             if (isset($matches[3]) && !empty($matches[3])) {
@@ -137,6 +146,7 @@ class Client
         return function (Update $update) use ($action) {
             $reflectionAction = new ReflectionFunction($action);
             $reflectionAction->invokeArgs([$update->getInlineQuery()]);
+
             return false;
         };
     }
