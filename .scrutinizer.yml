@@ -21,3 +21,11 @@ tools:
     external_code_coverage:
         timeout: 600
         runs: 3
+build:
+    tests:
+        override:
+            -
+                command: 'phpunit --coverage-text --coverage-clover=coverage.clover'
+                coverage:
+                    file: 'coverage.clover'
+                    format: 'php-clover'
