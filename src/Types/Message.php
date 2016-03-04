@@ -124,7 +124,7 @@ class Message extends BaseType implements TypeInterface
      * Optional. Message is a photo, available sizes of the photo
      * array of \TelegramBot\Api\Types\Photo
      *
-     * @var array
+     * @var ArrayOfPhotoSize
      */
     protected $photo;
 
@@ -486,7 +486,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return array
+     * @return ArrayOfPhotoSize
      */
     public function getNewChatPhoto()
     {
@@ -494,7 +494,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param array $newChatPhoto
+     * @param ArrayOfPhotoSize $newChatPhoto
      */
     public function setNewChatPhoto($newChatPhoto)
     {
@@ -518,7 +518,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return array
+     * @return ArrayOfPhotoSize
      */
     public function getPhoto()
     {
@@ -526,9 +526,9 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param array $photo
+     * @param ArrayOfPhotoSize $photo
      */
-    public function setPhoto(array $photo)
+    public function setPhoto(ArrayOfPhotoSize $photo)
     {
         $this->photo = $photo;
     }
