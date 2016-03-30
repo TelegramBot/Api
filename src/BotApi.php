@@ -199,7 +199,7 @@ class BotApi
 
         if ($data) {
             $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = http_build_query($data);
+            $options[CURLOPT_POSTFIELDS] = $data;
         }
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
