@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="League Test Suite">
+        <testsuite name="Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -18,6 +18,10 @@
         <whitelist>
             <directory suffix=".php">src/</directory>
         </whitelist>
+        <blacklist>
+            <directory suffix=".php">tests/</directory>
+            <directory suffix=".php">vendor/</directory>
+        </blacklist>
     </filter>
     <logging>
         <log type="tap" target="build/report.tap"/>

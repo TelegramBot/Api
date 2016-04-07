@@ -199,7 +199,7 @@ class BotApi
 
         if ($data) {
             $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = http_build_query($data);
+            $options[CURLOPT_POSTFIELDS] = $data;
         }
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
@@ -327,7 +327,7 @@ class BotApi
     public function sendChatAction($chatId, $action)
     {
         return $this->call('sendChatAction', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'action' => $action
         ]);
     }
@@ -431,7 +431,7 @@ class BotApi
     public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendLocation', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
             'reply_to_message_id' => $replyToMessageId,
@@ -454,7 +454,7 @@ class BotApi
     public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendSticker', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'sticker' => $sticker,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
@@ -486,7 +486,7 @@ class BotApi
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendVideo', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'video' => $video,
             'duration' => $duration,
             'caption' => $caption,
@@ -516,7 +516,7 @@ class BotApi
     public function sendVoice($chatId, $voice, $duration = null, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendVoice', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'voice' => $voice,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
@@ -538,8 +538,8 @@ class BotApi
     public function forwardMessage($chatId, $fromChatId, $messageId)
     {
         return Message::fromResponse($this->call('forwardMessage', [
-            'chat_id' => (int) $chatId,
-            'from_chat_id' => (int) $fromChatId,
+            'chat_id' => $chatId,
+            'from_chat_id' => $fromChatId,
             'message_id' => (int) $messageId,
         ]));
     }
@@ -578,7 +578,7 @@ class BotApi
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendAudio', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'audio' => $audio,
             'duration' => $duration,
             'performer' => $performer,
@@ -604,7 +604,7 @@ class BotApi
     public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendPhoto', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'photo' => $photo,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
@@ -628,7 +628,7 @@ class BotApi
     public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null)
     {
         return Message::fromResponse($this->call('sendDocument', [
-            'chat_id' => (int) $chatId,
+            'chat_id' => $chatId,
             'document' => $document,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()

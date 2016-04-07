@@ -12,7 +12,7 @@ class Message extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['message_id', 'from', 'date', 'chat'];
+    static protected $requiredParams = ['message_id', 'date', 'chat'];
 
     /**
      * {@inheritdoc}
@@ -57,7 +57,7 @@ class Message extends BaseType implements TypeInterface
     protected $messageId;
 
     /**
-     * Sender
+     * Optional. Sender name. Can be empty for messages sent to channels
      *
      * @var \TelegramBot\Api\Types\User
      */
