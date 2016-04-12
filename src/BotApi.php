@@ -432,7 +432,14 @@ class BotApi
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendLocation($chatId, $latitude, $longitude, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false)
+    public function sendLocation(
+        $chatId,
+        $latitude,
+        $longitude,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    )
     {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id' => $chatId,
@@ -457,7 +464,13 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendSticker($chatId, $sticker, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false)
+    public function sendSticker(
+        $chatId,
+        $sticker,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    )
     {
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
@@ -524,7 +537,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendVoice($chatId, $voice, $duration = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false)
+    public function sendVoice(
+        $chatId,
+        $voice,
+        $duration = null,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    )
     {
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
@@ -623,7 +643,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendPhoto($chatId, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false)
+    public function sendPhoto(
+        $chatId,
+        $photo,
+        $caption = null,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    )
     {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
@@ -649,7 +676,13 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendDocument($chatId, $document, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false)
+    public function sendDocument(
+        $chatId,
+        $document,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    )
     {
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
