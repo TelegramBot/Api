@@ -439,8 +439,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id' => $chatId,
             'latitude' => $latitude,
@@ -470,8 +469,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
             'sticker' => $sticker,
@@ -544,8 +542,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
             'voice' => $voice,
@@ -650,8 +647,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
             'photo' => $photo,
@@ -682,8 +678,7 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
             'document' => $document,
