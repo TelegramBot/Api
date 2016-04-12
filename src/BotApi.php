@@ -556,6 +556,10 @@ class BotApi
      * For this to work, the audio must be in an .ogg file encoded with OPUS.
      * This behavior will be phased out in the future. For sending voice messages, use the sendVoice method instead.
      *
+     * @deprecated since 20th February. Removed backward compatibility from the method sendAudio.
+     * Voice messages now must be sent using the method sendVoice.
+     * There is no more need to specify a non-empty title or performer while sending the audio by file_id.
+     *
      * @param int $chatId
      * @param \CURLFile|string $audio
      * @param int|null $duration
