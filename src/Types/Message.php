@@ -48,6 +48,7 @@ class Message extends BaseType implements TypeInterface
         'channel_chat_created' => true,
         'migrate_to_chat_id' => true,
         'migrate_from_chat_id' => true,
+        'pinned_message' => Message::class,
     ];
 
     /**
@@ -251,6 +252,14 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $migrateFromChatId;
+
+    /**
+     * Optional. Specified message was pinned.Note that the Message object in this field
+     * will not contain further reply_to_message fields even if it is itself a reply.
+     *
+     * @var Message
+     */
+    protected $pinnedMessage;
 
     /**
      * @return string
@@ -716,5 +725,21 @@ class Message extends BaseType implements TypeInterface
     public function getMigrateFromChatId()
     {
         return $this->migrateFromChatId;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getPinnedMessage()
+    {
+        return $this->pinnedMessage;
+    }
+
+    /**
+     * @param Message $pinnedMessage
+     */
+    public function setPinnedMessage($pinnedMessage)
+    {
+        $this->pinnedMessage = $pinnedMessage;
     }
 }
