@@ -803,6 +803,25 @@ class BotApi
     }
 
     /**
+     * Use this method to send answers to callback queries sent from inline keyboards.
+     * The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
+     *
+     * @param $callbackQueryId
+     * @param null $text
+     * @param bool $showAlert
+     *
+     * @return bool
+     */
+    public function answerCallbackQuery($callbackQueryId, $text = null, $showAlert = false)
+    {
+        return $this->call('answerCallbackQuery', [
+            'callback_query_id' => $callbackQueryId,
+            'text' => $text,
+            'show_alert' => (bool)$showAlert,
+        ]);
+    }
+
+    /**
      * Close curl
      */
     public function __destruct()
