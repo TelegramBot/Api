@@ -879,6 +879,30 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
+
+    /**
+     * Use this method to edit only the reply markup of messages sent by the bot or via the bot
+     *
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function editMessageReplyMarkup(
+        $chatId,
+        $messageId,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('editMessageText', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
+
     /**
      * Close curl
      */
