@@ -314,6 +314,40 @@ class BotApi
     }
 
     /**
+     * Use this method to send phone contacts
+     *
+     * @param int $chatId
+     * @param string $phoneNumber
+     * @param string $firstName
+     * @param string $lastName
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     * @param bool $disableNotification
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendContact(
+        $chatId,
+        $phoneNumber,
+        $firstName,
+        $lastName = null,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    ) {
+        return Message::fromResponse($this->call('sendContact', [
+            'chat_id' => $chatId,
+            'phone_number' => $phoneNumber,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'disable_notification' => (bool)$disableNotification,
+        ]));
+    }
+
+    /**
      * Use this method when you need to tell the user that something is happening on the bot's side.
      * The status is set for 5 seconds or less (when a message arrives from your bot,
      * Telegram clients clear its typing status).
@@ -824,7 +858,7 @@ class BotApi
 
 
     /**
-     * Use this method to edit text messages sent by the bot or via the bot (for inline bots)
+     * Use this method to edit text messages sent by the bot or via the bot
      *
      * @param int|string $chatId
      * @param int $messageId
