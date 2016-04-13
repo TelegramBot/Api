@@ -821,6 +821,38 @@ class BotApi
         ]);
     }
 
+
+    /**
+     * Use this method to edit text messages sent by the bot or via the bot (for inline bots)
+     *
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param string $text
+     * @param string|null $parseMode
+     * @param bool $disablePreview
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function editMessageText(
+        $chatId,
+        $messageId,
+        $text,
+        $parseMode = null,
+        $disablePreview = false,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('editMessageText', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'text' => $text,
+            'parse_mode' => $parseMode,
+            'disable_web_page_preview' => $disablePreview,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
     /**
      * Close curl
      */
