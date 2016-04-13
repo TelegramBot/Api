@@ -108,6 +108,10 @@ class BotApi
      * Url prefixes
      */
     const URL_PREFIX = 'https://api.telegram.org/bot';
+
+    /**
+     * Url prefix for files
+     */
     const FILE_URL_PREFIX = 'https://api.telegram.org/file/bot';
 
     /**
