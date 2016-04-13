@@ -795,10 +795,11 @@ class BotApi
      *
      * @return bool
      */
-    public function unbanChatMember($chatId, $userId) {
+    public function unbanChatMember($chatId, $userId)
+    {
         return $this->call('unbanChatMember', [
             'chat_id' => $chatId,
-            'user_id' => $userId
+            'user_id' => $userId,
         ]);
     }
 
