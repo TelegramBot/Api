@@ -442,10 +442,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setLeftChatParticipant($user);
+        $item->setLeftChatMember($user);
 
 
-        $this->assertAttributeEquals($user, 'leftChatParticipant', $item);
+        $this->assertAttributeEquals($user, 'leftChatMember', $item);
     }
 
     public function testGetLeftChatParticipant()
@@ -457,10 +457,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setLeftChatParticipant($user);
+        $item->setLeftChatMember($user);
 
-        $this->assertEquals($user, $item->getLeftChatParticipant());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getLeftChatParticipant());
+        $this->assertEquals($user, $item->getLeftChatMember());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getLeftChatMember());
     }
 
     public function testSetNewChatParticipant()
@@ -472,10 +472,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setNewChatParticipant($user);
+        $item->setNewChatMember($user);
 
 
-        $this->assertAttributeEquals($user, 'newChatParticipant', $item);
+        $this->assertAttributeEquals($user, 'newChatMember', $item);
     }
 
     public function testGetNewChatParticipant()
@@ -487,10 +487,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setNewChatParticipant($user);
+        $item->setNewChatMember($user);
 
-        $this->assertEquals($user, $item->getNewChatParticipant());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getNewChatParticipant());
+        $this->assertEquals($user, $item->getNewChatMember());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getNewChatMember());
     }
 
     public function testSetNewChatTitle()

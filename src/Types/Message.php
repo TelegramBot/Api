@@ -37,8 +37,8 @@ class Message extends BaseType implements TypeInterface
         'caption' => true,
         'contact' => Contact::class,
         'location' => Location::class,
-        'new_chat_participant' => User::class,
-        'left_chat_participant' => User::class,
+        'new_chat_member' => User::class,
+        'left_chat_member' => User::class,
         'new_chat_title' => true,
         'new_chat_photo' => ArrayOfPhotoSize::class,
         'delete_chat_photo' => true,
@@ -168,14 +168,14 @@ class Message extends BaseType implements TypeInterface
      *
      * @var \TelegramBot\Api\Types\User
      */
-    protected $newChatParticipant;
+    protected $newChatMember;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be bot itself)
      *
      * @var \TelegramBot\Api\Types\User
      */
-    protected $leftChatParticipant;
+    protected $leftChatMember;
 
     /**
      * Optional. A group title was changed to this value
@@ -418,17 +418,17 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return User
      */
-    public function getLeftChatParticipant()
+    public function getLeftChatMember()
     {
-        return $this->leftChatParticipant;
+        return $this->leftChatMember;
     }
 
     /**
-     * @param User $leftChatParticipant
+     * @param User $leftChatMember
      */
-    public function setLeftChatParticipant($leftChatParticipant)
+    public function setLeftChatMember($leftChatMember)
     {
-        $this->leftChatParticipant = $leftChatParticipant;
+        $this->leftChatMember = $leftChatMember;
     }
 
     /**
@@ -472,17 +472,17 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return User
      */
-    public function getNewChatParticipant()
+    public function getNewChatMember()
     {
-        return $this->newChatParticipant;
+        return $this->newChatMember;
     }
 
     /**
-     * @param User $newChatParticipant
+     * @param User $newChatMember
      */
-    public function setNewChatParticipant($newChatParticipant)
+    public function setNewChatMember($newChatMember)
     {
-        $this->newChatParticipant = $newChatParticipant;
+        $this->newChatMember = $newChatMember;
     }
 
     /**
