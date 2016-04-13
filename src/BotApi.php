@@ -765,6 +765,24 @@ class BotApi
     }
 
     /**
+     * Use this method to kick a user from a group or a supergroup.
+     * In the case of supergroups, the user will not be able to return to the group
+     * on their own using invite links, etc., unless unbanned first.
+     * The bot must be an administrator in the group for this to work. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target group
+     * or username of the target supergroup (in the format @supergroupusername)
+     * @param int $userId Unique identifier of the target user
+     *
+     * @return bool
+     */
+    public function kickChatMember($chatId, $userId)
+    {
+        return $this->call('kickChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+        ]);
+    }
      * Close curl
      */
     public function __destruct()
