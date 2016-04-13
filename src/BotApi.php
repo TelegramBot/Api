@@ -783,6 +783,26 @@ class BotApi
             'user_id' => $userId,
         ]);
     }
+
+    /**
+     * Use this method to unban a previously kicked user in a supergroup.
+     * The user will not return to the group automatically, but will be able to join via link, etc.
+     * The bot must be an administrator in the group for this to work. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target group
+     * or username of the target supergroup (in the format @supergroupusername)
+     * @param int $userId Unique identifier of the target user
+     *
+     * @return bool
+     */
+    public function unbanChatMember($chatId, $userId) {
+        return $this->call('unbanChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId
+        ]);
+    }
+
+    /**
      * Close curl
      */
     public function __destruct()
