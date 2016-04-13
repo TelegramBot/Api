@@ -485,6 +485,45 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool) $disableNotification
+    }
+
+    /**
+     * Use this method to send information about a venue. On success, the sent Message is returned.
+     *
+     * @param int|string $chatId
+     * @param float $latitude
+     * @param float $longitude
+     * @param string $title
+     * @param string $address
+     * @param string|null $foursquareId
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     * @param bool $disableNotification
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendVenue(
+        $chatId,
+        $latitude,
+        $longitude,
+        $title,
+        $address,
+        $foursquareId = null,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    ) {
+        return Message::fromResponse($this->call('sendVenue', [
+            'chat_id' => $chatId,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'title' => $title,
+            'address' => $address,
+            'foursquare_id' => $foursquareId,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
