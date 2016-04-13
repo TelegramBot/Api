@@ -38,6 +38,7 @@ class Message extends BaseType implements TypeInterface
         'caption' => true,
         'contact' => Contact::class,
         'location' => Location::class,
+        'venue' => Venue::class,
         'new_chat_member' => User::class,
         'left_chat_member' => User::class,
         'new_chat_title' => true,
@@ -172,6 +173,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Location
      */
     protected $location;
+
+    /**
+     * Optional. Message is a venue, information about the venue
+     *
+     * @var \TelegramBot\Api\Types\Venue
+     */
+    protected $venue;
 
     /**
      * Optional. A new member was added to the group, information about them (this member may be bot itself)
@@ -463,6 +471,22 @@ class Message extends BaseType implements TypeInterface
     public function setLocation(Location $location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return Venue
+     */
+    public function getVenue()
+    {
+        return $this->venue;
+    }
+
+    /**
+     * @param Venue $venue
+     */
+    public function setVenue($venue)
+    {
+        $this->venue = $venue;
     }
 
     /**
