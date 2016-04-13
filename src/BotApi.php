@@ -195,10 +195,10 @@ class BotApi
     public function call($method, array $data = null)
     {
         $options = [
-            CURLOPT_URL => $this->getUrl() . '/' . $method,
+            CURLOPT_URL => $this->getUrl().'/'.$method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
-            CURLOPT_POSTFIELDS => null
+            CURLOPT_POSTFIELDS => null,
         ];
 
         if ($data) {
@@ -307,9 +307,9 @@ class BotApi
             'text' => $text,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
-            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_to_message_id' => (int)$replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification,
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -369,7 +369,7 @@ class BotApi
     {
         return $this->call('sendChatAction', [
             'chat_id' => $chatId,
-            'action' => $action
+            'action' => $action,
         ]);
     }
 
@@ -386,9 +386,9 @@ class BotApi
     public function getUserProfilePhotos($userId, $offset = 0, $limit = 100)
     {
         return UserProfilePhotos::fromResponse($this->call('getUserProfilePhotos', [
-            'user_id' => (int) $userId,
-            'offset' => (int) $offset,
-            'limit' => (int) $limit,
+            'user_id' => (int)$userId,
+            'offset' => (int)$offset,
+            'limit' => (int)$limit,
         ]));
     }
 
@@ -445,7 +445,7 @@ class BotApi
         $updates = ArrayOfUpdates::fromResponse($this->call('getUpdates', [
             'offset' => $offset,
             'limit' => $limit,
-            'timeout' => $timeout
+            'timeout' => $timeout,
         ]));
 
         if ($this->tracker instanceof Botan) {
@@ -484,7 +484,8 @@ class BotApi
             'longitude' => $longitude,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
+        ]));
     }
 
     /**
@@ -552,7 +553,7 @@ class BotApi
             'sticker' => $sticker,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -589,7 +590,7 @@ class BotApi
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -626,7 +627,7 @@ class BotApi
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -647,8 +648,8 @@ class BotApi
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
-            'message_id' => (int) $messageId,
-            'disable_notification' => (bool) $disableNotification
+            'message_id' => (int)$messageId,
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -699,7 +700,7 @@ class BotApi
             'title' => $title,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -731,7 +732,7 @@ class BotApi
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -761,7 +762,7 @@ class BotApi
             'document' => $document,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -801,7 +802,7 @@ class BotApi
             CURLOPT_HEADER => 0,
             CURLOPT_HTTPGET => 1,
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $this->getFileUrl() . '/' . $file->getFilePath()
+            CURLOPT_URL => $this->getFileUrl().'/'.$file->getFilePath(),
         ];
 
         return $this->executeCurl($options);
@@ -990,7 +991,7 @@ class BotApi
      */
     public function getUrl()
     {
-        return self::URL_PREFIX . $this->token;
+        return self::URL_PREFIX.$this->token;
     }
 
     /**
@@ -998,7 +999,7 @@ class BotApi
      */
     public function getFileUrl()
     {
-        return self::FILE_URL_PREFIX . $this->token;
+        return self::FILE_URL_PREFIX.$this->token;
     }
 
     /**
