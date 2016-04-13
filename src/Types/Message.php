@@ -28,6 +28,7 @@ class Message extends BaseType implements TypeInterface
         'forward_date' => true,
         'reply_to_message' => Message::class,
         'text' => true,
+        'entities' => ArrayOfMessageEntity::class,
         'audio' => Audio::class,
         'document' => Document::class,
         'photo' => ArrayOfPhotoSize::class,
@@ -105,6 +106,14 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $text;
+
+    /**
+     * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
+     * array of \TelegramBot\Api\Types\MessageEntity
+     *
+     * @var array
+     */
+    protected $entities;
 
     /**
      * Optional. Message is an audio file, information about the file
@@ -579,6 +588,22 @@ class Message extends BaseType implements TypeInterface
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEntities()
+    {
+        return $this->entities;
+    }
+
+    /**
+     * @param array $entities
+     */
+    public function setEntities($entities)
+    {
+        $this->entities = $entities;
     }
 
     /**
