@@ -8,7 +8,6 @@
 
 namespace TelegramBot\Api\Types;
 
-
 abstract class ArrayOfMessageEntity
 {
     public static function fromResponse($data)
