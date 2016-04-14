@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
+use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\User;
 
 /**
@@ -29,6 +30,7 @@ class InlineQuery extends BaseType
     static protected $map = [
         'id' => true,
         'from' => User::class,
+        'location' => Location::class,
         'query' => true,
         'offset' => true,
     ];
@@ -46,6 +48,14 @@ class InlineQuery extends BaseType
      * @var User
      */
     protected $from;
+
+
+    /**
+     * Optional. Sender location, only for bots that request user location
+     *
+     * @var Location
+     */
+    protected $location;
 
     /**
      * Text of the query
@@ -91,6 +101,22 @@ class InlineQuery extends BaseType
     public function setFrom(User $from)
     {
         $this->from = $from;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
     }
 
     /**
