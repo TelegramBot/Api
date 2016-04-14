@@ -11,6 +11,12 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
+/**
+ * Class Venue
+ * This object represents a venue
+ *
+ * @package TelegramBot\Api\Types
+ */
 class Venue extends BaseType implements TypeInterface
 {
     /**
