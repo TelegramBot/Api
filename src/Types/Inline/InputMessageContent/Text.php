@@ -6,12 +6,20 @@
  * Time: 14:41
  */
 
-namespace TelegramBot\Api\Types\Inline;
+namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
-class InputTextMessageContent extends BaseType implements TypeInterface
+/**
+ * Class Text
+ * @see https://core.telegram.org/bots/api#inputtextmessagecontent
+ * 
+ * Represents the content of a text message to be sent as the result of an inline query.
+ *
+ * @package TelegramBot\Api\Types\Inline\InputMessageContent
+ */
+class Text extends BaseType implements TypeInterface
 {
     /**
      * {@inheritdoc}

@@ -6,19 +6,20 @@
  * Time: 15:45
  */
 
-namespace TelegramBot\Api\Types\Inline;
+namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
 /**
- * Class InputVenueMessageContent
+ * Class Venue
  * @see https://core.telegram.org/bots/api#inputvenuemessagecontent
+ * 
  * Represents the content of a venue message to be sent as the result of an inline query.
  *
  * @package TelegramBot\Api\Types\Inline
  */
-class InputVenueMessageContent extends BaseType implements TypeInterface
+class Venue extends BaseType implements TypeInterface
 {
     /**
      * {@inheritdoc}
