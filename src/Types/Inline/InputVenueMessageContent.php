@@ -11,6 +11,13 @@ namespace TelegramBot\Api\Types\Inline;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
+/**
+ * Class InputVenueMessageContent
+ * @see https://core.telegram.org/bots/api#inputvenuemessagecontent
+ * Represents the content of a venue message to be sent as the result of an inline query.
+ *
+ * @package TelegramBot\Api\Types\Inline
+ */
 class InputVenueMessageContent extends BaseType implements TypeInterface
 {
     /**
