@@ -3,6 +3,8 @@
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
 use TelegramBot\Api\BaseType;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class AbstractInlineQueryResult
@@ -54,6 +56,18 @@ class AbstractInlineQueryResult extends BaseType
      * @var bool
      */
     protected $disableWebPagePreview;
+
+
+    /**
+     * @var InputMessageContent
+     */
+    protected $inputMessageContent;
+
+    /**
+     * @var InlineKeyboardMarkup
+     */
+    protected $replyMarkup;
+
 
     /**
      * AbstractInlineQueryResult constructor.
@@ -168,5 +182,37 @@ class AbstractInlineQueryResult extends BaseType
     public function setDisableWebPagePreview($disableWebPagePreview)
     {
         $this->disableWebPagePreview = $disableWebPagePreview;
+    }
+
+    /**
+     * @return InputMessageContent
+     */
+    public function getInputMessageContent()
+    {
+        return $this->inputMessageContent;
+    }
+
+    /**
+     * @param InputMessageContent $inputMessageContent
+     */
+    public function setInputMessageContent($inputMessageContent)
+    {
+        $this->inputMessageContent = $inputMessageContent;
+    }
+
+    /**
+     * @return InlineKeyboardMarkup
+     */
+    public function getReplyMarkup()
+    {
+        return $this->replyMarkup;
+    }
+
+    /**
+     * @param InlineKeyboardMarkup $replyMarkup
+     */
+    public function setReplyMarkup($replyMarkup)
+    {
+        $this->replyMarkup = $replyMarkup;
     }
 }
