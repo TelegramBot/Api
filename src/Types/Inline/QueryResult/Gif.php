@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramBot\Api\Types\Inline;
+namespace TelegramBot\Api\Types\Inline\QueryResult;
 
 /**
  * Class InlineQueryResultGif
@@ -10,7 +10,7 @@ namespace TelegramBot\Api\Types\Inline;
  *
  * @package TelegramBot\Api\Types\Inline
  */
-class InlineQueryResultGif extends AbstractInlineQueryResult
+class Gif extends AbstractInlineQueryResult
 {
     /**
      * {@inheritdoc}
