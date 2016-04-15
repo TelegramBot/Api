@@ -2,6 +2,9 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class InlineQueryResultArticle
  * Represents a link to an article or web page.
@@ -15,7 +18,7 @@ class Article extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'title', 'message_text'];
+    static protected $requiredParams = ['type', 'id', 'title', 'input_message_content'];
 
     /**
      * {@inheritdoc}
@@ -26,8 +29,8 @@ class Article extends AbstractInlineQueryResult
         'type' => true,
         'id' => true,
         'title' => true,
-        'message_text' => true,
-        'parse_mode' => true,
+        'input_message_content' => InputMessageContent::class,
+        'reply_markup' => InlineKeyboardMarkup::class,
         'disable_web_page_preview' => true,
         'url' => true,
         'hide_url' => true,
@@ -91,11 +94,10 @@ class Article extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $title
-     * @param string $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param InputMessageContent $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      * @param string|null $url
-     * @param bool|null $hideUrl
+     * @param bool $hideUrl
      * @param string|null $description
      * @param string|null $thumbUrl
      * @param int|null $thumbWidth
@@ -104,17 +106,16 @@ class Article extends AbstractInlineQueryResult
     public function __construct(
         $id,
         $title,
-        $messageText,
-        $parseMode = null,
-        $disableWebPagePreview = null,
+        $inputMessageContent,
+        $inlineKeyboardMarkup = null,
         $url = null,
-        $hideUrl = null,
+        $hideUrl = false,
         $description = null,
         $thumbUrl = null,
         $thumbWidth = null,
         $thumbHeight = null
     ) {
-        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->url = $url;
         $this->hideUrl = $hideUrl;

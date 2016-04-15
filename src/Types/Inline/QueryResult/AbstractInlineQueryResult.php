@@ -36,57 +36,34 @@ class AbstractInlineQueryResult extends BaseType
     protected $title;
 
     /**
-     * Text of the message to be sent
-     * Optional for photo, gif, mpeg4_gif, video
+     * Content of the message to be sent instead of the file
      *
-     * @var string
-     */
-    protected $messageText;
-
-    /**
-     * Optional. Send “Markdown”, if you want Telegram apps to show bold, italic and inline URLs in your bot's message.
-     *
-     * @var string
-     */
-    protected $parseMode;
-
-    /**
-     * Optional. Disables link previews for links in the sent message
-     *
-     * @var bool
-     */
-    protected $disableWebPagePreview;
-
-
-    /**
      * @var InputMessageContent
      */
     protected $inputMessageContent;
 
     /**
+     * Optional. Inline keyboard attached to the message
+     *
      * @var InlineKeyboardMarkup
      */
     protected $replyMarkup;
-
 
     /**
      * AbstractInlineQueryResult constructor.
      *
      * @param string $id
      * @param string $title
-     * @param string $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param InputMessageContent|null $inputMessageContent
+     * @param InlineKeyboardMarkup|null $replyMarkup
      */
-    public function __construct($id, $title, $messageText, $parseMode, $disableWebPagePreview)
+    public function __construct($id, $title, $inputMessageContent = null, $replyMarkup = null)
     {
         $this->id = $id;
         $this->title = $title;
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
-        $this->disableWebPagePreview = $disableWebPagePreview;
+        $this->inputMessageContent = $inputMessageContent;
+        $this->replyMarkup = $replyMarkup;
     }
-
 
     /**
      * @return string
@@ -134,54 +111,6 @@ class AbstractInlineQueryResult extends BaseType
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessageText()
-    {
-        return $this->messageText;
-    }
-
-    /**
-     * @param string $messageText
-     */
-    public function setMessageText($messageText)
-    {
-        $this->messageText = $messageText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getParseMode()
-    {
-        return $this->parseMode;
-    }
-
-    /**
-     * @param string $parseMode
-     */
-    public function setParseMode($parseMode)
-    {
-        $this->parseMode = $parseMode;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isDisableWebPagePreview()
-    {
-        return $this->disableWebPagePreview;
-    }
-
-    /**
-     * @param boolean $disableWebPagePreview
-     */
-    public function setDisableWebPagePreview($disableWebPagePreview)
-    {
-        $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
     /**
