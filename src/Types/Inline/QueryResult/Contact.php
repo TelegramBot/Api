@@ -8,6 +8,8 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 class Contact extends AbstractInlineQueryResult
 {
@@ -30,9 +32,9 @@ class Contact extends AbstractInlineQueryResult
         'first_name' => true,
         'last_name' => true,
         //@TODO: InlineKeyboardMarkup
-        'reply_markup' => InlineKey,
+        'reply_markup' => InlineKeyboardMarkup::class,
         //@TODO: InlineKeyboardMarkup
-        'input_message_content' => InputMessageContent,
+        'input_message_content' => InputMessageContent::class,
         'thumb_url' => true,
         'thumb_width' => true,
         'thumb_height' => true,

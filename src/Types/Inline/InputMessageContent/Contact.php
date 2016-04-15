@@ -14,7 +14,6 @@ use TelegramBot\Api\TypeInterface;
 /**
  * Class Contact
  * @see https://core.telegram.org/bots/api#inputcontactmessagecontent
- * 
  * Represents the content of a contact message to be sent as the result of an inline query.
  *
  * @package TelegramBot\Api\Types\Inline
