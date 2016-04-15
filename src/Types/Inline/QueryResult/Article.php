@@ -94,31 +94,25 @@ class Article extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $title
-     * @param InputMessageContent $inputMessageContent
-     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
-     * @param string|null $url
-     * @param bool $hideUrl
      * @param string|null $description
      * @param string|null $thumbUrl
      * @param int|null $thumbWidth
      * @param int|null $thumbHeight
+     * @param InputMessageContent $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
         $title,
-        $inputMessageContent,
-        $inlineKeyboardMarkup = null,
-        $url = null,
-        $hideUrl = false,
         $description = null,
         $thumbUrl = null,
         $thumbWidth = null,
-        $thumbHeight = null
+        $thumbHeight = null,
+        InputMessageContent $inputMessageContent,
+        $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
-        $this->url = $url;
-        $this->hideUrl = $hideUrl;
         $this->description = $description;
         $this->thumbUrl = $thumbUrl;
         $this->thumbWidth = $thumbWidth;

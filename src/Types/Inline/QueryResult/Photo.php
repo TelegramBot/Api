@@ -30,16 +30,14 @@ class Photo extends AbstractInlineQueryResult
         'type' => true,
         'id' => true,
         'photo_url' => true,
-        'mime_type' => true,
+        'thumb_url' => true,
         'photo_width' => true,
         'photo_height' => true,
-        'thumb_url' => true,
         'title' => true,
         'description' => true,
         'caption' => true,
-        'message_text' => true,
-        'parse_mode' => true,
-        'disable_web_page_preview' => true,
+        'input_message_content' => InputMessageContent::class,
+        'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**

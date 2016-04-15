@@ -8,8 +8,8 @@
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class Venue
@@ -18,7 +18,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types\Inline
  */
-class Venue extends BaseType implements TypeInterface
+class Venue extends InputMessageContent implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -74,6 +74,24 @@ class Venue extends BaseType implements TypeInterface
      * @var string
      */
     protected $foursquareId;
+
+    /**
+     * Venue constructor.
+     * @param float $latitude
+     * @param float $longitude
+     * @param string $title
+     * @param string $address
+     * @param string $foursquareId
+     */
+    public function __construct($latitude, $longitude, $title, $address, $foursquareId = null)
+    {
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
+        $this->title = $title;
+        $this->address = $address;
+        $this->foursquareId = $foursquareId;
+    }
+
 
     /**
      * @return float

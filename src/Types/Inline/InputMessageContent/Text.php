@@ -10,6 +10,7 @@ namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class Text
@@ -18,7 +19,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types\Inline\InputMessageContent
  */
-class Text extends BaseType implements TypeInterface
+class Text extends InputMessageContent implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -59,6 +60,19 @@ class Text extends BaseType implements TypeInterface
      * @var bool
      */
     protected $disableWebPagePreview;
+
+    /**
+     * Text constructor.
+     * @param string $messageText
+     * @param string $parseMode
+     * @param bool $disableWebPagePreview
+     */
+    public function __construct($messageText, $parseMode = null, $disableWebPagePreview = false)
+    {
+        $this->messageText = $messageText;
+        $this->parseMode = $parseMode;
+        $this->disableWebPagePreview = $disableWebPagePreview;
+    }
 
     /**
      * @return string

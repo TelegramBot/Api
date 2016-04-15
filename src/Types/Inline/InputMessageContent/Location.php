@@ -6,10 +6,10 @@
  * Time: 15:41
  */
 
-namespace TelegramBot\Api\Types\Inline;
+namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class Location
@@ -18,7 +18,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types\Inline
  */
-class Location extends BaseType implements TypeInterface
+class Location extends InputMessageContent implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -50,6 +50,18 @@ class Location extends BaseType implements TypeInterface
      * @var float
      */
     protected $longitude;
+
+    /**
+     * Location constructor.
+     * @param float $latitude
+     * @param float $longitude
+     */
+    public function __construct($latitude, $longitude)
+    {
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
+    }
+
 
     /**
      * @return float

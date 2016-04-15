@@ -10,6 +10,7 @@ namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class Contact
@@ -18,7 +19,7 @@ use TelegramBot\Api\TypeInterface;
  *
  * @package TelegramBot\Api\Types\Inline
  */
-class Contact extends BaseType implements TypeInterface
+class Contact extends InputMessageContent implements TypeInterface
 {
     /**
      * {@inheritdoc}
@@ -58,6 +59,21 @@ class Contact extends BaseType implements TypeInterface
      * @var string
      */
     protected $lastName;
+
+    /**
+     * Contact constructor.
+     *
+     * @param string $phoneNumber
+     * @param string $firstName
+     * @param string|null $lastName
+     */
+    public function __construct($phoneNumber, $firstName, $lastName = null)
+    {
+        $this->phoneNumber = $phoneNumber;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+    }
+
 
     /**
      * @return string

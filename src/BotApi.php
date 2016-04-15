@@ -4,6 +4,7 @@ namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\File;
+use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
@@ -813,7 +814,7 @@ class BotApi
      * No more than 50 results per query are allowed.
      *
      * @param string $inlineQueryId
-     * @param \TelegramBot\Api\Types\Inline\AbstractInlineQueryResult[] $results
+     * @param AbstractInlineQueryResult[] $results
      * @param int $cacheTime
      * @param bool $isPersonal
      * @param string $nextOffset
@@ -824,7 +825,7 @@ class BotApi
     public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '')
     {
         $results = array_map(function ($item) {
-            /* @var \TelegramBot\Api\Types\Inline\AbstractInlineQueryResult $item */
+            /* @var AbstractInlineQueryResult $item */
 
             return json_decode($item->toJson(), true);
         }, $results);
