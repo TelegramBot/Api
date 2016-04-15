@@ -2,6 +2,9 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class InlineQueryResultPhoto
  * Represents a link to a photo. By default, this photo will be sent by the user with optional caption.
@@ -54,13 +57,6 @@ class Photo extends AbstractInlineQueryResult
     protected $photoUrl;
 
     /**
-     * Optional. MIME type of the photo, defaults to image/jpeg
-     *
-     * @var string
-     */
-    protected $mimeType;
-
-    /**
      * Optional. Width of the photo
      *
      * @var int
@@ -101,35 +97,30 @@ class Photo extends AbstractInlineQueryResult
      * @param string $id
      * @param string $photoUrl
      * @param string $thumbUrl
-     * @param string|null $mimeType
      * @param int|null $photoWidth
      * @param int|null $photoHeight
      * @param string|null $title
      * @param string|null $description
      * @param string|null $caption
-     * @param string|null $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param InputMessageContent|null $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
         $photoUrl,
         $thumbUrl,
-        $mimeType = null,
         $photoWidth = null,
         $photoHeight = null,
         $title = null,
         $description = null,
         $caption = null,
-        $messageText = null,
-        $parseMode = null,
-        $disableWebPagePreview = null
+        $inputMessageContent = null,
+        $inlineKeyboardMarkup = null
     ) {
-        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->photoUrl = $photoUrl;
         $this->thumbUrl = $thumbUrl;
-        $this->mimeType = $mimeType;
         $this->photoWidth = $photoWidth;
         $this->photoHeight = $photoHeight;
         $this->description = $description;
@@ -151,22 +142,6 @@ class Photo extends AbstractInlineQueryResult
     public function setPhotoUrl($photoUrl)
     {
         $this->photoUrl = $photoUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
-
-    /**
-     * @param string $mimeType
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
     }
 
     /**
