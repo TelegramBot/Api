@@ -14,6 +14,7 @@ use TelegramBot\Api\Types\Inline\InputMessageContent;
 
 /**
  * Class Contact
+ *
  * @see https://core.telegram.org/bots/api#inputcontactmessagecontent
  * Represents the content of a contact message to be sent as the result of an inline query.
  *
@@ -36,7 +37,7 @@ class Contact extends InputMessageContent implements TypeInterface
     static protected $map = [
         'phone_number' => true,
         'first_name' => true,
-        'last_name' => true
+        'last_name' => true,
     ];
 
     /**

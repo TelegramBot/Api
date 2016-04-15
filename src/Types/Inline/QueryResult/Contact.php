@@ -89,6 +89,7 @@ class Contact extends AbstractInlineQueryResult
 
     /**
      * Contact constructor.
+     *
      * @param string $id
      * @param string $phoneNumber
      * @param string $firstName
@@ -109,8 +110,7 @@ class Contact extends AbstractInlineQueryResult
         $thumbHeight = null,
         $inputMessageContent = null,
         $inlineKeyboardMarkup = null
-    )
-    {
+    ) {
         parent::__construct($id, null, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->phoneNumber = $phoneNumber;

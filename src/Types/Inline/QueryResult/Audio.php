@@ -8,8 +8,12 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class Audio
+ *
  * @see https://core.telegram.org/bots/api#inlinequeryresultaudio
  * Represents a link to an mp3 audio file. By default, this audio file will be sent by the user.
  * Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
@@ -91,10 +95,10 @@ class Audio extends AbstractInlineQueryResult
      * @param string $id
      * @param string $audioUrl
      * @param string $title
-     * @param string $performer
-     * @param int $audioDuration
-     * @param InlineKeyboardMarkup $replyMarkup
-     * @param InputMessageContent $inputMessageContent
+     * @param string|null $performer
+     * @param int|null $audioDuration
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
+     * @param InputMessageContent|null $inputMessageContent
      */
     public function __construct(
         $id,
@@ -102,17 +106,16 @@ class Audio extends AbstractInlineQueryResult
         $title,
         $performer = null,
         $audioDuration = null,
-        InlineKeyboardMarkup $replyMarkup = null,
-        InputMessageContent $inputMessageContent = null
+        $inlineKeyboardMarkup = null,
+        $inputMessageContent = null
     ) {
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
+
         $this->id = $id;
         $this->audioUrl = $audioUrl;
-        $this->title = $title;
         $this->performer = $performer;
         $this->audioDuration = $audioDuration;
-        $this->replyMarkup = $replyMarkup;
+        $this->replyMarkup = $inlineKeyboardMarkup;
         $this->inputMessageContent = $inputMessageContent;
     }
-
-
 }

@@ -108,7 +108,7 @@ class Article extends AbstractInlineQueryResult
         $thumbUrl = null,
         $thumbWidth = null,
         $thumbHeight = null,
-        InputMessageContent $inputMessageContent,
+        $inputMessageContent = null,
         $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
