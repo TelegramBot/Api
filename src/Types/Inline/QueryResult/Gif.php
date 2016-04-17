@@ -2,6 +2,9 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class InlineQueryResultGif
  * Represents a link to an animated GIF file.
@@ -33,9 +36,8 @@ class Gif extends AbstractInlineQueryResult
         'thumb_url' => true,
         'title' => true,
         'caption' => true,
-        'message_text' => true,
-        'parse_mode' => true,
-        'disable_web_page_preview' => true,
+        'reply_markup' => InlineKeyboardMarkup::class,
+        'input_message_content' => InputMessageContent::class,
     ];
 
     /**
@@ -88,28 +90,26 @@ class Gif extends AbstractInlineQueryResult
      * @param string $thumbUrl
      * @param int|null $gifWidth
      * @param int|null $gifHeight
-     * @param string|null $caption
      * @param string|null $title
-     * @param string|null $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param string|null $caption
+     * @param InputMessageContent $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
         $gifUrl,
-        $thumbUrl,
+        $thumbUrl = null,
+        $title = null,
+        $caption = null,
         $gifWidth = null,
         $gifHeight = null,
-        $caption = null,
-        $title = null,
-        $messageText = null,
-        $parseMode = null,
-        $disableWebPagePreview = null
+        $inputMessageContent = null,
+        $inlineKeyboardMarkup = null
     ) {
-        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->gifUrl = $gifUrl;
-        $this->thumbUrl = $thumbUrl;
+        $this->thumbUrl = is_null($thumbUrl) ? $gifUrl : $thumbUrl;
         $this->gifWidth = $gifWidth;
         $this->gifHeight = $gifHeight;
         $this->caption = $caption;
