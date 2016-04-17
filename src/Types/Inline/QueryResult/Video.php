@@ -2,6 +2,9 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class InlineQueryResultVideo
  * Represents link to a page containing an embedded video player or a video file.
@@ -15,7 +18,7 @@ class Video extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumb_url'];
+    static protected $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumb_url', 'title'];
 
     /**
      * {@inheritdoc}
@@ -27,15 +30,15 @@ class Video extends AbstractInlineQueryResult
         'id' => true,
         'video_url' => true,
         'mime_type' => true,
-        'message_text' => true,
-        'parse_mode' => true,
-        'disable_web_page_preview' => true,
+        'thumb_url' => true,
+        'title' => true,
+        'caption' => true,
+        'description' => true,
         'video_width' => true,
         'video_height' => true,
         'video_duration' => true,
-        'thumb_url' => true,
-        'title' => true,
-        'description' => true,
+        'reply_markup' => InlineKeyboardMarkup::class,
+        'input_message_content' => InputMessageContent::class,
     ];
 
     /**
@@ -92,47 +95,56 @@ class Video extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $description;
+    protected $caption;
 
     /**
-     * InlineQueryResultVideo constructor.
+     * Optional. Short description of the result
+     *
+     * @var string
+     */
+    protected $description;
+
+
+    /**
+     * Video constructor
      *
      * @param string $id
      * @param string $videoUrl
      * @param string $thumbUrl
      * @param string $mimeType
-     * @param string|null $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param string $title
+     * @param string|null $caption
+     * @param string|null $description
      * @param int|null $videoWidth
      * @param int|null $videoHeight
      * @param int|null $videoDuration
-     * @param string|null $title
-     * @param string|null $description
+     * @param InputMessageContent|null $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
         $videoUrl,
         $thumbUrl,
         $mimeType,
-        $messageText = null,
-        $parseMode = null,
-        $disableWebPagePreview = null,
+        $title,
+        $caption = null,
+        $description = null,
         $videoWidth = null,
         $videoHeight = null,
         $videoDuration = null,
-        $title = null,
-        $description = null
+        $inputMessageContent = null,
+        $inlineKeyboardMarkup = null
     ) {
-        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
         
         $this->videoUrl = $videoUrl;
         $this->thumbUrl = $thumbUrl;
+        $this->caption = $caption;
+        $this->description = $description;
         $this->mimeType = $mimeType;
         $this->videoWidth = $videoWidth;
         $this->videoHeight = $videoHeight;
         $this->videoDuration = $videoDuration;
-        $this->description = $description;
     }
 
 
@@ -230,6 +242,22 @@ class Video extends AbstractInlineQueryResult
     public function setThumbUrl($thumbUrl)
     {
         $this->thumbUrl = $thumbUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaption()
+    {
+        return $this->caption;
+    }
+
+    /**
+     * @param string $caption
+     */
+    public function setCaption($caption)
+    {
+        $this->caption = $caption;
     }
 
     /**
