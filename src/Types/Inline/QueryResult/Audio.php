@@ -76,20 +76,6 @@ class Audio extends AbstractInlineQueryResult
     protected $audioDuration;
 
     /**
-     * Optional. Inline keyboard attached to the message
-     *
-     * @var InlineKeyboardMarkup
-     */
-    protected $replyMarkup;
-
-    /**
-     * Optional. Content of the message to be sent instead of the audio
-     *
-     * @var InputMessageContent
-     */
-    protected $inputMessageContent;
-
-    /**
      * Audio constructor.
      *
      * @param string $id
@@ -111,11 +97,58 @@ class Audio extends AbstractInlineQueryResult
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
-        $this->id = $id;
         $this->audioUrl = $audioUrl;
         $this->performer = $performer;
         $this->audioDuration = $audioDuration;
         $this->replyMarkup = $inlineKeyboardMarkup;
         $this->inputMessageContent = $inputMessageContent;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudioUrl()
+    {
+        return $this->audioUrl;
+    }
+
+    /**
+     * @param string $audioUrl
+     */
+    public function setAudioUrl($audioUrl)
+    {
+        $this->audioUrl = $audioUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPerformer()
+    {
+        return $this->performer;
+    }
+
+    /**
+     * @param string $performer
+     */
+    public function setPerformer($performer)
+    {
+        $this->performer = $performer;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAudioDuration()
+    {
+        return $this->audioDuration;
+    }
+
+    /**
+     * @param int $audioDuration
+     */
+    public function setAudioDuration($audioDuration)
+    {
+        $this->audioDuration = $audioDuration;
     }
 }
