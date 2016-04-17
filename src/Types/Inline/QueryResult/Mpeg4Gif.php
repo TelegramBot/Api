@@ -2,6 +2,9 @@
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InputMessageContent;
+
 /**
  * Class InlineQueryResultMpeg4Gif
  * Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
@@ -33,9 +36,8 @@ class Mpeg4Gif extends AbstractInlineQueryResult
         'thumb_url' => true,
         'title' => true,
         'caption' => true,
-        'message_text' => true,
-        'parse_mode' => true,
-        'disable_web_page_preview' => true,
+        'reply_markup' => InlineKeyboardMarkup::class,
+        'input_message_content' => InputMessageContent::class,
     ];
 
     /**
@@ -90,23 +92,21 @@ class Mpeg4Gif extends AbstractInlineQueryResult
      * @param int|null $mpeg4Height
      * @param string|null $caption
      * @param string|null $title
-     * @param string|null $messageText
-     * @param string|null $parseMode
-     * @param bool|null $disableWebPagePreview
+     * @param InputMessageContent $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
         $mpeg4Url,
         $thumbUrl,
+        $title = null,
+        $caption = null,
         $mpeg4Width = null,
         $mpeg4Height = null,
-        $caption = null,
-        $title = null,
-        $messageText = null,
-        $parseMode = null,
-        $disableWebPagePreview = null
+        $inputMessageContent = null,
+        $inlineKeyboardMarkup = null
     ) {
-        parent::__construct($id, $title, $messageText, $parseMode, $disableWebPagePreview);
+        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->mpeg4Url = $mpeg4Url;
         $this->thumbUrl = $thumbUrl;
