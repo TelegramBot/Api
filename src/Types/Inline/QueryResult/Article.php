@@ -31,7 +31,6 @@ class Article extends AbstractInlineQueryResult
         'title' => true,
         'input_message_content' => InputMessageContent::class,
         'reply_markup' => InlineKeyboardMarkup::class,
-        'disable_web_page_preview' => true,
         'url' => true,
         'hide_url' => true,
         'description' => true,
