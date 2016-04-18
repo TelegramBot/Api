@@ -14,7 +14,7 @@ use TelegramBot\Api\Types\Inline\InputMessageContent;
 /**
  * Class Voice
  *
- * @see https://core.telegram.org/bots/api#inlinequeryresultaudio
+ * @see https://core.telegram.org/bots/api#inlinequeryresultvoice
  * Represents a link to an mp3 audio file. By default, this audio file will be sent by the user.
  * Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
  *

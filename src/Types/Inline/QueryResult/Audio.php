@@ -83,8 +83,8 @@ class Audio extends AbstractInlineQueryResult
      * @param string $title
      * @param string|null $performer
      * @param int|null $audioDuration
-     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      * @param InputMessageContent|null $inputMessageContent
+     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
         $id,
@@ -92,16 +92,14 @@ class Audio extends AbstractInlineQueryResult
         $title,
         $performer = null,
         $audioDuration = null,
-        $inlineKeyboardMarkup = null,
-        $inputMessageContent = null
+        $inputMessageContent = null,
+        $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->audioUrl = $audioUrl;
         $this->performer = $performer;
         $this->audioDuration = $audioDuration;
-        $this->replyMarkup = $inlineKeyboardMarkup;
-        $this->inputMessageContent = $inputMessageContent;
     }
 
     /**
