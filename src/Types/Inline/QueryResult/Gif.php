@@ -9,7 +9,7 @@ use TelegramBot\Api\Types\Inline\InputMessageContent;
  * Class InlineQueryResultGif
  * Represents a link to an animated GIF file.
  * By default, this animated GIF file will be sent by the user with optional caption.
- * Alternatively, you can provide message_text to send it instead of the animation.
+ * Alternatively, you can provide InputMessageContent to send it instead of the animation.
  *
  * @package TelegramBot\Api\Types\Inline
  */
