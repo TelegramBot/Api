@@ -86,7 +86,7 @@ class Chat extends BaseType implements TypeInterface
      */
     public function setId($id)
     {
-        if (is_integer($id)) {
+        if (is_integer($id) || is_float($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();

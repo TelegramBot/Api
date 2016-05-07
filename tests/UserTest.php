@@ -13,6 +13,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(1, 'id', $item);
     }
 
+    public function testSet64bitId()
+    {
+        $item = new User();
+        $item->setId(2147483648);
+        $this->assertAttributeEquals(2147483648, 'id', $item);
+    }
+
     public function testGetDuration()
     {
         $item = new User();

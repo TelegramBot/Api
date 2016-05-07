@@ -27,6 +27,13 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(1, 'id', $chat);
     }
 
+    public function testSet64bitId()
+    {
+        $chat = new Chat();
+        $chat->setId(2147483648);
+        $this->assertAttributeEquals(2147483648, 'id', $chat);
+    }
+
     public function testGetId()
     {
         $chat = new Chat();
