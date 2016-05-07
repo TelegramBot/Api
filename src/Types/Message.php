@@ -504,7 +504,7 @@ class Message extends BaseType implements TypeInterface
      */
     public function setMessageId($messageId)
     {
-        if (is_integer($messageId)) {
+        if (is_integer($messageId) || is_float($messageId)) {
             $this->messageId = $messageId;
         } else {
             throw new InvalidArgumentException();

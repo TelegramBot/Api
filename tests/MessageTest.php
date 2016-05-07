@@ -25,6 +25,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals(1, 'messageId', $item);
     }
 
+    public function testSet64bitMessageId()
+    {
+        $item = new Message();
+        $item->setMessageId(2147483648);
+        $this->assertAttributeEquals(2147483648, 'messageId', $item);
+    }
+
     public function testGetMessageId()
     {
         $item = new Message();
