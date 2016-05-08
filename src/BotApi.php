@@ -239,6 +239,9 @@ class BotApi
 
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl);
+        if ($result === false) {
+            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+        }
 
         return $result;
     }
