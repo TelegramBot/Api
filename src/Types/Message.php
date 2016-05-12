@@ -302,7 +302,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return TypeInterface
+     * @return Chat
      */
     public function getChat()
     {
