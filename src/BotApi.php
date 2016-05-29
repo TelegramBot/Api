@@ -320,7 +320,7 @@ class BotApi
     /**
      * Use this method to send phone contacts
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param string $phoneNumber
      * @param string $firstName
      * @param string $lastName
@@ -495,7 +495,7 @@ class BotApi
     /**
      * Use this method to send information about a venue. On success, the sent Message is returned.
      *
-     * @param int|string $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param float $latitude
      * @param float $longitude
      * @param string $title
@@ -535,7 +535,7 @@ class BotApi
     /**
      * Use this method to send .webp stickers. On success, the sent Message is returned.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
@@ -566,7 +566,7 @@ class BotApi
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $video
      * @param int|null $duration
      * @param string|null $caption
@@ -606,7 +606,7 @@ class BotApi
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $voice
      * @param int|null $duration
      * @param int|null $replyToMessageId
@@ -638,7 +638,7 @@ class BotApi
     /**
      * Use this method to forward messages of any kind. On success, the sent Message is returned.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param int $fromChatId
      * @param int $messageId
      * @param bool $disableNotification
@@ -673,7 +673,7 @@ class BotApi
      * Voice messages now must be sent using the method sendVoice.
      * There is no more need to specify a non-empty title or performer while sending the audio by file_id.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $audio
      * @param int|null $duration
      * @param string|null $performer
@@ -711,7 +711,7 @@ class BotApi
     /**
      * Use this method to send photos. On success, the sent Message is returned.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $photo
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -744,7 +744,7 @@ class BotApi
      * Use this method to send general files. On success, the sent Message is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
-     * @param int $chatId
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $document
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
