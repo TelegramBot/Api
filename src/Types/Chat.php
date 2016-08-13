@@ -32,7 +32,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value
      *
-     * @var int
+     * @var int|double|float
      */
     protected $id;
 
@@ -86,7 +86,7 @@ class Chat extends BaseType implements TypeInterface
      */
     public function setId($id)
     {
-        if (is_integer($id) || is_float($id)) {
+        if (is_numeric($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();
