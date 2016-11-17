@@ -951,7 +951,7 @@ class BotApi
         $caption = null,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('editMessageText', [
+        return Message::fromResponse($this->call('editMessageCaption', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
             'caption' => $caption,
