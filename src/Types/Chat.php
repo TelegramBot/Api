@@ -91,7 +91,6 @@ class Chat extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-
     }
 
     /**
