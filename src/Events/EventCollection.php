@@ -48,6 +48,7 @@ class EventCollection
     {
         $this->events[] = !is_null($checker) ? new Event($event, $checker)
             : new Event($event, function () {
+                return true;
             });
 
         return $this;
