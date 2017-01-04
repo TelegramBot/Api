@@ -258,7 +258,8 @@ class BotApi
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
             && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {
-            throw new HttpException(self::$codes[$httpCode], $httpCode);
+            $r = json_decode(curl_exec($curl));
+            throw new HttpException(self::$codes[$httpCode]." (".$r->description.")", $httpCode);
         }
     }
 
