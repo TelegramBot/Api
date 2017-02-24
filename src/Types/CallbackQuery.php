@@ -207,7 +207,4 @@ class CallbackQuery extends BaseType
     {
         $this->gameShortName = $gameShortName;
     }
-
-
-
 }
