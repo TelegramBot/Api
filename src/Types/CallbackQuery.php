@@ -32,8 +32,8 @@ class CallbackQuery extends BaseType
      */
     static protected $map = [
         'id' => true,
-        'from' => true,
-        'message' => true,
+        'from' => User::class,
+        'message' => Message::class,
         'inline_message_id' => true,
         'chat_instance' => true,
         'data' => true,
@@ -95,33 +95,6 @@ class CallbackQuery extends BaseType
      */
     protected $gameShortName;
 
-    /**
-     * CallbackQuery constructor.
-     * @param string $id
-     * @param User $from
-     * @param Message $message
-     * @param string $inlineMessageId
-     * @param string $chatInstance
-     * @param string $data
-     * @param string $gameShortName
-     */
-    public function __construct(
-        $id,
-        $from,
-        $message,
-        $inlineMessageId,
-        $chatInstance,
-        $data,
-        $gameShortName
-    ) {
-        $this->id              = $id;
-        $this->from            = $from;
-        $this->message         = $message;
-        $this->inlineMessageId = $inlineMessageId;
-        $this->chatInstance    = $chatInstance;
-        $this->data            = $data;
-        $this->gameShortName   = $gameShortName;
-    }
 
     /**
      * @return string
@@ -150,7 +123,7 @@ class CallbackQuery extends BaseType
     /**
      * @param User $from
      */
-    public function setFrom($from)
+    public function setFrom(User $from)
     {
         $this->from = $from;
     }
