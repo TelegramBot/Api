@@ -17,7 +17,7 @@ class Client
     /**
      * RegExp for bot commands
      */
-    const REGEXP = '/^\/([^\s@]+)(@\S+)?\s?(.*)$/';
+    const REGEXP = '/^(?:@\w+\s)?\/([^\s@]+)(@\S+)?\s?(.*)$/';
 
     /**
      * @var \TelegramBot\Api\BotApi
