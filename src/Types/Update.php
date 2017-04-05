@@ -33,6 +33,7 @@ class Update extends BaseType implements TypeInterface
         'message' => Message::class,
         'inline_query' => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
+        'callback_query' => CallbackQuery::class,
     ];
 
     /**
@@ -65,6 +66,13 @@ class Update extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult
      */
     protected $chosenInlineResult;
+
+    /**
+     * Optional. New incoming callback query
+     *
+     * @var \TelegramBot\Api\Types\CallbackQuery
+     */
+    protected $callbackQuery;
 
     /**
      * @return int
@@ -128,5 +136,21 @@ class Update extends BaseType implements TypeInterface
     public function setChosenInlineResult($chosenInlineResult)
     {
         $this->chosenInlineResult = $chosenInlineResult;
+    }
+
+    /**
+     * @return CallbackQuery
+     */
+    public function getCallbackQuery()
+    {
+        return $this->callbackQuery;
+    }
+
+    /**
+     * @param CallbackQuery $callbackQuery
+     */
+    public function setCallbackQuery($callbackQuery)
+    {
+        $this->callbackQuery = $callbackQuery;
     }
 }
