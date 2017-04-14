@@ -52,6 +52,12 @@ $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "t
 $bot->sendMessage($chatId, $messageText, false, null, $keyboard);
 ```
 
+``` php
+$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+
+$bot->sendMessage($chatId, $bot->emoji('FACE_WITH_TEARS_OF_JOY'));
+```
+
 #### Client
 
 ```php
