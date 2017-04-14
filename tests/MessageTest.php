@@ -797,4 +797,57 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, $item->getMigrateFromChatId());
     }
+
+    public function testToJson1()
+    {
+        $data = array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'migrate_from_chat_id' => 3
+        );
+
+        $item = Message::fromResponse($data);
+        $this->assertJson(json_encode($data), $item->toJson());
+    }
+
+    public function testToJson2()
+    {
+        $data = array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'entities' => array(
+                array(
+                    "type" => "bot_command",
+                    "offset" => 0,
+                    "length" => 7,
+                )
+            ),
+            'migrate_from_chat_id' => 3
+        );
+
+        $item = Message::fromResponse($data);
+        $this->assertJson(json_encode($data), $item->toJson());
+    }
 }
