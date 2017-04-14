@@ -52,6 +52,20 @@ $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "t
 $bot->sendMessage($chatId, $messageText, false, null, $keyboard);
 ```
 
+```php
+$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+
+$keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(
+            [
+                [
+                    ['switch_inline_query_current_chat' => '/answer', 'text' => 'Answer']
+                ]
+            ]
+        );
+        
+$bot->sendMessage($chatId, $messageText, false, null, $keyboard);
+```
+
 #### Client
 
 ```php
