@@ -1042,4 +1042,57 @@ class BotApi
             $this->tracker->track($message, $eventName);
         }
     }
+
+    /**
+     * Use this method to send invoices. On success, the sent Message is returned.
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendInvoice(
+        $chatId,
+        $title,
+        $description,
+        $payload,
+        $providerToken,
+        $startParameter,
+        $currency,
+        $prices,
+        $photoUrl = null,
+        $photoSize = null,
+        $photoWidth = null,
+        $photoHeight = null,
+        $needName = false,
+        $needPhoneNumber = false,
+        $needEmail = false,
+        $needShippingAddress = false,
+        $isFlexible = false,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    ) {
+        return Message::fromResponse($this->call('sendInvoice', [
+            'chat_id' => $chatId,
+            'title' => $title,
+            'description' => $description,
+            'payload' => $payload,
+            'providerToken' => $providerToken,
+            'startParameter' => $startParameter,
+            'currency' => $currency,
+            'prices' => json_encode($prices),
+            'photoUrl' => $photoUrl,
+            'photoSize' => $photoSize,
+            'photoWidth' => $photoWidth,
+            'photoHeight' => $photoHeight,
+            'needName' => $needName,
+            'needPhoneNumber' => $needPhoneNumber,
+            'needEmail' => $needEmail,
+            'needShippingAddress' => $needShippingAddress,
+            'isFlexible' => $isFlexible,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'disable_notification' => (bool)$disableNotification,
+        ]));
+    }
 }

@@ -4,6 +4,8 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Payments\Invoice;
+use TelegramBot\Api\Types\Payments\SuccessfulPayment;
 
 class Message extends BaseType implements TypeInterface
 {
@@ -50,6 +52,8 @@ class Message extends BaseType implements TypeInterface
         'migrate_to_chat_id' => true,
         'migrate_from_chat_id' => true,
         'pinned_message' => Message::class,
+        'invoice' => Invoice::class,
+        'successful_payment' => SuccessfulPayment::class
     ];
 
     /**
@@ -268,6 +272,20 @@ class Message extends BaseType implements TypeInterface
      * @var Message
      */
     protected $pinnedMessage;
+
+    /**
+     * Optional. Message is an invoice for a payment, information about the invoice.
+     *
+     * @var Invoice
+     */
+    protected $invoice;
+
+    /**
+     * Optional. Message is a service message about a successful payment, information about the payment.
+     *
+     * @var SuccessfulPayment
+     */
+    protected $successfulPayment;
 
     /**
      * @return string
@@ -765,5 +783,41 @@ class Message extends BaseType implements TypeInterface
     public function setPinnedMessage($pinnedMessage)
     {
         $this->pinnedMessage = $pinnedMessage;
+    }
+
+    /**
+     * @author MY
+     * @return Invoice
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * @author MY
+     * @param Invoice $invoice
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+    }
+
+    /**
+     * @author MY
+     * @return SuccessfulPayment
+     */
+    public function getSuccessfulPayment()
+    {
+        return $this->successfulPayment;
+    }
+
+    /**
+     * @author MY
+     * @param SuccessfulPayment $successfulPayment
+     */
+    public function setSuccessfulPayment($successfulPayment)
+    {
+        $this->successfulPayment = $successfulPayment;
     }
 }

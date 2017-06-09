@@ -6,6 +6,8 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\ChosenInlineResult;
 use TelegramBot\Api\Types\Inline\InlineQuery;
+use TelegramBot\Api\Types\Payments\Query\PreCheckoutQuery;
+use TelegramBot\Api\Types\Payments\Query\ShippingQuery;
 
 /**
  * Class Update
@@ -34,6 +36,8 @@ class Update extends BaseType implements TypeInterface
         'inline_query' => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
         'callback_query' => CallbackQuery::class,
+        'shipping_query' => ShippingQuery::class,
+        'pre_checkout_query' => PreCheckoutQuery::class,
     ];
 
     /**
@@ -73,6 +77,20 @@ class Update extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\CallbackQuery
      */
     protected $callbackQuery;
+
+    /**
+     * Optional. New incoming shipping query. Only for invoices with flexible price
+     *
+     * @var ShippingQuery
+     */
+    protected $shippingQuery;
+
+    /**
+     * Optional. New incoming pre-checkout query. Contains full information about checkout
+     *
+     * @var PreCheckoutQuery
+     */
+    protected $preCheckoutQuery;
 
     /**
      * @return int
@@ -152,5 +170,41 @@ class Update extends BaseType implements TypeInterface
     public function setCallbackQuery($callbackQuery)
     {
         $this->callbackQuery = $callbackQuery;
+    }
+
+    /**
+     * @author MY
+     * @return ShippingQuery
+     */
+    public function getShippingQuery()
+    {
+        return $this->shippingQuery;
+    }
+
+    /**
+     * @author MY
+     * @param ShippingQuery $shippingQuery
+     */
+    public function setShippingQuery($shippingQuery)
+    {
+        $this->shippingQuery = $shippingQuery;
+    }
+
+    /**
+     * @author MY
+     * @return PreCheckoutQuery
+     */
+    public function getPreCheckoutQuery()
+    {
+        return $this->preCheckoutQuery;
+    }
+
+    /**
+     * @author MY
+     * @param PreCheckoutQuery $preCheckoutQuery
+     */
+    public function setPreCheckoutQuery($preCheckoutQuery)
+    {
+        $this->preCheckoutQuery = $preCheckoutQuery;
     }
 }

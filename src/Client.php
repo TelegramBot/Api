@@ -59,6 +59,16 @@ class Client
         return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
     }
 
+    public function shippingQuery(Closure $action)
+    {
+        return $this->on(self::getShippingQueryEvent($action), self::getInlineQueryChecker());
+    }
+
+    public function preCheckoutQuery(Closure $action)
+    {
+        return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
+    }
+
     /**
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
@@ -154,6 +164,32 @@ class Client
         };
     }
 
+    protected static function getShippingQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getShippingQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getShippingQuery()]);
+            return false;
+        };
+    }
+
+    protected static function getPreCheckoutQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPreCheckoutQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPreCheckoutQuery()]);
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -187,6 +223,29 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the shipping queries.
+     *
+     * @return Closure
+     */
+    protected static function getShippingQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getShippingQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the pre checkout queries.
+     *
+     * @return Closure
+     */
+    protected static function getPreCheckoutQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPreCheckoutQuery());
+        };
+    }
 
     public function __call($name, array $arguments)
     {
