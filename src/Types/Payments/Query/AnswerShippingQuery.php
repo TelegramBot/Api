@@ -51,7 +51,8 @@ class AnswerShippingQuery extends BaseType
     protected $shippingOptions;
 
     /**
-     * Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order
+     * Required if ok is False. Error message in human readable form 
+     * that explains why it is impossible to complete the order
      *
      * @var string
      */

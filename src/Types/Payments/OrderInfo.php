@@ -126,5 +126,4 @@ class OrderInfo extends BaseType
     {
         $this->shippingAddress = $shippingAddress;
     }
-
 }

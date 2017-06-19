@@ -61,7 +61,7 @@ class Client
 
     public function shippingQuery(Closure $action)
     {
-        return $this->on(self::getShippingQueryEvent($action), self::getInlineQueryChecker());
+        return $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
     }
 
     public function preCheckoutQuery(Closure $action)

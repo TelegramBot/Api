@@ -15,7 +15,13 @@ class SuccessfulPayment extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['currency', 'total_amount', 'invoice_payload', 'telegram_payment_charge_id', 'provider_payment_charge_id'];
+    static protected $requiredParams = [
+        'currency',
+        'total_amount',
+        'invoice_payload',
+        'telegram_payment_charge_id',
+        'provider_payment_charge_id'
+    ];
 
     /**
      * @var array
@@ -66,7 +72,7 @@ class SuccessfulPayment extends BaseType
     protected $orderInfo;
 
     /**
-     * 	Telegram payment identifier
+     * Telegram payment identifier
      *
      * @var string
      */
