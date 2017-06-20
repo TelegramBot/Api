@@ -1046,9 +1046,28 @@ class BotApi
     /**
      * Use this method to send invoices. On success, the sent Message is returned.
      *
-     * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
-     * @throws \TelegramBot\Api\Exception
+     * @param int|string $chatId
+     * @param string $title
+     * @param string $description
+     * @param string $payload
+     * @param string $providerToken
+     * @param string $startParameter
+     * @param string $currency
+     * @param array $prices
+     * @param string|null $photoUrl
+     * @param int|null $photoSize
+     * @param int|null $photoWidth
+     * @param int|null $photoHeight
+     * @param bool $needName
+     * @param bool $needPhoneNumber
+     * @param bool $needEmail
+     * @param bool $needShippingAddress
+     * @param bool $isFlexible
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     * @param bool $disableNotification
+     *
+     * @return Message
      */
     public function sendInvoice(
         $chatId,
@@ -1059,6 +1078,7 @@ class BotApi
         $startParameter,
         $currency,
         $prices,
+        $isFlexible = false,
         $photoUrl = null,
         $photoSize = null,
         $photoWidth = null,
@@ -1067,7 +1087,6 @@ class BotApi
         $needPhoneNumber = false,
         $needEmail = false,
         $needShippingAddress = false,
-        $isFlexible = false,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
@@ -1077,19 +1096,19 @@ class BotApi
             'title' => $title,
             'description' => $description,
             'payload' => $payload,
-            'providerToken' => $providerToken,
-            'startParameter' => $startParameter,
+            'provider_token' => $providerToken,
+            'start_parameter' => $startParameter,
             'currency' => $currency,
             'prices' => json_encode($prices),
-            'photoUrl' => $photoUrl,
-            'photoSize' => $photoSize,
-            'photoWidth' => $photoWidth,
-            'photoHeight' => $photoHeight,
-            'needName' => $needName,
-            'needPhoneNumber' => $needPhoneNumber,
-            'needEmail' => $needEmail,
-            'needShippingAddress' => $needShippingAddress,
-            'isFlexible' => $isFlexible,
+            'is_flexible' => $isFlexible,
+            'photo_url' => $photoUrl,
+            'photo_size' => $photoSize,
+            'photo_width' => $photoWidth,
+            'photo_height' => $photoHeight,
+            'need_name' => $needName,
+            'need_phone_number' => $needPhoneNumber,
+            'need_email' => $needEmail,
+            'need_shipping_address' => $needShippingAddress,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
