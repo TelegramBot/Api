@@ -1114,4 +1114,46 @@ class BotApi
             'disable_notification' => (bool)$disableNotification,
         ]));
     }
+
+    /**
+     * If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API
+     * will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries.
+     * On success, True is returned.
+     *
+     * @param string $shippingQueryId
+     * @param bool $ok
+     * @param array $shipping_options
+     * @param null|string $errorMessage
+     *
+     * @return bool
+     *
+     */
+    public function answerShippingQuery($shippingQueryId, $ok = true, $shipping_options = [], $errorMessage = null)
+    {
+        return $this->call('answerShippingQuery', [
+            'shipping_query_id' => $shippingQueryId,
+            'ok' => (bool)$ok,
+            'shipping_options' => json_encode($shipping_options),
+            'error_message' => $errorMessage
+        ]);
+    }
+
+    /**
+     * Use this method to respond to such pre-checkout queries. On success, True is returned.
+     * Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
+     *
+     * @param string $preCheckoutQueryId
+     * @param bool $ok
+     * @param null|string $errorMessage
+     *
+     * @return mixed
+     */
+    public function answerPreCheckoutQuery($preCheckoutQueryId, $ok = true, $errorMessage = null)
+    {
+        return $this->call('answerPreCheckoutQuery', [
+            'pre_checkout_query_id' => $preCheckoutQueryId,
+            'ok' => (bool)$ok,
+            'error_message' => $errorMessage
+        ]);
+    }
 }
