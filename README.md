@@ -49,7 +49,7 @@ $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
 
 $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup(array(array("one", "two", "three")), true); // true for one-time keyboard
 
-$bot->sendMessage($chatId, $messageText, false, null, $keyboard);
+$bot->sendMessage($chatId, $messageText, null, false, null, $keyboard);
 ```
 
 ```php
@@ -58,12 +58,12 @@ $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
 $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(
             [
                 [
-                    ['switch_inline_query_current_chat' => '/answer', 'text' => 'Answer']
+                    ['text' => 'link', 'url' => 'https://core.telegram.org']
                 ]
             ]
         );
         
-$bot->sendMessage($chatId, $messageText, false, null, $keyboard);
+$bot->sendMessage($chatId, $messageText, null, false, null, $keyboard);
 ```
 
 #### Client
