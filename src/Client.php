@@ -56,44 +56,37 @@ class Client
 
     public function editedMessage(Closure $action)
     {
-        $method = 'getEditedMessage';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
     }
 
     public function channelPost(Closure $action)
     {
-        $method = 'getChannelPost';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
     }
 
     public function editedChannelPost(Closure $action)
     {
-        $method = 'getEditedChannelPost';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getEditedChannelPostEvent($action), self::getEditedChannelPostChecker());
     }
 
     public function inlineQuery(Closure $action)
     {
-        $method = 'getInlineQuery';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
     }
 
     public function chosenInlineResult(Closure $action)
     {
-        $method = 'getChosenInlineResult';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getChosenInlineResultEvent($action), self::getChosenInlineResultChecker());
     }
 
     public function shippingQuery(Closure $action)
     {
-        $method = 'getShippingQuery';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
     }
 
     public function preCheckoutQuery(Closure $action)
     {
-        $method = 'getPreCheckoutQuery';
-        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+        return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
     }
 
     /**
@@ -178,15 +171,93 @@ class Client
         };
     }
 
-    protected static function getCustomEvent(Closure $action, $method)
+    protected static function getEditedMessageEvent(Closure $action)
     {
-        return function (Update $update) use ($action, $method) {
-            if (!$update->$method()) {
+        return function (Update $update) use ($action) {
+            if (!$update->getEditedMessage()) {
                 return true;
             }
 
             $reflectionAction = new ReflectionFunction($action);
-            $reflectionAction->invokeArgs([$update->$method()]);
+            $reflectionAction->invokeArgs([$update->getEditedMessage()]);
+            return false;
+        };
+    }
+
+    protected static function getChannelPostEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChannelPost()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChannelPost()]);
+            return false;
+        };
+    }
+
+    protected static function getEditedChannelPostEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getEditedChannelPost()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getEditedChannelPost()]);
+            return false;
+        };
+    }
+
+    protected static function getInlineQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getInlineQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getInlineQuery()]);
+            return false;
+        };
+    }
+
+    protected static function getChosenInlineResultEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChosenInlineResult()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChosenInlineResult()]);
+            return false;
+        };
+    }
+
+    protected static function getShippingQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getShippingQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getShippingQuery()]);
+            return false;
+        };
+    }
+
+    protected static function getPreCheckoutQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPreCheckoutQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPreCheckoutQuery()]);
             return false;
         };
     }
@@ -212,19 +283,87 @@ class Client
         };
     }
 
-
     /**
-     * Returns check function to handling the custom event
-     * @link https://core.telegram.org/bots/api#update
-     *
-     * @param string $method Update method name
+     * Returns check function to handling the edited message.
      *
      * @return Closure
      */
-    protected static function getCustomEventChecker($method)
+    protected static function getEditedMessageChecker()
     {
-        return function (Update $update) use ($method) {
-            return !is_null($update->$method());
+        return function (Update $update) {
+            return !is_null($update->getEditedMessage());
+        };
+    }
+
+    /**
+     * Returns check function to handling the channel post.
+     *
+     * @return Closure
+     */
+    protected static function getChannelPostChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChannelPost());
+        };
+    }
+
+    /**
+     * Returns check function to handling the edited channel post.
+     *
+     * @return Closure
+     */
+    protected static function getEditedChannelPostChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getEditedChannelPost());
+        };
+    }
+
+    /**
+     * Returns check function to handling the chosen inline result.
+     *
+     * @return Closure
+     */
+    protected static function getChosenInlineResultChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChosenInlineResult());
+        };
+    }
+
+    /**
+     * Returns check function to handling the inline queries.
+     *
+     * @return Closure
+     */
+    protected static function getInlineQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getInlineQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the shipping queries.
+     *
+     * @return Closure
+     */
+    protected static function getShippingQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getShippingQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the pre checkout queries.
+     *
+     * @return Closure
+     */
+    protected static function getPreCheckoutQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPreCheckoutQuery());
         };
     }
 

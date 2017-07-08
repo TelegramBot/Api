@@ -1174,15 +1174,19 @@ class BotApi
      * The bot must be an administrator in the supergroup for this to work and must have the appropriate admin rights.
      * Pass True for all boolean parameters to lift restrictions from a user.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup
+     *                   (in the format @supergroupusername)
      * @param int $userId Unique identifier of the target user
      * @param null|integer $untilDate Date when restrictions will be lifted for the user, unix time.
      *                     If user is restricted for more than 366 days or less than 30 seconds from the current time,
      *                     they are considered to be restricted forever
      * @param bool $canSendMessages Pass True, if the user can send text messages, contacts, locations and venues
-     * @param bool $canSendMediaMessages No	Pass True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages
-     * @param bool $canSendOtherMessages Pass True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages
-     * @param bool $canAddWebPagePreviews Pass True, if the user may add web page previews to their messages, implies can_send_media_messages
+     * @param bool $canSendMediaMessages No Pass True, if the user can send audios, documents, photos, videos,
+     *                                   video notes and voice notes, implies can_send_messages
+     * @param bool $canSendOtherMessages Pass True, if the user can send animations, games, stickers and
+     *                                   use inline bots, implies can_send_media_messages
+     * @param bool $canAddWebPagePreviews Pass True, if the user may add web page previews to their messages,
+     *                                    implies can_send_media_messages
      *
      * @return bool
      */
@@ -1211,18 +1215,19 @@ class BotApi
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      * Pass False for all boolean parameters to demote a user.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup
+     *                   (in the format @supergroupusername)
      * @param int $userId Unique identifier of the target user
      * @param bool $canChangeInfo Pass True, if the administrator can change chat title, photo and other settings
      * @param bool $canPostMessages Pass True, if the administrator can create channel posts, channels only
      * @param bool $canEditMessages Pass True, if the administrator can edit messages of other users, channels only
      * @param bool $canDeleteMessages Pass True, if the administrator can delete messages of other users
-     * @param bool $canInviteUsers 	Pass True, if the administrator can invite new users to the chat
+     * @param bool $canInviteUsers Pass True, if the administrator can invite new users to the chat
      * @param bool $canRestrictMembers Pass True, if the administrator can restrict, ban or unban chat members
      * @param bool $canPinMessages Pass True, if the administrator can pin messages, supergroups only
-     * @param bool $canPromoteMembers Pass True, if the administrator can add new administrators with a subset of his own
-     *                                privileges or demote administrators that he has promoted, directly or indirectly
-     *                                (promoted by administrators that were appointed by him)
+     * @param bool $canPromoteMembers Pass True, if the administrator can add new administrators with a subset of his
+     *                                own privileges or demote administrators that he has promoted,directly or
+     *                                indirectly (promoted by administrators that were appointed by him)
      *
      * @return bool
      */
@@ -1256,7 +1261,8 @@ class BotApi
      * Use this method to export an invite link to a supergroup or a channel.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                           (in the format @channelusername)
      * @return string
      */
     public function exportChatInviteLink($chatId)
@@ -1270,7 +1276,8 @@ class BotApi
      * Use this method to set a new profile photo for the chat. Photos can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                           (in the format @channelusername)
      * @param \CURLFile|string $photo New chat photo, uploaded using multipart/form-data
      *
      * @return bool
@@ -1287,7 +1294,8 @@ class BotApi
      * Use this method to delete a chat photo. Photos can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                           (in the format @channelusername)
      *
      * @return bool
      */
@@ -1302,7 +1310,8 @@ class BotApi
      * Use this method to change the title of a chat. Titles can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                           (in the format @channelusername)
      * @param string $title New chat title, 1-255 characters
      *
      * @return bool
@@ -1319,7 +1328,8 @@ class BotApi
      * Use this method to change the description of a supergroup or a channel.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
      * @param string|null $description New chat description, 0-255 characters
      *
      * @return bool
@@ -1336,7 +1346,8 @@ class BotApi
      * Use this method to pin a message in a supergroup.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
      * @param int $messageId Identifier of a message to pin
      * @param bool $disableNotification
      *
@@ -1355,7 +1366,8 @@ class BotApi
      * Use this method to unpin a message in a supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
      *
      * @return bool
      */
@@ -1370,7 +1382,8 @@ class BotApi
      * Use this method to get up to date information about the chat
      * (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.).
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
      *
      * @return Chat
      */
@@ -1384,7 +1397,8 @@ class BotApi
     /**
      * Use this method to get information about a member of a chat.
      *
-     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
      * @param int $userId
      *
      * @return ChatMember
