@@ -33,6 +33,7 @@ class Update extends BaseType implements TypeInterface
     static protected $map = [
         'update_id' => true,
         'message' => Message::class,
+        'channel_post' => Message::class,
         'inline_query' => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
         'callback_query' => CallbackQuery::class,
@@ -56,6 +57,13 @@ class Update extends BaseType implements TypeInterface
      * @var Message
      */
     protected $message;
+
+    /**
+     * Optional. New channel post of any kind — text, photo, sticker, etc.
+     *
+     * @var Message
+     */
+    protected $channelPost;
 
     /**
      * Optional. New incoming inline query
@@ -122,6 +130,22 @@ class Update extends BaseType implements TypeInterface
     public function setMessage(Message $message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getChannelPost()
+    {
+        return $this->channelPost;
+    }
+
+    /**
+     * @param Message $channelPost
+     */
+    public function setChannelPost($channelPost)
+    {
+        $this->channelPost = $channelPost;
     }
 
     /**

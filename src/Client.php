@@ -54,6 +54,11 @@ class Client
         return $this->on(self::getEvent($action), self::getChecker($name));
     }
 
+    public function channelPost(Closure $action)
+    {
+        return $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
+    }
+
     public function inlineQuery(Closure $action)
     {
         return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
@@ -151,6 +156,19 @@ class Client
         };
     }
 
+    protected static function getChannelPostEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChannelPost()) {
+                return true;
+            }
+
+            $action = new ReflectionFunction($action);
+            $action->invokeArgs([$update->getChannelPost()]);
+            return false;
+        };
+    }
+
     protected static function getInlineQueryEvent(Closure $action)
     {
         return function (Update $update) use ($action) {
@@ -211,6 +229,18 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the inline queries.
+     *
+     * @return Closure
+     */
+    protected static function getChannelPostChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChannelPost());
+        };
+    }
+    
     /**
      * Returns check function to handling the inline queries.
      *
