@@ -240,7 +240,7 @@ class BotApi
         curl_setopt_array($this->curl, $options);
 
         $result = curl_exec($this->curl);
-        self::curlValidate($this->curl);
+        self::curlValidate($this->curl, $result);
         if ($result === false) {
             throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
@@ -252,15 +252,17 @@ class BotApi
      * Response validation
      *
      * @param resource $curl
-     *
-     * @throws \TelegramBot\Api\HttpException
+     * @param string $response
+     * @throws HttpException
      */
-    public static function curlValidate($curl)
+    public static function curlValidate($curl, $response = null)
     {
+        $json = json_decode($response, true)?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
             && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {
-            throw new HttpException(self::$codes[$httpCode], $httpCode);
+            $errorDescription = array_key_exists('description', $json) ? $json['description'] : self::$codes[$httpCode];
+            throw new HttpException($errorDescription, $httpCode);
         }
     }
 
