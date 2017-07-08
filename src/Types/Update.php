@@ -33,6 +33,9 @@ class Update extends BaseType implements TypeInterface
     static protected $map = [
         'update_id' => true,
         'message' => Message::class,
+        'edited_message' => Message::class,
+        'channel_post' => Message::class,
+        'edited_channel_post' => Message::class,
         'inline_query' => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
         'callback_query' => CallbackQuery::class,
@@ -56,6 +59,27 @@ class Update extends BaseType implements TypeInterface
      * @var Message
      */
     protected $message;
+
+    /**
+     * Optional. New version of a message that is known to the bot and was edited
+     *
+     * @var Message
+     */
+    protected $editedMessage;
+
+    /**
+     * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
+     *
+     * @var Message
+     */
+    protected $channelPost;
+
+    /**
+     * Optional. New version of a channel post that is known to the bot and was edited
+     *
+     * @var Message
+     */
+    protected $editedChannelPost;
 
     /**
      * Optional. New incoming inline query
@@ -122,6 +146,54 @@ class Update extends BaseType implements TypeInterface
     public function setMessage(Message $message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getEditedMessage()
+    {
+        return $this->editedMessage;
+    }
+
+    /**
+     * @param Message $editedMessage
+     */
+    public function setEditedMessage($editedMessage)
+    {
+        $this->editedMessage = $editedMessage;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getChannelPost()
+    {
+        return $this->channelPost;
+    }
+
+    /**
+     * @param Message $channelPost
+     */
+    public function setChannelPost($channelPost)
+    {
+        $this->channelPost = $channelPost;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getEditedChannelPost()
+    {
+        return $this->editedChannelPost;
+    }
+
+    /**
+     * @param Message $editedChannelPost
+     */
+    public function setEditedChannelPost($editedChannelPost)
+    {
+        $this->editedChannelPost = $editedChannelPost;
     }
 
     /**

@@ -27,6 +27,10 @@ class Chat extends BaseType implements TypeInterface
         'username' => true,
         'first_name' => true,
         'last_name' => true,
+        'all_members_are_administrators' => true,
+        'photo' => ChatPhoto::class,
+        'description' => true,
+        'invite_link' => true
     ];
 
     /**
@@ -70,6 +74,29 @@ class Chat extends BaseType implements TypeInterface
      * @var string
      */
     protected $lastName;
+
+    protected $allMembersAreAdministrators;
+
+    /**
+     * Optional. Chat photo. Returned only in getChat.
+     *
+     * @var ChatPhoto
+     */
+    protected $photo;
+
+    /**
+     * Optional. Description, for supergroups and channel chats. Returned only in getChat.
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat.
+     *
+     * @var string
+     */
+    protected $inviteLink;
 
     /**
      * @return int
@@ -171,5 +198,69 @@ class Chat extends BaseType implements TypeInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllMembersAreAdministrators()
+    {
+        return $this->allMembersAreAdministrators;
+    }
+
+    /**
+     * @param mixed $allMembersAreAdministrators
+     */
+    public function setAllMembersAreAdministrators($allMembersAreAdministrators)
+    {
+        $this->allMembersAreAdministrators = $allMembersAreAdministrators;
+    }
+
+    /**
+     * @return ChatPhoto
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param ChatPhoto $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInviteLink()
+    {
+        return $this->inviteLink;
+    }
+
+    /**
+     * @param string $inviteLink
+     */
+    public function setInviteLink($inviteLink)
+    {
+        $this->inviteLink = $inviteLink;
     }
 }

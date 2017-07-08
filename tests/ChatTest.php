@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatPhoto;
 
 class ChatTest extends \PHPUnit_Framework_TestCase
 {
@@ -109,6 +110,56 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $chat = new Chat();
         $chat->setLastName('Gusev');
         $this->assertEquals('Gusev', $chat->getLastName());
+    }
+
+    public function testSetAllMembersAreAdministrators()
+    {
+        $chat = new Chat();
+        $chat->setAllMembersAreAdministrators(true);
+        $this->assertAttributeEquals(true, 'allMembersAreAdministrators', $chat);
+    }
+
+    public function testGetAllMembersAreAdministrators()
+    {
+        $chat = new Chat();
+        $chat->setAllMembersAreAdministrators(true);
+        $this->assertEquals(true, $chat->getAllMembersAreAdministrators());
+    }
+
+    public function testSetPhoto()
+    {
+        $chat = new Chat();
+        $photo = ChatPhoto::fromResponse([
+            'small_file_id' => 'small_file_id',
+            'big_file_id' => 'big_file_id'
+        ]);
+        $chat->setPhoto($photo);
+        $this->assertAttributeEquals($photo, 'photo', $chat);
+    }
+
+    public function testGetPhoto()
+    {
+        $chat = new Chat();
+        $photo = ChatPhoto::fromResponse([
+            'small_file_id' => 'small_file_id',
+            'big_file_id' => 'big_file_id'
+        ]);
+        $chat->setPhoto($photo);
+        $this->assertEquals($photo, $chat->getPhoto());
+    }
+
+    public function testSetDescriptions()
+    {
+        $chat = new Chat();
+        $chat->setDescription('description');
+        $this->assertAttributeEquals('description', 'description', $chat);
+    }
+
+    public function testGetDescription()
+    {
+        $chat = new Chat();
+        $chat->setDescription('description');
+        $this->assertEquals('description', $chat->getDescription());
     }
 
     public function testFromResponseUser()

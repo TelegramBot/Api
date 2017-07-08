@@ -3,6 +3,8 @@
 namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfUpdates;
+use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\Message;
@@ -854,14 +856,18 @@ class BotApi
      * @param int|string $chatId Unique identifier for the target group
      * or username of the target supergroup (in the format @supergroupusername)
      * @param int $userId Unique identifier of the target user
+     * @param null|int $untilDate Date when the user will be unbanned, unix time.
+     *                            If user is banned for more than 366 days or less than 30 seconds from the current time
+     *                            they are considered to be banned forever
      *
      * @return bool
      */
-    public function kickChatMember($chatId, $userId)
+    public function kickChatMember($chatId, $userId, $untilDate = null)
     {
         return $this->call('kickChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
+            'until_date' => $untilDate
         ]);
     }
 
@@ -1159,5 +1165,233 @@ class BotApi
             'ok' => (bool)$ok,
             'error_message' => $errorMessage
         ]);
+    }
+
+    /**
+     * Use this method to restrict a user in a supergroup.
+     * The bot must be an administrator in the supergroup for this to work and must have the appropriate admin rights.
+     * Pass True for all boolean parameters to lift restrictions from a user.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $userId Unique identifier of the target user
+     * @param null|integer $untilDate Date when restrictions will be lifted for the user, unix time.
+     *                     If user is restricted for more than 366 days or less than 30 seconds from the current time,
+     *                     they are considered to be restricted forever
+     * @param bool $canSendMessages Pass True, if the user can send text messages, contacts, locations and venues
+     * @param bool $canSendMediaMessages No	Pass True, if the user can send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages
+     * @param bool $canSendOtherMessages Pass True, if the user can send animations, games, stickers and use inline bots, implies can_send_media_messages
+     * @param bool $canAddWebPagePreviews Pass True, if the user may add web page previews to their messages, implies can_send_media_messages
+     *
+     * @return bool
+     */
+    public function restrictChatMember(
+        $chatId,
+        $userId,
+        $untilDate = null,
+        $canSendMessages = false,
+        $canSendMediaMessages = false,
+        $canSendOtherMessages = false,
+        $canAddWebPagePreviews = false
+    ) {
+        return $this->call('restrictChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+            'until_date' => $untilDate,
+            'can_send_messages' => $canSendMessages,
+            'can_send_media_messages' => $canSendMediaMessages,
+            'can_send_other_messages' => $canSendOtherMessages,
+            'can_add_web_page_previews' => $canAddWebPagePreviews
+        ]);
+    }
+
+    /**
+     * Use this method to promote or demote a user in a supergroup or a channel.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     * Pass False for all boolean parameters to demote a user.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $userId Unique identifier of the target user
+     * @param bool $canChangeInfo Pass True, if the administrator can change chat title, photo and other settings
+     * @param bool $canPostMessages Pass True, if the administrator can create channel posts, channels only
+     * @param bool $canEditMessages Pass True, if the administrator can edit messages of other users, channels only
+     * @param bool $canDeleteMessages Pass True, if the administrator can delete messages of other users
+     * @param bool $canInviteUsers 	Pass True, if the administrator can invite new users to the chat
+     * @param bool $canRestrictMembers Pass True, if the administrator can restrict, ban or unban chat members
+     * @param bool $canPinMessages Pass True, if the administrator can pin messages, supergroups only
+     * @param bool $canPromoteMembers Pass True, if the administrator can add new administrators with a subset of his own
+     *                                privileges or demote administrators that he has promoted, directly or indirectly
+     *                                (promoted by administrators that were appointed by him)
+     *
+     * @return bool
+     */
+    public function promoteChatMember(
+        $chatId,
+        $userId,
+        $canChangeInfo = true,
+        $canPostMessages = true,
+        $canEditMessages = true,
+        $canDeleteMessages = true,
+        $canInviteUsers = true,
+        $canRestrictMembers = true,
+        $canPinMessages = true,
+        $canPromoteMembers = true
+    ) {
+        return $this->call('promoteChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+            'can_change_info' => $canChangeInfo,
+            'can_post_messages' => $canPostMessages,
+            'can_edit_messages' => $canEditMessages,
+            'can_delete_messages' => $canDeleteMessages,
+            'can_invite_users' => $canInviteUsers,
+            'can_restrict_members' => $canRestrictMembers,
+            'can_pin_messages' => $canPinMessages,
+            'can_promote_members' => $canPromoteMembers
+        ]);
+    }
+
+    /**
+     * Use this method to export an invite link to a supergroup or a channel.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @return string
+     */
+    public function exportChatInviteLink($chatId)
+    {
+        return $this->call('exportChatInviteLink', [
+            'chat_id' => $chatId
+        ]);
+    }
+
+    /**
+     * Use this method to set a new profile photo for the chat. Photos can't be changed for private chats.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param \CURLFile|string $photo New chat photo, uploaded using multipart/form-data
+     *
+     * @return bool
+     */
+    public function setChatPhoto($chatId, $photo)
+    {
+        return $this->call('setChatPhoto', [
+            'chat_id' => $chatId,
+            'photo' => $photo
+        ]);
+    }
+
+    /**
+     * Use this method to delete a chat photo. Photos can't be changed for private chats.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     *
+     * @return bool
+     */
+    public function deleteChatPhoto($chatId)
+    {
+        return $this->call('deleteChatPhoto', [
+            'chat_id' => $chatId
+        ]);
+    }
+
+    /**
+     * Use this method to change the title of a chat. Titles can't be changed for private chats.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string $title New chat title, 1-255 characters
+     *
+     * @return bool
+     */
+    public function setChatTitle($chatId, $title)
+    {
+        return $this->call('setChatTitle', [
+            'chat_id' => $chatId,
+            'title' => $title
+        ]);
+    }
+
+    /**
+     * Use this method to change the description of a supergroup or a channel.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|null $description New chat description, 0-255 characters
+     *
+     * @return bool
+     */
+    public function setChatDescription($chatId, $description = null)
+    {
+        return $this->call('setChatDescription', [
+            'chat_id' => $chatId,
+            'title' => $description
+        ]);
+    }
+
+    /**
+     * Use this method to pin a message in a supergroup.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int $messageId Identifier of a message to pin
+     * @param bool $disableNotification
+     *
+     * @return bool
+     */
+    public function pinChatMessage($chatId, $messageId, $disableNotification = false)
+    {
+        return $this->call('pinChatMessage', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'disable_notification' => $disableNotification
+        ]);
+    }
+
+    /**
+     * Use this method to unpin a message in a supergroup chat.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     *
+     * @return bool
+     */
+    public function unpinChatMessage($chatId)
+    {
+        return $this->call('unpinChatMessage', [
+            'chat_id' => $chatId
+        ]);
+    }
+
+    /**
+     * Use this method to get up to date information about the chat
+     * (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.).
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     *
+     * @return Chat
+     */
+    public function getChat($chatId)
+    {
+        return Chat::fromResponse($this->call('getChat', [
+            'chat_id' => $chatId
+        ]));
+    }
+
+    /**
+     * Use this method to get information about a member of a chat.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int $userId
+     *
+     * @return ChatMember
+     */
+    public function getChatMember($chatId, $userId)
+    {
+        return ChatMember::fromResponse($this->call('getChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId
+        ]));
     }
 }

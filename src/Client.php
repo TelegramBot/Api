@@ -54,19 +54,46 @@ class Client
         return $this->on(self::getEvent($action), self::getChecker($name));
     }
 
+    public function editedMessage(Closure $action)
+    {
+        $method = 'getEditedMessage';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+    }
+
+    public function channelPost(Closure $action)
+    {
+        $method = 'getChannelPost';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+    }
+
+    public function editedChannelPost(Closure $action)
+    {
+        $method = 'getEditedChannelPost';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+    }
+
     public function inlineQuery(Closure $action)
     {
-        return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
+        $method = 'getInlineQuery';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
+    }
+
+    public function chosenInlineResult(Closure $action)
+    {
+        $method = 'getChosenInlineResult';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
     }
 
     public function shippingQuery(Closure $action)
     {
-        return $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
+        $method = 'getShippingQuery';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
     }
 
     public function preCheckoutQuery(Closure $action)
     {
-        return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
+        $method = 'getPreCheckoutQuery';
+        return $this->on(self::getCustomEvent($action, $method), self::getCustomEventChecker($method));
     }
 
     /**
@@ -151,41 +178,15 @@ class Client
         };
     }
 
-    protected static function getInlineQueryEvent(Closure $action)
+    protected static function getCustomEvent(Closure $action, $method)
     {
-        return function (Update $update) use ($action) {
-            if (!$update->getInlineQuery()) {
+        return function (Update $update) use ($action, $method) {
+            if (!$update->$method()) {
                 return true;
             }
 
             $reflectionAction = new ReflectionFunction($action);
-            $reflectionAction->invokeArgs([$update->getInlineQuery()]);
-            return false;
-        };
-    }
-
-    protected static function getShippingQueryEvent(Closure $action)
-    {
-        return function (Update $update) use ($action) {
-            if (!$update->getShippingQuery()) {
-                return true;
-            }
-
-            $reflectionAction = new ReflectionFunction($action);
-            $reflectionAction->invokeArgs([$update->getShippingQuery()]);
-            return false;
-        };
-    }
-
-    protected static function getPreCheckoutQueryEvent(Closure $action)
-    {
-        return function (Update $update) use ($action) {
-            if (!$update->getPreCheckoutQuery()) {
-                return true;
-            }
-
-            $reflectionAction = new ReflectionFunction($action);
-            $reflectionAction->invokeArgs([$update->getPreCheckoutQuery()]);
+            $reflectionAction->invokeArgs([$update->$method()]);
             return false;
         };
     }
@@ -211,39 +212,19 @@ class Client
         };
     }
 
-    /**
-     * Returns check function to handling the inline queries.
-     *
-     * @return Closure
-     */
-    protected static function getInlineQueryChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getInlineQuery());
-        };
-    }
 
     /**
-     * Returns check function to handling the shipping queries.
+     * Returns check function to handling the custom event
+     * @link https://core.telegram.org/bots/api#update
+     *
+     * @param string $method Update method name
      *
      * @return Closure
      */
-    protected static function getShippingQueryChecker()
+    protected static function getCustomEventChecker($method)
     {
-        return function (Update $update) {
-            return !is_null($update->getShippingQuery());
-        };
-    }
-
-    /**
-     * Returns check function to handling the pre checkout queries.
-     *
-     * @return Closure
-     */
-    protected static function getPreCheckoutQueryChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getPreCheckoutQuery());
+        return function (Update $update) use ($method) {
+            return !is_null($update->$method());
         };
     }
 
