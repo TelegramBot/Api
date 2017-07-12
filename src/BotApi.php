@@ -1410,4 +1410,19 @@ class BotApi
             'user_id' => $userId
         ]));
     }
+
+    /**
+     * Use this method for your bot to leave a group, supergroup or channel.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
+     *
+     * @return bool
+     */
+    public function leaveChat($chatId)
+    {
+        return $this->call('leaveChat', [
+            'chat_id' => $chatId
+        ]);
+    }
 }
