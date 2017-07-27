@@ -59,6 +59,11 @@ class Client
         return $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
     }
 
+	public function callbackQuery(Closure $action)
+	{
+		return $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
+	}
+
     public function channelPost(Closure $action)
     {
         return $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
@@ -197,6 +202,19 @@ class Client
         };
     }
 
+    protected static function getCallbackQueryEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getCallbackQuery()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getCallbackQuery()]);
+            return false;
+        };
+    }
+
     protected static function getEditedChannelPostEvent(Closure $action)
     {
         return function (Update $update) use ($action) {
@@ -304,6 +322,18 @@ class Client
     {
         return function (Update $update) {
             return !is_null($update->getChannelPost());
+        };
+    }
+
+    /**
+     * Returns check function to handling the callbackQuery.
+     *
+     * @return Closure
+     */
+    protected static function getCallbackQueryChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getCallbackQuery());
         };
     }
 
