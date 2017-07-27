@@ -59,10 +59,10 @@ class Client
         return $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
     }
 
-	public function callbackQuery(Closure $action)
-	{
-		return $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
-	}
+    public function callbackQuery(Closure $action)
+    {
+        return $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
+    }
 
     public function channelPost(Closure $action)
     {
