@@ -184,19 +184,16 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     public function testSetIdException1()
     {
         $chat = new Chat();
-        $chat->setId('s');
+        $chat->setId([]);
     }
 
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testFromResponseException1()
+    public function testSetIdException2()
     {
-        $chat = Chat::fromResponse(array(
-            'id' => 'fail',
-            'title' => 'test chat',
-            'type' => 'private'
-        ));
+        $chat = new Chat();
+        $chat->setId(null);
     }
 
     /**

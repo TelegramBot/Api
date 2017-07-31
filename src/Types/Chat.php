@@ -36,7 +36,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value
      *
-     * @var int
+     * @var int|string
      */
     protected $id;
 
@@ -99,7 +99,7 @@ class Chat extends BaseType implements TypeInterface
     protected $inviteLink;
 
     /**
-     * @return int
+     * @return int|string
      */
     public function getId()
     {
@@ -107,13 +107,13 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $id
+     * @param int|string $id
      *
      * @throws InvalidArgumentException
      */
     public function setId($id)
     {
-        if (is_integer($id) || is_float($id)) {
+        if (is_integer($id) || is_float($id) || is_string($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();
