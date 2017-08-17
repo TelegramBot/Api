@@ -834,7 +834,8 @@ class BotApi
      * @return mixed
      * @throws Exception
      */
-    public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '', $switchPmText = null, $switchPmParameter = null)
+    public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, 
+                                      $nextOffset = '', $switchPmText = null, $switchPmParameter = null)
     {
         $results = array_map(function ($item) {
             /* @var AbstractInlineQueryResult $item */
