@@ -845,7 +845,6 @@ class BotApi
     ) {
         $results = array_map(function ($item) {
             /* @var AbstractInlineQueryResult $item */
-
             return json_decode($item->toJson(), true);
         }, $results);
 
