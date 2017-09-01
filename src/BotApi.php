@@ -828,15 +828,23 @@ class BotApi
      * @param int $cacheTime
      * @param bool $isPersonal
      * @param string $nextOffset
+     * @param string $switchPmText
+     * @param string $switchPmParameter
      *
      * @return mixed
      * @throws Exception
      */
-    public function answerInlineQuery($inlineQueryId, $results, $cacheTime = 300, $isPersonal = false, $nextOffset = '')
-    {
+    public function answerInlineQuery(
+        $inlineQueryId,
+        $results,
+        $cacheTime = 300,
+        $isPersonal = false,
+        $nextOffset = '',
+        $switchPmText = null,
+        $switchPmParameter = null
+    ) {
         $results = array_map(function ($item) {
             /* @var AbstractInlineQueryResult $item */
-
             return json_decode($item->toJson(), true);
         }, $results);
 
@@ -846,6 +854,8 @@ class BotApi
             'cache_time' => $cacheTime,
             'is_personal' => $isPersonal,
             'next_offset' => $nextOffset,
+            'switch_pm_text' => $switchPmText,
+            'switch_pm_parameter' => $switchPmParameter,
         ]);
     }
 

@@ -31,6 +31,7 @@ class User extends BaseType implements TypeInterface
         'first_name' => true,
         'last_name' => true,
         'username' => true,
+        'language_code' => true,
     ];
 
     /**
@@ -60,6 +61,13 @@ class User extends BaseType implements TypeInterface
      * @var string
      */
     protected $username;
+
+    /**
+     * Optional. IETF language tag of the user's language
+     *
+     * @var string
+     */
+    protected $languageCode;
 
     /**
      * @return string
@@ -129,5 +137,21 @@ class User extends BaseType implements TypeInterface
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageCode()
+    {
+        return $this->languageCode;
+    }
+
+    /**
+     * @param string $languageCode
+     */
+    public function setLanguageCode($languageCode)
+    {
+        $this->languageCode = $languageCode;
     }
 }

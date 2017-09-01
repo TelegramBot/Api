@@ -86,6 +86,10 @@ abstract class BaseType
 
     public static function fromResponse($data)
     {
+        if ($data === true) {
+            return true;
+        }
+        
         self::validate($data);
         $instance = new static();
         $instance->map($data);
