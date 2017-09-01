@@ -32,6 +32,7 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
+        'is_bot' => true
     ];
 
     /**
@@ -68,6 +69,13 @@ class User extends BaseType implements TypeInterface
      * @var string
      */
     protected $languageCode;
+
+    /**
+     * True, if this user is a bot
+     *
+     * @var bool
+     */
+    protected $isBot;
 
     /**
      * @return string
@@ -153,5 +161,21 @@ class User extends BaseType implements TypeInterface
     public function setLanguageCode($languageCode)
     {
         $this->languageCode = $languageCode;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBot()
+    {
+        return $this->isBot;
+    }
+
+    /**
+     * @param bool $isBot
+     */
+    public function setIsBot($isBot)
+    {
+        $this->isBot = $isBot;
     }
 }

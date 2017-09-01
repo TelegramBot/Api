@@ -53,7 +53,9 @@ class Message extends BaseType implements TypeInterface
         'migrate_from_chat_id' => true,
         'pinned_message' => Message::class,
         'invoice' => Invoice::class,
-        'successful_payment' => SuccessfulPayment::class
+        'successful_payment' => SuccessfulPayment::class,
+        'forward_signature' => true,
+        'author_signature' => true
     ];
 
     /**
@@ -286,6 +288,20 @@ class Message extends BaseType implements TypeInterface
      * @var SuccessfulPayment
      */
     protected $successfulPayment;
+
+    /**
+     * Optional. For messages forwarded from channels, signature of the post author if present
+     *
+     * @var string
+     */
+    protected $forwardSignature;
+
+    /**
+     * Optional. Signature of the post author for messages in channels
+     *
+     * @var string
+     */
+    protected $authorSignature;
 
     /**
      * @return string
@@ -819,5 +835,37 @@ class Message extends BaseType implements TypeInterface
     public function setSuccessfulPayment($successfulPayment)
     {
         $this->successfulPayment = $successfulPayment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getForwardSignature()
+    {
+        return $this->forwardSignature;
+    }
+
+    /**
+     * @param string $forwardSignature
+     */
+    public function setForwardSignature($forwardSignature)
+    {
+        $this->forwardSignature = $forwardSignature;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorSignature()
+    {
+        return $this->authorSignature;
+    }
+
+    /**
+     * @param string $authorSignature
+     */
+    public function setAuthorSignature($authorSignature)
+    {
+        $this->authorSignature = $authorSignature;
     }
 }

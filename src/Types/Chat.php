@@ -30,7 +30,8 @@ class Chat extends BaseType implements TypeInterface
         'all_members_are_administrators' => true,
         'photo' => ChatPhoto::class,
         'description' => true,
-        'invite_link' => true
+        'invite_link' => true,
+        'pinned_message' => Message::class
     ];
 
     /**
@@ -97,6 +98,13 @@ class Chat extends BaseType implements TypeInterface
      * @var string
      */
     protected $inviteLink;
+
+    /**
+     * Optional. Pinned message, for supergroups. Returned only in getChat.
+     *
+     * @var Message
+     */
+    protected $pinnedMessage;
 
     /**
      * @return int|string
@@ -262,5 +270,21 @@ class Chat extends BaseType implements TypeInterface
     public function setInviteLink($inviteLink)
     {
         $this->inviteLink = $inviteLink;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getPinnedMessage()
+    {
+        return $this->pinnedMessage;
+    }
+
+    /**
+     * @param Message $pinnedMessage
+     */
+    public function setPinnedMessage($pinnedMessage)
+    {
+        $this->pinnedMessage = $pinnedMessage;
     }
 }
