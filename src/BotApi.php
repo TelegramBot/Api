@@ -272,11 +272,15 @@ class BotApi
      * @param string $jsonString
      * @param boolean $asArray
      *
-     * @return object|array
+     * @return object|array|null
      * @throws \TelegramBot\Api\InvalidJsonException
      */
     public static function jsonValidate($jsonString, $asArray)
     {
+        if(!$jsonString) {
+            return null;
+        }
+        
         $json = json_decode($jsonString, $asArray);
 
         if (json_last_error() != JSON_ERROR_NONE) {
