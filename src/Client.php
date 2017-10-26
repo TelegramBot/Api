@@ -114,13 +114,22 @@ class Client
      * Handle updates
      *
      * @param Update[] $updates
+     *
+     * @return int Max Update Id
      */
     public function handle(array $updates)
     {
+        $maxId = 0;
+        
         foreach ($updates as $update) {
             /* @var \TelegramBot\Api\Types\Update $update */
             $this->events->handle($update);
+            
+            $id = $update->getUpdateId();
+            $maxId = ($id > $maxId)? $id : $maxId;
         }
+        
+        return $maxId;
     }
 
     /**
