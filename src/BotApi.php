@@ -486,8 +486,7 @@ class BotApi
         $replyMarkup = null,
         $disableNotification = false,
         $livePeriod = null
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id'              => $chatId,
             'latitude'             => $latitude,
@@ -517,8 +516,7 @@ class BotApi
         $latitude,
         $longitude,
         $replyMarkup = null
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,
@@ -544,8 +542,7 @@ class BotApi
         $messageId,
         $inlineMessageId,
         $replyMarkup = null
-    )
-    {
+    ) {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,

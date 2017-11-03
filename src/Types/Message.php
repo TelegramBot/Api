@@ -305,7 +305,8 @@ class Message extends BaseType implements TypeInterface
     protected $authorSignature;
 
     /**
-     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+     * Optional. For messages with a caption, special entities like usernames,
+     * URLs, bot commands, etc. that appear in the caption
      *
      * @var ArrayOfMessageEntity
      */
