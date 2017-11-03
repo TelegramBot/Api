@@ -468,15 +468,15 @@ class BotApi
     /**
      * Use this method to send point on the map. On success, the sent Message is returned.
      *
-     * @param int $chatId
-     * @param float $latitude
-     * @param float $longitude
-     * @param int|null $replyToMessageId
+     * @param int|string                                                              $chatId
+     * @param float                                                                   $latitude
+     * @param float                                                                   $longitude
+     * @param int|null                                                                $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
-     * @param bool $disableNotification
+     * @param bool                                                                    $disableNotification
      *
+     * @param null|int                                                                $livePeriod
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\Exception
      */
     public function sendLocation(
         $chatId,
@@ -484,15 +484,73 @@ class BotApi
         $longitude,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
-    ) {
+        $disableNotification = false,
+        $livePeriod = null
+    )
+    {
         return Message::fromResponse($this->call('sendLocation', [
-            'chat_id' => $chatId,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'reply_to_message_id' => $replyToMessageId,
-            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'chat_id'              => $chatId,
+            'latitude'             => $latitude,
+            'longitude'            => $longitude,
+            'live_period'          => $livePeriod,
+            'reply_to_message_id'  => $replyToMessageId,
+            'reply_markup'         => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
+        ]));
+    }
+
+    /**
+     * Use this method to edit live location messages sent by the bot or via the bot (for inline bots).
+     *
+     * @param int|string                                                              $chatId
+     * @param int                                                                     $messageId
+     * @param string                                                                  $inlineMessageId
+     * @param float                                                                   $latitude
+     * @param float                                                                   $longitude
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     * @return \TelegramBot\Api\Types\Message
+     */
+    public function editMessageLiveLocation(
+        $chatId,
+        $messageId,
+        $inlineMessageId,
+        $latitude,
+        $longitude,
+        $replyMarkup = null
+    )
+    {
+        return Message::fromResponse($this->call('sendLocation', [
+            'chat_id'           => $chatId,
+            'message_id'        => $messageId,
+            'inline_message_id' => $inlineMessageId,
+            'latitude'          => $latitude,
+            'longitude'         => $longitude,
+            'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
+
+    /**
+     * Use this method to stop updating a live location message sent by the bot or via the bot (for inline bots) before
+     * live_period expires.
+     *
+     * @param int|string                                                              $chatId
+     * @param int                                                                     $messageId
+     * @param string                                                                  $inlineMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|null $replyMarkup
+     * @return \TelegramBot\Api\Types\Message
+     */
+    public function stopMessageLiveLocation(
+        $chatId,
+        $messageId,
+        $inlineMessageId,
+        $replyMarkup = null
+    )
+    {
+        return Message::fromResponse($this->call('sendLocation', [
+            'chat_id'           => $chatId,
+            'message_id'        => $messageId,
+            'inline_message_id' => $inlineMessageId,
+            'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 
@@ -1455,5 +1513,43 @@ class BotApi
         return $this->call('leaveChat', [
             'chat_id' => $chatId
         ]);
+    }
+
+    /**
+     * Use this method to get the number of members in a chat.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
+     *
+     * @return int
+     */
+    public function getChatMembersCount($chatId)
+    {
+        return $this->call(
+            'getChatMembersCount',
+            [
+                'chat_id' => $chatId
+            ]
+        );
+    }
+
+    /**
+     * Use this method to get a list of administrators in a chat.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
+     *                   (in the format @channelusername)
+     *
+     * @return array
+     */
+    public function getChatAdministrators($chatId)
+    {
+        return ArrayOfChatMemberEntity::fromResponse(
+            $this->call(
+                'getChatMembersCount',
+                [
+                    'chat_id' => $chatId
+                ]
+            )
+        );
     }
 }

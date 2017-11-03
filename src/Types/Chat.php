@@ -31,7 +31,9 @@ class Chat extends BaseType implements TypeInterface
         'photo' => ChatPhoto::class,
         'description' => true,
         'invite_link' => true,
-        'pinned_message' => Message::class
+        'pinned_message' => Message::class,
+        'sticker_set_name' => true,
+        'can_set_sticker_set' => true
     ];
 
     /**
@@ -105,6 +107,20 @@ class Chat extends BaseType implements TypeInterface
      * @var Message
      */
     protected $pinnedMessage;
+
+    /**
+     * Optional. For supergroups, name of group sticker set. Returned only in getChat.
+     *
+     * @var string
+     */
+    protected $stickerSetName;
+
+    /**
+     * Optional. True, if the bot can change the group sticker set. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $canSetStickerSet;
 
     /**
      * @return int|string
@@ -286,5 +302,37 @@ class Chat extends BaseType implements TypeInterface
     public function setPinnedMessage($pinnedMessage)
     {
         $this->pinnedMessage = $pinnedMessage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStickerSetName()
+    {
+        return $this->stickerSetName;
+    }
+
+    /**
+     * @param string $stickerSetName
+     */
+    public function setStickerSetName($stickerSetName)
+    {
+        $this->stickerSetName = $stickerSetName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSetStickerSet()
+    {
+        return $this->canSetStickerSet;
+    }
+
+    /**
+     * @param bool $canSetStickerSet
+     */
+    public function setCanSetStickerSet($canSetStickerSet)
+    {
+        $this->canSetStickerSet = $canSetStickerSet;
     }
 }

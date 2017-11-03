@@ -31,6 +31,7 @@ class Message extends BaseType implements TypeInterface
         'reply_to_message' => Message::class,
         'text' => true,
         'entities' => ArrayOfMessageEntity::class,
+        'caption_entities' => ArrayOfMessageEntity::class,
         'audio' => Audio::class,
         'document' => Document::class,
         'photo' => ArrayOfPhotoSize::class,
@@ -302,6 +303,13 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $authorSignature;
+
+    /**
+     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+     *
+     * @var ArrayOfMessageEntity
+     */
+    protected $captionEntities;
 
     /**
      * @return string
@@ -867,5 +875,21 @@ class Message extends BaseType implements TypeInterface
     public function setAuthorSignature($authorSignature)
     {
         $this->authorSignature = $authorSignature;
+    }
+
+    /**
+     * @return ArrayOfMessageEntity
+     */
+    public function getCaptionEntities()
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param ArrayOfMessageEntity $captionEntities
+     */
+    public function setCaptionEntities($captionEntities)
+    {
+        $this->captionEntities = $captionEntities;
     }
 }
