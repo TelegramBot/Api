@@ -68,7 +68,8 @@ class Botan
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json'
             ],
-            CURLOPT_POSTFIELDS => $message->toJson()
+            CURLOPT_POSTFIELDS => $message->toJson(),
+            CURLOPT_TIMEOUT => 5,
         ];
 
         curl_setopt_array($this->curl, $options);

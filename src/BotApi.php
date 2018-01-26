@@ -202,6 +202,7 @@ class BotApi
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
+            CURLOPT_TIMEOUT => 5,
         ];
 
         if ($data) {
