@@ -56,7 +56,8 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'forward_signature' => true,
-        'author_signature' => true
+        'author_signature' => true,
+        'connected_website' => true
     ];
 
     /**
@@ -311,6 +312,13 @@ class Message extends BaseType implements TypeInterface
      * @var ArrayOfMessageEntity
      */
     protected $captionEntities;
+
+    /**
+     * Optional. The domain name of the website on which the user has logged in.
+     *
+     * @var string
+     */
+    protected $connectedWebsite;
 
     /**
      * @return string
@@ -892,5 +900,21 @@ class Message extends BaseType implements TypeInterface
     public function setCaptionEntities($captionEntities)
     {
         $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConnectedWebsite()
+    {
+        return $this->connectedWebsite;
+    }
+
+    /**
+     * @param string $connectedWebsite
+     */
+    public function setConnectedWebsite($connectedWebsite)
+    {
+        $this->connectedWebsite = $connectedWebsite;
     }
 }
