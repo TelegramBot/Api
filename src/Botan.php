@@ -65,6 +65,7 @@ class Botan
             CURLOPT_URL => self::BASE_URL . "?token={$this->token}&uid={$uid}&name={$eventName}",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
+            CURLOPT_TIMEOUT => 2,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json'
             ],
