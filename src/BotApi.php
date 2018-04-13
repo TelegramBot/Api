@@ -93,6 +93,10 @@ class BotApi
         511 => 'Network Authentication Required',                             // RFC6585
     ];
 
+    private $proxySettings = [
+        CURLOPT_PROXY => '',
+        CURLOPT_HTTPPROXYTUNNEL => false,
+    ];
 
     /**
      * Default http status code
@@ -154,20 +158,28 @@ class BotApi
      */
     protected $returnArray = true;
 
-
     /**
      * Constructor
      *
-     * @param string $token Telegram Bot API token
+     * @param string      $token        Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
+     * @param array       $proxySettings
+     *
+     * @throws \Exception
      */
-    public function __construct($token, $trackerToken = null)
+    public function __construct($token, $trackerToken = null, $proxySettings = [])
     {
         $this->curl = curl_init();
         $this->token = $token;
 
         if ($trackerToken) {
             $this->tracker = new Botan($trackerToken);
+        }
+
+        foreach ($proxySettings as $key => $value) {
+            if (isset($this->proxySettings[$key])) {
+                $this->proxySettings[$key] = $value;
+            }
         }
     }
 
@@ -199,13 +211,13 @@ class BotApi
      */
     public function call($method, array $data = null)
     {
-        $options = [
+        $options = array_merge([
             CURLOPT_URL => $this->getUrl().'/'.$method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
             CURLOPT_TIMEOUT => 5,
-        ];
+        ], $this->proxySettings);
 
         if ($data) {
             $options[CURLOPT_POST] = true;
