@@ -1339,7 +1339,6 @@ class BotApi
             'can_send_messages' => $canSendMessages,
             'can_send_media_messages' => $canSendMediaMessages,
             'can_send_other_messages' => $canSendOtherMessages,
-
             'can_add_web_page_previews' => $canAddWebPagePreviews
         ]);
     }
