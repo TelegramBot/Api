@@ -160,8 +160,6 @@ class BotApi
      *
      * @param string $token Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
-     *
-     * @throws \Exception
      */
     public function __construct($token, $trackerToken = null)
     {
@@ -1341,6 +1339,7 @@ class BotApi
             'can_send_messages' => $canSendMessages,
             'can_send_media_messages' => $canSendMediaMessages,
             'can_send_other_messages' => $canSendOtherMessages,
+
             'can_add_web_page_previews' => $canAddWebPagePreviews
         ]);
     }
