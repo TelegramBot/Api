@@ -161,25 +161,18 @@ class BotApi
     /**
      * Constructor
      *
-     * @param string      $token        Telegram Bot API token
+     * @param string $token Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
-     * @param array       $proxySettings
      *
      * @throws \Exception
      */
-    public function __construct($token, $trackerToken = null, $proxySettings = [])
+    public function __construct($token, $trackerToken = null)
     {
         $this->curl = curl_init();
         $this->token = $token;
 
         if ($trackerToken) {
             $this->tracker = new Botan($trackerToken);
-        }
-
-        foreach ($proxySettings as $key => $value) {
-            if (isset($this->proxySettings[$key])) {
-                $this->proxySettings[$key] = $value;
-            }
         }
     }
 
@@ -211,13 +204,13 @@ class BotApi
      */
     public function call($method, array $data = null)
     {
-        $options = array_merge([
+        $options = $this->proxySettings + [
             CURLOPT_URL => $this->getUrl().'/'.$method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
             CURLOPT_TIMEOUT => 5,
-        ], $this->proxySettings);
+        ];
 
         if ($data) {
             $options[CURLOPT_POST] = true;
@@ -1671,5 +1664,26 @@ class BotApi
             'reply_to_message_id' => (int)$replyToMessageId,
             'disable_notification' => (bool)$disableNotification
         ]));
+    }
+
+    /**
+     * Enable proxy for curl requests. Empty string will disable proxy.
+     * @param string $proxyString
+     */
+    public function setProxy($proxyString = '')
+    {
+        if (empty($proxyString)) {
+            $this->proxySettings = [
+                CURLOPT_PROXY => '',
+                CURLOPT_HTTPPROXYTUNNEL => false,
+            ];
+            return;
+        }
+
+        $this->proxySettings = [
+            CURLOPT_PROXY => $proxyString,
+            CURLOPT_HTTPPROXYTUNNEL => true,
+        ];
+        return;
     }
 }
