@@ -93,10 +93,7 @@ class BotApi
         511 => 'Network Authentication Required',                             // RFC6585
     ];
 
-    private $proxySettings = [
-        CURLOPT_PROXY => '',
-        CURLOPT_HTTPPROXYTUNNEL => false,
-    ];
+    private $proxySettings = [];
 
     /**
      * Default http status code
@@ -1668,22 +1665,22 @@ class BotApi
 
     /**
      * Enable proxy for curl requests. Empty string will disable proxy.
+     *
      * @param string $proxyString
+     *
+     * @return BotApi
      */
     public function setProxy($proxyString = '')
     {
         if (empty($proxyString)) {
-            $this->proxySettings = [
-                CURLOPT_PROXY => '',
-                CURLOPT_HTTPPROXYTUNNEL => false,
-            ];
-            return;
+            $this->proxySettings = [];
+            return $this;
         }
 
         $this->proxySettings = [
             CURLOPT_PROXY => $proxyString,
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
-        return;
+        return $this;
     }
 }
