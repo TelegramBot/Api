@@ -93,6 +93,7 @@ class BotApi
         511 => 'Network Authentication Required',                             // RFC6585
     ];
 
+    private $proxySettings = [];
 
     /**
      * Default http status code
@@ -154,7 +155,6 @@ class BotApi
      */
     protected $returnArray = true;
 
-
     /**
      * Constructor
      *
@@ -199,7 +199,7 @@ class BotApi
      */
     public function call($method, array $data = null)
     {
-        $options = [
+        $options = $this->proxySettings + [
             CURLOPT_URL => $this->getUrl().'/'.$method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
@@ -1659,5 +1659,26 @@ class BotApi
             'reply_to_message_id' => (int)$replyToMessageId,
             'disable_notification' => (bool)$disableNotification
         ]));
+    }
+
+    /**
+     * Enable proxy for curl requests. Empty string will disable proxy.
+     *
+     * @param string $proxyString
+     *
+     * @return BotApi
+     */
+    public function setProxy($proxyString = '')
+    {
+        if (empty($proxyString)) {
+            $this->proxySettings = [];
+            return $this;
+        }
+
+        $this->proxySettings = [
+            CURLOPT_PROXY => $proxyString,
+            CURLOPT_HTTPPROXYTUNNEL => true,
+        ];
+        return $this;
     }
 }
