@@ -128,6 +128,13 @@ class BotApi
     protected $curl;
 
     /**
+     * CURL custom options
+     *
+     * @var array
+     */
+    protected $customCurlOptions = [];
+
+    /**
      * Bot token
      *
      * @var string
@@ -210,6 +217,10 @@ class BotApi
         if ($data) {
             $options[CURLOPT_POST] = true;
             $options[CURLOPT_POSTFIELDS] = $data;
+        }
+
+        if (!empty($this->customCurlOptions) && is_array($this->customCurlOptions)) {
+            $options += $this->customCurlOptions;
         }
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
@@ -1680,5 +1691,34 @@ class BotApi
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
         return $this;
+    }
+
+    /**
+     * Set an option for a cURL transfer
+     *
+     * @param int $option The CURLOPT_XXX option to set
+     * @param mixed $value The value to be set on option
+     */
+    public function setCurlOption($option, $value)
+    {
+        $this->customCurlOptions[$option] = $value;
+    }
+
+    /**
+     * Unset an option for a cURL transfer
+     *
+     * @param int $option The CURLOPT_XXX option to unset
+     */
+    public function unsetCurlOption($option)
+    {
+        unset($this->customCurlOptions[$option]);
+    }
+
+    /**
+     * Clean custom options
+     */
+    public function resetCurlOptions()
+    {
+        $this->customCurlOptions = [];
     }
 }
