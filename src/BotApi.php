@@ -4,6 +4,7 @@ namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfMessages;
 use TelegramBot\Api\Types\ArrayOfUpdates;
+use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
