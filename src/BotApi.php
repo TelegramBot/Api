@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
+use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
@@ -1589,7 +1590,7 @@ class BotApi
     {
         return ArrayOfChatMemberEntity::fromResponse(
             $this->call(
-                'getChatMembersCount',
+                'getChatAdministrators',
                 [
                     'chat_id' => $chatId
                 ]
