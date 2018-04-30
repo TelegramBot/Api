@@ -36,7 +36,7 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var bool
      */
-    protected $remove_keyboard;
+    protected $removeKeyboard;
 
     /**
      * Optional. Use this parameter if you want to remove the keyboard for specific users only.
@@ -50,7 +50,7 @@ class ReplyKeyboardRemove extends BaseType
 
     public function __construct($remove_keyboard = true, $selective = false)
     {
-        $this->remove_keyboard = $remove_keyboard;
+        $this->removeKeyboard = $remove_keyboard;
         $this->selective = $selective;
     }
 
@@ -59,7 +59,7 @@ class ReplyKeyboardRemove extends BaseType
      */
     public function getRemoveKeyboard()
     {
-        return $this->remove_keyboard;
+        return $this->removeKeyboard;
     }
 
     /**
@@ -67,7 +67,7 @@ class ReplyKeyboardRemove extends BaseType
      */
     public function setRemoveKeyboard($remove_keyboard)
     {
-        $this->remove_keyboard = $remove_keyboard;
+        $this->removeKeyboard = $remove_keyboard;
     }
 
     /**
