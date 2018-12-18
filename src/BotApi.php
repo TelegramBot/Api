@@ -436,6 +436,18 @@ class BotApi
     {
         return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
     }
+    
+    /**
+    * Use this method to get current webhook status. 
+    *
+    * @return WebhookInfo
+    *
+    * @throws \TelegramBot\Api\Exception
+    */
+     public function getWebhookInfo()
+     {
+        return $this->call('getWebhookInfo');
+     }
 
     /**
      * A simple method for testing your bot's auth token.Requires no parameters.
