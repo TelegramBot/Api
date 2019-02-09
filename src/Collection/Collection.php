@@ -28,7 +28,7 @@ class Collection
      */
     public function addItem(CollectionItemInterface $item, $key = null)
     {
-        if ($this->maxCount > 0 && $this->count() + 1 >= $this->maxCount) {
+        if ($this->maxCount > 0 && $this->count() >= $this->maxCount) {
             throw new ReachedMaxSizeException("Maximum collection items count reached. Max size: {$this->maxCount}");
         }
 
