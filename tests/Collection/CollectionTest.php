@@ -67,7 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(ReachedMaxSizeException::class);
         $media = new ArrayOfInputMedia();
         $media->setMaxCount(2);
-        for ($i = 1; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $media->addItem(new InputMediaPhoto('link'));
         }
     }
