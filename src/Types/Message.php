@@ -1,4 +1,5 @@
 <?php
+
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
@@ -22,14 +23,14 @@ class Message extends BaseType implements TypeInterface
      * @var array
      */
     static protected $map = [
-        'message_id' => true,
+        'message_id' => TRUE,
         'from' => User::class,
-        'date' => true,
+        'date' => TRUE,
         'chat' => Chat::class,
         'forward_from' => User::class,
-        'forward_date' => true,
+        'forward_date' => TRUE,
         'reply_to_message' => Message::class,
-        'text' => true,
+        'text' => TRUE,
         'entities' => ArrayOfMessageEntity::class,
         'caption_entities' => ArrayOfMessageEntity::class,
         'audio' => Audio::class,
@@ -38,26 +39,27 @@ class Message extends BaseType implements TypeInterface
         'sticker' => Sticker::class,
         'video' => Video::class,
         'voice' => Voice::class,
-        'caption' => true,
+        'caption' => TRUE,
         'contact' => Contact::class,
         'location' => Location::class,
         'venue' => Venue::class,
         'new_chat_member' => User::class,
+        'new_chat_members' => ArrayOfUsers::class,
         'left_chat_member' => User::class,
-        'new_chat_title' => true,
+        'new_chat_title' => TRUE,
         'new_chat_photo' => ArrayOfPhotoSize::class,
-        'delete_chat_photo' => true,
-        'group_chat_created' => true,
-        'supergroup_chat_created' => true,
-        'channel_chat_created' => true,
-        'migrate_to_chat_id' => true,
-        'migrate_from_chat_id' => true,
+        'delete_chat_photo' => TRUE,
+        'group_chat_created' => TRUE,
+        'supergroup_chat_created' => TRUE,
+        'channel_chat_created' => TRUE,
+        'migrate_to_chat_id' => TRUE,
+        'migrate_from_chat_id' => TRUE,
         'pinned_message' => Message::class,
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
-        'forward_signature' => true,
-        'author_signature' => true,
-        'connected_website' => true
+        'forward_signature' => TRUE,
+        'author_signature' => TRUE,
+        'connected_website' => TRUE
     ];
 
     /**
@@ -195,6 +197,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\User
      */
     protected $newChatMember;
+
+    /**
+     * Optional. Array of new members was added to the group, information about they (this members may contains bot itself)
+     *
+     * @var \TelegramBot\Api\Types\ArrayOfUsers
+     */
+    protected $newChatMembers;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be bot itself)
@@ -576,6 +585,22 @@ class Message extends BaseType implements TypeInterface
     public function setNewChatMember($newChatMember)
     {
         $this->newChatMember = $newChatMember;
+    }
+
+    /**
+     * @return ArrayOfUsers
+     */
+    public function getNewChatMembers()
+    {
+        return $this->newChatMembers;
+    }
+
+    /**
+     * @param User $newChatMembers
+     */
+    public function setNewChatMembers($newChatMembers)
+    {
+        $this->newChatMembers = $newChatMembers;
     }
 
     /**
