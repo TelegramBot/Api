@@ -1065,6 +1065,7 @@ class BotApi
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
      * @param string $inlineMessageId
+     * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -1075,7 +1076,8 @@ class BotApi
         $messageId,
         $caption = null,
         $replyMarkup = null,
-        $inlineMessageId = null
+        $inlineMessageId = null,
+        $parseMode = null
     ) {
         return Message::fromResponse($this->call('editMessageCaption', [
             'chat_id' => $chatId,
@@ -1083,6 +1085,7 @@ class BotApi
             'inline_message_id' => $inlineMessageId,
             'caption' => $caption,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'parse_mode' => $parseMode
         ]));
     }
 
