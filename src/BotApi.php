@@ -688,6 +688,47 @@ class BotApi
     }
 
     /**
+     * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound),
+     * On success, the sent Message is returned.
+     * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+     *
+     * @param int|string $chatId chat_id or @channel_name
+     * @param \CURLFile|string $animation
+     * @param int|null $duration
+     * @param string|null $caption
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param bool $disableNotification
+     * @param string|null $parseMode
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendAnimation(
+        $chatId,
+        $animation,
+        $duration = null,
+        $caption = null,
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false,
+        $parseMode = null
+    ) {
+        return Message::fromResponse($this->call('sendAnimation', [
+            'chat_id' => $chatId,
+            'animation' => $animation,
+            'duration' => $duration,
+            'caption' => $caption,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'disable_notification' => (bool)$disableNotification,
+            'parse_mode' => $parseMode
+        ]));
+    }
+
+    /**
      * Use this method to send audio files,
      * if you want Telegram clients to display the file as a playable voice message.
      * For this to work, your audio must be in an .ogg file encoded with OPUS
