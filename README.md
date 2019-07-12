@@ -100,6 +100,9 @@ try {
 }
 ```
 
+##### Note
+This code must be placed in webhook url and be ran by telegram, otherwise you'll get an `InvalidJsonException` 
+
 ### Botan SDK (not supported more)
 
 [Botan](http://botan.io) is a telegram bot analytics system based on [Yandex.Appmetrica](http://appmetrica.yandex.com/).
