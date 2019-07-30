@@ -221,7 +221,7 @@ class BotApi
         }
 
         if (!empty($this->customCurlOptions) && is_array($this->customCurlOptions)) {
-            $options += $this->customCurlOptions;
+            $options = $this->customCurlOptions + $options;
         }
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
