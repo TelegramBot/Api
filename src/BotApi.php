@@ -1680,7 +1680,7 @@ class BotApi
      *
      * @return BotApi
      */
-    public function setProxy($proxyString = '')
+    public function setProxy($proxyString = '', $socks5 = false)
     {
         if (empty($proxyString)) {
             $this->proxySettings = [];
@@ -1691,6 +1691,10 @@ class BotApi
             CURLOPT_PROXY => $proxyString,
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
+        
+        if ($socks5) {
+            $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
+        }
         return $this;
     }
 
