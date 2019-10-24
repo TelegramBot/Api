@@ -125,6 +125,4 @@ class Poll extends BaseType implements TypeInterface
     {
         $this->isClosed = $isClosed;
     }
-
-
 }

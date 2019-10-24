@@ -1701,7 +1701,8 @@ class BotApi
 
 
     /**
-     * Use this method to send a native poll. A native poll can't be sent to a private chat. On success, the sent \TelegramBot\Api\Types\Message is returned.
+     * Use this method to send a native poll. A native poll can't be sent to a private chat.
+     * On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
      * @param int|string $chatId
      * @param string $question
@@ -1734,7 +1735,8 @@ class BotApi
     }
 
     /**
-     * Use this method to stop a poll which was sent by the bot. On success, the stopped \TelegramBot\Api\Types\Poll with the final results is returned.
+     * Use this method to stop a poll which was sent by the bot.
+     * On success, the stopped \TelegramBot\Api\Types\Poll with the final results is returned.
      *
      * @param int|string $chatId
      * @param int $messageId

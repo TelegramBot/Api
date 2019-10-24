@@ -76,6 +76,4 @@ class PollOption extends BaseType implements TypeInterface
     {
         $this->voterCount = $voterCount;
     }
-
-
 }
