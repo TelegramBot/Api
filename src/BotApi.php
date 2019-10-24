@@ -11,6 +11,7 @@ use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -1696,6 +1697,63 @@ class BotApi
             $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
         }
         return $this;
+    }
+
+
+    /**
+     * Use this method to send a native poll. A native poll can't be sent to a private chat. On success, the sent \TelegramBot\Api\Types\Message is returned.
+     *
+     * @param int|string $chatId
+     * @param string $question
+     * @param array $options
+     * @param bool $disableNotification
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendPoll(
+        $chatId,
+        $question,
+        $options,
+        $disableNotification = false,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('sendPoll', [
+            'chat_id' => $chatId,
+            'question' => $question,
+            'options' => json_encode($options),
+            'disable_notification' => (bool)$disableNotification,
+            'reply_to_message_id' => (int)$replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
+
+    /**
+     * Use this method to stop a poll which was sent by the bot. On success, the stopped \TelegramBot\Api\Types\Poll with the final results is returned.
+     *
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @return Poll
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function stopPoll(
+        $chatId,
+        $messageId,
+        $replyMarkup = null
+    ) {
+        return Poll::fromResponse($this->call('stopPoll', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
     }
 
     /**

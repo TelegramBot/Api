@@ -42,6 +42,7 @@ class Message extends BaseType implements TypeInterface
         'contact' => Contact::class,
         'location' => Location::class,
         'venue' => Venue::class,
+        'poll' => Poll::class,
         'new_chat_member' => User::class,
         'left_chat_member' => User::class,
         'new_chat_title' => true,
@@ -188,6 +189,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Venue
      */
     protected $venue;
+
+    /**
+     * Optional. Message is a native poll, information about the poll
+     *
+     * @var \TelegramBot\Api\Types\Poll
+     */
+    protected $poll;
 
     /**
      * Optional. A new member was added to the group, information about them (this member may be bot itself)
@@ -538,6 +546,22 @@ class Message extends BaseType implements TypeInterface
     public function setVenue($venue)
     {
         $this->venue = $venue;
+    }
+
+    /**
+     * @return Poll
+     */
+    public function getPoll()
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     */
+    public function setPoll($poll)
+    {
+        $this->poll = $poll;
     }
 
     /**
