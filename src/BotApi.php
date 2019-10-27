@@ -227,7 +227,7 @@ class BotApi
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
         if ($this->returnArray) {
-            if (!isset($response['ok'])) {
+            if (!isset($response['ok']) || !$response['ok']) {
                 throw new Exception($response['description'], $response['error_code']);
             }
 
