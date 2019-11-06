@@ -729,6 +729,63 @@ class BotApi
     }
 
     /**
+     * Use this method to send polling. On success, the sent \TelegramBot\Api\Types\Poll is returned.
+     *
+     * @param int|string $chatId
+     * @param string $question
+     * @param array $options
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param bool $disableNotification
+     *
+     * @return \TelegramBot\Api\Types\Poll
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendPoll(
+        $chatId,
+        $question,
+        $options = array(),
+        $replyToMessageId = null,
+        $replyMarkup = null,
+        $disableNotification = false
+    ) {
+        return Message::fromResponse($this->call('sendPoll', [
+            'chat_id' => $chatId,
+            'question' => $question,
+            'options' => json_encode($options),
+            'reply_to_message_id' => (int)$replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'disable_notification' => (bool)$disableNotification
+        ]));
+    }
+
+    /**
+     * Use this method to stop polling. On success, the sent \TelegramBot\Api\Types\Poll is returned.
+     *
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     *
+     * @return array
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function stopPoll(
+        $chatId,
+        $messageId,
+        $replyMarkup = null
+    ) {
+        return $this->call('stopPoll', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson()
+        ]);
+    }
+
+    /**
      * Use this method to forward messages of any kind. On success, the sent Message is returned.
      *
      * @param int|string $chatId chat_id or @channel_name
@@ -1691,7 +1748,7 @@ class BotApi
             CURLOPT_PROXY => $proxyString,
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
-        
+
         if ($socks5) {
             $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
         }

@@ -38,6 +38,7 @@ class Message extends BaseType implements TypeInterface
         'sticker' => Sticker::class,
         'video' => Video::class,
         'voice' => Voice::class,
+        'poll' => Poll::class,
         'caption' => true,
         'contact' => Contact::class,
         'location' => Location::class,
@@ -167,6 +168,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Voice
      */
     protected $voice;
+
+    /**
+     * Optional. Message is a poll message, information about the pool
+     *
+     * @var \TelegramBot\Api\Types\Poll
+     */
+    protected $poll;
 
     /**
      * Optional. Message is a shared contact, information about the contact
@@ -736,6 +744,22 @@ class Message extends BaseType implements TypeInterface
     public function setVoice($voice)
     {
         $this->voice = $voice;
+    }
+
+    /**
+     * @return Poll
+     */
+    public function getPoll()
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     */
+    public function setPoll(Poll $poll)
+    {
+        $this->poll = $poll;
     }
 
     /**
