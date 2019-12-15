@@ -19,7 +19,8 @@
     ],
     "require": {
         "php" : "7.1",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
