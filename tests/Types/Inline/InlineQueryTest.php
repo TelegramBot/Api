@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test\Types\Inline;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\User;
 
-class InlineQueryTest extends \PHPUnit_Framework_TestCase
+class InlineQueryTest extends TestCase
 {
     protected $inlineQueryFixture = [
         'id' => 1,

@@ -3,9 +3,10 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Location;
 
-class LocationTest extends \PHPUnit_Framework_TestCase
+class LocationTest extends TestCase
 {
     public function testSetLatitude()
     {

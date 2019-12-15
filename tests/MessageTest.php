@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\Location;
@@ -15,7 +16,7 @@ use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\Video;
 use TelegramBot\Api\Types\Voice;
 
-class MessageTest extends \PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
 
     public function testSetMessageId()

@@ -3,10 +3,11 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\PhotoSize;
 
-class DocumentTest extends \PHPUnit_Framework_TestCase
+class DocumentTest extends TestCase
 {
     public function testSetFileId()
     {

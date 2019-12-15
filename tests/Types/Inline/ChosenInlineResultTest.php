@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test\Types\Inline;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Inline\ChosenInlineResult;
 use TelegramBot\Api\Types\User;
 
-class ChosenInlineResultTest extends \PHPUnit_Framework_TestCase
+class ChosenInlineResultTest extends TestCase
 {
     protected $chosenInlineResultFixture = [
         'result_id' => 1,

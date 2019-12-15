@@ -19,7 +19,7 @@ class User extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'first_name'];
+    static protected $requiredParams = ['id', 'first_name', 'is_bot'];
 
     /**
      * {@inheritdoc}
@@ -28,11 +28,11 @@ class User extends BaseType implements TypeInterface
      */
     static protected $map = [
         'id' => true,
+        'is_bot' => true,
         'first_name' => true,
         'last_name' => true,
         'username' => true,
         'language_code' => true,
-        'is_bot' => true
     ];
 
     /**
@@ -41,6 +41,13 @@ class User extends BaseType implements TypeInterface
      * @var int
      */
     protected $id;
+
+    /**
+     * True, if this user is a bot
+     *
+     * @var bool
+     */
+    protected $isBot;
 
     /**
      * User‘s or bot’s first name
@@ -69,13 +76,6 @@ class User extends BaseType implements TypeInterface
      * @var string
      */
     protected $languageCode;
-
-    /**
-     * True, if this user is a bot
-     *
-     * @var bool
-     */
-    protected $isBot;
 
     /**
      * @return string

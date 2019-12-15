@@ -2,9 +2,10 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 
-class ReplyKeyboardMarkupTest extends \PHPUnit_Framework_TestCase
+class ReplyKeyboardMarkupTest extends TestCase
 {
     public function testConstructor()
     {

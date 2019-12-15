@@ -3,10 +3,11 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\ArrayOfPhotoSize;
 
-class ArrayOfPhotoSizeTest extends \PHPUnit_Framework_TestCase
+class ArrayOfPhotoSizeTest extends TestCase
 {
 
     public function testFromResponse()

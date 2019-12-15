@@ -3,9 +3,10 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ForceReply;
 
-class ForceReplyTest extends \PHPUnit_Framework_TestCase
+class ForceReplyTest extends TestCase
 {
     public function testConstructor()
     {

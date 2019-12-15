@@ -2,9 +2,10 @@
 
 namespace TelegramBot\Api\Test\Types\Inline;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 
-class InlineKeyboardMarkupTest extends \PHPUnit_Framework_TestCase
+class InlineKeyboardMarkupTest extends TestCase
 {
 
     public function testConstructor()

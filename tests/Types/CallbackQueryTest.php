@@ -2,11 +2,12 @@
 
 namespace TelegramBot\Api\Test\Types;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\CallbackQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\User;
 
-class CallbackQueryTest extends \PHPUnit_Framework_TestCase
+class CallbackQueryTest extends TestCase
 {
     protected $callbackQueryFixture = [
         'id' => 1,

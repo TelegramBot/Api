@@ -2,10 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 
-class StickerTest extends \PHPUnit_Framework_TestCase {
+class StickerTest extends TestCase
+{
     public function testSetFileId()
     {
         $sticker = new Sticker();

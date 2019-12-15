@@ -2,11 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Update;
 
-class BotApiTest extends \PHPUnit_Framework_TestCase
+class BotApiTest extends TestCase
 {
     public function data()
     {

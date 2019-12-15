@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatPhoto;
 
-class ChatTest extends \PHPUnit_Framework_TestCase
+class ChatTest extends TestCase
 {
     public function testFromResponseGroupChat()
     {

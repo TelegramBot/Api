@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test\Types\Events;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Events\Event;
 use TelegramBot\Api\Types\Update;
 
-class EventTest extends \PHPUnit_Framework_TestCase
+class EventTest extends TestCase
 {
     public function data()
     {

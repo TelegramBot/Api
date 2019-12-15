@@ -2,9 +2,10 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 
-class ReplyKeyboardHideTest extends \PHPUnit_Framework_TestCase
+class ReplyKeyboardHideTest extends TestCase
 {
     public function testConstructor()
     {

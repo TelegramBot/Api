@@ -3,10 +3,11 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\UserProfilePhotos;
 
-class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
+class UserProfilePhotosTest extends TestCase
 {
     public function testSetTotalCount()
     {

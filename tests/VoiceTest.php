@@ -1,9 +1,10 @@
 <?php
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Voice;
 
-class VoiceTest extends \PHPUnit_Framework_TestCase
+class VoiceTest extends TestCase
 {
     public function testSetFileId()
     {
