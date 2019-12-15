@@ -44,6 +44,13 @@ class UserTest extends TestCase
         $this->assertEquals('iGusev', $item->getUsername());
     }
 
+    public function testGetLaguageCode()
+    {
+        $item = new User();
+        $item->setLanguageCode('en');
+        $this->assertEquals('en', $item->getLanguageCode());
+    }
+
     public function testGetIsBOt()
     {
         $item = new User();
@@ -64,12 +71,33 @@ class UserTest extends TestCase
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'is_bot' => true,
+            'language_code' => 'en',
             'id' => 123456,
             'username' => 'iGusev'
         ]);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals(123456, $user->getId());
         $this->assertEquals(true, $user->getIsBot());
+        $this->assertEquals('en', $user->getLanguageCode());
+        $this->assertEquals('Ilya', $user->getFirstName());
+        $this->assertEquals('Gusev', $user->getLastName());
+        $this->assertEquals('iGusev', $user->getUsername());
+    }
+
+    public function testMethodChaining()
+    {
+        $user = (new User())
+            ->setFirstName('Ilya')
+            ->setLastName('Gusev')
+            ->setIsBot(false)
+            ->setLanguageCode('en')
+            ->setUsername('iGusev')
+            ->setId(123456);
+
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals(123456, $user->getId());
+        $this->assertEquals(false, $user->getIsBot());
+        $this->assertEquals('en', $user->getLanguageCode());
         $this->assertEquals('Ilya', $user->getFirstName());
         $this->assertEquals('Gusev', $user->getLastName());
         $this->assertEquals('iGusev', $user->getUsername());
