@@ -115,6 +115,8 @@ class User extends BaseType implements TypeInterface
         }
     }
 
+
+
     /**
      * @return string
      */
@@ -166,7 +168,7 @@ class User extends BaseType implements TypeInterface
     /**
      * @return bool
      */
-    public function isBot()
+    public function getIsBot()
     {
         return $this->isBot;
     }
