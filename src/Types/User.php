@@ -86,11 +86,14 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $firstName
+     * @param $firstName
+     * @return $this
      */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
@@ -102,8 +105,8 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $id
-     *
+     * @param $id
+     * @return $this
      * @throws InvalidArgumentException
      */
     public function setId($id)
@@ -113,6 +116,8 @@ class User extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+
+        return $this;
     }
 
 
@@ -126,11 +131,14 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $lastName
+     * @param $lastName
+     * @return $this
      */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
     /**
@@ -142,11 +150,14 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $username
+     * @param $username
+     * @return $this
      */
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -158,11 +169,14 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $languageCode
+     * @param $languageCode
+     * @return $this
      */
     public function setLanguageCode($languageCode)
     {
         $this->languageCode = $languageCode;
+
+        return $this;
     }
 
     /**
@@ -174,10 +188,13 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param bool $isBot
+     * @param $isBot
+     * @return $this
      */
     public function setIsBot($isBot)
     {
         $this->isBot = $isBot;
+
+        return $this;
     }
 }
