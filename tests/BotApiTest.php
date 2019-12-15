@@ -21,6 +21,7 @@ class BotApiTest extends TestCase
                             'from' => [
                                 'id' => 123,
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -42,6 +43,7 @@ class BotApiTest extends TestCase
                             'from' => [
                                 'id' => 123,
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -49,6 +51,7 @@ class BotApiTest extends TestCase
                                 'id' => 123,
                                 'type' => 'private',
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -63,6 +66,7 @@ class BotApiTest extends TestCase
                             'from' => [
                                 'id' => 123,
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -82,6 +86,7 @@ class BotApiTest extends TestCase
                             'from' => [
                                 'id' => 123,
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -89,6 +94,7 @@ class BotApiTest extends TestCase
                                 'id' => 123,
                                 'type' => 'private',
                                 'first_name' => 'Ilya',
+                                'is_bot' => false,
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
                             ],
@@ -104,10 +110,13 @@ class BotApiTest extends TestCase
     /**
      * @param Update[] $updates
      *
+     * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\InvalidArgumentException
      * @dataProvider data
      */
     public function testGetUpdates($updates)
     {
+        /** @var BotApi $mock */
         $mock = $this->getMockBuilder('\TelegramBot\Api\BotApi')
             ->setMethods(['call'])
             ->enableOriginalConstructor()
@@ -120,10 +129,10 @@ class BotApiTest extends TestCase
         $expectedResult = ArrayOfUpdates::fromResponse($updates);
         $result = $mock->getUpdates();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEquals($expectedResult, $result);
 
-        foreach($result as $key => $item) {
+        foreach ($result as $key => $item) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\Update', $item);
             $this->assertEquals($expectedResult[$key], $item);
         }
