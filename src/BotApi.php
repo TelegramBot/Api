@@ -437,6 +437,19 @@ class BotApi
     {
         return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
     }
+    
+    
+    /**
+     * Use this method to clear webhook and use getUpdates again!
+     *
+     * @return mixed
+     *
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function deleteWebhook()
+    {
+        return $this->call('deleteWebhook');
+    }
 
     /**
      * A simple method for testing your bot's auth token.Requires no parameters.
