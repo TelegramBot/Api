@@ -3,13 +3,11 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Document
- * This object represents a general file (as opposed to photos and audio files).
- * Telegram users can send files of any type of up to 1.5 GB in size.
+ * This object represents a general file (as opposed to photos, voice messages and audio files).
  *
  * @package TelegramBot\Api\Types
  */
@@ -36,123 +34,131 @@ class Document extends BaseType implements TypeInterface
     static protected $requiredParams = ['file_id'];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file
      *
      * @var string
      */
     protected $fileId;
 
     /**
-     * Document thumbnail as defined by sender
+     * Optional. Document thumbnail as defined by sender
      *
-     * @var PhotoSize
+     * @var PhotoSize|null
      */
     protected $thumb;
 
     /**
      * Optional. Original filename as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $fileName;
 
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
 
     /**
      * @param string $fileId
+     * @return Document
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): Document
     {
         $this->fileId = $fileId;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return PhotoSize|null
      */
-    public function getFileName()
-    {
-        return $this->fileName;
-    }
-
-    /**
-     * @param string $fileName
-     */
-    public function setFileName($fileName)
-    {
-        $this->fileName = $fileName;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFileSize()
-    {
-        return $this->fileSize;
-    }
-
-    /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setFileSize($fileSize)
-    {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
-
-    /**
-     * @param string $mimeType
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
-    }
-
-    /**
-     * @return PhotoSize
-     */
-    public function getThumb()
+    public function getThumb(): ?PhotoSize
     {
         return $this->thumb;
     }
 
     /**
      * @param PhotoSize $thumb
+     * @return Document
      */
-    public function setThumb(PhotoSize $thumb)
+    public function setThumb(PhotoSize $thumb): Document
     {
         $this->thumb = $thumb;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param string $fileName
+     * @return Document
+     */
+    public function setFileName(string $fileName): Document
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @param string $mimeType
+     * @return Document
+     */
+    public function setMimeType(?string $mimeType): Document
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFileSize(): ?int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     * @return Document
+     */
+    public function setFileSize(int $fileSize): Document
+    {
+        $this->fileSize = $fileSize;
+
+        return $this;
     }
 }
