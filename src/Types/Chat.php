@@ -274,6 +274,8 @@ class Chat extends BaseType implements TypeInterface
     public function setDescription(string $description): Chat
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
