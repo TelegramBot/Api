@@ -27,7 +27,6 @@ class Chat extends BaseType implements TypeInterface
         'username' => true,
         'first_name' => true,
         'last_name' => true,
-        'all_members_are_administrators' => true,
         'photo' => ChatPhoto::class,
         'description' => true,
         'invite_link' => true,
@@ -39,7 +38,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value
      *
-     * @var int|string
+     * @var int
      */
     protected $id;
 
@@ -53,286 +52,322 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Optional. Title, for channels and group chats
      *
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
      * Optional. Username, for private chats and channels if available
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
 
     /**
      * Optional. First name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
 
     /**
      * Optional. Last name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
-
-    protected $allMembersAreAdministrators;
 
     /**
      * Optional. Chat photo. Returned only in getChat.
      *
-     * @var ChatPhoto
+     * @var ChatPhoto|null
      */
     protected $photo;
 
     /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $inviteLink;
 
     /**
      * Optional. Pinned message, for supergroups. Returned only in getChat.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $pinnedMessage;
 
     /**
+     * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat.
+     *
+     * @var ChatPermissions|null
+     */
+    protected $permissions;
+
+    /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $stickerSetName;
 
     /**
      * Optional. True, if the bot can change the group sticker set. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSetStickerSet;
 
     /**
-     * @return int|string
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param int|string $id
-     *
-     * @throws InvalidArgumentException
+     * @param int $id
+     * @return Chat
      */
-    public function setId($id)
+    public function setId(int $id): Chat
     {
-        if (is_integer($id) || is_float($id) || is_string($id)) {
-            $this->id = $id;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
      * @param string $type
+     * @return Chat
      */
-    public function setType($type)
+    public function setType(string $type): Chat
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
      * @param string $title
+     * @return Chat
      */
-    public function setTitle($title)
+    public function setTitle(string $title): Chat
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
     /**
      * @param string $username
+     * @return Chat
      */
-    public function setUsername($username)
+    public function setUsername(string $username): Chat
     {
         $this->username = $username;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param string $firstName
+     * @param $firstName
+     * @return Chat
      */
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): Chat
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
      * @param string $lastName
+     * @return Chat
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): Chat
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return ChatPhoto|null
      */
-    public function getAllMembersAreAdministrators()
-    {
-        return $this->allMembersAreAdministrators;
-    }
-
-    /**
-     * @param mixed $allMembersAreAdministrators
-     */
-    public function setAllMembersAreAdministrators($allMembersAreAdministrators)
-    {
-        $this->allMembersAreAdministrators = $allMembersAreAdministrators;
-    }
-
-    /**
-     * @return ChatPhoto
-     */
-    public function getPhoto()
+    public function getPhoto(): ?ChatPhoto
     {
         return $this->photo;
     }
 
     /**
      * @param ChatPhoto $photo
+     * @return Chat
      */
-    public function setPhoto($photo)
+    public function setPhoto(ChatPhoto $photo): Chat
     {
         $this->photo = $photo;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
      * @param string $description
+     * @return Chat
      */
-    public function setDescription($description)
+    public function setDescription(string $description): Chat
     {
         $this->description = $description;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInviteLink()
+    public function getInviteLink(): ?string
     {
         return $this->inviteLink;
     }
 
     /**
      * @param string $inviteLink
+     * @return Chat
      */
-    public function setInviteLink($inviteLink)
+    public function setInviteLink(string $inviteLink): Chat
     {
         $this->inviteLink = $inviteLink;
+
+        return $this;
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
-    public function getPinnedMessage()
+    public function getPinnedMessage(): ?Message
     {
         return $this->pinnedMessage;
     }
 
     /**
      * @param Message $pinnedMessage
+     * @return Chat
      */
-    public function setPinnedMessage($pinnedMessage)
+    public function setPinnedMessage(Message $pinnedMessage): Chat
     {
         $this->pinnedMessage = $pinnedMessage;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return ChatPermissions|null
      */
-    public function getStickerSetName()
+    public function getPermissions(): ?ChatPermissions
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * @param ChatPermissions $permissions
+     * @return Chat
+     */
+    public function setPermissions(ChatPermissions $permissions): Chat
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStickerSetName(): ?string
     {
         return $this->stickerSetName;
     }
 
     /**
      * @param string $stickerSetName
+     * @return Chat
      */
-    public function setStickerSetName($stickerSetName)
+    public function setStickerSetName(string $stickerSetName): Chat
     {
         $this->stickerSetName = $stickerSetName;
+
+        return $this;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isCanSetStickerSet()
+    public function getIsCanSetStickerSet(): ?bool
     {
         return $this->canSetStickerSet;
     }
 
     /**
      * @param bool $canSetStickerSet
+     * @return Chat
      */
-    public function setCanSetStickerSet($canSetStickerSet)
+    public function setCanSetStickerSet(bool $canSetStickerSet): Chat
     {
         $this->canSetStickerSet = $canSetStickerSet;
+
+        return $this;
     }
 }
