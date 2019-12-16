@@ -111,12 +111,8 @@ class User extends BaseType implements TypeInterface
      */
     public function setId(int $id): User
     {
-        if (is_integer($id) || is_float($id)) {
-            $this->id = $id;
-        } else {
-            throw new InvalidArgumentException();
-        }
-
+        $this->id = $id;
+        
         return $this;
     }
 

@@ -60,7 +60,7 @@ class UserTest extends TestCase
 
     public function testSetIdException()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\TypeError::class);
         $item = new User();
         $item->setId('s');
     }
