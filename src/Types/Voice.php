@@ -3,12 +3,11 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Voice
- * This object represents a voice note.
+ * This object represents a voice note
  *
  * @package TelegramBot\Api\Types
  */
@@ -34,7 +33,7 @@ class Voice extends BaseType implements TypeInterface
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file
      *
      * @var string
      */
@@ -50,90 +49,90 @@ class Voice extends BaseType implements TypeInterface
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
 
     /**
      * @param string $fileId
+     * @return Voice
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): Voice
     {
         $this->fileId = $fileId;
+
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getDuration()
+    public function getDuration(): int
     {
         return $this->duration;
     }
 
     /**
      * @param int $duration
-     *
-     * @throws InvalidArgumentException
+     * @return Voice
      */
-    public function setDuration($duration)
+    public function setDuration(int $duration): Voice
     {
-        if (is_integer($duration)) {
-            $this->duration = $duration;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->duration = $duration;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMimeType()
+    public function getMimeType(): ?string
     {
         return $this->mimeType;
     }
 
     /**
      * @param string $mimeType
+     * @return Voice
      */
-    public function setMimeType($mimeType)
+    public function setMimeType(string $mimeType): Voice
     {
         $this->mimeType = $mimeType;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getFileSize()
+    public function getFileSize(): ?int
     {
         return $this->fileSize;
     }
 
     /**
      * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
+     * @return Voice
      */
-    public function setFileSize($fileSize)
+    public function setFileSize(int $fileSize): Voice
     {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->fileSize = $fileSize;
+
+        return $this;
     }
 }
