@@ -3,12 +3,11 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
  * Class PollOption
- * This object contains information about one answer option in a poll.
+ * This object contains information about one answer option in a poll
  *
  * @package TelegramBot\Api\Types
  */
@@ -41,39 +40,45 @@ class PollOption extends BaseType implements TypeInterface
     /**
      * Number of users that voted for this option
      *
-     * @var integer
+     * @var int
      */
     protected $voterCount;
 
     /**
      * @return string
      */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
 
     /**
      * @param string $text
+     * @return PollOption
      */
-    public function setText($text)
+    public function setText(string $text): PollOption
     {
         $this->text = $text;
+        
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getVoterCount()
+    public function getVoterCount(): int
     {
         return $this->voterCount;
     }
 
     /**
      * @param int $voterCount
+     * @return PollOption
      */
-    public function setVoterCount($voterCount)
+    public function setVoterCount(int $voterCount): PollOption
     {
         $this->voterCount = $voterCount;
+
+        return $this;
     }
 }
