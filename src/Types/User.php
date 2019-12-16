@@ -80,16 +80,16 @@ class User extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
-     * @param $firstName
-     * @return $this
+     * @param string $firstName
+     * @return User
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): User
     {
         $this->firstName = $firstName;
 
@@ -99,17 +99,17 @@ class User extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param $id
-     * @return $this
+     * @param int $id
+     * @return User
      * @throws InvalidArgumentException
      */
-    public function setId($id)
+    public function setId(int $id): User
     {
         if (is_integer($id) || is_float($id)) {
             $this->id = $id;
@@ -120,21 +120,19 @@ class User extends BaseType implements TypeInterface
         return $this;
     }
 
-
-
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param $lastName
-     * @return $this
+     * @param string $lastName
+     * @return User
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): User
     {
         $this->lastName = $lastName;
 
@@ -142,37 +140,38 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
     /**
      * @param $username
-     * @return $this
+     * @return User
      */
-    public function setUsername($username)
+    public function setUsername($username): User
     {
         $this->username = $username;
 
         return $this;
     }
 
+
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLanguageCode()
+    public function getLanguageCode(): ?string
     {
         return $this->languageCode;
     }
 
     /**
-     * @param $languageCode
+     * @param string $languageCode
      * @return $this
      */
-    public function setLanguageCode($languageCode)
+    public function setLanguageCode(string $languageCode)
     {
         $this->languageCode = $languageCode;
 
@@ -180,18 +179,18 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function getIsBot()
+    public function getIsBot(): ?bool
     {
         return $this->isBot;
     }
 
     /**
-     * @param $isBot
-     * @return $this
+     * @param bool $isBot
+     * @return User
      */
-    public function setIsBot($isBot)
+    public function setIsBot(bool $isBot): User
     {
         $this->isBot = $isBot;
 
