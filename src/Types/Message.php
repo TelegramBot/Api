@@ -1,9 +1,12 @@
 <?php
+
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\QueryResult\Photo;
 use TelegramBot\Api\Types\Payments\Invoice;
 use TelegramBot\Api\Types\Payments\SuccessfulPayment;
 
@@ -75,7 +78,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. Sender name. Can be empty for messages sent to channels
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
     protected $from;
 
@@ -89,14 +92,14 @@ class Message extends BaseType implements TypeInterface
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \TelegramBot\Api\Types\Chat
+     * @var Chat
      */
     protected $chat;
 
     /**
      * Optional. For forwarded messages, sender of the original message
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User|null
      */
     protected $forwardFrom;
 
@@ -104,7 +107,7 @@ class Message extends BaseType implements TypeInterface
      * Optional. For messages forwarded from channels, information about
      * the original channel
      *
-     * @var \TelegramBot\Api\Types\Chat
+     * @var Chat|null
      */
     protected $forwardFromChat;
 
@@ -112,29 +115,64 @@ class Message extends BaseType implements TypeInterface
      * Optional. For messages forwarded from channels, identifier of
      * the original message in the channel
      *
-     * @var int
+     * @var int|null
      */
     protected $forwardFromMessageId;
 
     /**
+     * Optional. For messages forwarded from channels, signature of the post author if present
+     *
+     * @var string|null
+     */
+    protected $forwardSignature;
+
+    /**
+     * Optional. Sender's name for messages forwarded from users who disallow adding a link
+     * to their account in forwarded messages
+     * @var string|null
+     */
+    protected $forwardSenderName;
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      *
-     * @var int
+     * @var int|null
      */
     protected $forwardDate;
 
     /**
-     * Optional. For replies, the original message. Note that the Message object in this field will not contain further
-     * reply_to_message fields even if it itself is a reply.
+     * Optional. For replies, the original message. Note that the Message object in this field
+     * will not contain further reply_to_message fields even if it itself is a reply.
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var Message|null
      */
     protected $replyToMessage;
 
     /**
+     * Optional. Date the message was last edited in Unix time
+     *
+     * @var int|null
+     */
+    protected $editDate;
+
+    /**
+     * Optional. The unique identifier of a media message group this message belongs to
+     *
+     * @var int|null
+     */
+    protected $mediaGroupId;
+
+    /**
+     * Optional. Signature of the post author for messages in channels
+     *
+     * @var string|null
+     */
+    protected $authorSignature;
+
+    /**
      * Optional. For text messages, the actual UTF-8 text of the message
      *
-     * @var string
+     * @var string|null
      */
     protected $text;
 
@@ -142,173 +180,198 @@ class Message extends BaseType implements TypeInterface
      * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
      * array of \TelegramBot\Api\Types\MessageEntity
      *
-     * @var array
+     * @var MessageEntity[]|null
      */
     protected $entities;
 
     /**
+     * Optional. For messages with a caption, special entities like usernames,
+     * URLs, bot commands, etc. that appear in the caption
+     *
+     * @var MessageEntity[]|null
+     */
+    protected $captionEntities;
+
+    /**
      * Optional. Message is an audio file, information about the file
      *
-     * @var \TelegramBot\Api\Types\Audio
+     * @var Audio|null
      */
     protected $audio;
 
     /**
      * Optional. Message is a general file, information about the file
      *
-     * @var \TelegramBot\Api\Types\Document
+     * @var Document|null
      */
     protected $document;
 
     /**
-     * Optional. Message is a photo, available sizes of the photo
-     * array of \TelegramBot\Api\Types\Photo
+     * Optional. Message is a animation, information about the animation
      *
-     * @var array
+     * @var Animation|null
+     */
+    protected $animation;
+
+    /**
+     * Optional. Message is a game, information about the game
+     *
+     * @var Game|null
+     */
+    protected $game;
+
+    /**
+     * Optional. Message is a photo, available sizes of the photo
+     * array of \TelegramBot\Api\Types\PhotoSize
+     *
+     * @var PhotoSize[]|null
      */
     protected $photo;
 
     /**
-     * Optional. The unique identifier of a media message group
-     * this message belongs to
-     *
-     * @var int
-     */
-    protected $mediaGroupId;
-
-    /**
      * Optional. Message is a sticker, information about the sticker
      *
-     * @var \TelegramBot\Api\Types\Sticker
+     * @var Sticker|null
      */
     protected $sticker;
 
     /**
      * Optional. Message is a video, information about the video
      *
-     * @var \TelegramBot\Api\Types\Video
+     * @var Video|null
      */
     protected $video;
-    
-    /**
-     * Optional. Message is a animation, information about the animation
-     *
-     * @var \TelegramBot\Api\Types\Animation
-     */
-    protected $animation;
 
     /**
      * Optional. Message is a voice message, information about the file
      *
-     * @var \TelegramBot\Api\Types\Voice
+     * @var Voice|null
      */
     protected $voice;
 
     /**
+     * Optional. Message is a video, information about the video
+     *
+     * @var VideoNote|null
+     */
+    protected $videoNote;
+
+    /**
+     * Optional. Text description of the video (usually empty)
+     *
+     * @var string|null
+     */
+    protected $caption;
+
+    /**
      * Optional. Message is a shared contact, information about the contact
      *
-     * @var \TelegramBot\Api\Types\Contact
+     * @var Contact|null
      */
     protected $contact;
 
     /**
      * Optional. Message is a shared location, information about the location
      *
-     * @var \TelegramBot\Api\Types\Location
+     * @var Location|null
      */
     protected $location;
 
     /**
      * Optional. Message is a venue, information about the venue
      *
-     * @var \TelegramBot\Api\Types\Venue
+     * @var Venue|null
      */
     protected $venue;
 
     /**
      * Optional. Message is a native poll, information about the poll
      *
-     * @var \TelegramBot\Api\Types\Poll
+     * @var Poll|null
      */
     protected $poll;
 
     /**
-     * Optional. A new member was added to the group, information about them (this member may be bot itself)
+     * Optional. New members that were added to the group or supergroup and information about them
+     * (the bot itself may be one of these members)
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User[]|null
      */
-    protected $newChatMember;
+    protected $newChatMembers;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be bot itself)
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User|null
      */
     protected $leftChatMember;
 
     /**
      * Optional. A group title was changed to this value
      *
-     * @var string
+     * @var string|null
      */
     protected $newChatTitle;
 
     /**
      * Optional. A group photo was change to this value
      *
-     * @var mixed
+     * @var PhotoSize[]|null
      */
     protected $newChatPhoto;
 
     /**
      * Optional. Informs that the group photo was deleted
      *
-     * @var bool
+     * @var bool|null
      */
     protected $deleteChatPhoto;
 
     /**
      * Optional. Informs that the group has been created
      *
-     * @var bool
+     * @var bool|null
      */
     protected $groupChatCreated;
 
     /**
-     * Optional. Text description of the video (usually empty)
+     * Optional. Service message: the supergroup has been created.
+     * This field can‘t be received in a message coming through updates,
+     * because bot can’t be a member of a supergroup when it is created.
+     * It can only be found in reply_to_message if someone replies
+     * to a very first message in a directly created supergroup.
      *
-     * @var string
-     */
-    protected $caption;
-
-
-    /**
-     * Optional. Service message: the supergroup has been created
-     *
-     * @var bool
+     * @var bool|null
      */
     protected $supergroupChatCreated;
 
     /**
-     * Optional. Service message: the channel has been created
+     * Optional. Service message: the channel has been created.
+     * This field can‘t be received in a message coming through updates,
+     * because bot can’t be a member of a channel when it is created.
+     * It can only be found in reply_to_message if someone replies to a very first message in a channel.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $channelChatCreated;
 
     /**
-     * Optional. The group has been migrated to a supergroup with the specified identifier,
-     * not exceeding 1e13 by absolute value
+     * Optional. The group has been migrated to a supergroup with the specified identifier.
+     * This number may be greater than 32 bits and some programming languages may have
+     * difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so
+     * a signed 64 bit integer or double-precision float type are safe for storing this identifier.
      *
-     * @var int
+     * @var int|null
      */
     protected $migrateToChatId;
 
     /**
-     * Optional. The supergroup has been migrated from a group with the specified identifier,
-     * not exceeding 1e13 by absolute value
+     * Optional. The supergroup has been migrated from a group with the specified identifier.
+     * This number may be greater than 32 bits and some programming languages may have
+     * difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so
+     * a signed 64 bit integer or double-precision float type are safe for storing this identifier.
      *
-     * @var int
+     * @var int|null
      */
     protected $migrateFromChatId;
 
@@ -316,728 +379,906 @@ class Message extends BaseType implements TypeInterface
      * Optional. Specified message was pinned.Note that the Message object in this field
      * will not contain further reply_to_message fields even if it is itself a reply.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $pinnedMessage;
 
     /**
      * Optional. Message is an invoice for a payment, information about the invoice.
      *
-     * @var Invoice
+     * @var Invoice|null
      */
     protected $invoice;
 
     /**
      * Optional. Message is a service message about a successful payment, information about the payment.
      *
-     * @var SuccessfulPayment
+     * @var SuccessfulPayment|null
      */
     protected $successfulPayment;
 
     /**
-     * Optional. For messages forwarded from channels, signature of the post author if present
-     *
-     * @var string
-     */
-    protected $forwardSignature;
-
-    /**
-     * Optional. Signature of the post author for messages in channels
-     *
-     * @var string
-     */
-    protected $authorSignature;
-
-    /**
-     * Optional. For messages with a caption, special entities like usernames,
-     * URLs, bot commands, etc. that appear in the caption
-     *
-     * @var ArrayOfMessageEntity
-     */
-    protected $captionEntities;
-
-    /**
      * Optional. The domain name of the website on which the user has logged in.
      *
-     * @var string
+     * @var string|null
      */
     protected $connectedWebsite;
 
     /**
-     * @return string
-     */
-    public function getCaption()
-    {
-        return $this->caption;
-    }
-
-    /**
-     * @param string $caption
-     */
-    public function setCaption($caption)
-    {
-        $this->caption = $caption;
-    }
-
-    /**
-     * @return Audio
-     */
-    public function getAudio()
-    {
-        return $this->audio;
-    }
-
-    /**
-     * @param Audio $audio
-     */
-    public function setAudio(Audio $audio)
-    {
-        $this->audio = $audio;
-    }
-
-    /**
-     * @return Chat
-     */
-    public function getChat()
-    {
-        return $this->chat;
-    }
-
-    /**
-     * @param Chat $chat
-     */
-    public function setChat(Chat $chat)
-    {
-        $this->chat = $chat;
-    }
-
-    /**
-     * @return Contact
-     */
-    public function getContact()
-    {
-        return $this->contact;
-    }
-
-    /**
-     * @param Contact $contact
-     */
-    public function setContact(Contact $contact)
-    {
-        $this->contact = $contact;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param int $date
+     * Optional. Telegram Passport data
      *
-     * @throws InvalidArgumentException
+     * @var PassportData|null
      */
-    public function setDate($date)
-    {
-        if (is_integer($date)) {
-            $this->date = $date;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
+    protected $passportData;
 
     /**
-     * @return boolean
-     */
-    public function isDeleteChatPhoto()
-    {
-        return $this->deleteChatPhoto;
-    }
-
-    /**
-     * @param boolean $deleteChatPhoto
-     */
-    public function setDeleteChatPhoto($deleteChatPhoto)
-    {
-        $this->deleteChatPhoto = (bool)$deleteChatPhoto;
-    }
-
-    /**
-     * @return Document
-     */
-    public function getDocument()
-    {
-        return $this->document;
-    }
-
-    /**
-     * @param Document $document
-     */
-    public function setDocument($document)
-    {
-        $this->document = $document;
-    }
-
-    /**
-     * @return int
-     */
-    public function getForwardDate()
-    {
-        return $this->forwardDate;
-    }
-
-    /**
-     * @param int $forwardDate
+     * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
      *
-     * @throws InvalidArgumentException
+     * @var InlineKeyboardMarkup|null
      */
-    public function setForwardDate($forwardDate)
-    {
-        if (is_integer($forwardDate)) {
-            $this->forwardDate = $forwardDate;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return User
-     */
-    public function getForwardFrom()
-    {
-        return $this->forwardFrom;
-    }
-
-    /**
-     * @param User $forwardFrom
-     */
-    public function setForwardFrom(User $forwardFrom)
-    {
-        $this->forwardFrom = $forwardFrom;
-    }
-
-    /**
-     * @return Chat
-     */
-    public function getForwardFromChat()
-    {
-        return $this->forwardFromChat;
-    }
-
-    /**
-     * @param Chat $forwardFromChat
-     */
-    public function setForwardFromChat(Chat $forwardFromChat)
-    {
-        $this->forwardFromChat = $forwardFromChat;
-    }
+    protected $replyMarkup;
 
     /**
      * @return int
      */
-    public function getForwardFromMessageId()
-    {
-        return $this->forwardFromMessageId;
-    }
-
-    /**
-     * @param int $forwardFromMessageId
-     */
-    public function setForwardFromMessageId($forwardFromMessageId)
-    {
-        $this->forwardFromMessageId = $forwardFromMessageId;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isGroupChatCreated()
-    {
-        return $this->groupChatCreated;
-    }
-
-    /**
-     * @param boolean $groupChatCreated
-     */
-    public function setGroupChatCreated($groupChatCreated)
-    {
-        $this->groupChatCreated = (bool)$groupChatCreated;
-    }
-
-    /**
-     * @return User
-     */
-    public function getLeftChatMember()
-    {
-        return $this->leftChatMember;
-    }
-
-    /**
-     * @param User $leftChatMember
-     */
-    public function setLeftChatMember($leftChatMember)
-    {
-        $this->leftChatMember = $leftChatMember;
-    }
-
-    /**
-     * @return Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-    }
-
-    /**
-     * @return Venue
-     */
-    public function getVenue()
-    {
-        return $this->venue;
-    }
-
-    /**
-     * @param Venue $venue
-     */
-    public function setVenue($venue)
-    {
-        $this->venue = $venue;
-    }
-
-    /**
-     * @return Poll
-     */
-    public function getPoll()
-    {
-        return $this->poll;
-    }
-
-    /**
-     * @param Poll $poll
-     */
-    public function setPoll($poll)
-    {
-        $this->poll = $poll;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMessageId()
+    public function getMessageId(): int
     {
         return $this->messageId;
     }
 
     /**
      * @param int $messageId
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setMessageId($messageId)
-    {
-        if (is_integer($messageId) || is_float($messageId)) {
-            $this->messageId = $messageId;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return User
-     */
-    public function getNewChatMember()
-    {
-        return $this->newChatMember;
-    }
-
-    /**
-     * @param User $newChatMember
-     */
-    public function setNewChatMember($newChatMember)
-    {
-        $this->newChatMember = $newChatMember;
-    }
-
-    /**
-     * @return array
-     */
-    public function getNewChatPhoto()
-    {
-        return $this->newChatPhoto;
-    }
-
-    /**
-     * @param array $newChatPhoto
-     */
-    public function setNewChatPhoto($newChatPhoto)
-    {
-        $this->newChatPhoto = $newChatPhoto;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNewChatTitle()
-    {
-        return $this->newChatTitle;
-    }
-
-    /**
-     * @param string $newChatTitle
-     */
-    public function setNewChatTitle($newChatTitle)
-    {
-        $this->newChatTitle = $newChatTitle;
-    }
-
-    /**
-     * @return array
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    /**
-     * @param array $photo
-     */
-    public function setPhoto(array $photo)
-    {
-        $this->photo = $photo;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMediaGroupId()
-    {
-        return $this->mediaGroupId;
-    }
-
-    /**
-     * @param int $mediaGroupId
-     */
-    public function setMediaGroupId($mediaGroupId)
-    {
-        $this->mediaGroupId = $mediaGroupId;
-    }
-
-    /**
      * @return Message
      */
-    public function getReplyToMessage()
+    public function setMessageId(int $messageId): Message
     {
-        return $this->replyToMessage;
-    }
+        $this->messageId = $messageId;
 
-    /**
-     * @param Message $replyToMessage
-     */
-    public function setReplyToMessage(Message $replyToMessage)
-    {
-        $this->replyToMessage = $replyToMessage;
-    }
-
-    /**
-     * @return Sticker
-     */
-    public function getSticker()
-    {
-        return $this->sticker;
-    }
-
-    /**
-     * @param Sticker $sticker
-     */
-    public function setSticker(Sticker $sticker)
-    {
-        $this->sticker = $sticker;
-    }
-
-    /**
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->text;
-    }
-
-    /**
-     * @param string $text
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * @return array
-     */
-    public function getEntities()
-    {
-        return $this->entities;
-    }
-
-    /**
-     * @param array $entities
-     */
-    public function setEntities($entities)
-    {
-        $this->entities = $entities;
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getFrom()
+    public function getFrom(): User
     {
         return $this->from;
     }
 
     /**
      * @param User $from
-     */
-    public function setFrom(User $from)
-    {
-        $this->from = $from;
-    }
-
-    /**
-     * @return Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
-    }
-
-    /**
-     * @param Video $video
-     */
-    public function setVideo(Video $video)
-    {
-        $this->video = $video;
-    }
-    
-    /**
-     * @return Animation
-     */
-    public function getAnimation()
-    {
-        return $this->animation;
-    }
-
-    /**
-     * @param Animation $animation
-     */
-    public function setAnimation(Animation $animation)
-    {
-        $this->animation = $animation;
-    }
-
-    /**
-     * @return Voice
-     */
-    public function getVoice()
-    {
-        return $this->voice;
-    }
-
-    /**
-     * @param Voice $voice
-     */
-    public function setVoice($voice)
-    {
-        $this->voice = $voice;
-    }
-
-    /**
-     * @param boolean $supergroupChatCreated
-     */
-    public function setSupergroupChatCreated($supergroupChatCreated)
-    {
-        $this->supergroupChatCreated = $supergroupChatCreated;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isSupergroupChatCreated()
-    {
-        return $this->supergroupChatCreated;
-    }
-
-    /**
-     * @param boolean $channelChatCreated
-     */
-    public function setChannelChatCreated($channelChatCreated)
-    {
-        $this->channelChatCreated = $channelChatCreated;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isChannelChatCreated()
-    {
-        return $this->channelChatCreated;
-    }
-
-    /**
-     * @param int $migrateToChatId
-     */
-    public function setMigrateToChatId($migrateToChatId)
-    {
-        $this->migrateToChatId = $migrateToChatId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMigrateToChatId()
-    {
-        return $this->migrateToChatId;
-    }
-
-    /**
-     * @param int $migrateFromChatId
-     */
-    public function setMigrateFromChatId($migrateFromChatId)
-    {
-        $this->migrateFromChatId = $migrateFromChatId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMigrateFromChatId()
-    {
-        return $this->migrateFromChatId;
-    }
-
-    /**
      * @return Message
      */
-    public function getPinnedMessage()
+    public function setFrom(User $from): Message
     {
-        return $this->pinnedMessage;
+        $this->from = $from;
+
+        return $this;
     }
 
     /**
-     * @param Message $pinnedMessage
+     * @return int
      */
-    public function setPinnedMessage($pinnedMessage)
+    public function getDate(): int
     {
-        $this->pinnedMessage = $pinnedMessage;
+        return $this->date;
     }
 
     /**
-     * @author MY
-     * @return Invoice
+     * @param int $date
+     * @return Message
      */
-    public function getInvoice()
+    public function setDate(int $date): Message
     {
-        return $this->invoice;
+        $this->date = $date;
+
+        return $this;
     }
 
     /**
-     * @author MY
-     * @param Invoice $invoice
+     * @return Chat
      */
-    public function setInvoice($invoice)
+    public function getChat(): Chat
     {
-        $this->invoice = $invoice;
+        return $this->chat;
     }
 
     /**
-     * @author MY
-     * @return SuccessfulPayment
+     * @param Chat $chat
+     * @return Message
      */
-    public function getSuccessfulPayment()
+    public function setChat(Chat $chat): Message
     {
-        return $this->successfulPayment;
+        $this->chat = $chat;
+
+        return $this;
     }
 
     /**
-     * @author MY
-     * @param SuccessfulPayment $successfulPayment
+     * @return User|null
      */
-    public function setSuccessfulPayment($successfulPayment)
+    public function getForwardFrom(): ?User
     {
-        $this->successfulPayment = $successfulPayment;
+        return $this->forwardFrom;
     }
 
     /**
-     * @return string
+     * @param User $forwardFrom
+     * @return Message
      */
-    public function getForwardSignature()
+    public function setForwardFrom(User $forwardFrom): Message
+    {
+        $this->forwardFrom = $forwardFrom;
+
+        return $this;
+    }
+
+    /**
+     * @return Chat|null
+     */
+    public function getForwardFromChat(): ?Chat
+    {
+        return $this->forwardFromChat;
+    }
+
+    /**
+     * @param Chat $forwardFromChat
+     * @return Message
+     */
+    public function setForwardFromChat(Chat $forwardFromChat): Message
+    {
+        $this->forwardFromChat = $forwardFromChat;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getForwardFromMessageId(): ?int
+    {
+        return $this->forwardFromMessageId;
+    }
+
+    /**
+     * @param int $forwardFromMessageId
+     * @return Message
+     */
+    public function setForwardFromMessageId(int $forwardFromMessageId): Message
+    {
+        $this->forwardFromMessageId = $forwardFromMessageId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getForwardSignature(): ?string
     {
         return $this->forwardSignature;
     }
 
     /**
      * @param string $forwardSignature
+     * @return Message
      */
-    public function setForwardSignature($forwardSignature)
+    public function setForwardSignature(string $forwardSignature): Message
     {
         $this->forwardSignature = $forwardSignature;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAuthorSignature()
+    public function getForwardSenderName(): ?string
+    {
+        return $this->forwardSenderName;
+    }
+
+    /**
+     * @param string $forwardSenderName
+     * @return Message
+     */
+    public function setForwardSenderName(string $forwardSenderName): Message
+    {
+        $this->forwardSenderName = $forwardSenderName;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getForwardDate(): ?int
+    {
+        return $this->forwardDate;
+    }
+
+    /**
+     * @param int $forwardDate
+     * @return Message
+     */
+    public function setForwardDate(int $forwardDate): Message
+    {
+        $this->forwardDate = $forwardDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Message|null
+     */
+    public function getReplyToMessage(): ?Message
+    {
+        return $this->replyToMessage;
+    }
+
+    /**
+     * @param Message $replyToMessage
+     * @return Message
+     */
+    public function setReplyToMessage(Message $replyToMessage): Message
+    {
+        $this->replyToMessage = $replyToMessage;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getEditDate(): ?int
+    {
+        return $this->editDate;
+    }
+
+    /**
+     * @param int $editDate
+     * @return Message
+     */
+    public function setEditDate(int $editDate): Message
+    {
+        $this->editDate = $editDate;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMediaGroupId(): ?int
+    {
+        return $this->mediaGroupId;
+    }
+
+    /**
+     * @param int $mediaGroupId
+     * @return Message
+     */
+    public function setMediaGroupId(int $mediaGroupId): Message
+    {
+        $this->mediaGroupId = $mediaGroupId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAuthorSignature(): ?string
     {
         return $this->authorSignature;
     }
 
     /**
      * @param string $authorSignature
+     * @return Message
      */
-    public function setAuthorSignature($authorSignature)
+    public function setAuthorSignature(string $authorSignature): Message
     {
         $this->authorSignature = $authorSignature;
+
+        return $this;
     }
 
     /**
-     * @return ArrayOfMessageEntity
+     * @return string|null
      */
-    public function getCaptionEntities()
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return Message
+     */
+    public function setText(string $text): Message
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * @return MessageEntity[]|null
+     */
+    public function getEntities(): ?array
+    {
+        return $this->entities;
+    }
+
+    /**
+     * @param MessageEntity[]|null $entities
+     * @return Message
+     */
+    public function setEntities(array $entities): Message
+    {
+        $this->entities = $entities;
+
+        return $this;
+    }
+
+    /**
+     * @return MessageEntity[]|null
+     */
+    public function getCaptionEntities(): ?array
     {
         return $this->captionEntities;
     }
 
     /**
-     * @param ArrayOfMessageEntity $captionEntities
+     * @param MessageEntity[] $captionEntities
+     * @return Message
      */
-    public function setCaptionEntities($captionEntities)
+    public function setCaptionEntities(array $captionEntities): Message
     {
         $this->captionEntities = $captionEntities;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return Audio|null
      */
-    public function getConnectedWebsite()
+    public function getAudio(): ?Audio
+    {
+        return $this->audio;
+    }
+
+    /**
+     * @param Audio $audio
+     * @return Message
+     */
+    public function setAudio(Audio $audio): Message
+    {
+        $this->audio = $audio;
+
+        return $this;
+    }
+
+    /**
+     * @return Document|null
+     */
+    public function getDocument(): ?Document
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param Document $document
+     * @return Message
+     */
+    public function setDocument(Document $document): Message
+    {
+        $this->document = $document;
+        return $this;
+    }
+
+    /**
+     * @return Animation|null
+     */
+    public function getAnimation(): ?Animation
+    {
+        return $this->animation;
+    }
+
+    /**
+     * @param Animation $animation
+     * @return Message
+     */
+    public function setAnimation(Animation $animation): Message
+    {
+        $this->animation = $animation;
+        return $this;
+    }
+
+    /**
+     * @return Game|null
+     */
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game $game
+     * @return Message
+     */
+    public function setGame(Game $game): Message
+    {
+        $this->game = $game;
+        return $this;
+    }
+
+    /**
+     * @return PhotoSize[]|null
+     */
+    public function getPhoto(): ?array
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param PhotoSize[] $photo
+     * @return Message
+     */
+    public function setPhoto(array $photo): Message
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+    /**
+     * @return Sticker|null
+     */
+    public function getSticker(): ?Sticker
+    {
+        return $this->sticker;
+    }
+
+    /**
+     * @param Sticker $sticker
+     * @return Message
+     */
+    public function setSticker(Sticker $sticker): Message
+    {
+        $this->sticker = $sticker;
+        return $this;
+    }
+
+    /**
+     * @return Video|null
+     */
+    public function getVideo(): ?Video
+    {
+        return $this->video;
+    }
+
+    /**
+     * @param Video $video
+     * @return Message
+     */
+    public function setVideo(Video $video): Message
+    {
+        $this->video = $video;
+        return $this;
+    }
+
+    /**
+     * @return Voice|null
+     */
+    public function getVoice(): ?Voice
+    {
+        return $this->voice;
+    }
+
+    /**
+     * @param Voice $voice
+     * @return Message
+     */
+    public function setVoice(Voice $voice): Message
+    {
+        $this->voice = $voice;
+        return $this;
+    }
+
+    /**
+     * @return VideoNote|null
+     */
+    public function getVideoNote(): ?VideoNote
+    {
+        return $this->videoNote;
+    }
+
+    /**
+     * @param VideoNote $videoNote
+     * @return Message
+     */
+    public function setVideoNote(VideoNote $videoNote): Message
+    {
+        $this->videoNote = $videoNote;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCaption(): ?string
+    {
+        return $this->caption;
+    }
+
+    /**
+     * @param string $caption
+     * @return Message
+     */
+    public function setCaption(string $caption): Message
+    {
+        $this->caption = $caption;
+        return $this;
+    }
+
+    /**
+     * @return Contact|null
+     */
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param Contact $contact
+     * @return Message
+     */
+    public function setContact(Contact $contact): Message
+    {
+        $this->contact = $contact;
+        return $this;
+    }
+
+    /**
+     * @return Location|null
+     */
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location $location
+     * @return Message
+     */
+    public function setLocation(Location $location): Message
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * @return Venue|null
+     */
+    public function getVenue(): ?Venue
+    {
+        return $this->venue;
+    }
+
+    /**
+     * @param Venue $venue
+     * @return Message
+     */
+    public function setVenue(Venue $venue): Message
+    {
+        $this->venue = $venue;
+        return $this;
+    }
+
+    /**
+     * @return Poll|null
+     */
+    public function getPoll(): ?Poll
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     * @return Message
+     */
+    public function setPoll(Poll $poll): Message
+    {
+        $this->poll = $poll;
+        return $this;
+    }
+
+    /**
+     * @return User[]|null
+     */
+    public function getNewChatMembers(): ?array
+    {
+        return $this->newChatMembers;
+    }
+
+    /**
+     * @param User[] $newChatMembers
+     * @return Message
+     */
+    public function setNewChatMembers(array $newChatMembers): Message
+    {
+        $this->newChatMembers = $newChatMembers;
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getLeftChatMember(): ?User
+    {
+        return $this->leftChatMember;
+    }
+
+    /**
+     * @param User $leftChatMember
+     * @return Message
+     */
+    public function setLeftChatMember(User $leftChatMember): Message
+    {
+        $this->leftChatMember = $leftChatMember;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNewChatTitle(): ?string
+    {
+        return $this->newChatTitle;
+    }
+
+    /**
+     * @param string $newChatTitle
+     * @return Message
+     */
+    public function setNewChatTitle(string $newChatTitle): Message
+    {
+        $this->newChatTitle = $newChatTitle;
+        return $this;
+    }
+
+    /**
+     * @return PhotoSize[]|null
+     */
+    public function getNewChatPhoto(): ?array
+    {
+        return $this->newChatPhoto;
+    }
+
+    /**
+     * @param PhotoSize[] $newChatPhoto
+     * @return Message
+     */
+    public function setNewChatPhoto(array $newChatPhoto): Message
+    {
+        $this->newChatPhoto = $newChatPhoto;
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDeleteChatPhoto(): ?bool
+    {
+        return $this->deleteChatPhoto;
+    }
+
+    /**
+     * @param bool $deleteChatPhoto
+     * @return Message
+     */
+    public function setDeleteChatPhoto(bool $deleteChatPhoto): Message
+    {
+        $this->deleteChatPhoto = $deleteChatPhoto;
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getGroupChatCreated(): ?bool
+    {
+        return $this->groupChatCreated;
+    }
+
+    /**
+     * @param bool $groupChatCreated
+     * @return Message
+     */
+    public function setGroupChatCreated(bool $groupChatCreated): Message
+    {
+        $this->groupChatCreated = $groupChatCreated;
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getSupergroupChatCreated(): ?bool
+    {
+        return $this->supergroupChatCreated;
+    }
+
+    /**
+     * @param bool $supergroupChatCreated
+     * @return Message
+     */
+    public function setSupergroupChatCreated(bool $supergroupChatCreated): Message
+    {
+        $this->supergroupChatCreated = $supergroupChatCreated;
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getChannelChatCreated(): ?bool
+    {
+        return $this->channelChatCreated;
+    }
+
+    /**
+     * @param bool $channelChatCreated
+     * @return Message
+     */
+    public function setChannelChatCreated(bool $channelChatCreated): Message
+    {
+        $this->channelChatCreated = $channelChatCreated;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMigrateToChatId(): ?int
+    {
+        return $this->migrateToChatId;
+    }
+
+    /**
+     * @param int $migrateToChatId
+     * @return Message
+     */
+    public function setMigrateToChatId(int $migrateToChatId): Message
+    {
+        $this->migrateToChatId = $migrateToChatId;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMigrateFromChatId(): ?int
+    {
+        return $this->migrateFromChatId;
+    }
+
+    /**
+     * @param int $migrateFromChatId
+     * @return Message
+     */
+    public function setMigrateFromChatId(int $migrateFromChatId): Message
+    {
+        $this->migrateFromChatId = $migrateFromChatId;
+        return $this;
+    }
+
+    /**
+     * @return Message|null
+     */
+    public function getPinnedMessage(): ?Message
+    {
+        return $this->pinnedMessage;
+    }
+
+    /**
+     * @param Message $pinnedMessage
+     * @return Message
+     */
+    public function setPinnedMessage(Message $pinnedMessage): Message
+    {
+        $this->pinnedMessage = $pinnedMessage;
+        return $this;
+    }
+
+    /**
+     * @return Invoice|null
+     */
+    public function getInvoice(): ?Invoice
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return Message
+     */
+    public function setInvoice(Invoice $invoice): Message
+    {
+        $this->invoice = $invoice;
+        return $this;
+    }
+
+    /**
+     * @return SuccessfulPayment|null
+     */
+    public function getSuccessfulPayment(): ?SuccessfulPayment
+    {
+        return $this->successfulPayment;
+    }
+
+    /**
+     * @param SuccessfulPayment $successfulPayment
+     * @return Message
+     */
+    public function setSuccessfulPayment(SuccessfulPayment $successfulPayment): Message
+    {
+        $this->successfulPayment = $successfulPayment;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConnectedWebsite(): ?string
     {
         return $this->connectedWebsite;
     }
 
     /**
      * @param string $connectedWebsite
+     * @return Message
      */
-    public function setConnectedWebsite($connectedWebsite)
+    public function setConnectedWebsite(string $connectedWebsite): Message
     {
         $this->connectedWebsite = $connectedWebsite;
+        return $this;
+    }
+
+    /**
+     * @return PassportData
+     */
+    public function getPassportData(): ?PassportData
+    {
+        return $this->passportData;
+    }
+
+    /**
+     * @param PassportData $passportData
+     * @return Message
+     */
+    public function setPassportData(PassportData $passportData): Message
+    {
+        $this->passportData = $passportData;
+        return $this;
+    }
+
+    /**
+     * @return InlineKeyboardMarkup
+     */
+    public function getReplyMarkup(): ?InlineKeyboardMarkup
+    {
+        return $this->replyMarkup;
+    }
+
+    /**
+     * @param InlineKeyboardMarkup $replyMarkup
+     * @return Message
+     */
+    public function setReplyMarkup(InlineKeyboardMarkup $replyMarkup): Message
+    {
+        $this->replyMarkup = $replyMarkup;
+        return $this;
     }
 }
