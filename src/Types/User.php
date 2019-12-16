@@ -59,21 +59,21 @@ class User extends BaseType implements TypeInterface
     /**
      * Optional. User‘s or bot’s last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. User‘s or bot’s username
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
 
     /**
      * Optional. IETF language tag of the user's language
      *
-     * @var string
+     * @var string|null
      */
     protected $languageCode;
 
@@ -157,7 +157,6 @@ class User extends BaseType implements TypeInterface
 
         return $this;
     }
-
 
     /**
      * @return string|null
