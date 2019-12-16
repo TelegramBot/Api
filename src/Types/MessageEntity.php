@@ -125,6 +125,7 @@ class MessageEntity extends BaseType implements TypeInterface
     public function setOffset(int $offset): MessageEntity
     {
         $this->offset = $offset;
+
         return $this;
     }
 
