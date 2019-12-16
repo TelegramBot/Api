@@ -27,6 +27,8 @@ class Message extends BaseType implements TypeInterface
         'date' => true,
         'chat' => Chat::class,
         'forward_from' => User::class,
+        'forward_from_chat' => Chat::class,
+        'forward_from_message_id' => true,
         'forward_date' => true,
         'reply_to_message' => Message::class,
         'text' => true,
@@ -35,6 +37,7 @@ class Message extends BaseType implements TypeInterface
         'audio' => Audio::class,
         'document' => Document::class,
         'photo' => ArrayOfPhotoSize::class,
+        'media_group_id' => true,
         'sticker' => Sticker::class,
         'video' => Video::class,
         'voice' => Voice::class,
@@ -96,6 +99,22 @@ class Message extends BaseType implements TypeInterface
     protected $forwardFrom;
 
     /**
+     * Optional. For messages forwarded from channels, information about
+     * the original channel
+     *
+     * @var \TelegramBot\Api\Types\Chat
+     */
+    protected $forwardFromChat;
+
+    /**
+     * Optional. For messages forwarded from channels, identifier of
+     * the original message in the channel
+     *
+     * @var int
+     */
+    protected $forwardFromMessageId;
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      *
      * @var int
@@ -146,6 +165,14 @@ class Message extends BaseType implements TypeInterface
      * @var array
      */
     protected $photo;
+
+    /**
+     * Optional. The unique identifier of a media message group
+     * this message belongs to
+     *
+     * @var int
+     */
+    protected $mediaGroupId;
 
     /**
      * Optional. Message is a sticker, information about the sticker
@@ -477,6 +504,38 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @return Chat
+     */
+    public function getForwardFromChat()
+    {
+        return $this->forwardFromChat;
+    }
+
+    /**
+     * @param Chat $forwardFromChat
+     */
+    public function setForwardFromChat(Chat $forwardFromChat)
+    {
+        $this->forwardFromChat = $forwardFromChat;
+    }
+
+    /**
+     * @return int
+     */
+    public function getForwardFromMessageId()
+    {
+        return $this->forwardFromMessageId;
+    }
+
+    /**
+     * @param int $forwardFromMessageId
+     */
+    public function setForwardFromMessageId($forwardFromMessageId)
+    {
+        $this->forwardFromMessageId = $forwardFromMessageId;
+    }
+
+    /**
      * @return boolean
      */
     public function isGroupChatCreated()
@@ -624,6 +683,22 @@ class Message extends BaseType implements TypeInterface
     public function setPhoto(array $photo)
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMediaGroupId()
+    {
+        return $this->mediaGroupId;
+    }
+
+    /**
+     * @param int $mediaGroupId
+     */
+    public function setMediaGroupId($mediaGroupId)
+    {
+        $this->mediaGroupId = $mediaGroupId;
     }
 
     /**
