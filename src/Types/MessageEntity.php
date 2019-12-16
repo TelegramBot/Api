@@ -11,10 +11,16 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
+/**
+ * Class MessageEntity
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+ *
+ * @package TelegramBot\Api\Types
+ */
 class MessageEntity extends BaseType implements TypeInterface
 {
 
-    const TYPE_MENTION = 'mentin';
+    const TYPE_MENTION = 'mention';
     const TYPE_HASHTAG = 'hashtag';
     const TYPE_CASHTAG = 'cashtag';
     const TYPE_BOT_COMMAND = 'bot_command';
