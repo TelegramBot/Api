@@ -27,6 +27,8 @@ class Message extends BaseType implements TypeInterface
         'date' => true,
         'chat' => Chat::class,
         'forward_from' => User::class,
+        'forward_from_chat' => Chat::class,
+        'forward_from_message_id' => true,
         'forward_date' => true,
         'reply_to_message' => Message::class,
         'text' => true,
@@ -35,8 +37,10 @@ class Message extends BaseType implements TypeInterface
         'audio' => Audio::class,
         'document' => Document::class,
         'photo' => ArrayOfPhotoSize::class,
+        'media_group_id' => true,
         'sticker' => Sticker::class,
         'video' => Video::class,
+        'animation' => Animation::class,
         'voice' => Voice::class,
         'caption' => true,
         'contact' => Contact::class,
@@ -96,6 +100,22 @@ class Message extends BaseType implements TypeInterface
     protected $forwardFrom;
 
     /**
+     * Optional. For messages forwarded from channels, information about
+     * the original channel
+     *
+     * @var \TelegramBot\Api\Types\Chat
+     */
+    protected $forwardFromChat;
+
+    /**
+     * Optional. For messages forwarded from channels, identifier of
+     * the original message in the channel
+     *
+     * @var int
+     */
+    protected $forwardFromMessageId;
+
+    /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      *
      * @var int
@@ -148,6 +168,14 @@ class Message extends BaseType implements TypeInterface
     protected $photo;
 
     /**
+     * Optional. The unique identifier of a media message group
+     * this message belongs to
+     *
+     * @var int
+     */
+    protected $mediaGroupId;
+
+    /**
      * Optional. Message is a sticker, information about the sticker
      *
      * @var \TelegramBot\Api\Types\Sticker
@@ -160,6 +188,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Video
      */
     protected $video;
+    
+    /**
+     * Optional. Message is a animation, information about the animation
+     *
+     * @var \TelegramBot\Api\Types\Animation
+     */
+    protected $animation;
 
     /**
      * Optional. Message is a voice message, information about the file
@@ -477,6 +512,38 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @return Chat
+     */
+    public function getForwardFromChat()
+    {
+        return $this->forwardFromChat;
+    }
+
+    /**
+     * @param Chat $forwardFromChat
+     */
+    public function setForwardFromChat(Chat $forwardFromChat)
+    {
+        $this->forwardFromChat = $forwardFromChat;
+    }
+
+    /**
+     * @return int
+     */
+    public function getForwardFromMessageId()
+    {
+        return $this->forwardFromMessageId;
+    }
+
+    /**
+     * @param int $forwardFromMessageId
+     */
+    public function setForwardFromMessageId($forwardFromMessageId)
+    {
+        $this->forwardFromMessageId = $forwardFromMessageId;
+    }
+
+    /**
      * @return boolean
      */
     public function isGroupChatCreated()
@@ -627,6 +694,22 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @return int
+     */
+    public function getMediaGroupId()
+    {
+        return $this->mediaGroupId;
+    }
+
+    /**
+     * @param int $mediaGroupId
+     */
+    public function setMediaGroupId($mediaGroupId)
+    {
+        $this->mediaGroupId = $mediaGroupId;
+    }
+
+    /**
      * @return Message
      */
     public function getReplyToMessage()
@@ -720,6 +803,22 @@ class Message extends BaseType implements TypeInterface
     public function setVideo(Video $video)
     {
         $this->video = $video;
+    }
+    
+    /**
+     * @return Animation
+     */
+    public function getAnimation()
+    {
+        return $this->animation;
+    }
+
+    /**
+     * @param Animation $animation
+     */
+    public function setAnimation(Animation $animation)
+    {
+        $this->animation = $animation;
     }
 
     /**
