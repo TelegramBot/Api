@@ -11,24 +11,10 @@ class ContactTest extends TestCase
     {
         $contact = new Contact();
         $contact->setPhoneNumber('123456');
-        $this->assertAttributeEquals('123456', 'phoneNumber', $contact);
-    }
-
-    public function testGetPhoneNumber()
-    {
-        $contact = new Contact();
-        $contact->setPhoneNumber('123456');
         $this->assertEquals('123456', $contact->getPhoneNumber());
     }
 
     public function testSetFirstName()
-    {
-        $contact = new Contact();
-        $contact->setFirstName('Ilya');
-        $this->assertAttributeEquals('Ilya', 'firstName', $contact);
-    }
-
-    public function testGetFirstName()
     {
         $contact = new Contact();
         $contact->setFirstName('Ilya');
@@ -39,42 +25,37 @@ class ContactTest extends TestCase
     {
         $contact = new Contact();
         $contact->setLastName('Gusev');
-        $this->assertAttributeEquals('Gusev', 'lastName', $contact);
-    }
-
-    public function testGetLastName()
-    {
-        $contact = new Contact();
-        $contact->setLastName('Gusev');
         $this->assertEquals('Gusev', $contact->getLastName());
     }
 
     public function testSetUserId()
     {
         $contact = new Contact();
-        $contact->setUserId('iGusev');
-        $this->assertAttributeEquals('iGusev', 'userId', $contact);
+        $contact->setUserId(12345);
+        $this->assertEquals(12345, $contact->getUserId());
     }
 
-    public function testGetUserId()
+    public function testSetVcard()
     {
         $contact = new Contact();
-        $contact->setUserId('iGusev');
-        $this->assertEquals('iGusev', $contact->getUserId());
+        $contact->setVcard('testvcard');
+        $this->assertEquals('testvcard', $contact->getVcard());
     }
 
     public function testFromResponse()
     {
-        $contact = Contact::fromResponse(array(
+        $contact = Contact::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'phone_number' => '123456',
-            'user_id' => 'iGusev'
-        ));
-        $this->assertInstanceOf('\TelegramBot\Api\Types\Contact', $contact);
+            'user_id' => 12345,
+            'vcard' => 'testVcard'
+        ]);
+        $this->assertInstanceOf(Contact::class, $contact);
         $this->assertEquals('123456', $contact->getPhoneNumber());
         $this->assertEquals('Ilya', $contact->getFirstName());
         $this->assertEquals('Gusev', $contact->getLastName());
-        $this->assertEquals('iGusev', $contact->getUserId());
+        $this->assertEquals(12345, $contact->getUserId());
+        $this->assertEquals('testVcard', $contact->getVcard());
     }
 }

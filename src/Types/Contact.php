@@ -7,7 +7,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Contact
- * This object represents a sticker.
+ * This object represents a phone contact.
  *
  * @package TelegramBot\Api\Types
  */
@@ -29,7 +29,8 @@ class Contact extends BaseType implements TypeInterface
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,
-        'user_id' => true
+        'user_id' => true,
+        'vcard' => true
     ];
 
     /**
@@ -49,78 +50,118 @@ class Contact extends BaseType implements TypeInterface
     /**
      * Optional. Contact's last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. Contact's user identifier in Telegram
      *
-     * @var int
+     * @var int|null
      */
     protected $userId;
 
     /**
-     * @return string
+     * Optional. Additional data about the contact in the form of a vCard
+     *
+     * @var string|null
      */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
+    protected $vcard;
 
     /**
      * @return string
      */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
 
     /**
      * @param string $phoneNumber
+     * @return Contact
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): Contact
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId()
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     *
+     * @return Contact
+     */
+    public function setFirstName(string $firstName): Contact
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     *
+     * @return Contact
+     */
+    public function setLastName(string $lastName): Contact
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
 
     /**
      * @param int $userId
+     * @return Contact
      */
-    public function setUserId($userId)
+    public function setUserId(int $userId): Contact
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVcard(): ?string
+    {
+        return $this->vcard;
+    }
+
+    /**
+     * @param string $vcard
+     * @return Contact
+     */
+    public function setVcard(string $vcard): Contact
+    {
+        $this->vcard = $vcard;
+
+        return $this;
     }
 }
