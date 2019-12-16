@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
@@ -37,7 +36,7 @@ class Video extends BaseType implements TypeInterface
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file
      *
      * @var string
      */
@@ -71,154 +70,150 @@ class Video extends BaseType implements TypeInterface
      */
     protected $thumb;
 
-
     /**
      * Optional. Mime type of a file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @param int $duration
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setDuration($duration)
-    {
-        if (is_integer($duration)) {
-            $this->duration = $duration;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
 
     /**
      * @param string $fileId
+     * @return Video
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): Video
     {
         $this->fileId = $fileId;
+
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getFileSize()
-    {
-        return $this->fileSize;
-    }
-
-    /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setFileSize($fileSize)
-    {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * @param int $height
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setHeight($height)
-    {
-        if (is_integer($height)) {
-            $this->height = $height;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
-
-    /**
-     * @param string $mimeType
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
-    }
-
-    /**
-     * @return PhotoSize
-     */
-    public function getThumb()
-    {
-        return $this->thumb;
-    }
-
-    /**
-     * @param PhotoSize $thumb
-     */
-    public function setThumb(PhotoSize $thumb)
-    {
-        $this->thumb = $thumb;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
     /**
      * @param int $width
-     *
-     * @throws InvalidArgumentException
+     * @return Video
      */
-    public function setWidth($width)
+    public function setWidth(int $width): Video
     {
-        if (is_integer($width)) {
-            $this->width = $width;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param int $height
+     * @return Video
+     */
+    public function setHeight(int $height): Video
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDuration(): int
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param int $duration
+     * @return Video
+     */
+    public function setDuration(int $duration): Video
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return PhotoSize
+     */
+    public function getThumb(): PhotoSize
+    {
+        return $this->thumb;
+    }
+
+    /**
+     * @param PhotoSize $thumb
+     * @return Video
+     */
+    public function setThumb(PhotoSize $thumb): Video
+    {
+        $this->thumb = $thumb;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @param string $mimeType
+     * @return Video
+     */
+    public function setMimeType(string $mimeType): Video
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFileSize(): ?int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     * @return Video
+     */
+    public function setFileSize(int $fileSize): Video
+    {
+        $this->fileSize = $fileSize;
+
+        return $this;
     }
 }
