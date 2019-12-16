@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 13/04/16
- * Time: 13:55
- */
 
 namespace TelegramBot\Api\Types;
 
@@ -36,6 +30,7 @@ class Venue extends BaseType implements TypeInterface
         'title' => true,
         'address' => true,
         'foursquare_id' => true,
+        'foursquare_type' => true
     ];
 
     /**
@@ -62,71 +57,109 @@ class Venue extends BaseType implements TypeInterface
     /**
      * Optional. Foursquare identifier of the venue
      *
-     * @var string
+     * @var string|null
      */
     protected $foursquareId;
 
     /**
+     * Optional. Foursquare type of the venue.
+     * (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”)
+     *
+     * @var string|null
+     */
+    protected $foursquareType;
+
+    /**
      * @return Location
      */
-    public function getLocation()
+    public function getLocation(): Location
     {
         return $this->location;
     }
 
     /**
      * @param Location $location
+     * @return Venue
      */
-    public function setLocation($location)
+    public function setLocation(Location $location): Venue
     {
         $this->location = $location;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
      * @param string $title
+     * @return Venue
      */
-    public function setTitle($title)
+    public function setTitle(string $title): Venue
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
     /**
      * @param string $address
+     * @return Venue
      */
-    public function setAddress($address)
+    public function setAddress(string $address): Venue
     {
         $this->address = $address;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFoursquareId()
+    public function getFoursquareId(): ?string
     {
         return $this->foursquareId;
     }
 
     /**
      * @param string $foursquareId
+     * @return Venue
      */
-    public function setFoursquareId($foursquareId)
+    public function setFoursquareId(string $foursquareId): Venue
     {
         $this->foursquareId = $foursquareId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFoursquareType(): ?string
+    {
+        return $this->foursquareType;
+    }
+
+    /**
+     * @param string $foursquareType
+     * @return Venue
+     */
+    public function setFoursquareType(string $foursquareType): Venue
+    {
+        $this->foursquareType = $foursquareType;
+
+        return $this;
     }
 }
