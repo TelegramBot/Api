@@ -59,6 +59,7 @@ class Location extends BaseType implements TypeInterface
     public function setLongitude(float $longitude): Location
     {
         $this->longitude = $longitude;
+
         return $this;
     }
 
@@ -77,6 +78,7 @@ class Location extends BaseType implements TypeInterface
     public function setLatitude(float $latitude): Location
     {
         $this->latitude = $latitude;
+
         return $this;
     }
 }
