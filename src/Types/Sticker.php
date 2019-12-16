@@ -19,7 +19,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'width', 'height'];
+    static protected $requiredParams = ['file_id', 'width', 'height', 'is_animated'];
 
     /**
      * {@inheritdoc}
@@ -30,7 +30,11 @@ class Sticker extends BaseType implements TypeInterface
         'file_id' => true,
         'width' => true,
         'height' => true,
+        'is_animated' => true,
         'thumb' => PhotoSize::class,
+        'emoji' => true,
+        'set_name' => true,
+//        'mask_position' => MaskPosition::class,
         'file_size' => true,
     ];
 
@@ -56,6 +60,13 @@ class Sticker extends BaseType implements TypeInterface
     protected $height;
 
     /**
+     * True, if the sticker is animated
+     *
+     * @var bool
+     */
+    protected $isAnimated;
+
+    /**
      * Document thumbnail as defined by sender
      *
      * @var PhotoSize
@@ -63,107 +74,202 @@ class Sticker extends BaseType implements TypeInterface
     protected $thumb;
 
     /**
+     * Optional. Emoji associated with the sticker
+     *
+     * @var string|null
+     */
+    protected $emoji;
+
+    /**
+     * Optional. Name of the sticker set to which the sticker belongs
+     *
+     * @var string|null
+     */
+    protected $setName;
+
+    /**
+     * Optional. For mask stickers, the position where the mask should be placed
+     *
+     * @var MaskPosition|null
+     * @TODO: implement
+     */
+    protected $maskPosition;
+
+    /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
 
     /**
      * @param string $fileId
+     * @return Sticker
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): Sticker
     {
         $this->fileId = $fileId;
+
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getFileSize()
-    {
-        return $this->fileSize;
-    }
-
-    /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setFileSize($fileSize)
-    {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * @param int $height
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setHeight($height)
-    {
-        if (is_integer($height)) {
-            $this->height = $height;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return PhotoSize
-     */
-    public function getThumb()
-    {
-        return $this->thumb;
-    }
-
-    /**
-     * @param PhotoSize $thumb
-     */
-    public function setThumb(PhotoSize $thumb)
-    {
-        $this->thumb = $thumb;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
     /**
      * @param int $width
-     *
-     * @throws InvalidArgumentException
+     * @return Sticker
      */
-    public function setWidth($width)
+    public function setWidth(int $width): Sticker
     {
-        if (is_integer($width)) {
-            $this->width = $width;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param int $height
+     * @return Sticker
+     */
+    public function setHeight(int $height): Sticker
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnimated(): bool
+    {
+        return $this->isAnimated;
+    }
+
+    /**
+     * @param bool $isAnimated
+     * @return Sticker
+     */
+    public function setIsAnimated(bool $isAnimated): Sticker
+    {
+        $this->isAnimated = $isAnimated;
+
+        return $this;
+    }
+
+    /**
+     * @return PhotoSize
+     */
+    public function getThumb(): PhotoSize
+    {
+        return $this->thumb;
+    }
+
+    /**
+     * @param PhotoSize $thumb
+     * @return Sticker
+     */
+    public function setThumb(PhotoSize $thumb): Sticker
+    {
+        $this->thumb = $thumb;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmoji(): ?string
+    {
+        return $this->emoji;
+    }
+
+    /**
+     * @param string $emoji
+     * @return Sticker
+     */
+    public function setEmoji(string $emoji): Sticker
+    {
+        $this->emoji = $emoji;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSetName(): ?string
+    {
+        return $this->setName;
+    }
+
+    /**
+     * @param string $setName
+     * @return Sticker
+     */
+    public function setSetName(string $setName): Sticker
+    {
+        $this->setName = $setName;
+
+        return $this;
+    }
+
+    /**
+     * @return MaskPosition|null
+     */
+    public function getMaskPosition(): ?MaskPosition
+    {
+        return $this->maskPosition;
+    }
+
+    /**
+     * @param MaskPosition $maskPosition
+     * @return Sticker
+     */
+    public function setMaskPosition(MaskPosition $maskPosition): Sticker
+    {
+        $this->maskPosition = $maskPosition;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFileSize(): ?int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     * @return Sticker
+     */
+    public function setFileSize(int $fileSize): Sticker
+    {
+        $this->fileSize = $fileSize;
+
+        return $this;
     }
 }
