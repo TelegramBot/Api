@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
@@ -76,7 +75,7 @@ class PhotoSize extends BaseType implements TypeInterface
     public function setFileId(string $fileId): PhotoSize
     {
         $this->fileId = $fileId;
-        
+
         return $this;
     }
 
