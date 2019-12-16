@@ -8,7 +8,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Audio
- * This object represents an audio file (voice note).
+ * This object represents an audio file to be treated as music by the Telegram clients.
  *
  * @package TelegramBot\Api\Types
  */
@@ -32,18 +32,19 @@ class Audio extends BaseType implements TypeInterface
         'performer' => true,
         'title' => true,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
+        'thumb' => PhotoSize::class,
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file
      *
      * @var string
      */
     protected $fileId;
 
     /**
-     * Photo width
+     * Duration of the audio in seconds as defined by sender
      *
      * @var int
      */
@@ -52,136 +53,167 @@ class Audio extends BaseType implements TypeInterface
     /**
      * Optional. Performer of the audio as defined by sender or by audio tags
      *
-     * @var string
+     * @var string|null
      */
     protected $performer;
 
     /**
      * Optional. Title of the audio as defined by sender or by audio tags
      *
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @param int $duration
+     * Optional. Thumbnail of the album cover to which the music file belongs
      *
-     * @throws InvalidArgumentException
+     * @var PhotoSize|null
      */
-    public function setDuration($duration)
-    {
-        if (is_integer($duration)) {
-            $this->duration = $duration;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
+    protected $thumb;
 
     /**
      * @return string
      */
-    public function getPerformer()
-    {
-        return $this->performer;
-    }
-
-    /**
-     * @param string $performer
-     */
-    public function setPerformer($performer)
-    {
-        $this->performer = $performer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
 
     /**
      * @param string $fileId
+     * @return Audio
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): Audio
     {
         $this->fileId = $fileId;
+
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getFileSize()
+    public function getDuration(): int
     {
-        return $this->fileSize;
+        return $this->duration;
     }
 
     /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
+     * @param int $duration
+     * @return Audio
      */
-    public function setFileSize($fileSize)
+    public function setDuration(int $duration): Audio
     {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->duration = $duration;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMimeType()
+    public function getPerformer(): ?string
+    {
+        return $this->performer;
+    }
+
+    /**
+     * @param string|null $performer
+     * @return Audio
+     */
+    public function setPerformer(string $performer): Audio
+    {
+        $this->performer = $performer;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Audio
+     */
+    public function setTitle(string $title): Audio
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMimeType(): ?string
     {
         return $this->mimeType;
     }
 
     /**
      * @param string $mimeType
+     * @return Audio
      */
-    public function setMimeType($mimeType)
+    public function setMimeType(string $mimeType): Audio
     {
         $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFileSize(): ?int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     * @return Audio
+     */
+    public function setFileSize(int $fileSize): Audio
+    {
+        $this->fileSize = $fileSize;
+
+        return $this;
+    }
+
+    /**
+     * @return PhotoSize|null
+     */
+    public function getThumb(): ?PhotoSize
+    {
+        return $this->thumb;
+    }
+
+    /**
+     * @param PhotoSize $thumb
+     * @return Audio
+     */
+    public function setThumb(PhotoSize $thumb): Audio
+    {
+        $this->thumb = $thumb;
+
+        return $this;
     }
 }
