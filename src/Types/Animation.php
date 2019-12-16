@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
@@ -108,7 +107,7 @@ class Animation extends BaseType implements TypeInterface
     public function setFileId(string $fileId): Animation
     {
         $this->fileId = $fileId;
-        
+
         return $this;
     }
 
