@@ -3,12 +3,11 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Poll
- * This object contains information about a poll.
+ * This object contains information about a poll
  *
  * @package TelegramBot\Api\Types
  */
@@ -51,7 +50,7 @@ class Poll extends BaseType implements TypeInterface
      * List of poll options
      * Array of \TelegramBot\Api\Types\PollOption
      *
-     * @var array
+     * @var PollOption[]
      */
     protected $options;
 
@@ -65,64 +64,76 @@ class Poll extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
      * @param string $id
+     * @return Poll
      */
-    public function setId($id)
+    public function setId(string $id): Poll
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getQuestion()
+    public function getQuestion(): string
     {
         return $this->question;
     }
 
     /**
      * @param string $question
+     * @return Poll
      */
-    public function setQuestion($question)
+    public function setQuestion(string $question): Poll
     {
         $this->question = $question;
+
+        return $this;
     }
 
     /**
-     * @return array
+     * @return PollOption[]
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
 
     /**
      * @param array $options
+     * @return Poll
      */
-    public function setOptions($options)
+    public function setOptions(array $options): Poll
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**
      * @return bool
      */
-    public function isClosed()
+    public function isClosed(): bool
     {
         return $this->isClosed;
     }
 
     /**
      * @param bool $isClosed
+     * @return Poll
      */
-    public function setIsClosed($isClosed)
+    public function setIsClosed(bool $isClosed): Poll
     {
         $this->isClosed = $isClosed;
+
+        return $this;
     }
 }
