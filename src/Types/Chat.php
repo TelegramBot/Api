@@ -28,6 +28,7 @@ class Chat extends BaseType implements TypeInterface
         'first_name' => true,
         'last_name' => true,
         'photo' => ChatPhoto::class,
+        'permissions' => ChatPermissions::class,
         'description' => true,
         'invite_link' => true,
         'pinned_message' => Message::class,
