@@ -2,20 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Location;
 
 class LocationTest extends TestCase
 {
     public function testSetLatitude()
-    {
-        $location = new Location();
-        $location->setLatitude(55.585827);
-        $this->assertAttributeEquals(55.585827, 'latitude', $location);
-    }
-
-    public function testGetLatitude()
     {
         $location = new Location();
         $location->setLatitude(55.585827);
@@ -26,39 +18,28 @@ class LocationTest extends TestCase
     {
         $location = new Location();
         $location->setLongitude(37.675309);
-        $this->assertAttributeEquals(37.675309, 'longitude', $location);
-    }
-
-    public function testGetLongtitude()
-    {
-        $location = new Location();
-        $location->setLongitude(37.675309);
         $this->assertEquals(37.675309, $location->getLongitude());
     }
 
     public function testFromResponse()
     {
-        $location = Location::fromResponse(array("latitude" => 55.585827, 'longitude' => 37.675309));
-        $this->assertInstanceOf('\TelegramBot\Api\Types\Location', $location);
-        $this->assertAttributeEquals(55.585827, 'latitude', $location);
-        $this->assertAttributeEquals(37.675309, 'longitude', $location);
+        $location = Location::fromResponse(['latitude' => 55.585827, 'longitude' => 37.675309]);
+        $this->assertInstanceOf(Location::class, $location);
+        $this->assertEquals(55.585827, $location->getLatitude());
+        $this->assertEquals(37.675309, $location->getLongitude());
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetLatitudeException()
     {
+        $this->expectException(\TypeError::class);
         $item = new Location();
         $item->setLatitude('s');
     }
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
+
     public function testSetLongitudeException()
     {
+        $this->expectException(\TypeError::class);
         $item = new Location();
         $item->setLongitude('s');
     }
-
 }

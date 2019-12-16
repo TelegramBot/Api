@@ -3,12 +3,11 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Location
- * This object represents a point on the map.
+ * This object represents a point on the map
  *
  * @package TelegramBot\Api\Types
  */
@@ -48,44 +47,36 @@ class Location extends BaseType implements TypeInterface
     /**
      * @return float
      */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param float $latitude
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setLatitude($latitude)
-    {
-        if (is_float($latitude)) {
-            $this->latitude = $latitude;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return float
-     */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
 
     /**
      * @param float $longitude
-     *
-     * @throws InvalidArgumentException
+     * @return Location
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): Location
     {
-        if (is_float($longitude)) {
-            $this->longitude = $longitude;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->longitude = $longitude;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     * @return Location
+     */
+    public function setLatitude(float $latitude): Location
+    {
+        $this->latitude = $latitude;
+        return $this;
     }
 }
