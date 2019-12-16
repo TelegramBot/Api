@@ -6,8 +6,10 @@ use TelegramBot\Api\BaseType;
 
 /**
  * Class ReplyKeyboardRemove
- * Upon receiving a message with this object,
- * Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
+ * Upon receiving a message with this object, Telegram clients will remove the current custom keyboard
+ * and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard
+ * is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user
+ * presses a button (see ReplyKeyboardMarkup).
  *
  * @package TelegramBot\Api\Types
  */
@@ -43,46 +45,60 @@ class ReplyKeyboardRemove extends BaseType
      * Targets:
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
+     * Example: A user votes in a poll, bot returns confirmation message in reply to the vote and removes
+     * the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
-    public function __construct($remove_keyboard = true, $selective = false)
+    /**
+     * ReplyKeyboardRemove constructor.
+     * @param bool|null $removeKeyboard
+     * @param bool|null $selective
+     */
+    public function __construct(?bool $removeKeyboard = null, ?bool $selective = null)
     {
-        $this->removeKeyboard = $remove_keyboard;
+        $this->removeKeyboard = $removeKeyboard;
+
         $this->selective = $selective;
     }
 
     /**
      * @return bool
      */
-    public function getRemoveKeyboard()
+    public function isRemoveKeyboard(): bool
     {
         return $this->removeKeyboard;
     }
 
     /**
-     * @param bool $remove_keyboard
+     * @param bool $removeKeyboard
+     * @return ReplyKeyboardRemove
      */
-    public function setRemoveKeyboard($remove_keyboard)
+    public function setRemoveKeyboard(bool $removeKeyboard): ReplyKeyboardRemove
     {
-        $this->removeKeyboard = $remove_keyboard;
+        $this->removeKeyboard = $removeKeyboard;
+
+        return $this;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function getSelective()
+    public function getSelective(): ?bool
     {
         return $this->selective;
     }
 
     /**
      * @param bool $selective
+     * @return ReplyKeyboardRemove
      */
-    public function setSelective($selective)
+    public function setSelective(bool $selective): ReplyKeyboardRemove
     {
         $this->selective = $selective;
+
+        return $this;
     }
 }

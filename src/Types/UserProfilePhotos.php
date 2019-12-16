@@ -8,7 +8,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class UserProfilePhotos
- * This object represent a user's profile pictures.
+ * This object represent a user's profile pictures
  *
  * @package TelegramBot\Api\Types
  */
@@ -34,7 +34,7 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     /**
      * Total number of profile pictures the target user has
      *
-     * @var Integer
+     * @var int
      */
     protected $totalCount;
 
@@ -47,40 +47,40 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     protected $photos;
 
     /**
-     * @return array
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
-    }
-
-    /**
-     * @param array $photos
-     */
-    public function setPhotos($photos)
-    {
-        $this->photos = $photos;
-    }
-
-    /**
      * @return int
      */
-    public function getTotalCount()
+    public function getTotalCount(): int
     {
         return $this->totalCount;
     }
 
     /**
      * @param int $totalCount
-     *
-     * @throws InvalidArgumentException
+     * @return UserProfilePhotos
      */
-    public function setTotalCount($totalCount)
+    public function setTotalCount(int $totalCount): UserProfilePhotos
     {
-        if (is_integer($totalCount)) {
-            $this->totalCount = $totalCount;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->totalCount = $totalCount;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPhotos(): array
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param array $photos
+     * @return UserProfilePhotos
+     */
+    public function setPhotos(array $photos): UserProfilePhotos
+    {
+        $this->photos = $photos;
+
+        return $this;
     }
 }

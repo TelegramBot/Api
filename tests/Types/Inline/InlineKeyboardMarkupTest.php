@@ -12,18 +12,10 @@ class InlineKeyboardMarkupTest extends TestCase
     {
         $item = new InlineKeyboardMarkup([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]]);
 
-        $this->assertAttributeEquals([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]], 'inlineKeyboard', $item);
+        $this->assertEquals([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]], $item->getInlineKeyboard());
     }
 
     public function testSetInlineKeyboard()
-    {
-        $item = new InlineKeyboardMarkup([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]]);
-        $item->setInlineKeyboard([[['url' => 'http://test.com', 'text' => 'Link']]]);
-
-        $this->assertAttributeEquals([[['url' => 'http://test.com', 'text' => 'Link']]], 'inlineKeyboard', $item);
-    }
-
-    public function testGetInlineKeyboard()
     {
         $item = new InlineKeyboardMarkup([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]]);
         $item->setInlineKeyboard([[['url' => 'http://test.com', 'text' => 'Link']]]);

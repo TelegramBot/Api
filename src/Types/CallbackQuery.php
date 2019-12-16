@@ -50,32 +50,30 @@ class CallbackQuery extends BaseType
     /**
      * Sender
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User|null
      */
     protected $from;
 
     /**
      * Optional. Message with the callback button that originated the query.
-     * Note that message content and message date will not be available
-     * if the message is too old
+     * Note that message content and message date will not be available if the message is too old
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var Message|null
      */
     protected $message;
 
     /**
-     * Optional. Identifier of the message sent via the bot in inline mode,
-     * that originated the query.
+     * Optional. Identifier of the message sent via the bot in inline mode, that originated the query.
      *
-     * @var string
+     * @var string|null
      */
     protected $inlineMessageId;
 
     /**
      * Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent.
-     * Useful for high scores in games.
+     * Useful for high scores in games (https://core.telegram.org/bots/api#games).
      *
-     * @var string
+     * @var string|null
      */
     protected $chatInstance;
 
@@ -83,128 +81,148 @@ class CallbackQuery extends BaseType
      * Optional. Data associated with the callback button.
      * Be aware that a bad client can send arbitrary data in this field.
      *
-     * @var string
+     * @var string|null
      */
     protected $data;
 
     /**
-     * Optional. Short name of a Game to be returned,
-     * serves as the unique identifier for the game
+     * Optional. Short name of a Game (https://core.telegram.org/bots/api#games) to be returned,
+     * serves as the unique identifier for the game.
      *
-     * @var string
+     * @var string|null
      */
     protected $gameShortName;
-
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
      * @param string $id
+     * @return CallbackQuery
      */
-    public function setId($id)
+    public function setId(string $id): CallbackQuery
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getFrom()
+    public function getFrom(): ?User
     {
         return $this->from;
     }
 
     /**
      * @param User $from
+     * @return CallbackQuery
      */
-    public function setFrom(User $from)
+    public function setFrom(User $from): CallbackQuery
     {
         $this->from = $from;
+
+        return $this;
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
-    public function getMessage()
+    public function getMessage(): ?Message
     {
         return $this->message;
     }
 
     /**
      * @param Message $message
+     * @return CallbackQuery
      */
-    public function setMessage($message)
+    public function setMessage(Message $message): CallbackQuery
     {
         $this->message = $message;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInlineMessageId()
+    public function getInlineMessageId(): ?string
     {
         return $this->inlineMessageId;
     }
 
     /**
-     * @param string $inlineMessageId
+     * @param string|null $inlineMessageId
+     * @return CallbackQuery
      */
-    public function setInlineMessageId($inlineMessageId)
+    public function setInlineMessageId(string $inlineMessageId): CallbackQuery
     {
         $this->inlineMessageId = $inlineMessageId;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getChatInstance()
+    public function getChatInstance(): ?string
     {
         return $this->chatInstance;
     }
 
     /**
      * @param string $chatInstance
+     * @return CallbackQuery
      */
-    public function setChatInstance($chatInstance)
+    public function setChatInstance(string $chatInstance): CallbackQuery
     {
         $this->chatInstance = $chatInstance;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getData()
+    public function getData(): ?string
     {
         return $this->data;
     }
 
     /**
      * @param string $data
+     * @return CallbackQuery
      */
-    public function setData($data)
+    public function setData(string $data): CallbackQuery
     {
         $this->data = $data;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGameShortName()
+    public function getGameShortName(): ?string
     {
         return $this->gameShortName;
     }
 
     /**
      * @param string $gameShortName
+     * @return CallbackQuery
      */
-    public function setGameShortName($gameShortName)
+    public function setGameShortName(string $gameShortName): CallbackQuery
     {
         $this->gameShortName = $gameShortName;
+
+        return $this;
     }
 }

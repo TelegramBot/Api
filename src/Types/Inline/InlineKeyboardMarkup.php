@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: YaroslavMolchan
- * Date: 16/03/17
- * Time: 22:15
- */
 
 namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
 
+/**
+ * Class InlineKeyboardMarkup
+ * This object represents an inline keyboard that appears right next to the message it belongs to.
+ *
+ * @package TelegramBot\Api\Types\Inline
+ */
 class InlineKeyboardMarkup extends BaseType
 {
     /**
@@ -37,9 +37,10 @@ class InlineKeyboardMarkup extends BaseType
     protected $inlineKeyboard;
 
     /**
+     * InlineKeyboardMarkup constructor.
      * @param array $inlineKeyboard
      */
-    public function __construct($inlineKeyboard)
+    public function __construct(?array $inlineKeyboard = null)
     {
         $this->inlineKeyboard = $inlineKeyboard;
     }
@@ -47,16 +48,19 @@ class InlineKeyboardMarkup extends BaseType
     /**
      * @return array
      */
-    public function getInlineKeyboard()
+    public function getInlineKeyboard(): array
     {
         return $this->inlineKeyboard;
     }
 
     /**
      * @param array $inlineKeyboard
+     * @return InlineKeyboardMarkup
      */
-    public function setInlineKeyboard($inlineKeyboard)
+    public function setInlineKeyboard(array $inlineKeyboard): InlineKeyboardMarkup
     {
         $this->inlineKeyboard = $inlineKeyboard;
+
+        return $this;
     }
 }

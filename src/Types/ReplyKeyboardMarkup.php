@@ -6,7 +6,7 @@ use TelegramBot\Api\BaseType;
 
 /**
  * Class ReplyKeyboardMarkup
- * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
+ * This object represents a custom keyboard with reply options (see Introduction to bots for details and examples)
  *
  * @package TelegramBot\Api\Types
  */
@@ -44,14 +44,17 @@ class ReplyKeyboardMarkup extends BaseType
      * (e.g., make the keyboard smaller if there are just two rows of buttons).
      * Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $resizeKeyboard;
 
     /**
-     * Optional. Requests clients to hide the keyboard as soon as it's been used. Defaults to false.
+     * Optional. Requests clients to hide the keyboard as soon as it's been used.
+     * The keyboard will still be available, but clients will automatically display
+     * the usual letter-keyboard in the chat – the user can press a special button in the input
+     * field to see the custom keyboard again. Defaults to false.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $oneTimeKeyboard;
 
@@ -60,80 +63,103 @@ class ReplyKeyboardMarkup extends BaseType
      * Targets:
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
+     * Example: A user requests to change the bot‘s language,
+     * bot replies to the request with a keyboard to select the new language.
+     * Other users in the group don’t see the keyboard.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
-    public function __construct($keyboard, $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null)
+    /**
+     * ReplyKeyboardMarkup constructor.
+     * @param array|null $keyboard
+     * @param bool|null $resizeKeyboard
+     * @param bool|null $oneTimeKeyboard
+     * @param bool|null $selective
+     */
+    public function __construct(?array $keyboard = null, ?bool $resizeKeyboard = null, ?bool $oneTimeKeyboard = null, ?bool $selective = null)
     {
         $this->keyboard = $keyboard;
-        $this->oneTimeKeyboard = $oneTimeKeyboard;
         $this->resizeKeyboard = $resizeKeyboard;
+        $this->oneTimeKeyboard = $oneTimeKeyboard;
         $this->selective = $selective;
     }
+
 
     /**
      * @return array
      */
-    public function getKeyboard()
+    public function getKeyboard(): array
     {
         return $this->keyboard;
     }
 
     /**
      * @param array $keyboard
+     * @return ReplyKeyboardMarkup
      */
-    public function setKeyboard($keyboard)
+    public function setKeyboard(array $keyboard): ReplyKeyboardMarkup
     {
         $this->keyboard = $keyboard;
+
+        return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isOneTimeKeyboard()
-    {
-        return $this->oneTimeKeyboard;
-    }
-
-    /**
-     * @param boolean $oneTimeKeyboard
-     */
-    public function setOneTimeKeyboard($oneTimeKeyboard)
-    {
-        $this->oneTimeKeyboard = $oneTimeKeyboard;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isResizeKeyboard()
+    public function getResizeKeyboard(): ?bool
     {
         return $this->resizeKeyboard;
     }
 
     /**
-     * @param boolean $resizeKeyboard
+     * @param bool $resizeKeyboard
+     * @return ReplyKeyboardMarkup
      */
-    public function setResizeKeyboard($resizeKeyboard)
+    public function setResizeKeyboard(bool $resizeKeyboard): ReplyKeyboardMarkup
     {
         $this->resizeKeyboard = $resizeKeyboard;
+
+        return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isSelective()
+    public function getOneTimeKeyboard(): ?bool
+    {
+        return $this->oneTimeKeyboard;
+    }
+
+    /**
+     * @param bool $oneTimeKeyboard
+     * @return ReplyKeyboardMarkup
+     */
+    public function setOneTimeKeyboard(bool $oneTimeKeyboard): ReplyKeyboardMarkup
+    {
+        $this->oneTimeKeyboard = $oneTimeKeyboard;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getSelective(): ?bool
     {
         return $this->selective;
     }
 
     /**
-     * @param boolean $selective
+     * @param bool $selective
+     * @return ReplyKeyboardMarkup
      */
-    public function setSelective($selective)
+    public function setSelective(bool $selective): ReplyKeyboardMarkup
     {
         $this->selective = $selective;
+
+        return $this;
     }
 }

@@ -44,45 +44,56 @@ class ForceReply extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
-    public function __construct($forceReply = true, $selective = null)
+    /**
+     * ForceReply constructor.
+     * @param bool|null $forceReply
+     * @param bool|null $selective
+     */
+    public function __construct(?bool $forceReply = null, ?bool $selective = null)
     {
         $this->forceReply = $forceReply;
         $this->selective = $selective;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isForceReply()
+    public function isForceReply(): bool
     {
         return $this->forceReply;
     }
 
     /**
-     * @param boolean $forceReply
+     * @param bool $forceReply
+     * @return ForceReply
      */
-    public function setForceReply($forceReply)
+    public function setForceReply(bool $forceReply): ForceReply
     {
         $this->forceReply = $forceReply;
+
+        return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isSelective()
+    public function isSelective(): ?bool
     {
         return $this->selective;
     }
 
     /**
-     * @param boolean $selective
+     * @param bool $selective
+     * @return ForceReply
      */
-    public function setSelective($selective)
+    public function setSelective(bool $selective): ForceReply
     {
         $this->selective = $selective;
+
+        return $this;
     }
 }
