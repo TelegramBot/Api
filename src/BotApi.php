@@ -710,6 +710,14 @@ class BotApi
         ]));
     }
 
+    public function setStickerPositionInSet(string $sticker, int $position)
+    {
+        return StickerSet::fromResponse($this->call('setStickerPositionInSet', [
+            'sticker' => $sticker,
+            'position' => $position
+        ]));
+    }
+
     public function deleteStickerFromSet(string $sticker)
     {
         return StickerSet::fromResponse($this->call('deleteStickerFromSet', [
