@@ -678,7 +678,7 @@ class BotApi
     public function addStickerToSet(
         int $userId,
         string $name,
-        \CURLFile $pngSticker,
+        $pngSticker,
         string $emojis,
         ?bool $containsMasks = null,
         ?MaskPosition $maskPosition = null
@@ -699,6 +699,14 @@ class BotApi
     {
         return StickerSet::fromResponse($this->call('getStickerSet', [
             'name' => $name
+        ]));
+    }
+
+    public function uploadStickerFile(int $userId, \CURLFile $pngSticker)
+    {
+        return File::fromResponse($this->call('uploadStickerFile', [
+            'user_id' => $userId,
+            'png_sticker' => $pngSticker,
         ]));
     }
 
