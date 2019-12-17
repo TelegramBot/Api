@@ -13,6 +13,7 @@ use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
+use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -677,7 +678,7 @@ class BotApi
     public function addStickerToSet(
         int $userId,
         string $name,
-        string $pngSticker,
+        \CURLFile $pngSticker,
         string $emojis,
         ?bool $containsMasks = null,
         ?MaskPosition $maskPosition = null
@@ -692,6 +693,20 @@ class BotApi
             /** @OTOD: implement it */
 //            'mask_position' =>
         ]);
+    }
+
+    public function getStickerSet(string $name)
+    {
+        return StickerSet::fromResponse($this->call('getStickerSet', [
+            'name' => $name
+        ]));
+    }
+
+    public function deleteStickerFromSet(string $sticker)
+    {
+        return StickerSet::fromResponse($this->call('deleteStickerFromSet', [
+            'sticker' => $sticker
+        ]));
     }
 
     /**
