@@ -25,9 +25,9 @@ class ReplyKeyboardMarkupTest extends TestCase
                 (new KeyboardButton())->setText('two')
             ]
         ], $item->getKeyboard());
-        $this->assertNull($item->getOneTimeKeyboard());
-        $this->assertNull($item->getResizeKeyboard());
-        $this->assertNull($item->getSelective());
+        $this->assertNull($item->isOneTimeKeyboard());
+        $this->assertNull($item->isResizeKeyboard());
+        $this->assertNull($item->isSelective());
     }
 
     public function testConstructor2()
@@ -49,9 +49,9 @@ class ReplyKeyboardMarkupTest extends TestCase
                 (new KeyboardButton())->setText('two')
             ]
         ], $item->getKeyboard());
-        $this->assertTrue($item->getOneTimeKeyboard());
-        $this->assertNull($item->getResizeKeyboard());
-        $this->assertNull($item->getSelective());
+        $this->assertTrue($item->isOneTimeKeyboard());
+        $this->assertNull($item->isResizeKeyboard());
+        $this->assertNull($item->isSelective());
     }
 
     public function testConstructor3()
@@ -74,9 +74,9 @@ class ReplyKeyboardMarkupTest extends TestCase
                 (new KeyboardButton())->setText('two')
             ]
         ], $item->getKeyboard());
-        $this->assertTrue($item->getOneTimeKeyboard());
-        $this->assertTrue($item->getResizeKeyboard());
-        $this->assertNull($item->getSelective());
+        $this->assertTrue($item->isOneTimeKeyboard());
+        $this->assertTrue($item->isResizeKeyboard());
+        $this->assertNull($item->isSelective());
     }
 
     public function testConstructor4()
@@ -100,9 +100,9 @@ class ReplyKeyboardMarkupTest extends TestCase
                 (new KeyboardButton())->setText('two')
             ]
         ], $item->getKeyboard());
-        $this->assertTrue($item->getOneTimeKeyboard());
-        $this->assertTrue($item->getResizeKeyboard());
-        $this->assertTrue($item->getSelective());
+        $this->assertTrue($item->isOneTimeKeyboard());
+        $this->assertTrue($item->isResizeKeyboard());
+        $this->assertTrue($item->isSelective());
     }
 
     public function testToJson()

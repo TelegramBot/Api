@@ -55,7 +55,7 @@ class UserTest extends TestCase
     {
         $item = new User();
         $item->setIsBot(true);
-        $this->assertEquals(true, $item->getIsBot());
+        $this->assertEquals(true, $item->isBot());
     }
 
     public function testSetIdException()
@@ -77,7 +77,7 @@ class UserTest extends TestCase
         ]);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals(123456, $user->getId());
-        $this->assertEquals(true, $user->getIsBot());
+        $this->assertEquals(true, $user->isBot());
         $this->assertEquals('en', $user->getLanguageCode());
         $this->assertEquals('Ilya', $user->getFirstName());
         $this->assertEquals('Gusev', $user->getLastName());
@@ -96,7 +96,7 @@ class UserTest extends TestCase
 
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals(123456, $user->getId());
-        $this->assertEquals(false, $user->getIsBot());
+        $this->assertEquals(false, $user->isBot());
         $this->assertEquals('en', $user->getLanguageCode());
         $this->assertEquals('Ilya', $user->getFirstName());
         $this->assertEquals('Gusev', $user->getLastName());
@@ -106,20 +106,20 @@ class UserTest extends TestCase
     public function testFromResponseException1()
     {
         $this->expectException(InvalidArgumentException::class);
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev'
-        ));
+        ]);
     }
 
     public function testFromResponseException2()
     {
         $this->expectException(InvalidArgumentException::class);
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
     }
 }
