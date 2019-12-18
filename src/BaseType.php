@@ -8,7 +8,7 @@ namespace TelegramBot\Api;
  *
  * @package TelegramBot\Api
  */
-abstract class BaseType
+abstract class BaseType implements \JsonSerializable
 {
     /**
      * Array of required data params for type
@@ -61,27 +61,16 @@ abstract class BaseType
         return str_replace(" ", "", ucwords(str_replace("_", " ", $str)));
     }
 
-    public function toJson($inner = false)
+    public function jsonSerialize()
     {
         $output = [];
-
         foreach (static::$map as $key => $item) {
             $property = lcfirst(self::toCamelCase($key));
             if (!is_null($this->$property)) {
-                if (is_array($this->$property)) {
-                    $output[$key] = array_map(
-                        function ($v) {
-                            return is_object($v) ? $v->toJson(true) : $v;
-                        },
-                        $this->$property
-                    );
-                } else {
-                    $output[$key] = $item === true ? $this->$property : $this->$property->toJson(true);
-                }
+                $output[$key] = $this->$property;
             }
         }
-
-        return $inner === false ? json_encode($output) : $output;
+        return $output;
     }
 
     public static function fromResponse($data)
@@ -89,7 +78,7 @@ abstract class BaseType
         if ($data === true) {
             return true;
         }
-        
+
         self::validate($data);
         $instance = new static();
         $instance->map($data);

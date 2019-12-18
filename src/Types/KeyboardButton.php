@@ -125,9 +125,4 @@ class KeyboardButton extends BaseType implements \JsonSerializable
 
         return $this;
     }
-
-    public function jsonSerialize()
-    {
-        return $this->toJson(true);
-    }
 }

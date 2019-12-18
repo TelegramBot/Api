@@ -115,6 +115,6 @@ class ReplyKeyboardMarkupTest extends TestCase
                 ]
             );
 
-        $this->assertEquals(json_encode(['keyboard' => [['text' => 'one'], ['text' => 'two']]]), $item->toJson());
+        $this->assertEquals(json_encode(['keyboard' => [['text' => 'one'], ['text' => 'two']]]), json_encode($item));
     }
 }

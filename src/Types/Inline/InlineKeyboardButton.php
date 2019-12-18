@@ -296,12 +296,4 @@ class InlineKeyboardButton extends BaseType implements \JsonSerializable
 
         return $this;
     }
-
-    /**
-     * @return array
-     */
-    public function jsonSerialize(): array
-    {
-        return $this->toJson(true);
-    }
 }

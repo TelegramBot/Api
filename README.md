@@ -100,45 +100,6 @@ try {
 }
 ```
 
-### Botan SDK (not supported more)
-
-[Botan](http://botan.io) is a telegram bot analytics system based on [Yandex.Appmetrica](http://appmetrica.yandex.com/).
-In this document you can find how to setup Yandex.Appmetrica account, as well as examples of Botan SDK usage.
-
-### Creating an account
- * Register at http://appmetrica.yandex.com/
- * After registration you will be prompted to create Application. Please use @YourBotName as a name.
- * Save an API key from settings page, you will use it as a token for Botan API calls.
- * Download lib for your language, and use it as described below. Don`t forget to insert your token!
-
-Since we are only getting started, you may discover that some existing reports in AppMetriсa aren't properly working for Telegram bots, like Geography, Gender, Age, Library, Devices, Traffic sources and Network sections. We will polish that later.
-
-## SDK usage
-
-#### Standalone
-
-```php
-$tracker = new \TelegramBot\Api\Botan('YOUR_BOTAN_TRACKER_API_KEY');
-
-$tracker->track($message, $eventName);
-```
-
-#### API Wrapper
-```php
-$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
-
-$bot->track($message, $eventName);
-```
-
-_You can use method `getUpdates()` and all incoming messages will be automatically tracked as `Message`-event_
-
-#### Client
-```php
-$bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
-```
-
-_All registered commands are automatically tracked as command name_
-
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
