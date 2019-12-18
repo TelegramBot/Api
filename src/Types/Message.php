@@ -1075,7 +1075,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return bool|null
      */
-    public function getDeleteChatPhoto(): ?bool
+    public function isDeleteChatPhoto(): ?bool
     {
         return $this->deleteChatPhoto;
     }
@@ -1093,7 +1093,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return bool|null
      */
-    public function getGroupChatCreated(): ?bool
+    public function isGroupChatCreated(): ?bool
     {
         return $this->groupChatCreated;
     }
@@ -1111,7 +1111,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return bool|null
      */
-    public function getSupergroupChatCreated(): ?bool
+    public function isSupergroupChatCreated(): ?bool
     {
         return $this->supergroupChatCreated;
     }
@@ -1129,7 +1129,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return bool|null
      */
-    public function getChannelChatCreated(): ?bool
+    public function isChannelChatCreated(): ?bool
     {
         return $this->channelChatCreated;
     }

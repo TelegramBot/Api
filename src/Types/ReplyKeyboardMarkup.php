@@ -109,7 +109,7 @@ class ReplyKeyboardMarkup extends BaseType
     /**
      * @return bool|null
      */
-    public function getResizeKeyboard(): ?bool
+    public function isResizeKeyboard(): ?bool
     {
         return $this->resizeKeyboard;
     }
@@ -128,7 +128,7 @@ class ReplyKeyboardMarkup extends BaseType
     /**
      * @return bool|null
      */
-    public function getOneTimeKeyboard(): ?bool
+    public function isOneTimeKeyboard(): ?bool
     {
         return $this->oneTimeKeyboard;
     }
@@ -147,7 +147,7 @@ class ReplyKeyboardMarkup extends BaseType
     /**
      * @return bool|null
      */
-    public function getSelective(): ?bool
+    public function isSelective(): ?bool
     {
         return $this->selective;
     }

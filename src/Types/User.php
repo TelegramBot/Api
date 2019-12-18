@@ -112,7 +112,7 @@ class User extends BaseType implements TypeInterface
     public function setId(int $id): User
     {
         $this->id = $id;
-        
+
         return $this;
     }
 
@@ -176,7 +176,7 @@ class User extends BaseType implements TypeInterface
     /**
      * @return bool|null
      */
-    public function getIsBot(): ?bool
+    public function isBot(): ?bool
     {
         return $this->isBot;
     }

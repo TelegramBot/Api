@@ -86,7 +86,7 @@ class ReplyKeyboardRemove extends BaseType
     /**
      * @return bool|null
      */
-    public function getSelective(): ?bool
+    public function isSelective(): ?bool
     {
         return $this->selective;
     }

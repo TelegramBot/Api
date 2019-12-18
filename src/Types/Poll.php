@@ -57,7 +57,7 @@ class Poll extends BaseType implements TypeInterface
     /**
      * True, if the poll is closed
      *
-     * @var boolean
+     * @var bool
      */
     protected $isClosed;
 
