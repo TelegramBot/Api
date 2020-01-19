@@ -2,8 +2,8 @@
 
 namespace TelegramBot\Api\Types;
 
+use InvalidArgumentException;
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException as InvalidArgumentExceptionAlias;
 use TelegramBot\Api\TypeInterface;
 
 class Chat extends BaseType implements TypeInterface
@@ -141,14 +141,13 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param int|string $id
      *
-     * @throws InvalidArgumentExceptionAlias
      */
     public function setId($id)
     {
         if (is_integer($id) || is_float($id) || is_string($id)) {
             $this->id = $id;
         } else {
-            throw new InvalidArgumentExceptionAlias();
+            throw new InvalidArgumentException();
         }
     }
 
@@ -321,8 +320,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param $permissions
-     * @return void
+     * @return ChatPermissions
      */
     public function setPermissions($permissions)
     {
