@@ -292,7 +292,7 @@ class BotApi
      * @param string $jsonString
      * @param boolean $asArray
      *
-     * @return object|array
+     * @return object|array|null
      * @throws InvalidJsonException
      */
     public static function jsonValidate($jsonString, $asArray)
@@ -1128,17 +1128,20 @@ class BotApi
      * @param int|string $chatId
      * @param int $messageId
      * @param string|null $caption
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $parseMode
+     * @param null $replyMarkup
      * @param string $inlineMessageId
      *
      * @return Message
      * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
      */
     public function editMessageCaption(
         $chatId,
         $messageId,
         $caption = null,
+        $parseMode = null,
         $replyMarkup = null,
         $inlineMessageId = null
     ) {
@@ -1147,6 +1150,7 @@ class BotApi
             'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
             'caption' => $caption,
+            'parse_mode' => $parseMode,
             'reply_markup' => $replyMarkup,
         ]));
     }
@@ -1853,7 +1857,7 @@ class BotApi
     }
 
     /**
-     * Use this method to stop a poll which was sent by the bot.
+     * Use this method to stop a which was sent by the bot.
      * On success, the stopped \TelegramBot\Api\Types\Poll with the final results is returned.
      *
      * @param int|string $chatId

@@ -3,7 +3,7 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\InvalidArgumentException as InvalidArgumentExceptionAlias;
 use TelegramBot\Api\TypeInterface;
 
 class Chat extends BaseType implements TypeInterface
@@ -32,6 +32,7 @@ class Chat extends BaseType implements TypeInterface
         'description' => true,
         'invite_link' => true,
         'pinned_message' => Message::class,
+        'permissions' => ChatPermissions::class,
         'sticker_set_name' => true,
         'can_set_sticker_set' => true
     ];
@@ -109,6 +110,13 @@ class Chat extends BaseType implements TypeInterface
     protected $pinnedMessage;
 
     /**
+     * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat.
+     *
+     * @var ChatPermissions
+     */
+    protected $permissions;
+
+    /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
      *
      * @var string
@@ -133,14 +141,14 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param int|string $id
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentExceptionAlias
      */
     public function setId($id)
     {
         if (is_integer($id) || is_float($id) || is_string($id)) {
             $this->id = $id;
         } else {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentExceptionAlias();
         }
     }
 
@@ -302,6 +310,23 @@ class Chat extends BaseType implements TypeInterface
     public function setPinnedMessage($pinnedMessage)
     {
         $this->pinnedMessage = $pinnedMessage;
+    }
+
+    /**
+     * @return ChatPermissions
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * @param $permissions
+     * @return void
+     */
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
     }
 
     /**
