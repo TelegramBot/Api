@@ -197,7 +197,6 @@ class BotApi
         return $this;
     }
 
-
     /**
      * Call method
      *
@@ -440,7 +439,6 @@ class BotApi
     {
         return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
     }
-
 
     /**
      * Use this method to clear webhook and use getUpdates again!
@@ -1087,7 +1085,6 @@ class BotApi
         ]);
     }
 
-
     /**
      * Use this method to edit text messages sent by the bot or via the bot
      *
@@ -1124,7 +1121,8 @@ class BotApi
     }
 
     /**
-     * Use this method to edit text messages sent by the bot or via the bot
+     * Use this method to edit captions of messages.
+     * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string $chatId
      * @param int $messageId
@@ -1852,37 +1850,6 @@ class BotApi
             'message_id' => $messageId,
             'media' => $media->toJson(),
             'inline_message_id' => $inlineMessageId,
-            'reply_markup' => $replyMarkup,
-        ]));
-    }
-
-    /**
-     * @param int|string $chatId
-     * @param int $messageId
-     * @param string $caption
-     * @param string|null $parseMode
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
-     * @param int|null $inlineMessageId
-     * @return Message
-     * @throws Exception
-     * @throws HttpException
-     * @throws InvalidJsonException
-     */
-    public function editMessageMediaCaption(
-        $chatId,
-        $messageId,
-        $caption,
-        $parseMode = null,
-        $replyMarkup = null,
-        $inlineMessageId = null
-    ) {
-        return Message::fromResponse($this->call('editMessageCaption', [
-            'chat_id' => $chatId,
-            'message_id' => $messageId,
-            'caption' => $caption,
-            'inline_message_id' => $inlineMessageId,
-            'parse_mode' => $parseMode,
             'reply_markup' => $replyMarkup,
         ]));
     }
