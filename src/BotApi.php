@@ -11,6 +11,7 @@ use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
+use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\Update;
@@ -1821,6 +1822,70 @@ class BotApi
         return $this;
     }
 
+    /**
+     * Use this method to edit animation, audio, document, photo, or video messages.
+     * If a message is a part of a message album, then it can be edited only to a photo or a video.
+     * Otherwise, message type can be changed arbitrarily.
+     * When inline message is edited, new file can't be uploaded. Use previously uploaded file via its file_id or specify a URL.
+     * On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned.
+     *
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param InputMedia $media
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param int|null $inlineMessageId
+     * @return Message
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function editMessageMedia(
+        $chatId,
+        $messageId,
+        InputMedia $media,
+        $replyMarkup = null,
+        $inlineMessageId = null
+    ) {
+        return Message::fromResponse($this->call('editMessageMedia', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'media' => $media->toJson(),
+            'inline_message_id' => $inlineMessageId,
+            'reply_markup' => $replyMarkup,
+        ]));
+    }
+
+    /**
+     * @param int|string $chatId
+     * @param int $messageId
+     * @param string $caption
+     * @param string|null $parseMode
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param int|null $inlineMessageId
+     * @return Message
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function editMessageMediaCaption(
+        $chatId,
+        $messageId,
+        $caption,
+        $parseMode = null,
+        $replyMarkup = null,
+        $inlineMessageId = null
+    ) {
+        return Message::fromResponse($this->call('editMessageCaption', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'caption' => $caption,
+            'inline_message_id' => $inlineMessageId,
+            'parse_mode' => $parseMode,
+            'reply_markup' => $replyMarkup,
+        ]));
+    }
 
     /**
      * Use this method to send a native poll. A native poll can't be sent to a private chat.
