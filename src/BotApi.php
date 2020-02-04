@@ -294,13 +294,15 @@ class BotApi
      */
     public static function jsonValidate($jsonString, $asArray)
     {
-        $json = json_decode($jsonString, $asArray);
+        try {
+            $json = json_decode($jsonString, $asArray);
 
-        if (json_last_error() != JSON_ERROR_NONE) {
-            throw new InvalidJsonException(json_last_error_msg(), json_last_error());
+            return $json;
+        } catch (\Throwable $th) {
+            if (json_last_error() != JSON_ERROR_NONE) {
+                throw new InvalidJsonException(json_last_error_msg(), json_last_error());
+            }
         }
-
-        return $json;
     }
 
     /**
