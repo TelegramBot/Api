@@ -14,7 +14,7 @@ use TelegramBot\Api\TypeInterface;
 class MessageEntity extends BaseType implements TypeInterface
 {
 
-    const TYPE_MENTION = 'mentin';
+    const TYPE_MENTION = 'mention';
     const TYPE_HASHTAG = 'hashtag';
     const TYPE_BOT_COMMAND = 'bot_command';
     const TYPE_URL = 'url';
