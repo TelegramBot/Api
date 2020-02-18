@@ -214,6 +214,7 @@ class BotApi
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
             CURLOPT_TIMEOUT => 5,
+            CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
         ];
 
         if ($data) {
@@ -970,6 +971,7 @@ class BotApi
             CURLOPT_HTTPGET => 1,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL => $this->getFileUrl().'/'.$file->getFilePath(),
+            CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
         ];
 
         return $this->executeCurl($options);
