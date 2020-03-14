@@ -1154,6 +1154,22 @@ class BotApi
         ]));
     }
 
+    public function editMessageMedia(
+        $chatId,
+        $messageId,
+        InputMedia $media,
+        $inlineMessageId = null,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('editMessageMedia', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'inline_message_id' => $inlineMessageId,
+            'media' => $media->toJson(),
+            'reply_markup' => $replyMarkup,
+        ]));
+    }
+
     /**
      * Use this method to edit only the reply markup of messages sent by the bot or via the bot
      *
