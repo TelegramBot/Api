@@ -10,6 +10,7 @@ use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
+use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\Update;
@@ -437,8 +438,8 @@ class BotApi
     {
         return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
     }
-    
-    
+
+
     /**
      * Use this method to clear webhook and use getUpdates again!
      *
@@ -1142,6 +1143,39 @@ class BotApi
     }
 
     /**
+     * Use this method to edit animation, audio, document, photo, or video messages.
+     * If a message is a part of a message album, then it can be edited only to a photo or a video.
+     * Otherwise, message type can be changed arbitrarily.
+     * When inline message is edited, new file can't be uploaded. Use previously uploaded file via its file_id or specify a URL.
+     * On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned
+     *
+     * @param $chatId
+     * @param $messageId
+     * @param InputMedia $media
+     * @param null $inlineMessageId
+     * @param null $replyMarkup
+     * @return bool|Message
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function editMessageMedia(
+        $chatId,
+        $messageId,
+        InputMedia $media,
+        $inlineMessageId = null,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('editMessageMedia', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'inline_message_id' => $inlineMessageId,
+            'media' => $media->toJson(),
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
+
+    /**
      * Use this method to edit only the reply markup of messages sent by the bot or via the bot
      *
      * @param int|string $chatId
@@ -1746,7 +1780,7 @@ class BotApi
             CURLOPT_PROXY => $proxyString,
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
-        
+
         if ($socks5) {
             $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
         }
