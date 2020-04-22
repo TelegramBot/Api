@@ -43,6 +43,7 @@ class Message extends BaseType implements TypeInterface
         'location' => Location::class,
         'venue' => Venue::class,
         'poll' => Poll::class,
+        'dice' => Dice::class,
         'new_chat_member' => User::class,
         'left_chat_member' => User::class,
         'new_chat_title' => true,
@@ -196,6 +197,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Poll
      */
     protected $poll;
+
+    /**
+     * Optional. Message is a dice with random value from 1 to 6
+     *
+     * @var \TelegramBot\Api\Types\Dice
+     */
+    protected $dice;
 
     /**
      * Optional. A new member was added to the group, information about them (this member may be bot itself)
@@ -562,6 +570,22 @@ class Message extends BaseType implements TypeInterface
     public function setPoll($poll)
     {
         $this->poll = $poll;
+    }
+
+    /**
+     * @return Dice
+     */
+    public function getDice()
+    {
+        return $this->dice;
+    }
+
+    /**
+     * @param Dice $dice
+     */
+    public function setDice($dice)
+    {
+        $this->dice = $dice;
     }
 
     /**
