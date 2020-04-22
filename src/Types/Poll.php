@@ -19,18 +19,32 @@ class Poll extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'question', 'options', 'is_closed'];
+    protected static $requiredParams = [
+        'id',
+        'question',
+        'options',
+        'total_voter_count',
+        'is_closed',
+        'is_anonymous',
+        'type',
+        'allows_multiple_answers',
+    ];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'question' => true,
         'options' => ArrayOfPollOption::class,
-        'is_closed' => true
+        'total_voter_count' => true,
+        'is_closed' => true,
+        'is_anonymous' => true,
+        'type' => true,
+        'allows_multiple_answers' => true,
+        'correct_option_id' => true,
     ];
 
     /**
@@ -56,11 +70,48 @@ class Poll extends BaseType implements TypeInterface
     protected $options;
 
     /**
+     * Total number of users that voted in the poll
+     *
+     * @var int
+     */
+    protected $totalVoterCount;
+
+    /**
      * True, if the poll is closed
      *
      * @var boolean
      */
     protected $isClosed;
+
+    /**
+     * True, if the poll is anonymous
+     *
+     * @var bool
+     */
+    protected $isAnonymous;
+
+    /**
+     * Poll type, currently can be “regular” or “quiz”
+     *
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * True, if the poll allows multiple answers
+     *
+     * @var bool
+     */
+    protected $allowsMultipleAnswers;
+
+    /**
+     * Optional. 0-based identifier of the correct answer option.
+     * Available only for polls in the quiz mode, which are closed, or was sent (not forwarded)
+     * by the bot or to the private chat with the bot.
+     *
+     * @var int
+     */
+    protected $correctOptionId;
 
     /**
      * @return string
@@ -111,6 +162,22 @@ class Poll extends BaseType implements TypeInterface
     }
 
     /**
+     * @return int
+     */
+    public function getTotalVoterCount()
+    {
+        return $this->totalVoterCount;
+    }
+
+    /**
+     * @param int $totalVoterCount
+     */
+    public function setTotalVoterCount($totalVoterCount)
+    {
+        $this->totalVoterCount = $totalVoterCount;
+    }
+
+    /**
      * @return bool
      */
     public function isClosed()
@@ -124,5 +191,69 @@ class Poll extends BaseType implements TypeInterface
     public function setIsClosed($isClosed)
     {
         $this->isClosed = $isClosed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnonymous()
+    {
+        return $this->isAnonymous;
+    }
+
+    /**
+     * @param bool $isAnonymous
+     */
+    public function setIsAnonymous($isAnonymous)
+    {
+        $this->isAnonymous = $isAnonymous;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowsMultipleAnswers()
+    {
+        return $this->allowsMultipleAnswers;
+    }
+
+    /**
+     * @param bool $allowsMultipleAnswers
+     */
+    public function setAllowsMultipleAnswers($allowsMultipleAnswers)
+    {
+        $this->allowsMultipleAnswers = $allowsMultipleAnswers;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCorrectOptionId()
+    {
+        return $this->correctOptionId;
+    }
+
+    /**
+     * @param int $correctOptionId
+     */
+    public function setCorrectOptionId($correctOptionId)
+    {
+        $this->correctOptionId = $correctOptionId;
     }
 }
