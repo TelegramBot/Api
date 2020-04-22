@@ -15,6 +15,7 @@ use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
+use TelegramBot\Api\Types\Dice;
 
 /**
  * Class BotApi
@@ -336,6 +337,36 @@ class BotApi
             'reply_to_message_id' => (int)$replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
+        ]));
+    }
+
+    /**
+     * Use this method to send a dice, which will have a random value from 1 to 6.
+     * On success, the sent Message is returned.
+     * (Yes, we're aware of the “proper” singular of die. But it's awkward,
+     * and we decided to help it change. One dice at a time!)
+     *
+     * @param int|string $chatId
+     * @param bool $disableNotification
+     * @param int|null $replyToMessageId
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     *
+     * @return \TelegramBot\Api\Types\Message
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function sendDice(
+        $chatId,
+        $disableNotification = false,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('sendDice', [
+            'chat_id' => $chatId,
+            'disable_notification' => (bool)$disableNotification,
+            'reply_to_message_id' => (int)$replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 
@@ -1692,7 +1723,7 @@ class BotApi
             CURLOPT_PROXY => $proxyString,
             CURLOPT_HTTPPROXYTUNNEL => true,
         ];
-        
+
         if ($socks5) {
             $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
         }
