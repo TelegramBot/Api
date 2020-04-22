@@ -479,10 +479,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setNewChatMember($user);
+        $item->setNewChatMembers([$user]);
 
 
-        $this->assertAttributeEquals($user, 'newChatMember', $item);
+        $this->assertAttributeEquals([$user], 'newChatMembers', $item);
     }
 
     public function testGetNewChatParticipant()
@@ -494,10 +494,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'username' => 'iGusev'
         ));
-        $item->setNewChatMember($user);
+        $item->setNewChatMembers([$user]);
 
-        $this->assertEquals($user, $item->getNewChatMember());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getNewChatMember());
+        $this->assertEquals([$user], $item->getNewChatMembers());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getNewChatMembers()[0]);
     }
 
     public function testSetNewChatTitle()
