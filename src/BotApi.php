@@ -1793,22 +1793,35 @@ class BotApi
      * Use this method to send a native poll. A native poll can't be sent to a private chat.
      * On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
-     * @param int|string $chatId
-     * @param string $question
-     * @param array $options
-     * @param bool $disableNotification
-     * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
-     *
+     * @param $chatId string|int Unique identifier for the target chat or username of the target channel
+     *                (in the format @channelusername)
+     * @param string $question Poll question, 1-255 characters
+     * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+     * @param bool $isAnonymous True, if the poll needs to be anonymous, defaults to True
+     * @param null $type Poll type, “quiz” or “regular”, defaults to “regular”
+     * @param bool $allowsMultipleAnswers True, if the poll allows multiple answers,
+     *                          ignored for polls in quiz mode, defaults to False
+     * @param null $correctOptionId 0-based identifier of the correct answer option, required for polls in quiz mode
+     * @param bool $isClosed Pass True, if the poll needs to be immediately closed. This can be useful for poll preview.
+     * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
+     * @param int|null $replyToMessageId If the message is a reply, ID of the original message
+     * @param null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     *                          custom reply keyboard, instructions to remove reply
+     *                          keyboard or to force a reply from the user.
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
-     * @throws \TelegramBot\Api\Exception
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
      */
     public function sendPoll(
         $chatId,
         $question,
         $options,
+        $isAnonymous = false,
+        $type = null,
+        $allowsMultipleAnswers = false,
+        $correctOptionId = null,
+        $isClosed = false,
         $disableNotification = false,
         $replyToMessageId = null,
         $replyMarkup = null
@@ -1817,9 +1830,45 @@ class BotApi
             'chat_id' => $chatId,
             'question' => $question,
             'options' => json_encode($options),
-            'disable_notification' => (bool)$disableNotification,
-            'reply_to_message_id' => (int)$replyToMessageId,
-            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'is_anonymous' => (bool) $isAnonymous,
+            'type' => (string) $type,
+            'allows_multiple_answers' => (bool) $allowsMultipleAnswers,
+            'correct_option_id' => (int) $correctOptionId,
+            'is_closed' => (bool) $isClosed,
+            'disable_notification' => (bool) $disableNotification,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup === null ? $replyMarkup : $replyMarkup->toJson(),
+        ]));
+    }
+
+    /**
+     * Use this method to send a dice, which will have a random value from 1 to 6.
+     * On success, the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
+     * But it's awkward, and we decided to help it change. One dice at a time!)
+     *
+     * @param $chatId string|int Unique identifier for the target chat or username of the target channel
+     *                (in the format @channelusername)
+     * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
+     * @param null $replyToMessageId If the message is a reply, ID of the original message
+     * @param null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     *                          custom reply keyboard, instructions to remove reply
+     *                          keyboard or to force a reply from the user.
+     * @return bool|Message
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function sendDice(
+        $chatId,
+        $disableNotification = false,
+        $replyToMessageId = null,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('sendDice', [
+            'chat_id' => $chatId,
+            'disable_notification' => (bool) $disableNotification,
+            'reply_to_message_id' => (int) $replyToMessageId,
+            'reply_markup' => $replyMarkup === null ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 

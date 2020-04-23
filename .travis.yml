@@ -14,7 +14,7 @@ matrix:
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
   - php vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 src/
