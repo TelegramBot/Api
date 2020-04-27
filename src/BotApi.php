@@ -358,12 +358,14 @@ class BotApi
      */
     public function sendDice(
         $chatId,
+        $emoji = '🎲',
         $disableNotification = false,
         $replyToMessageId = null,
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
+            'emoji'  => $emoji,
             'disable_notification' => (bool)$disableNotification,
             'reply_to_message_id' => (int)$replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),

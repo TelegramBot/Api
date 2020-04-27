@@ -33,11 +33,33 @@ class Dice extends BaseType implements TypeInterface
     ];
 
     /**
+     * Emoji on which the dice throw animation is based
+     * @var string
+     */
+    protected $emoji;
+
+    /**
      * Value of the dice, 1-6
      *
      * @var integer
      */
     protected $value;
+
+    /**
+     * @return string
+     */
+    public function getEmoji()
+    {
+        return $this->emoji;
+    }
+
+    /**
+     * @param string $emoji
+     */
+    public function setEmoji($emoji)
+    {
+        $this->emoji = $emoji;
+    }
 
     /**
      * @return integer
@@ -54,4 +76,5 @@ class Dice extends BaseType implements TypeInterface
     {
         $this->value = $value;
     }
+
 }
