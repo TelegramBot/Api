@@ -1766,11 +1766,13 @@ class BotApi
     /**
      * Enable proxy for curl requests. Empty string will disable proxy.
      *
-     * @param string $proxyString
+     * @param string $proxyString host:port
+     * @param string $credentialsString login:password
+     * @param int $proxyType CURLPROXY_HTTP|CURLPROXY_SOCKS4|CURLPROXY_SOCKS5|CURLPROXY_SOCKS4A|CURLPROXY_SOCKS5_HOSTNAME
      *
      * @return BotApi
      */
-    public function setProxy($proxyString = '', $socks5 = false)
+    public function setProxy($proxyString = '', $credentialsString = '', $proxyType = CURLPROXY_HTTP)
     {
         if (empty($proxyString)) {
             $this->proxySettings = [];
@@ -1779,12 +1781,11 @@ class BotApi
 
         $this->proxySettings = [
             CURLOPT_PROXY => $proxyString,
+	        CURLOPT_PROXYUSERPWD => $credentialsString,
             CURLOPT_HTTPPROXYTUNNEL => true,
+	        CURLOPT_PROXYTYPE => $proxyType,
         ];
 
-        if ($socks5) {
-            $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
-        }
         return $this;
     }
 
