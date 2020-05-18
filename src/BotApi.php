@@ -1768,12 +1768,17 @@ class BotApi
      *
      * @param string $proxyString host:port
      * @param string $credentialsString login:password
+     * @param int $proxyAuthType CURLAUTH_BASIC|CURLAUTH_NTLM
      * @param int $proxyType CURLPROXY_HTTP|CURLPROXY_SOCKS4|CURLPROXY_SOCKS5|CURLPROXY_SOCKS4A|CURLPROXY_SOCKS5_HOSTNAME
      *
      * @return BotApi
      */
-    public function setProxy($proxyString = '', $credentialsString = '', $proxyType = CURLPROXY_HTTP)
-    {
+    public function setProxy(
+    	$proxyString = '',
+	    $credentialsString = '',
+	    $proxyAuthType = CURLAUTH_BASIC,
+	    $proxyType = CURLPROXY_HTTP
+    ){
         if (empty($proxyString)) {
             $this->proxySettings = [];
             return $this;
@@ -1782,6 +1787,7 @@ class BotApi
         $this->proxySettings = [
             CURLOPT_PROXY => $proxyString,
 	        CURLOPT_PROXYUSERPWD => $credentialsString,
+	        CURLOPT_PROXYAUTH => $proxyAuthType,
             CURLOPT_HTTPPROXYTUNNEL => true,
 	        CURLOPT_PROXYTYPE => $proxyType,
         ];
