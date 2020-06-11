@@ -16,6 +16,7 @@ use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
+use TelegramBot\Api\Types\WebhookInfo;
 
 /**
  * Class BotApi
@@ -450,6 +451,20 @@ class BotApi
     public function deleteWebhook()
     {
         return $this->call('deleteWebhook');
+    }
+
+    /**
+     * Use this method to get current webhook status. Requires no parameters.
+     * On success, returns a WebhookInfo object. If the bot is using getUpdates,
+     * will return an object with the url field empty.
+     *
+     * @return \TelegramBot\Api\Types\WebhookInfo
+     * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     */
+    public function getWebhookInfo()
+    {
+        return WebhookInfo::fromResponse($this->call('getWebhookInfo'));
     }
 
     /**
