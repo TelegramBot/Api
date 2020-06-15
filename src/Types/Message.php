@@ -67,7 +67,6 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
-        'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**
