@@ -9,6 +9,10 @@
 
 An extended native php wrapper for [Telegram Bot API](https://core.telegram.org/bots/api) without requirements. Supports all methods and types of responses.
 
+## Fork notes
+
+Original package does not support `poll_answer` messages. Added this support.
+
 ## Bots: An introduction for developers
 >Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats.
 
