@@ -9,7 +9,7 @@ use TelegramBot\Api\BaseType;
  *
  * @see https://core.telegram.org/bots/api#pollanswer
  *
- * Poll answer from user
+ * This object represents an answer of a user in a non-anonymous poll.
  *
  *
  * @package TelegramBot\Api\Types
@@ -34,17 +34,12 @@ class PollAnswer extends BaseType
         'poll_id' => true,
     ];
 
-
-
     /**
-     * Sender
-     *
      * @var \TelegramBot\Api\Types\User
      */
     protected $user;
 
     /**
-     *
      * @var int
      */
     protected $pollId;
@@ -53,7 +48,6 @@ class PollAnswer extends BaseType
      * @var int[]
      */
     protected $optionIds;
-
 
     /**
      * @return string
@@ -70,7 +64,6 @@ class PollAnswer extends BaseType
     {
         $this->pollId = $id;
     }
-
 
     /**
      * @return User
@@ -119,6 +112,4 @@ class PollAnswer extends BaseType
     {
         $this->optionIds = $optionIds;
     }
-
-
 }
