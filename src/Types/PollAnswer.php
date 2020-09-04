@@ -29,7 +29,7 @@ class PollAnswer extends BaseType
     static protected $map = [
         'option_ids' => true,
         'user' => User::class,
-        'pollId' => true,
+        'poll_id' => true,
     ];
 
 
