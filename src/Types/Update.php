@@ -31,17 +31,18 @@ class Update extends BaseType implements TypeInterface
      * @var array
      */
     static protected $map = [
-        'update_id' => true,
-        'message' => Message::class,
-        'edited_message' => Message::class,
-        'channel_post' => Message::class,
-        'edited_channel_post' => Message::class,
-        'inline_query' => InlineQuery::class,
+        'update_id'            => true,
+        'message'              => Message::class,
+        'edited_message'       => Message::class,
+        'channel_post'         => Message::class,
+        'edited_channel_post'  => Message::class,
+        'inline_query'         => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
-        'callback_query' => CallbackQuery::class,
-        'shipping_query' => ShippingQuery::class,
-        'pre_checkout_query' => PreCheckoutQuery::class,
-        'poll_answer' => PollAnswerQuery::class,
+        'callback_query'       => CallbackQuery::class,
+        'shipping_query'       => ShippingQuery::class,
+        'pre_checkout_query'   => PreCheckoutQuery::class,
+        'poll_answer'          => PollAnswerQuery::class,
+        'poll'                 => Poll::class,
     ];
 
     /**
@@ -64,7 +65,12 @@ class Update extends BaseType implements TypeInterface
     /**
      * @var PollAnswerQuery
      */
-    protected $poll_answer;
+    protected $pollAnswer;
+
+    /**
+     * @var Poll
+     */
+    protected $poll;
 
 
     /**
@@ -188,11 +194,27 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return PollAnswerQuery
      */
     public function getPollAnswer()
     {
-        return $this->poll_answer;
+        return $this->pollAnswer;
+    }
+
+    /**
+     * @return Poll
+     */
+    public function getPoll()
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     */
+    public function setPoll($poll)
+    {
+        $this->poll = $poll;
     }
 
     /**
@@ -200,7 +222,7 @@ class Update extends BaseType implements TypeInterface
      */
     public function setPollAnswer($pollAnswer)
     {
-        $this->poll_answer = $pollAnswer;
+        $this->pollAnswer = $pollAnswer;
     }
 
     /**
