@@ -4,11 +4,13 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-
 /**
- * Class PollAnswerQuery
+ * Class PollAnswer
+ *
+ * @see https://core.telegram.org/bots/api#pollanswer
  *
  * Poll answer from user
+ *
  *
  * @package TelegramBot\Api\Types
  */
