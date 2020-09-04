@@ -40,7 +40,7 @@ class PollAnswer extends BaseType
     protected $user;
 
     /**
-     * @var int
+     * @var string
      */
     protected $pollId;
 
