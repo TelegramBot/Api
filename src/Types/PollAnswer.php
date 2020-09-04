@@ -108,7 +108,7 @@ class PollAnswer extends BaseType
     /**
      * @param int[] $optionIds
      */
-    public function setOptionIds( $optionIds)
+    public function setOptionIds($optionIds)
     {
         $this->optionIds = $optionIds;
     }
