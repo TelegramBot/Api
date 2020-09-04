@@ -12,7 +12,7 @@ use TelegramBot\Api\BaseType;
  *
  * @package TelegramBot\Api\Types
  */
-class PollAnswerQuery extends BaseType
+class PollAnswer extends BaseType
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class PollAnswerQuery extends BaseType
     static protected $map = [
         'option_ids' => true,
         'user' => User::class,
-        'poll_id' => true,
+        'pollId' => true,
     ];
 
 
@@ -45,12 +45,12 @@ class PollAnswerQuery extends BaseType
      *
      * @var int
      */
-    protected $poll_id;
+    protected $pollId;
 
     /**
      * @var int[]
      */
-    protected $option_ids;
+    protected $optionIds;
 
 
     /**
@@ -58,7 +58,7 @@ class PollAnswerQuery extends BaseType
      */
     public function getPollId()
     {
-        return $this->poll_id;
+        return $this->pollId;
     }
 
     /**
@@ -66,7 +66,7 @@ class PollAnswerQuery extends BaseType
      */
     public function setPollId($id)
     {
-        $this->poll_id = $id;
+        $this->pollId = $id;
     }
 
 
@@ -107,7 +107,7 @@ class PollAnswerQuery extends BaseType
      */
     public function getOptionIds()
     {
-        return $this->option_ids;
+        return $this->optionIds;
     }
 
     /**
@@ -115,7 +115,7 @@ class PollAnswerQuery extends BaseType
      */
     public function setOptionIds( $optionIds)
     {
-        $this->option_ids = $optionIds;
+        $this->optionIds = $optionIds;
     }
 
 

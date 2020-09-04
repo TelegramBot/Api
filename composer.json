@@ -1,6 +1,6 @@
 {
-    "name": "nikserg/telegram-bot-api",
-    "description": "PHP Wrapper for Telegram Bot API. poll_answer support added",
+    "name": "telegram-bot/api",
+    "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
         "php",
         "telegram",

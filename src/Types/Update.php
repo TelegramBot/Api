@@ -31,18 +31,18 @@ class Update extends BaseType implements TypeInterface
      * @var array
      */
     static protected $map = [
-        'update_id'            => true,
-        'message'              => Message::class,
-        'edited_message'       => Message::class,
-        'channel_post'         => Message::class,
-        'edited_channel_post'  => Message::class,
-        'inline_query'         => InlineQuery::class,
+        'update_id' => true,
+        'message' => Message::class,
+        'edited_message' => Message::class,
+        'channel_post' => Message::class,
+        'edited_channel_post' => Message::class,
+        'inline_query' => InlineQuery::class,
         'chosen_inline_result' => ChosenInlineResult::class,
-        'callback_query'       => CallbackQuery::class,
-        'shipping_query'       => ShippingQuery::class,
-        'pre_checkout_query'   => PreCheckoutQuery::class,
-        'poll_answer'          => PollAnswerQuery::class,
-        'poll'                 => Poll::class,
+        'callback_query' => CallbackQuery::class,
+        'shipping_query' => ShippingQuery::class,
+        'pre_checkout_query' => PreCheckoutQuery::class,
+        'poll_answer' => PollAnswer::class,
+        'poll' => Poll::class,
     ];
 
     /**
@@ -63,7 +63,7 @@ class Update extends BaseType implements TypeInterface
     protected $message;
 
     /**
-     * @var PollAnswerQuery
+     * @var PollAnswer
      */
     protected $pollAnswer;
 
@@ -194,7 +194,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PollAnswerQuery
+     * @return PollAnswer
      */
     public function getPollAnswer()
     {
@@ -218,7 +218,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @param PollAnswerQuery $pollAnswer
+     * @param PollAnswer $pollAnswer
      */
     public function setPollAnswer($pollAnswer)
     {
