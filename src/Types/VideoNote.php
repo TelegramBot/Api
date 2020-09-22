@@ -62,7 +62,6 @@ class VideoNote extends BaseType implements TypeInterface
      */
     protected $thumb;
 
-
     /**
      * Optional. File size
      *
@@ -88,7 +87,7 @@ class VideoNote extends BaseType implements TypeInterface
         if (is_integer($duration)) {
             $this->duration = $duration;
         } else {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('VideoNote duration does not contain integer values');
         }
     }
 
@@ -126,7 +125,7 @@ class VideoNote extends BaseType implements TypeInterface
         if (is_integer($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('VideoNote file_size does not contain integer values');
         }
     }
 
@@ -148,7 +147,7 @@ class VideoNote extends BaseType implements TypeInterface
         if (is_integer($length)) {
             $this->length = $length;
         } else {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('VideoNote length does not contain integer values');
         }
     }
 
