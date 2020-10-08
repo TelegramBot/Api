@@ -16,14 +16,19 @@ class MessageEntity extends BaseType implements TypeInterface
 
     const TYPE_MENTION = 'mention';
     const TYPE_HASHTAG = 'hashtag';
+    const TYPE_CASHTAG = 'cashtag';
     const TYPE_BOT_COMMAND = 'bot_command';
     const TYPE_URL = 'url';
     const TYPE_EMAIL = 'email';
+    const TYPE_PHONE_NUMBER = 'phone_number';
     const TYPE_BOLD = 'bold';
     const TYPE_ITALIC = 'italic';
+    const TYPE_UNDERLINE = 'underline';
+    const TYPE_STRIKETHROUGH = 'strikethrough';
     const TYPE_CODE = 'code';
     const TYPE_PRE = 'pre';
     const TYPE_TEXT_LINK = 'text_link';
+    const TYPE_TEXT_MENTION = 'text_mention';
 
     /**
      * {@inheritdoc}
@@ -42,12 +47,16 @@ class MessageEntity extends BaseType implements TypeInterface
         'offset' => true,
         'length' => true,
         'url' => true,
+        'user' => User::class,
+        'language' => true,
     ];
 
     /**
      * Type of the entity.
-     * One of mention (@username), hashtag, bot_command, url, email, bold (bold text),
-     * italic (italic text), code (monowidth string),pre (monowidth block), text_link (for clickable text URLs)
+     * One of mention (@username), hashtag (#hashtag), cashtag ($USD), bot_command, url, email, phone_number,
+     * bold (bold text), italic (italic text), underline (underlined text), strikethrough (strikethrough text),
+     * code (monowidth string), pre (monowidth block), text_link (for clickable text URLs),
+     * text_mention (for users without usernames)
      *
      * @var string
      */
@@ -73,6 +82,20 @@ class MessageEntity extends BaseType implements TypeInterface
      * @var string
      */
     protected $url;
+
+    /**
+     * Optional. For “text_mention” only, the mentioned user
+     *
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * Optional. For “pre” only, the programming language of the entity text
+     *
+     * @var string
+     */
+    protected $language;
 
     /**
      * @return string
@@ -136,5 +159,37 @@ class MessageEntity extends BaseType implements TypeInterface
     public function setUrl($url)
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 }
