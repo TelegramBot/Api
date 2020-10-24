@@ -32,7 +32,7 @@ class Client
     /**
      * Client constructor
      *
-     * @param string $token Telegram Bot API token
+     * @param string      $token        Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
      */
     public function __construct($token, $trackerToken = null)
@@ -42,16 +42,39 @@ class Client
     }
 
     /**
+     * @param Closure $action
+     * @return $this
+     */
+    public function anyUpdate(Closure $action)
+    {
+        $this->on(self::getMessageEvent($action), self::getMessageChecker());
+        $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
+        $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
+        $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
+        $this->on(self::getEditedChannelPostEvent($action), self::getEditedChannelPostChecker());
+        $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
+        $this->on(self::getChosenInlineResultEvent($action), self::getChosenInlineResultChecker());
+        $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
+        $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
+
+        return $this;
+    }
+
+    /**
      * Use this method to add command. Parameters will be automatically parsed and passed to closure.
      *
-     * @param string $name
+     * @param string   $name
      * @param \Closure $action
-     *
      * @return \TelegramBot\Api\Client
      */
     public function command($name, Closure $action)
     {
         return $this->on(self::getEvent($action), self::getChecker($name));
+    }
+
+    public function message(Closure $action)
+    {
+        return $this->on(self::getMessageEvent($action), self::getMessageChecker());
     }
 
     public function editedMessage(Closure $action)
@@ -98,9 +121,8 @@ class Client
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
      *
-     * @param \Closure $event
+     * @param \Closure      $event
      * @param \Closure|null $checker
-     *
      * @return \TelegramBot\Api\Client
      */
     public function on(Closure $event, Closure $checker = null)
@@ -145,7 +167,6 @@ class Client
      * Returns event function to handling the command.
      *
      * @param \Closure $action
-     *
      * @return \Closure
      */
     protected static function getEvent(Closure $action)
@@ -172,6 +193,19 @@ class Client
                 $action->invokeArgs($parameters);
             }
 
+            return false;
+        };
+    }
+
+    protected static function getMessageEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getMessage()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getMessage()]);
             return false;
         };
     }
@@ -284,7 +318,6 @@ class Client
      * Returns check function to handling the command.
      *
      * @param string $name
-     *
      * @return \Closure
      */
     protected static function getChecker($name)
@@ -298,6 +331,18 @@ class Client
             preg_match(self::REGEXP, $message->getText(), $matches);
 
             return !empty($matches) && $matches[1] == $name;
+        };
+    }
+
+    /**
+     * Returns check function to handling the message.
+     *
+     * @return Closure
+     */
+    protected static function getMessageChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getMessage());
         };
     }
 
@@ -404,6 +449,7 @@ class Client
         } elseif (method_exists($this->api, $name)) {
             return call_user_func_array([$this->api, $name], $arguments);
         }
+
         throw new BadMethodCallException("Method {$name} not exists");
     }
 }
