@@ -20,12 +20,12 @@ class Client
     const REGEXP = '/^(?:@\w+\s)?\/([^\s@]+)(@\S+)?\s?(.*)$/';
 
     /**
-     * @var \TelegramBot\Api\BotApi
+     * @var BotApi
      */
     protected $api;
 
     /**
-     * @var \TelegramBot\Api\Events\EventCollection
+     * @var EventCollection
      */
     protected $events;
 
@@ -39,6 +39,72 @@ class Client
     {
         $this->api = new BotApi($token);
         $this->events = new EventCollection($trackerToken);
+    }
+
+    /**
+     * @param       $name
+     * @param array $arguments
+     * @return mixed
+     * @throws BadMethodCallException
+     */
+    public function __call($name, array $arguments)
+    {
+        if (method_exists($this, $name)) {
+            return call_user_func_array([$this, $name], $arguments);
+        } elseif (method_exists($this->api, $name)) {
+            return call_user_func_array([$this->api, $name], $arguments);
+        }
+
+        throw new BadMethodCallException("Method {$name} not exists");
+    }
+
+    /**
+     * Use this method to add an event.
+     * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
+     *
+     * @param Closure      $event
+     * @param Closure|null $checker
+     * @return Client
+     */
+    public function on(Closure $event, Closure $checker = null)
+    {
+        $this->events->add($event, $checker);
+
+        return $this;
+    }
+
+    /**
+     * Handle updates
+     *
+     * @param Update[] $updates
+     */
+    public function handle(array $updates)
+    {
+        foreach ($updates as $update) {
+            /* @var Update $update */
+            $this->events->handle($update);
+        }
+    }
+
+    /**
+     * Webhook handler
+     *
+     * @return void
+     * @throws InvalidJsonException
+     */
+    public function run()
+    {
+        if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
+            $this->handle([Update::fromResponse($data)]);
+        }
+    }
+
+    /**
+     * @return false|string
+     */
+    public function getRawBody()
+    {
+        return file_get_contents('php://input');
     }
 
     /**
@@ -63,13 +129,13 @@ class Client
     /**
      * Use this method to add command. Parameters will be automatically parsed and passed to closure.
      *
-     * @param string   $name
-     * @param \Closure $action
-     * @return \TelegramBot\Api\Client
+     * @param string  $name
+     * @param Closure $action
+     * @return Client
      */
     public function command($name, Closure $action)
     {
-        return $this->on(self::getEvent($action), self::getChecker($name));
+        return $this->on(self::getCommandEvent($action), self::getCommandChecker($name));
     }
 
     public function message(Closure $action)
@@ -118,61 +184,16 @@ class Client
     }
 
     /**
-     * Use this method to add an event.
-     * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
-     *
-     * @param \Closure      $event
-     * @param \Closure|null $checker
-     * @return \TelegramBot\Api\Client
-     */
-    public function on(Closure $event, Closure $checker = null)
-    {
-        $this->events->add($event, $checker);
-
-        return $this;
-    }
-
-    /**
-     * Handle updates
-     *
-     * @param Update[] $updates
-     */
-    public function handle(array $updates)
-    {
-        foreach ($updates as $update) {
-            /* @var \TelegramBot\Api\Types\Update $update */
-            $this->events->handle($update);
-        }
-    }
-
-    /**
-     * Webhook handler
-     *
-     * @return array
-     * @throws \TelegramBot\Api\InvalidJsonException
-     */
-    public function run()
-    {
-        if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
-            $this->handle([Update::fromResponse($data)]);
-        }
-    }
-
-    public function getRawBody()
-    {
-        return file_get_contents('php://input');
-    }
-
-    /**
      * Returns event function to handling the command.
      *
-     * @param \Closure $action
-     * @return \Closure
+     * @param Closure $action
+     * @return Closure
      */
-    protected static function getEvent(Closure $action)
+    protected static function getCommandEvent(Closure $action)
     {
         return function (Update $update) use ($action) {
             $message = $update->getMessage();
+
             if (!$message) {
                 return true;
             }
@@ -318,9 +339,9 @@ class Client
      * Returns check function to handling the command.
      *
      * @param string $name
-     * @return \Closure
+     * @return Closure
      */
-    protected static function getChecker($name)
+    protected static function getCommandChecker($name)
     {
         return function (Update $update) use ($name) {
             $message = $update->getMessage();
@@ -440,16 +461,5 @@ class Client
         return function (Update $update) {
             return !is_null($update->getPreCheckoutQuery());
         };
-    }
-
-    public function __call($name, array $arguments)
-    {
-        if (method_exists($this, $name)) {
-            return call_user_func_array([$this, $name], $arguments);
-        } elseif (method_exists($this->api, $name)) {
-            return call_user_func_array([$this->api, $name], $arguments);
-        }
-
-        throw new BadMethodCallException("Method {$name} not exists");
     }
 }
