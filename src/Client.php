@@ -135,7 +135,7 @@ class Client
      */
     public function command($name, Closure $action)
     {
-        return $this->on(self::getCommandEvent($action), self::getCommandChecker($name));
+        return $this->on(self::getEvent($action), self::getChecker($name));
     }
 
     public function message(Closure $action)
@@ -189,7 +189,7 @@ class Client
      * @param Closure $action
      * @return Closure
      */
-    protected static function getCommandEvent(Closure $action)
+    protected static function getEvent(Closure $action)
     {
         return function (Update $update) use ($action) {
             $message = $update->getMessage();
@@ -341,7 +341,7 @@ class Client
      * @param string $name
      * @return Closure
      */
-    protected static function getCommandChecker($name)
+    protected static function getChecker($name)
     {
         return function (Update $update) use ($name) {
             $message = $update->getMessage();
