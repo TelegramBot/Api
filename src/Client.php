@@ -56,6 +56,8 @@ class Client
         $this->on(self::getChosenInlineResultEvent($action), self::getChosenInlineResultChecker());
         $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
         $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
+        $this->on(self::getPollEvent($action), self::getPollChecker());
+        $this->on(self::getPollAnswerEvent($action), self::getPollAnswerChecker());
 
         return $this;
     }
@@ -314,6 +316,32 @@ class Client
         };
     }
 
+    protected static function getPollEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPoll()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPoll()]);
+            return false;
+        };
+    }
+
+    protected static function getPollAnswerEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPollAnswer()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPollAnswer()]);
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -439,6 +467,30 @@ class Client
     {
         return function (Update $update) {
             return !is_null($update->getPreCheckoutQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the message.
+     *
+     * @return Closure
+     */
+    protected static function getPollChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPoll());
+        };
+    }
+
+    /**
+     * Returns check function to handling the message.
+     *
+     * @return Closure
+     */
+    protected static function getPollAnswerChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPollAnswer());
         };
     }
 
