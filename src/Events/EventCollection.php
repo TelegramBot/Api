@@ -14,7 +14,7 @@ class EventCollection
      *
      * @var array
      */
-    protected $events;
+    protected $events = [];
 
     /**
      * Botan tracker
