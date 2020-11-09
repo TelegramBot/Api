@@ -95,7 +95,7 @@ try {
     });
     
     //Handle text messages
-    $bot->on(function (\TelegramBot\Api\Types\Update $ update) use ($bot) {
+    $bot->on(function (\TelegramBot\Api\Types\Update $update) use ($bot) {
         $message = $update->getMessage();
         $id = $message->getChat()->getId();
         $bot->sendMessage($id, 'Your message: ' . $message->getText());
