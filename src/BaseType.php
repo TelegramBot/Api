@@ -13,7 +13,7 @@ abstract class BaseType
     /**
      * Array of required data params for type
      *
-     * @var array
+     * @var string[]
      */
     protected static array $requiredParams = [];
 

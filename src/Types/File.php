@@ -3,31 +3,17 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class File
- * This object represents a file ready to be downloaded.
- * The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>.
- * It is guaranteed that the link will be valid for at least 1 hour.
- * When the link expires, a new one can be requested by calling getFile.
- *
- * @package TelegramBot\Api\Types
- */
 class File extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['file_id'];
+    protected static array $requiredParams = ['file_id'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'file_id' => true,
@@ -40,26 +26,26 @@ class File extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $fileId;
+    protected string $fileId;
 
     /**
      * Optional. File size, if known
      *
      * @var int
      */
-    protected $fileSize;
+    protected int $fileSize;
 
     /**
      * Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
      *
      * @var string
      */
-    protected $filePath;
+    protected string $filePath;
 
     /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
@@ -67,7 +53,7 @@ class File extends BaseType implements TypeInterface
     /**
      * @param string $fileId
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): void
     {
         $this->fileId = $fileId;
     }
@@ -75,29 +61,23 @@ class File extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getFileSize()
+    public function getFileSize(): int
     {
         return $this->fileSize;
     }
 
     /**
      * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
      */
-    public function setFileSize($fileSize)
+    public function setFileSize(int $fileSize): void
     {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->fileSize = $fileSize;
     }
 
     /**
      * @return string
      */
-    public function getFilePath()
+    public function getFilePath(): string
     {
         return $this->filePath;
     }
@@ -105,7 +85,7 @@ class File extends BaseType implements TypeInterface
     /**
      * @param string $filePath
      */
-    public function setFilePath($filePath)
+    public function setFilePath(string $filePath): void
     {
         $this->filePath = $filePath;
     }

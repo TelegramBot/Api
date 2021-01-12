@@ -4,13 +4,6 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/**
- * Class ReplyKeyboardRemove
- * Upon receiving a message with this object,
- * Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
- *
- * @package TelegramBot\Api\Types
- */
 class ReplyKeyboardRemove extends BaseType
 {
     /**
@@ -18,7 +11,7 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['remove_keyboard'];
+    protected static array $requiredParams = ['remove_keyboard'];
 
     /**
      * {@inheritdoc}
@@ -36,7 +29,7 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var bool
      */
-    protected $removeKeyboard;
+    protected bool $removeKeyboard;
 
     /**
      * Optional. Use this parameter if you want to remove the keyboard for specific users only.
@@ -46,9 +39,9 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var bool
      */
-    protected $selective;
+    protected bool $selective;
 
-    public function __construct($remove_keyboard = true, $selective = false)
+    public function __construct(bool $remove_keyboard = true, bool $selective = false)
     {
         $this->removeKeyboard = $remove_keyboard;
         $this->selective = $selective;
@@ -57,23 +50,23 @@ class ReplyKeyboardRemove extends BaseType
     /**
      * @return bool
      */
-    public function getRemoveKeyboard()
+    public function isRemoveKeyboard(): bool
     {
         return $this->removeKeyboard;
     }
 
     /**
-     * @param bool $remove_keyboard
+     * @param bool $removeKeyboard
      */
-    public function setRemoveKeyboard($remove_keyboard)
+    public function setRemoveKeyboard(bool $removeKeyboard): void
     {
-        $this->removeKeyboard = $remove_keyboard;
+        $this->removeKeyboard = $removeKeyboard;
     }
 
     /**
      * @return bool
      */
-    public function getSelective()
+    public function isSelective(): bool
     {
         return $this->selective;
     }
@@ -81,7 +74,7 @@ class ReplyKeyboardRemove extends BaseType
     /**
      * @param bool $selective
      */
-    public function setSelective($selective)
+    public function setSelective(bool $selective): void
     {
         $this->selective = $selective;
     }

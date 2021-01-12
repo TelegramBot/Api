@@ -3,28 +3,17 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class Audio
- * This object represents an audio file (voice note).
- *
- * @package TelegramBot\Api\Types
- */
 class Audio extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
     protected static array $requiredParams = ['file_id', 'duration'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'file_id' => true,
@@ -78,63 +67,9 @@ class Audio extends BaseType implements TypeInterface
     protected int $fileSize;
 
     /**
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @param int $duration
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setDuration($duration)
-    {
-        if (is_integer($duration)) {
-            $this->duration = $duration;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
      * @return string
      */
-    public function getPerformer()
-    {
-        return $this->performer;
-    }
-
-    /**
-     * @param string $performer
-     */
-    public function setPerformer($performer)
-    {
-        $this->performer = $performer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
@@ -142,7 +77,7 @@ class Audio extends BaseType implements TypeInterface
     /**
      * @param string $fileId
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): void
     {
         $this->fileId = $fileId;
     }
@@ -150,29 +85,55 @@ class Audio extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getFileSize()
+    public function getDuration(): int
     {
-        return $this->fileSize;
+        return $this->duration;
     }
 
     /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
+     * @param int $duration
      */
-    public function setFileSize($fileSize)
+    public function setDuration(int $duration): void
     {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->duration = $duration;
     }
 
     /**
      * @return string
      */
-    public function getMimeType()
+    public function getPerformer(): string
+    {
+        return $this->performer;
+    }
+
+    /**
+     * @param string $performer
+     */
+    public function setPerformer(string $performer): void
+    {
+        $this->performer = $performer;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimeType(): string
     {
         return $this->mimeType;
     }
@@ -180,8 +141,24 @@ class Audio extends BaseType implements TypeInterface
     /**
      * @param string $mimeType
      */
-    public function setMimeType($mimeType)
+    public function setMimeType(string $mimeType): void
     {
         $this->mimeType = $mimeType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFileSize(): int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     */
+    public function setFileSize(int $fileSize): void
+    {
+        $this->fileSize = $fileSize;
     }
 }

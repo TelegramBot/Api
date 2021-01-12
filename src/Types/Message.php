@@ -1,25 +1,22 @@
 <?php
+
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\QueryResult\Photo;
 use TelegramBot\Api\Types\Payments\Invoice;
 use TelegramBot\Api\Types\Payments\SuccessfulPayment;
 
 class Message extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['message_id', 'date', 'chat'];
+    protected static array $requiredParams = ['message_id', 'date', 'chat'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -74,43 +71,43 @@ class Message extends BaseType implements TypeInterface
      *
      * @var int
      */
-    protected $messageId;
+    protected int $messageId;
 
     /**
      * Optional. Sender name. Can be empty for messages sent to channels
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
-    protected $from;
+    protected User $from;
 
     /**
      * Date the message was sent in Unix time
      *
      * @var int
      */
-    protected $date;
+    protected int $date;
 
     /**
      * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
      *
-     * @var \TelegramBot\Api\Types\Chat
+     * @var Chat
      */
-    protected $chat;
+    protected Chat $chat;
 
     /**
      * Optional. For forwarded messages, sender of the original message
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
-    protected $forwardFrom;
+    protected User $forwardFrom;
 
     /**
      * Optional. For messages forwarded from channels, information about
      * the original channel
      *
-     * @var \TelegramBot\Api\Types\Chat
+     * @var Chat
      */
-    protected $forwardFromChat;
+    protected Chat $forwardFromChat;
 
     /**
      * Optional. For messages forwarded from channels, identifier of
@@ -118,14 +115,14 @@ class Message extends BaseType implements TypeInterface
      *
      * @var int
      */
-    protected $forwardFromMessageId;
+    protected int $forwardFromMessageId;
 
     /**
      * Optional. For messages forwarded from channels, signature of the post author if present
      *
      * @var string
      */
-    protected $forwardSignature;
+    protected string $forwardSignature;
 
     /**
      * Optional. Sender's name for messages forwarded from users who disallow adding a link to their account
@@ -133,29 +130,29 @@ class Message extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $forwardSenderName;
+    protected string $forwardSenderName;
 
     /**
      * Optional. For forwarded messages, date the original message was sent in Unix time
      *
      * @var int
      */
-    protected $forwardDate;
+    protected int $forwardDate;
 
     /**
      * Optional. For replies, the original message. Note that the Message object in this field will not contain further
      * reply_to_message fields even if it itself is a reply.
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var Message
      */
-    protected $replyToMessage;
+    protected Message $replyToMessage;
 
     /**
      * Optional. Date the message was last edited in Unix time
      *
      * @var int
      */
-    protected $editDate;
+    protected int $editDate;
 
     /**
      * Optional. The unique identifier of a media message group
@@ -163,29 +160,29 @@ class Message extends BaseType implements TypeInterface
      *
      * @var int
      */
-    protected $mediaGroupId;
+    protected int $mediaGroupId;
 
     /**
      * Optional. Signature of the post author for messages in channels
      *
      * @var string
      */
-    protected $authorSignature;
+    protected string $authorSignature;
 
     /**
      * Optional. For text messages, the actual UTF-8 text of the message
      *
      * @var string
      */
-    protected $text;
+    protected string $text;
 
     /**
      * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
      * array of \TelegramBot\Api\Types\MessageEntity
      *
-     * @var array
+     * @var MessageEntity[]
      */
-    protected $entities;
+    protected array $entities;
 
     /**
      * Optional. For messages with a caption, special entities like usernames,
@@ -193,165 +190,165 @@ class Message extends BaseType implements TypeInterface
      *
      * @var ArrayOfMessageEntity
      */
-    protected $captionEntities;
+    protected ArrayOfMessageEntity $captionEntities;
 
     /**
      * Optional. Message is an audio file, information about the file
      *
-     * @var \TelegramBot\Api\Types\Audio
+     * @var Audio
      */
-    protected $audio;
+    protected Audio $audio;
 
     /**
      * Optional. Message is a general file, information about the file
      *
-     * @var \TelegramBot\Api\Types\Document
+     * @var Document
      */
-    protected $document;
+    protected Document $document;
 
     /**
      * Optional. Message is a animation, information about the animation
      *
-     * @var \TelegramBot\Api\Types\Animation
+     * @var Animation
      */
-    protected $animation;
+    protected Animation $animation;
 
     /**
      * Optional. Message is a photo, available sizes of the photo
      * array of \TelegramBot\Api\Types\Photo
      *
-     * @var array
+     * @var Photo[]
      */
-    protected $photo;
+    protected array $photo;
 
     /**
      * Optional. Message is a sticker, information about the sticker
      *
-     * @var \TelegramBot\Api\Types\Sticker
+     * @var Sticker
      */
-    protected $sticker;
+    protected Sticker $sticker;
 
     /**
      * Optional. Message is a video, information about the video
      *
-     * @var \TelegramBot\Api\Types\Video
+     * @var Video
      */
-    protected $video;
+    protected Video $video;
 
     /**
      * Optional. Message is a voice message, information about the file
      *
-     * @var \TelegramBot\Api\Types\Voice
+     * @var Voice
      */
-    protected $voice;
+    protected Voice $voice;
 
     /**
      * Optional. Text description of the video (usually empty)
      *
      * @var string
      */
-    protected $caption;
+    protected string $caption;
 
     /**
      * Optional. Message is a shared contact, information about the contact
      *
-     * @var \TelegramBot\Api\Types\Contact
+     * @var Contact
      */
-    protected $contact;
+    protected Contact $contact;
 
     /**
      * Optional. Message is a shared location, information about the location
      *
-     * @var \TelegramBot\Api\Types\Location
+     * @var Location
      */
-    protected $location;
+    protected Location $location;
 
     /**
      * Optional. Message is a venue, information about the venue
      *
-     * @var \TelegramBot\Api\Types\Venue
+     * @var Venue
      */
-    protected $venue;
+    protected Venue $venue;
 
     /**
      * Optional. Message is a native poll, information about the poll
      *
-     * @var \TelegramBot\Api\Types\Poll
+     * @var Poll
      */
-    protected $poll;
+    protected Poll $poll;
 
     /**
      * Optional. Message is a dice with random value from 1 to 6
      *
-     * @var \TelegramBot\Api\Types\Dice
+     * @var Dice
      */
-    protected $dice;
+    protected Dice $dice;
 
     /**
      * Optional. New members that were added to the group or supergroup and information about them
      * (the bot itself may be one of these members)
      * array of \TelegramBot\Api\Types\User
      *
-     * @var array
+     * @var User[]
      */
-    protected $newChatMembers;
+    protected array $newChatMembers;
 
     /**
      * Optional. A member was removed from the group, information about them (this member may be bot itself)
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
-    protected $leftChatMember;
+    protected User $leftChatMember;
 
     /**
      * Optional. A group title was changed to this value
      *
      * @var string
      */
-    protected $newChatTitle;
+    protected string $newChatTitle;
 
     /**
-     * Optional. A group photo was change to this value
+     * Optional. A chat photo was change to this value
      *
-     * @var mixed
+     * @var PhotoSize[]
      */
-    protected $newChatPhoto;
+    protected array $newChatPhoto;
 
     /**
      * Optional. Informs that the group photo was deleted
      *
      * @var bool
      */
-    protected $deleteChatPhoto;
+    protected bool $deleteChatPhoto;
 
     /**
      * Optional. Informs that the group has been created
      *
      * @var bool
      */
-    protected $groupChatCreated;
+    protected bool $groupChatCreated;
 
     /**
      * Optional. Service message: the supergroup has been created
      *
      * @var bool
      */
-    protected $supergroupChatCreated;
+    protected bool $supergroupChatCreated;
 
     /**
      * Optional. Service message: the channel has been created
      *
      * @var bool
      */
-    protected $channelChatCreated;
+    protected bool $channelChatCreated;
 
     /**
-     * Optional. The group has been migrated to a supergroup with the specified identifier,
-     * not exceeding 1e13 by absolute value
+     * Optional. The group has been migrated to a supergroup with the specified identifier, not exceeding 1e13 by
+     * absolute value
      *
      * @var int
      */
-    protected $migrateToChatId;
+    protected int $migrateToChatId;
 
     /**
      * Optional. The supergroup has been migrated from a group with the specified identifier,
@@ -359,7 +356,7 @@ class Message extends BaseType implements TypeInterface
      *
      * @var int
      */
-    protected $migrateFromChatId;
+    protected int $migrateFromChatId;
 
     /**
      * Optional. Specified message was pinned.Note that the Message object in this field
@@ -367,62 +364,56 @@ class Message extends BaseType implements TypeInterface
      *
      * @var Message
      */
-    protected $pinnedMessage;
+    protected Message $pinnedMessage;
 
     /**
      * Optional. Message is an invoice for a payment, information about the invoice.
      *
      * @var Invoice
      */
-    protected $invoice;
+    protected Invoice $invoice;
 
     /**
      * Optional. Message is a service message about a successful payment, information about the payment.
      *
      * @var SuccessfulPayment
      */
-    protected $successfulPayment;
+    protected SuccessfulPayment $successfulPayment;
 
     /**
      * Optional. The domain name of the website on which the user has logged in.
      *
      * @var string
      */
-    protected $connectedWebsite;
+    protected string $connectedWebsite;
 
     /**
      * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
      *
      * @var InlineKeyboardMarkup
      */
-    protected $replyMarkup;
+    protected InlineKeyboardMarkup $replyMarkup;
 
     /**
      * @return int
      */
-    public function getMessageId()
+    public function getMessageId(): int
     {
         return $this->messageId;
     }
 
     /**
      * @param int $messageId
-     *
-     * @throws InvalidArgumentException
      */
-    public function setMessageId($messageId)
+    public function setMessageId(int $messageId): void
     {
-        if (is_integer($messageId) || is_float($messageId)) {
-            $this->messageId = $messageId;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->messageId = $messageId;
     }
 
     /**
      * @return User
      */
-    public function getFrom()
+    public function getFrom(): User
     {
         return $this->from;
     }
@@ -430,15 +421,31 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param User $from
      */
-    public function setFrom(User $from)
+    public function setFrom(User $from): void
     {
         $this->from = $from;
     }
 
     /**
+     * @return int
+     */
+    public function getDate(): int
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param int $date
+     */
+    public function setDate(int $date): void
+    {
+        $this->date = $date;
+    }
+
+    /**
      * @return Chat
      */
-    public function getChat()
+    public function getChat(): Chat
     {
         return $this->chat;
     }
@@ -446,37 +453,15 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Chat $chat
      */
-    public function setChat(Chat $chat)
+    public function setChat(Chat $chat): void
     {
         $this->chat = $chat;
     }
 
     /**
-     * @return int
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param int $date
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setDate($date)
-    {
-        if (is_int($date)) {
-            $this->date = $date;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
      * @return User
      */
-    public function getForwardFrom()
+    public function getForwardFrom(): User
     {
         return $this->forwardFrom;
     }
@@ -484,7 +469,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param User $forwardFrom
      */
-    public function setForwardFrom(User $forwardFrom)
+    public function setForwardFrom(User $forwardFrom): void
     {
         $this->forwardFrom = $forwardFrom;
     }
@@ -492,7 +477,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Chat
      */
-    public function getForwardFromChat()
+    public function getForwardFromChat(): Chat
     {
         return $this->forwardFromChat;
     }
@@ -500,7 +485,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Chat $forwardFromChat
      */
-    public function setForwardFromChat(Chat $forwardFromChat)
+    public function setForwardFromChat(Chat $forwardFromChat): void
     {
         $this->forwardFromChat = $forwardFromChat;
     }
@@ -508,7 +493,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getForwardFromMessageId()
+    public function getForwardFromMessageId(): int
     {
         return $this->forwardFromMessageId;
     }
@@ -516,7 +501,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param int $forwardFromMessageId
      */
-    public function setForwardFromMessageId($forwardFromMessageId)
+    public function setForwardFromMessageId(int $forwardFromMessageId): void
     {
         $this->forwardFromMessageId = $forwardFromMessageId;
     }
@@ -524,7 +509,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getForwardSignature()
+    public function getForwardSignature(): string
     {
         return $this->forwardSignature;
     }
@@ -532,7 +517,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $forwardSignature
      */
-    public function setForwardSignature($forwardSignature)
+    public function setForwardSignature(string $forwardSignature): void
     {
         $this->forwardSignature = $forwardSignature;
     }
@@ -540,7 +525,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getForwardSenderName()
+    public function getForwardSenderName(): string
     {
         return $this->forwardSenderName;
     }
@@ -548,7 +533,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $forwardSenderName
      */
-    public function setForwardSenderName($forwardSenderName)
+    public function setForwardSenderName(string $forwardSenderName): void
     {
         $this->forwardSenderName = $forwardSenderName;
     }
@@ -556,29 +541,23 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getForwardDate()
+    public function getForwardDate(): int
     {
         return $this->forwardDate;
     }
 
     /**
      * @param int $forwardDate
-     *
-     * @throws InvalidArgumentException
      */
-    public function setForwardDate($forwardDate)
+    public function setForwardDate(int $forwardDate): void
     {
-        if (is_int($forwardDate)) {
-            $this->forwardDate = $forwardDate;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->forwardDate = $forwardDate;
     }
 
     /**
      * @return Message
      */
-    public function getReplyToMessage()
+    public function getReplyToMessage(): Message
     {
         return $this->replyToMessage;
     }
@@ -586,7 +565,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Message $replyToMessage
      */
-    public function setReplyToMessage(Message $replyToMessage)
+    public function setReplyToMessage(Message $replyToMessage): void
     {
         $this->replyToMessage = $replyToMessage;
     }
@@ -594,29 +573,23 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getEditDate()
+    public function getEditDate(): int
     {
         return $this->editDate;
     }
 
     /**
      * @param int $editDate
-     *
-     * @throws InvalidArgumentException
      */
-    public function setEditDate($editDate)
+    public function setEditDate(int $editDate): void
     {
-        if (is_int($editDate)) {
-            $this->editDate = $editDate;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->editDate = $editDate;
     }
 
     /**
      * @return int
      */
-    public function getMediaGroupId()
+    public function getMediaGroupId(): int
     {
         return $this->mediaGroupId;
     }
@@ -624,7 +597,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param int $mediaGroupId
      */
-    public function setMediaGroupId($mediaGroupId)
+    public function setMediaGroupId(int $mediaGroupId): void
     {
         $this->mediaGroupId = $mediaGroupId;
     }
@@ -632,7 +605,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getAuthorSignature()
+    public function getAuthorSignature(): string
     {
         return $this->authorSignature;
     }
@@ -640,7 +613,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $authorSignature
      */
-    public function setAuthorSignature($authorSignature)
+    public function setAuthorSignature(string $authorSignature): void
     {
         $this->authorSignature = $authorSignature;
     }
@@ -648,7 +621,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
@@ -656,23 +629,23 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $text
      */
-    public function setText($text)
+    public function setText(string $text): void
     {
         $this->text = $text;
     }
 
     /**
-     * @return array
+     * @return MessageEntity[]
      */
-    public function getEntities()
+    public function getEntities(): array
     {
         return $this->entities;
     }
 
     /**
-     * @param array $entities
+     * @param MessageEntity[] $entities
      */
-    public function setEntities($entities)
+    public function setEntities(array $entities): void
     {
         $this->entities = $entities;
     }
@@ -680,7 +653,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return ArrayOfMessageEntity
      */
-    public function getCaptionEntities()
+    public function getCaptionEntities(): ArrayOfMessageEntity
     {
         return $this->captionEntities;
     }
@@ -688,7 +661,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param ArrayOfMessageEntity $captionEntities
      */
-    public function setCaptionEntities($captionEntities)
+    public function setCaptionEntities(ArrayOfMessageEntity $captionEntities): void
     {
         $this->captionEntities = $captionEntities;
     }
@@ -696,7 +669,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Audio
      */
-    public function getAudio()
+    public function getAudio(): Audio
     {
         return $this->audio;
     }
@@ -704,7 +677,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Audio $audio
      */
-    public function setAudio(Audio $audio)
+    public function setAudio(Audio $audio): void
     {
         $this->audio = $audio;
     }
@@ -712,7 +685,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Document
      */
-    public function getDocument()
+    public function getDocument(): Document
     {
         return $this->document;
     }
@@ -720,7 +693,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Document $document
      */
-    public function setDocument($document)
+    public function setDocument(Document $document): void
     {
         $this->document = $document;
     }
@@ -728,7 +701,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Animation
      */
-    public function getAnimation()
+    public function getAnimation(): Animation
     {
         return $this->animation;
     }
@@ -736,23 +709,23 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Animation $animation
      */
-    public function setAnimation(Animation $animation)
+    public function setAnimation(Animation $animation): void
     {
         $this->animation = $animation;
     }
 
     /**
-     * @return array
+     * @return Photo[]
      */
-    public function getPhoto()
+    public function getPhoto(): array
     {
         return $this->photo;
     }
 
     /**
-     * @param array $photo
+     * @param Photo[] $photo
      */
-    public function setPhoto(array $photo)
+    public function setPhoto(array $photo): void
     {
         $this->photo = $photo;
     }
@@ -760,7 +733,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Sticker
      */
-    public function getSticker()
+    public function getSticker(): Sticker
     {
         return $this->sticker;
     }
@@ -768,7 +741,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Sticker $sticker
      */
-    public function setSticker(Sticker $sticker)
+    public function setSticker(Sticker $sticker): void
     {
         $this->sticker = $sticker;
     }
@@ -776,7 +749,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Video
      */
-    public function getVideo()
+    public function getVideo(): Video
     {
         return $this->video;
     }
@@ -784,7 +757,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Video $video
      */
-    public function setVideo(Video $video)
+    public function setVideo(Video $video): void
     {
         $this->video = $video;
     }
@@ -792,7 +765,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Voice
      */
-    public function getVoice()
+    public function getVoice(): Voice
     {
         return $this->voice;
     }
@@ -800,7 +773,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Voice $voice
      */
-    public function setVoice($voice)
+    public function setVoice(Voice $voice): void
     {
         $this->voice = $voice;
     }
@@ -808,7 +781,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getCaption()
+    public function getCaption(): string
     {
         return $this->caption;
     }
@@ -816,7 +789,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $caption
      */
-    public function setCaption($caption)
+    public function setCaption(string $caption): void
     {
         $this->caption = $caption;
     }
@@ -824,7 +797,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Contact
      */
-    public function getContact()
+    public function getContact(): Contact
     {
         return $this->contact;
     }
@@ -832,7 +805,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Contact $contact
      */
-    public function setContact(Contact $contact)
+    public function setContact(Contact $contact): void
     {
         $this->contact = $contact;
     }
@@ -840,7 +813,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Location
      */
-    public function getLocation()
+    public function getLocation(): Location
     {
         return $this->location;
     }
@@ -848,7 +821,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Location $location
      */
-    public function setLocation(Location $location)
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -856,7 +829,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Venue
      */
-    public function getVenue()
+    public function getVenue(): Venue
     {
         return $this->venue;
     }
@@ -864,7 +837,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Venue $venue
      */
-    public function setVenue($venue)
+    public function setVenue(Venue $venue): void
     {
         $this->venue = $venue;
     }
@@ -872,7 +845,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Poll
      */
-    public function getPoll()
+    public function getPoll(): Poll
     {
         return $this->poll;
     }
@@ -880,7 +853,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Poll $poll
      */
-    public function setPoll($poll)
+    public function setPoll(Poll $poll): void
     {
         $this->poll = $poll;
     }
@@ -888,7 +861,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Dice
      */
-    public function getDice()
+    public function getDice(): Dice
     {
         return $this->dice;
     }
@@ -896,23 +869,23 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Dice $dice
      */
-    public function setDice(Dice $dice)
+    public function setDice(Dice $dice): void
     {
         $this->dice = $dice;
     }
 
     /**
-     * @return array
+     * @return User[]
      */
-    public function getNewChatMembers()
+    public function getNewChatMembers(): array
     {
         return $this->newChatMembers;
     }
 
     /**
-     * @param array $newChatMembers
+     * @param User[] $newChatMembers
      */
-    public function setNewChatMembers($newChatMembers)
+    public function setNewChatMembers(array $newChatMembers): void
     {
         $this->newChatMembers = $newChatMembers;
     }
@@ -920,7 +893,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return User
      */
-    public function getLeftChatMember()
+    public function getLeftChatMember(): User
     {
         return $this->leftChatMember;
     }
@@ -928,7 +901,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param User $leftChatMember
      */
-    public function setLeftChatMember($leftChatMember)
+    public function setLeftChatMember(User $leftChatMember): void
     {
         $this->leftChatMember = $leftChatMember;
     }
@@ -936,7 +909,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getNewChatTitle()
+    public function getNewChatTitle(): string
     {
         return $this->newChatTitle;
     }
@@ -944,87 +917,87 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $newChatTitle
      */
-    public function setNewChatTitle($newChatTitle)
+    public function setNewChatTitle(string $newChatTitle): void
     {
         $this->newChatTitle = $newChatTitle;
     }
 
     /**
-     * @return array
+     * @return PhotoSize[]
      */
-    public function getNewChatPhoto()
+    public function getNewChatPhoto(): array
     {
         return $this->newChatPhoto;
     }
 
     /**
-     * @param array $newChatPhoto
+     * @param PhotoSize[] $newChatPhoto
      */
-    public function setNewChatPhoto($newChatPhoto)
+    public function setNewChatPhoto(array $newChatPhoto): void
     {
         $this->newChatPhoto = $newChatPhoto;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isDeleteChatPhoto()
+    public function isDeleteChatPhoto(): bool
     {
         return $this->deleteChatPhoto;
     }
 
     /**
-     * @param boolean $deleteChatPhoto
+     * @param bool $deleteChatPhoto
      */
-    public function setDeleteChatPhoto($deleteChatPhoto)
+    public function setDeleteChatPhoto(bool $deleteChatPhoto): void
     {
-        $this->deleteChatPhoto = (bool)$deleteChatPhoto;
+        $this->deleteChatPhoto = $deleteChatPhoto;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isGroupChatCreated()
+    public function isGroupChatCreated(): bool
     {
         return $this->groupChatCreated;
     }
 
     /**
-     * @param boolean $groupChatCreated
+     * @param bool $groupChatCreated
      */
-    public function setGroupChatCreated($groupChatCreated)
+    public function setGroupChatCreated(bool $groupChatCreated): void
     {
-        $this->groupChatCreated = (bool)$groupChatCreated;
+        $this->groupChatCreated = $groupChatCreated;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isSupergroupChatCreated()
+    public function isSupergroupChatCreated(): bool
     {
         return $this->supergroupChatCreated;
     }
 
     /**
-     * @param boolean $supergroupChatCreated
+     * @param bool $supergroupChatCreated
      */
-    public function setSupergroupChatCreated($supergroupChatCreated)
+    public function setSupergroupChatCreated(bool $supergroupChatCreated): void
     {
         $this->supergroupChatCreated = $supergroupChatCreated;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isChannelChatCreated()
+    public function isChannelChatCreated(): bool
     {
         return $this->channelChatCreated;
     }
 
     /**
-     * @param boolean $channelChatCreated
+     * @param bool $channelChatCreated
      */
-    public function setChannelChatCreated($channelChatCreated)
+    public function setChannelChatCreated(bool $channelChatCreated): void
     {
         $this->channelChatCreated = $channelChatCreated;
     }
@@ -1032,7 +1005,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getMigrateToChatId()
+    public function getMigrateToChatId(): int
     {
         return $this->migrateToChatId;
     }
@@ -1040,7 +1013,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param int $migrateToChatId
      */
-    public function setMigrateToChatId($migrateToChatId)
+    public function setMigrateToChatId(int $migrateToChatId): void
     {
         $this->migrateToChatId = $migrateToChatId;
     }
@@ -1048,7 +1021,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getMigrateFromChatId()
+    public function getMigrateFromChatId(): int
     {
         return $this->migrateFromChatId;
     }
@@ -1056,7 +1029,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param int $migrateFromChatId
      */
-    public function setMigrateFromChatId($migrateFromChatId)
+    public function setMigrateFromChatId(int $migrateFromChatId): void
     {
         $this->migrateFromChatId = $migrateFromChatId;
     }
@@ -1064,7 +1037,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return Message
      */
-    public function getPinnedMessage()
+    public function getPinnedMessage(): Message
     {
         return $this->pinnedMessage;
     }
@@ -1072,43 +1045,39 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param Message $pinnedMessage
      */
-    public function setPinnedMessage($pinnedMessage)
+    public function setPinnedMessage(Message $pinnedMessage): void
     {
         $this->pinnedMessage = $pinnedMessage;
     }
 
     /**
-     * @author MY
      * @return Invoice
      */
-    public function getInvoice()
+    public function getInvoice(): Invoice
     {
         return $this->invoice;
     }
 
     /**
-     * @author MY
      * @param Invoice $invoice
      */
-    public function setInvoice($invoice)
+    public function setInvoice(Invoice $invoice): void
     {
         $this->invoice = $invoice;
     }
 
     /**
-     * @author MY
      * @return SuccessfulPayment
      */
-    public function getSuccessfulPayment()
+    public function getSuccessfulPayment(): SuccessfulPayment
     {
         return $this->successfulPayment;
     }
 
     /**
-     * @author MY
      * @param SuccessfulPayment $successfulPayment
      */
-    public function setSuccessfulPayment($successfulPayment)
+    public function setSuccessfulPayment(SuccessfulPayment $successfulPayment): void
     {
         $this->successfulPayment = $successfulPayment;
     }
@@ -1116,7 +1085,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getConnectedWebsite()
+    public function getConnectedWebsite(): string
     {
         return $this->connectedWebsite;
     }
@@ -1124,7 +1093,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param string $connectedWebsite
      */
-    public function setConnectedWebsite($connectedWebsite)
+    public function setConnectedWebsite(string $connectedWebsite): void
     {
         $this->connectedWebsite = $connectedWebsite;
     }
@@ -1132,7 +1101,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @return InlineKeyboardMarkup
      */
-    public function getReplyMarkup()
+    public function getReplyMarkup(): InlineKeyboardMarkup
     {
         return $this->replyMarkup;
     }
@@ -1140,7 +1109,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * @param InlineKeyboardMarkup $replyMarkup
      */
-    public function setReplyMarkup($replyMarkup)
+    public function setReplyMarkup(InlineKeyboardMarkup $replyMarkup): void
     {
         $this->replyMarkup = $replyMarkup;
     }

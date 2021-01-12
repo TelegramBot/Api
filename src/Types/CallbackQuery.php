@@ -4,26 +4,12 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/**
- * Class CallbackQuery
- * This object represents an incoming callback query from a callback
- * button in an inline keyboard.
- * If the button that originated the query was attached to a message sent by the bot,
- * the field message will be present.
- * If the button was attached to a message sent via the bot (in inline mode),
- * the field inline_message_id will be present.
- * Exactly one of the fields data or game_short_name will be present.
- *
- * @package TelegramBot\Api\Types
- */
 class CallbackQuery extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['id', 'from'];
+    protected static array $requiredParams = ['id', 'from'];
 
     /**
      * {@inheritdoc}
@@ -45,21 +31,21 @@ class CallbackQuery extends BaseType
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * Sender
      *
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
-    protected $from;
+    protected User $from;
 
     /**
      * Optional. Message with the callback button that originated the query.
      * Note that message content and message date will not be available
      * if the message is too old
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var Message
      */
     protected $message;
 

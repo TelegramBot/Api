@@ -3,28 +3,17 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class PollOption
- * This object contains information about one answer option in a poll.
- *
- * @package TelegramBot\Api\Types
- */
 class PollOption extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var string[]
      */
-    static protected $requiredParams = ['text', 'voter_count'];
+    protected static array $requiredParams = ['text', 'voter_count'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'text' => true,
@@ -36,19 +25,19 @@ class PollOption extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $text;
+    protected string $text;
 
     /**
      * Number of users that voted for this option
      *
      * @var integer
      */
-    protected $voterCount;
+    protected int $voterCount;
 
     /**
      * @return string
      */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
@@ -56,7 +45,7 @@ class PollOption extends BaseType implements TypeInterface
     /**
      * @param string $text
      */
-    public function setText($text)
+    public function setText(string $text): void
     {
         $this->text = $text;
     }
@@ -64,7 +53,7 @@ class PollOption extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getVoterCount()
+    public function getVoterCount(): int
     {
         return $this->voterCount;
     }
@@ -72,7 +61,7 @@ class PollOption extends BaseType implements TypeInterface
     /**
      * @param int $voterCount
      */
-    public function setVoterCount($voterCount)
+    public function setVoterCount(int $voterCount): void
     {
         $this->voterCount = $voterCount;
     }

@@ -5,40 +5,55 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class Dice
- * This object represents a dice with random value from 1 to 6. (Yes, we're aware of the “proper” singular of die.
- * But it's awkward, and we decided to help it change. One dice at a time!)
- */
 class Dice extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['value'];
+    protected static array $requiredParams = ['emoji', 'value'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
+        'emoji' => true,
         'value' => true
     ];
 
     /**
-     * Value of the dice, 1-6
+     * Emoji on which the dice throw animation is based
+     *
+     * @var string
+     */
+    protected string $emoji;
+
+    /**
+     * Value of the dice, 1-6 for “🎲” and “🎯” base emoji, 1-5 for “🏀” and “⚽” base emoji, 1-64 for “🎰” base emoji
      *
      * @var int
      */
-    protected $value;
+    protected int $value;
+
+    /**
+     * @return string
+     */
+    public function getEmoji(): string
+    {
+        return $this->emoji;
+    }
+
+    /**
+     * @param string $emoji
+     */
+    public function setEmoji(string $emoji): void
+    {
+        $this->emoji = $emoji;
+    }
 
     /**
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }
@@ -46,7 +61,7 @@ class Dice extends BaseType implements TypeInterface
     /**
      * @param int $value
      */
-    public function setValue($value)
+    public function setValue(int $value): void
     {
         $this->value = $value;
     }

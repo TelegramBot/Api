@@ -3,36 +3,28 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class User
- * This object represents a Telegram user or bot.
- *
- * @package TelegramBot\Api\Types
- */
 class User extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['id', 'first_name'];
+    protected static array $requiredParams = ['id', 'is_bot', 'first_name'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'id' => true,
+        'is_bot' => true,
         'first_name' => true,
         'last_name' => true,
         'username' => true,
         'language_code' => true,
-        'is_bot' => true
+        'can_join_groups' => true,
+        'can_read_all_group_messages' => true,
+        'supports_inline_queries' => true,
     ];
 
     /**
@@ -40,133 +32,68 @@ class User extends BaseType implements TypeInterface
      *
      * @var int
      */
-    protected $id;
-
-    /**
-     * User‘s or bot’s first name
-     *
-     * @var string
-     */
-    protected $firstName;
-
-    /**
-     * Optional. User‘s or bot’s last name
-     *
-     * @var string
-     */
-    protected $lastName;
-
-    /**
-     * Optional. User‘s or bot’s username
-     *
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * Optional. IETF language tag of the user's language
-     *
-     * @var string
-     */
-    protected $languageCode;
+    protected int $id;
 
     /**
      * True, if this user is a bot
      *
      * @var bool
      */
-    protected $isBot;
+    protected bool $isBot;
 
     /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
+     * User‘s or bot’s first name
      *
-     * @throws InvalidArgumentException
+     * @var string
      */
-    public function setId($id)
-    {
-        if (is_integer($id) || is_float($id)) {
-            $this->id = $id;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
+    protected string $firstName;
 
     /**
-     * @return string
+     * Optional. User‘s or bot’s last name
+     *
+     * @var string
      */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
+    protected string $lastName;
 
     /**
-     * @param string $lastName
+     * Optional. User‘s or bot’s username
+     *
+     * @var string
      */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
+    protected string $username;
 
     /**
-     * @return string
+     * Optional. IETF language tag of the user's language
+     *
+     * @var string
      */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+    protected string $languageCode;
 
     /**
-     * @param string $username
+     * Optional. True, if the bot can be invited to groups. Returned only in getMe.
+     *
+     * @var bool
      */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
+    protected bool $canJoinGroups;
 
     /**
-     * @return string
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     *
+     * @var bool
      */
-    public function getLanguageCode()
-    {
-        return $this->languageCode;
-    }
+    protected bool $canReadAllGroupMessages;
 
     /**
-     * @param string $languageCode
+     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     *
+     * @var bool
      */
-    public function setLanguageCode($languageCode)
-    {
-        $this->languageCode = $languageCode;
-    }
+    protected bool $supportsInlineQueries;
 
     /**
      * @return bool
      */
-    public function isBot()
+    public function isBot(): bool
     {
         return $this->isBot;
     }
@@ -174,8 +101,120 @@ class User extends BaseType implements TypeInterface
     /**
      * @param bool $isBot
      */
-    public function setIsBot($isBot)
+    public function setIsBot(bool $isBot): void
     {
         $this->isBot = $isBot;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageCode(): string
+    {
+        return $this->languageCode;
+    }
+
+    /**
+     * @param string $languageCode
+     */
+    public function setLanguageCode(string $languageCode): void
+    {
+        $this->languageCode = $languageCode;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanJoinGroups(): bool
+    {
+        return $this->canJoinGroups;
+    }
+
+    /**
+     * @param bool $canJoinGroups
+     */
+    public function setCanJoinGroups(bool $canJoinGroups): void
+    {
+        $this->canJoinGroups = $canJoinGroups;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanReadAllGroupMessages(): bool
+    {
+        return $this->canReadAllGroupMessages;
+    }
+
+    /**
+     * @param bool $canReadAllGroupMessages
+     */
+    public function setCanReadAllGroupMessages(bool $canReadAllGroupMessages): void
+    {
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSupportsInlineQueries(): bool
+    {
+        return $this->supportsInlineQueries;
+    }
+
+    /**
+     * @param bool $supportsInlineQueries
+     */
+    public function setSupportsInlineQueries(bool $supportsInlineQueries): void
+    {
+        $this->supportsInlineQueries = $supportsInlineQueries;
     }
 }

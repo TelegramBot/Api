@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 13/04/16
- * Time: 04:10
- */
 
 namespace TelegramBot\Api\Types;
 
@@ -13,33 +7,28 @@ use TelegramBot\Api\TypeInterface;
 
 class MessageEntity extends BaseType implements TypeInterface
 {
-
-    const TYPE_MENTION = 'mention';
-    const TYPE_HASHTAG = 'hashtag';
-    const TYPE_CASHTAG = 'cashtag';
-    const TYPE_BOT_COMMAND = 'bot_command';
-    const TYPE_URL = 'url';
-    const TYPE_EMAIL = 'email';
-    const TYPE_PHONE_NUMBER = 'phone_number';
-    const TYPE_BOLD = 'bold';
-    const TYPE_ITALIC = 'italic';
-    const TYPE_UNDERLINE = 'underline';
-    const TYPE_STRIKETHROUGH = 'strikethrough';
-    const TYPE_CODE = 'code';
-    const TYPE_PRE = 'pre';
-    const TYPE_TEXT_LINK = 'text_link';
-    const TYPE_TEXT_MENTION = 'text_mention';
+    protected const TYPE_MENTION = 'mention';
+    protected const TYPE_HASHTAG = 'hashtag';
+    protected const TYPE_CASHTAG = 'cashtag';
+    protected const TYPE_BOT_COMMAND = 'bot_command';
+    protected const TYPE_URL = 'url';
+    protected const TYPE_EMAIL = 'email';
+    protected const TYPE_PHONE_NUMBER = 'phone_number';
+    protected const TYPE_BOLD = 'bold';
+    protected const TYPE_ITALIC = 'italic';
+    protected const TYPE_UNDERLINE = 'underline';
+    protected const TYPE_STRIKETHROUGH = 'strikethrough';
+    protected const TYPE_CODE = 'code';
+    protected const TYPE_PRE = 'pre';
+    protected const TYPE_TEXT_LINK = 'text_link';
+    protected const TYPE_TEXT_MENTION = 'text_mention';
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['type', 'offset', 'length'];
+    protected static array $requiredParams = ['type', 'offset', 'length'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -60,47 +49,47 @@ class MessageEntity extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Offset in UTF-16 code units to the start of the entity
      *
      * @var int
      */
-    protected $offset;
+    protected int $offset;
 
     /**
      * Length of the entity in UTF-16 code units
      *
      * @var int
      */
-    protected $length;
+    protected int $length;
 
     /**
      * Optional. For “text_link” only, url that will be opened after user taps on the text
      *
      * @var string
      */
-    protected $url;
+    protected string $url;
 
     /**
      * Optional. For “text_mention” only, the mentioned user
      *
      * @var User
      */
-    protected $user;
+    protected User $user;
 
     /**
      * Optional. For “pre” only, the programming language of the entity text
      *
      * @var string
      */
-    protected $language;
+    protected string $language;
 
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -108,7 +97,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -116,7 +105,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getOffset()
+    public function getOffset(): int
     {
         return $this->offset;
     }
@@ -124,7 +113,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param int $offset
      */
-    public function setOffset($offset)
+    public function setOffset(int $offset): void
     {
         $this->offset = $offset;
     }
@@ -132,7 +121,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @return int
      */
-    public function getLength()
+    public function getLength(): int
     {
         return $this->length;
     }
@@ -140,7 +129,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param int $length
      */
-    public function setLength($length)
+    public function setLength(int $length): void
     {
         $this->length = $length;
     }
@@ -148,7 +137,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -156,7 +145,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
@@ -164,7 +153,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -172,7 +161,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param User $user
      */
-    public function setUser($user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -180,7 +169,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
@@ -188,7 +177,7 @@ class MessageEntity extends BaseType implements TypeInterface
     /**
      * @param string $language
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language): void
     {
         $this->language = $language;
     }

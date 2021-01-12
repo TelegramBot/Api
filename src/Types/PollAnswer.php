@@ -4,28 +4,14 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/**
- * Class PollAnswer
- *
- * @see https://core.telegram.org/bots/api#pollanswer
- *
- * This object represents an answer of a user in a non-anonymous poll.
- *
- *
- * @package TelegramBot\Api\Types
- */
 class PollAnswer extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['poll_id', 'option_ids', 'user'];
+    protected static array $requiredParams = ['poll_id', 'option_ids', 'user'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -35,72 +21,56 @@ class PollAnswer extends BaseType
     ];
 
     /**
-     * @var \TelegramBot\Api\Types\User
+     * @var User
      */
-    protected $user;
+    protected User $user;
 
     /**
      * @var string
      */
-    protected $pollId;
+    protected string $pollId;
 
     /**
      * @var int[]
      */
-    protected $optionIds;
-
-    /**
-     * @return string
-     */
-    public function getPollId()
-    {
-        return $this->pollId;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setPollId($id)
-    {
-        $this->pollId = $id;
-    }
+    protected array $optionIds;
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param User $from
+     * @param User $user
      */
-    public function setUser(User $from)
+    public function setUser(User $user): void
     {
-        $this->user = $from;
+        $this->user = $user;
     }
 
     /**
-     * @return User
+     * @return string
      */
-    public function getFrom()
+    public function getPollId(): string
     {
-        return $this->getUser();
+        return $this->pollId;
     }
 
     /**
-     * @param User $from
+     * @param string $pollId
      */
-    public function setFrom(User $from)
+    public function setPollId(string $pollId): void
     {
-        return $this->setUser($from);
+        $this->pollId = $pollId;
     }
 
     /**
      * @return int[]
      */
-    public function getOptionIds()
+    public function getOptionIds(): array
     {
         return $this->optionIds;
     }
@@ -108,7 +78,7 @@ class PollAnswer extends BaseType
     /**
      * @param int[] $optionIds
      */
-    public function setOptionIds($optionIds)
+    public function setOptionIds(array $optionIds): void
     {
         $this->optionIds = $optionIds;
     }

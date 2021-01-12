@@ -4,27 +4,15 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/**
- * Class ForceReply
- * Upon receiving a message with this object, Telegram clients will display a reply interface to the user
- * (act as if the user has selected the bot‘s message and tapped ’Reply').This can be extremely useful
- * if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.
- *
- * @package TelegramBot\Api\Types
- */
 class ForceReply extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['force_reply'];
+    protected static array $requiredParams = ['force_reply'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'force_reply' => true,
@@ -36,7 +24,7 @@ class ForceReply extends BaseType
      *
      * @var bool
      */
-    protected $forceReply;
+    protected bool $forceReply;
 
     /**
      * Optional. Use this parameter if you want to show the keyboard to specific users only.
@@ -44,45 +32,46 @@ class ForceReply extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected $selective;
+    protected ?bool $selective;
 
     public function __construct($forceReply = true, $selective = null)
     {
         $this->forceReply = $forceReply;
-        $this->selective = $selective;
+        $this->selective  = $selective;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isForceReply()
+    public function isForceReply(): bool
     {
         return $this->forceReply;
     }
 
     /**
-     * @param boolean $forceReply
+     * @param bool $forceReply
      */
-    public function setForceReply($forceReply)
+    public function setForceReply(bool $forceReply): void
     {
         $this->forceReply = $forceReply;
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isSelective()
+    public function getSelective(): ?bool
     {
         return $this->selective;
     }
 
     /**
-     * @param boolean $selective
+     * @param bool|null $selective
      */
-    public function setSelective($selective)
+    public function setSelective(?bool $selective): void
     {
         $this->selective = $selective;
     }
 }
+

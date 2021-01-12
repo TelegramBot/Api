@@ -9,25 +9,14 @@ use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Payments\Query\PreCheckoutQuery;
 use TelegramBot\Api\Types\Payments\Query\ShippingQuery;
 
-/**
- * Class Update
- * This object represents an incoming update.
- * Only one of the optional parameters can be present in any given update.
- *
- * @package TelegramBot\Api\Types
- */
 class Update extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['update_id'];
+    protected static array $requiredParams = ['update_id'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -46,93 +35,92 @@ class Update extends BaseType implements TypeInterface
     ];
 
     /**
-     * The update‘s unique identifier.
-     * Update identifiers start from a certain positive number and increase sequentially.
-     * This ID becomes especially handy if you’re using Webhooks, since it allows you to ignore repeated updates or
-     * to restore the correct update sequence, should they get out of order.
+     * The update's unique identifier. Update identifiers start from a certain positive number and increase
+     * sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated
+     * updates or to restore the correct update sequence, should they get out of order. If there are no new updates for
+     * at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
      *
-     * @var integer
+     * @var int
      */
-    protected $updateId;
+    protected int $updateId;
 
     /**
      * Optional. New incoming message of any kind — text, photo, sticker, etc.
      *
      * @var Message
      */
-    protected $message;
-
-    /**
-     * @var PollAnswer
-     */
-    protected $pollAnswer;
-
-    /**
-     * @var Poll
-     */
-    protected $poll;
-
+    protected Message $message;
 
     /**
      * Optional. New version of a message that is known to the bot and was edited
      *
      * @var Message
      */
-    protected $editedMessage;
+    protected Message $editedMessage;
 
     /**
      * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
      *
      * @var Message
      */
-    protected $channelPost;
+    protected Message $channelPost;
 
     /**
      * Optional. New version of a channel post that is known to the bot and was edited
      *
      * @var Message
      */
-    protected $editedChannelPost;
+    protected Message $editedChannelPost;
 
     /**
      * Optional. New incoming inline query
      *
-     * @var \TelegramBot\Api\Types\Inline\InlineQuery
+     * @var InlineQuery
      */
-    protected $inlineQuery;
+    protected InlineQuery $inlineQuery;
 
     /**
      * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
      *
-     * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult
+     * @var ChosenInlineResult
      */
-    protected $chosenInlineResult;
+    protected ChosenInlineResult $chosenInlineResult;
 
     /**
      * Optional. New incoming callback query
      *
-     * @var \TelegramBot\Api\Types\CallbackQuery
+     * @var CallbackQuery
      */
-    protected $callbackQuery;
+    protected CallbackQuery $callbackQuery;
 
     /**
      * Optional. New incoming shipping query. Only for invoices with flexible price
      *
      * @var ShippingQuery
      */
-    protected $shippingQuery;
+    protected ShippingQuery $shippingQuery;
 
     /**
      * Optional. New incoming pre-checkout query. Contains full information about checkout
      *
      * @var PreCheckoutQuery
      */
-    protected $preCheckoutQuery;
+    protected PreCheckoutQuery $preCheckoutQuery;
+
+    /**
+     * @var Poll
+     */
+    protected Poll $poll;
+
+    /**
+     * @var PollAnswer
+     */
+    protected PollAnswer $pollAnswer;
 
     /**
      * @return int
      */
-    public function getUpdateId()
+    public function getUpdateId(): int
     {
         return $this->updateId;
     }
@@ -140,7 +128,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param int $updateId
      */
-    public function setUpdateId($updateId)
+    public function setUpdateId(int $updateId): void
     {
         $this->updateId = $updateId;
     }
@@ -148,7 +136,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return Message
      */
-    public function getMessage()
+    public function getMessage(): Message
     {
         return $this->message;
     }
@@ -156,7 +144,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $message
      */
-    public function setMessage(Message $message)
+    public function setMessage(Message $message): void
     {
         $this->message = $message;
     }
@@ -164,7 +152,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return Message
      */
-    public function getEditedMessage()
+    public function getEditedMessage(): Message
     {
         return $this->editedMessage;
     }
@@ -172,7 +160,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $editedMessage
      */
-    public function setEditedMessage($editedMessage)
+    public function setEditedMessage(Message $editedMessage): void
     {
         $this->editedMessage = $editedMessage;
     }
@@ -180,7 +168,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return Message
      */
-    public function getChannelPost()
+    public function getChannelPost(): Message
     {
         return $this->channelPost;
     }
@@ -188,47 +176,15 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $channelPost
      */
-    public function setChannelPost($channelPost)
+    public function setChannelPost(Message $channelPost): void
     {
         $this->channelPost = $channelPost;
     }
 
     /**
-     * @return PollAnswer
-     */
-    public function getPollAnswer()
-    {
-        return $this->pollAnswer;
-    }
-
-    /**
-     * @return Poll
-     */
-    public function getPoll()
-    {
-        return $this->poll;
-    }
-
-    /**
-     * @param Poll $poll
-     */
-    public function setPoll($poll)
-    {
-        $this->poll = $poll;
-    }
-
-    /**
-     * @param PollAnswer $pollAnswer
-     */
-    public function setPollAnswer($pollAnswer)
-    {
-        $this->pollAnswer = $pollAnswer;
-    }
-
-    /**
      * @return Message
      */
-    public function getEditedChannelPost()
+    public function getEditedChannelPost(): Message
     {
         return $this->editedChannelPost;
     }
@@ -236,7 +192,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $editedChannelPost
      */
-    public function setEditedChannelPost($editedChannelPost)
+    public function setEditedChannelPost(Message $editedChannelPost): void
     {
         $this->editedChannelPost = $editedChannelPost;
     }
@@ -244,7 +200,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return InlineQuery
      */
-    public function getInlineQuery()
+    public function getInlineQuery(): InlineQuery
     {
         return $this->inlineQuery;
     }
@@ -252,7 +208,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param InlineQuery $inlineQuery
      */
-    public function setInlineQuery($inlineQuery)
+    public function setInlineQuery(InlineQuery $inlineQuery): void
     {
         $this->inlineQuery = $inlineQuery;
     }
@@ -260,7 +216,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return ChosenInlineResult
      */
-    public function getChosenInlineResult()
+    public function getChosenInlineResult(): ChosenInlineResult
     {
         return $this->chosenInlineResult;
     }
@@ -268,7 +224,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param ChosenInlineResult $chosenInlineResult
      */
-    public function setChosenInlineResult($chosenInlineResult)
+    public function setChosenInlineResult(ChosenInlineResult $chosenInlineResult): void
     {
         $this->chosenInlineResult = $chosenInlineResult;
     }
@@ -276,7 +232,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @return CallbackQuery
      */
-    public function getCallbackQuery()
+    public function getCallbackQuery(): CallbackQuery
     {
         return $this->callbackQuery;
     }
@@ -284,44 +240,72 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param CallbackQuery $callbackQuery
      */
-    public function setCallbackQuery($callbackQuery)
+    public function setCallbackQuery(CallbackQuery $callbackQuery): void
     {
         $this->callbackQuery = $callbackQuery;
     }
 
     /**
-     * @author MY
      * @return ShippingQuery
      */
-    public function getShippingQuery()
+    public function getShippingQuery(): ShippingQuery
     {
         return $this->shippingQuery;
     }
 
     /**
-     * @author MY
      * @param ShippingQuery $shippingQuery
      */
-    public function setShippingQuery($shippingQuery)
+    public function setShippingQuery(ShippingQuery $shippingQuery): void
     {
         $this->shippingQuery = $shippingQuery;
     }
 
     /**
-     * @author MY
      * @return PreCheckoutQuery
      */
-    public function getPreCheckoutQuery()
+    public function getPreCheckoutQuery(): PreCheckoutQuery
     {
         return $this->preCheckoutQuery;
     }
 
     /**
-     * @author MY
      * @param PreCheckoutQuery $preCheckoutQuery
      */
-    public function setPreCheckoutQuery($preCheckoutQuery)
+    public function setPreCheckoutQuery(PreCheckoutQuery $preCheckoutQuery): void
     {
         $this->preCheckoutQuery = $preCheckoutQuery;
+    }
+
+    /**
+     * @return Poll
+     */
+    public function getPoll(): Poll
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     */
+    public function setPoll(Poll $poll): void
+    {
+        $this->poll = $poll;
+    }
+
+    /**
+     * @return PollAnswer
+     */
+    public function getPollAnswer(): PollAnswer
+    {
+        return $this->pollAnswer;
+    }
+
+    /**
+     * @param PollAnswer $pollAnswer
+     */
+    public function setPollAnswer(PollAnswer $pollAnswer): void
+    {
+        $this->pollAnswer = $pollAnswer;
     }
 }

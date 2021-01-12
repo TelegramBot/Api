@@ -3,27 +3,16 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class UserProfilePhotos
- * This object represent a user's profile pictures.
- *
- * @package TelegramBot\Api\Types
- */
 class UserProfilePhotos extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['total_count', 'photos'];
+    protected static array $requiredParams = ['total_count', 'photos'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -34,9 +23,9 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     /**
      * Total number of profile pictures the target user has
      *
-     * @var Integer
+     * @var int
      */
-    protected $totalCount;
+    protected int $totalCount;
 
     /**
      * Requested profile pictures (in up to 4 sizes each).
@@ -44,12 +33,28 @@ class UserProfilePhotos extends BaseType implements TypeInterface
      *
      * @var array
      */
-    protected $photos;
+    protected array $photos;
+
+    /**
+     * @return int
+     */
+    public function getTotalCount(): int
+    {
+        return $this->totalCount;
+    }
+
+    /**
+     * @param int $totalCount
+     */
+    public function setTotalCount(int $totalCount): void
+    {
+        $this->totalCount = $totalCount;
+    }
 
     /**
      * @return array
      */
-    public function getPhotos()
+    public function getPhotos(): array
     {
         return $this->photos;
     }
@@ -57,30 +62,8 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     /**
      * @param array $photos
      */
-    public function setPhotos($photos)
+    public function setPhotos(array $photos): void
     {
         $this->photos = $photos;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotalCount()
-    {
-        return $this->totalCount;
-    }
-
-    /**
-     * @param int $totalCount
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setTotalCount($totalCount)
-    {
-        if (is_integer($totalCount)) {
-            $this->totalCount = $totalCount;
-        } else {
-            throw new InvalidArgumentException();
-        }
     }
 }

@@ -3,32 +3,25 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class Location
- * This object represents a point on the map.
- *
- * @package TelegramBot\Api\Types
- */
 class Location extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['latitude', 'longitude'];
+    protected static array $requiredParams = ['latitude', 'longitude'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'latitude' => true,
-        'longitude' => true
+        'longitude' => true,
+        'horizontal_accuracy' => true,
+        'live_period' => true,
+        'heading' => true,
+        'proximity_alert_radius' => true,
     ];
 
     /**
@@ -36,56 +29,138 @@ class Location extends BaseType implements TypeInterface
      *
      * @var float
      */
-    protected $longitude;
+    protected float $longitude;
 
     /**
      * Latitude as defined by sender
      *
      * @var float
      */
-    protected $latitude;
+    protected float $latitude;
 
     /**
-     * @return float
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param float $latitude
+     * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
      *
-     * @throws InvalidArgumentException
+     * @var float
      */
-    public function setLatitude($latitude)
-    {
-        if (is_float($latitude)) {
-            $this->latitude = $latitude;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
+    protected float $horizontalAccuracy;
+
+    /**
+     * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For
+     * active live locations only.
+     *
+     * @var int
+     */
+    protected int $livePeriod;
+
+    /**
+     * Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
+     *
+     * @var int
+     */
+    protected int $heading;
+
+    /**
+     * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live
+     * locations only.
+     *
+     * @var int
+     */
+    protected int $proximityAlertRadius;
 
     /**
      * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
 
     /**
      * @param float $longitude
-     *
-     * @throws InvalidArgumentException
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): void
     {
-        if (is_float($longitude)) {
-            $this->longitude = $longitude;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude(float $latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getHorizontalAccuracy(): float
+    {
+        return $this->horizontalAccuracy;
+    }
+
+    /**
+     * @param float $horizontalAccuracy
+     */
+    public function setHorizontalAccuracy(float $horizontalAccuracy): void
+    {
+        $this->horizontalAccuracy = $horizontalAccuracy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivePeriod(): int
+    {
+        return $this->livePeriod;
+    }
+
+    /**
+     * @param int $livePeriod
+     */
+    public function setLivePeriod(int $livePeriod): void
+    {
+        $this->livePeriod = $livePeriod;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeading(): int
+    {
+        return $this->heading;
+    }
+
+    /**
+     * @param int $heading
+     */
+    public function setHeading(int $heading): void
+    {
+        $this->heading = $heading;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProximityAlertRadius(): int
+    {
+        return $this->proximityAlertRadius;
+    }
+
+    /**
+     * @param int $proximityAlertRadius
+     */
+    public function setProximityAlertRadius(int $proximityAlertRadius): void
+    {
+        $this->proximityAlertRadius = $proximityAlertRadius;
     }
 }

@@ -4,28 +4,15 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/**
- * Class ReplyKeyboardHide
- * Upon receiving a message with this object, Telegram clients will hide the current custom keyboard
- * and display the default letter-keyboard. By default, custom keyboards are displayed
- * until a new keyboard is sent by a bot. An exception is made for one-time keyboards
- * that are hidden immediately after the user presses a button (see \TelegramBot\Api\Types\ReplyKeyboardMarkup).
- *
- * @package TelegramBot\Api\Types
- */
 class ReplyKeyboardHide extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['hide_keyboard'];
+    protected static array $requiredParams = ['hide_keyboard'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'hide_keyboard' => true,
@@ -37,7 +24,7 @@ class ReplyKeyboardHide extends BaseType
      *
      * @var bool
      */
-    protected $hideKeyboard;
+    protected bool $hideKeyboard;
 
     /**
      * Optional. Use this parameter if you want to show the keyboard to specific users only.
@@ -45,44 +32,44 @@ class ReplyKeyboardHide extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected $selective;
+    protected ?bool $selective;
 
-    public function __construct($hideKeyboard = true, $selective = null)
+    public function __construct(bool $hideKeyboard = true, ?bool $selective = null)
     {
         $this->hideKeyboard = $hideKeyboard;
-        $this->selective = $selective;
+        $this->selective    = $selective;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isHideKeyboard()
+    public function isHideKeyboard(): bool
     {
         return $this->hideKeyboard;
     }
 
     /**
-     * @param boolean $hideKeyboard
+     * @param bool $hideKeyboard
      */
-    public function setHideKeyboard($hideKeyboard)
+    public function setHideKeyboard(bool $hideKeyboard): void
     {
         $this->hideKeyboard = $hideKeyboard;
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
-    public function isSelective()
+    public function getSelective(): ?bool
     {
         return $this->selective;
     }
 
     /**
-     * @param boolean $selective
+     * @param bool|null $selective
      */
-    public function setSelective($selective)
+    public function setSelective(?bool $selective): void
     {
         $this->selective = $selective;
     }

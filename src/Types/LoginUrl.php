@@ -5,21 +5,15 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * This object represents a parameter of the inline keyboard button used to automatically authorize a user.
- * Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram.
- */
 class LoginUrl extends BaseType implements TypeInterface
 {
     /**
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['url'];
+    protected static array $requiredParams = ['url'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'url' => true,
@@ -33,33 +27,33 @@ class LoginUrl extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $url;
+    protected string $url;
 
     /**
      * Optional. New text of the button in forwarded messages.
      *
      * @var string
      */
-    protected $forwardText;
+    protected string $forwardText;
 
     /**
      * Optional. Username of a bot, which will be used for user authorization
      *
      * @var string
      */
-    protected $botUsername;
+    protected string $botUsername;
 
     /**
      * Optional. Pass True to request the permission for your bot to send messages to the user.
      *
      * @var bool
      */
-    protected $requestWriteAccess;
+    protected bool $requestWriteAccess;
 
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -67,7 +61,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
@@ -75,7 +69,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getForwardText()
+    public function getForwardText(): string
     {
         return $this->forwardText;
     }
@@ -83,7 +77,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @param string $forwardText
      */
-    public function setForwardText($forwardText)
+    public function setForwardText(string $forwardText): void
     {
         $this->forwardText = $forwardText;
     }
@@ -91,7 +85,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @return string
      */
-    public function getBotUsername()
+    public function getBotUsername(): string
     {
         return $this->botUsername;
     }
@@ -99,7 +93,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @param string $botUsername
      */
-    public function setBotUsername($botUsername)
+    public function setBotUsername(string $botUsername): void
     {
         $this->botUsername = $botUsername;
     }
@@ -107,7 +101,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @return bool
      */
-    public function isRequestWriteAccess()
+    public function isRequestWriteAccess(): bool
     {
         return $this->requestWriteAccess;
     }
@@ -115,7 +109,7 @@ class LoginUrl extends BaseType implements TypeInterface
     /**
      * @param bool $requestWriteAccess
      */
-    public function setRequestWriteAccess($requestWriteAccess)
+    public function setRequestWriteAccess(bool $requestWriteAccess): void
     {
         $this->requestWriteAccess = $requestWriteAccess;
     }

@@ -3,68 +3,66 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
-/**
- * Class PhotoSize
- * This object represents one size of a photo or a file / sticker thumbnail.
- *
- * @package TelegramBot\Api\Types
- */
 class PhotoSize extends BaseType implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['file_id', 'width', 'height'];
+    static protected array $requiredParams = ['file_id', 'file_unique_id', 'width', 'height'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'file_size' => true,
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file, which can be used to download or reuse the file
      *
      * @var string
      */
-    protected $fileId;
+    protected string $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be
+     * used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected string $fileUniqueId;
 
     /**
      * Photo width
      *
      * @var int
      */
-    protected $width;
+    protected int $width;
 
     /**
      * Photo height
      *
      * @var int
      */
-    protected $height;
+    protected int $height;
 
     /**
      * Optional. File size
      *
      * @var int
      */
-    protected $fileSize;
+    protected int $fileSize;
 
     /**
      * @return string
      */
-    public function getFileId()
+    public function getFileId(): string
     {
         return $this->fileId;
     }
@@ -72,74 +70,72 @@ class PhotoSize extends BaseType implements TypeInterface
     /**
      * @param string $fileId
      */
-    public function setFileId($fileId)
+    public function setFileId(string $fileId): void
     {
         $this->fileId = $fileId;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getFileSize()
+    public function getFileUniqueId(): string
     {
-        return $this->fileSize;
+        return $this->fileUniqueId;
     }
 
     /**
-     * @param int $fileSize
-     *
-     * @throws InvalidArgumentException
+     * @param string $fileUniqueId
      */
-    public function setFileSize($fileSize)
+    public function setFileUniqueId(string $fileUniqueId): void
     {
-        if (is_integer($fileSize)) {
-            $this->fileSize = $fileSize;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**
      * @return int
      */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * @param int $height
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setHeight($height)
-    {
-        if (is_integer($height)) {
-            $this->height = $height;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
     /**
      * @param int $width
-     *
-     * @throws InvalidArgumentException
      */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
-        if (is_integer($width)) {
-            $this->width = $width;
-        } else {
-            throw new InvalidArgumentException();
-        }
+        $this->width = $width;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param int $height
+     */
+    public function setHeight(int $height): void
+    {
+        $this->height = $height;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFileSize(): int
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param int $fileSize
+     */
+    public function setFileSize(int $fileSize): void
+    {
+        $this->fileSize = $fileSize;
     }
 }
