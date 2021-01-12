@@ -18,7 +18,7 @@ class ChatMember extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'user' => User::class,
         'status' => true,
         'until_date' => true,

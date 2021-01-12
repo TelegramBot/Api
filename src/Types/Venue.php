@@ -31,7 +31,7 @@ class Venue extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'location' => Location::class,
         'title' => true,
         'address' => true,

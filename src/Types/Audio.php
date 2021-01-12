@@ -19,14 +19,14 @@ class Audio extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'duration'];
+    protected static array $requiredParams = ['file_id', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'file_id' => true,
         'duration' => true,
         'performer' => true,
@@ -40,42 +40,42 @@ class Audio extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $fileId;
+    protected string $fileId;
 
     /**
      * Photo width
      *
      * @var int
      */
-    protected $duration;
+    protected int $duration;
 
     /**
      * Optional. Performer of the audio as defined by sender or by audio tags
      *
      * @var string
      */
-    protected $performer;
+    protected string $performer;
 
     /**
      * Optional. Title of the audio as defined by sender or by audio tags
      *
      * @var string
      */
-    protected $title;
+    protected string $title;
 
     /**
      * Optional. MIME type of the file as defined by sender
      *
      * @var string
      */
-    protected $mimeType;
+    protected string $mimeType;
 
     /**
      * Optional. File size
      *
      * @var int
      */
-    protected $fileSize;
+    protected int $fileSize;
 
     /**
      * @return int

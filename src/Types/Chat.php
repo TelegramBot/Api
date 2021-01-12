@@ -20,7 +20,7 @@ class Chat extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'id' => true,
         'type' => true,
         'title' => true,

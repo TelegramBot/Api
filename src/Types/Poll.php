@@ -35,7 +35,7 @@ class Poll extends BaseType implements TypeInterface
      *
      * @var array
      */
-    protected static $map = [
+    protected static array $map = [
         'id' => true,
         'question' => true,
         'options' => ArrayOfPollOption::class,

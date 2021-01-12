@@ -15,14 +15,14 @@ abstract class BaseType
      *
      * @var array
      */
-    protected static $requiredParams = [];
+    protected static array $requiredParams = [];
 
     /**
      * Map of input data
      *
      * @var array
      */
-    protected static $map = [];
+    protected static array $map = [];
 
     /**
      * Validate input data
@@ -33,16 +33,19 @@ abstract class BaseType
      *
      * @throws InvalidArgumentException
      */
-    public static function validate($data)
+    public static function validate(array $data): bool
     {
         if (count(array_intersect_key(array_flip(static::$requiredParams), $data)) === count(static::$requiredParams)) {
             return true;
         }
 
-        throw new InvalidArgumentException();
+        throw new InvalidArgumentException('Validation error');
     }
 
-    public function map($data)
+    /**
+     * @param array $data
+     */
+    public function map(array $data): void
     {
         foreach (static::$map as $key => $item) {
             if (isset($data[$key]) && (!is_array($data[$key]) || (is_array($data[$key]) && !empty($data[$key])))) {
@@ -56,12 +59,23 @@ abstract class BaseType
         }
     }
 
-    protected static function toCamelCase($str)
+    /**
+     * @param string $str
+     *
+     * @return string|string[]
+     */
+    protected static function toCamelCase(string $str)
     {
         return str_replace(" ", "", ucwords(str_replace("_", " ", $str)));
     }
 
-    public function toJson($inner = false)
+    /**
+     * @param bool $inner
+     *
+     * @return array|false|string
+     * @throws \JsonException
+     */
+    public function toJson(bool $inner = false)
     {
         $output = [];
 
@@ -81,15 +95,21 @@ abstract class BaseType
             }
         }
 
-        return $inner === false ? json_encode($output) : $output;
+        return $inner === false ? json_encode($output, JSON_THROW_ON_ERROR) : $output;
     }
 
+    /**
+     * @param $data
+     *
+     * @return bool|static
+     * @throws InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
         if ($data === true) {
             return true;
         }
-        
+
         self::validate($data);
         $instance = new static();
         $instance->map($data);

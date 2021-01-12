@@ -42,7 +42,7 @@ class MessageEntity extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'type' => true,
         'offset' => true,
         'length' => true,

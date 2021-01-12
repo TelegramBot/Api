@@ -26,7 +26,7 @@ class Voice extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'file_id' => true,
         'duration' => true,
         'mime_type' => true,

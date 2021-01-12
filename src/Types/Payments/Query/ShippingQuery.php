@@ -25,7 +25,7 @@ class ShippingQuery extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'id' => true,
         'from' => User::class,
         'invoice_payload' => true,

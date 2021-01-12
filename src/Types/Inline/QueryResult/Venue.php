@@ -36,7 +36,7 @@ class Venue extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'type' => true,
         'id' => true,
         'latitude' => true,

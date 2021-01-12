@@ -22,7 +22,7 @@ class AnswerShippingQuery extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'shipping_query_id' => true,
         'ok' => true,
         'shipping_options' => ArrayOfLabeledPrice::class,

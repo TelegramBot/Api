@@ -21,7 +21,7 @@ class LoginUrl extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'url' => true,
         'forward_text' => true,
         'bot_username' => true,

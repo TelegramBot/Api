@@ -20,7 +20,7 @@ class ShippingAddress extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'country_code' => true,
         'state' => true,
         'city' => true,

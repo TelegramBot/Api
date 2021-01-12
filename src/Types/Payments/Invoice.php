@@ -20,7 +20,7 @@ class Invoice extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'title' => true,
         'description' => true,
         'start_parameter' => true,

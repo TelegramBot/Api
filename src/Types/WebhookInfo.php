@@ -29,7 +29,7 @@ class WebhookInfo extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'url' => true,
         'has_custom_certificate' => true,
         'pending_update_count' => true,

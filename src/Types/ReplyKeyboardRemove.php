@@ -25,7 +25,7 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'remove_keyboard' => true,
         'selective' => true
     ];

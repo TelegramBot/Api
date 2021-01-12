@@ -34,7 +34,7 @@ class Contact extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,

@@ -27,7 +27,7 @@ class Gif extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'type' => true,
         'id' => true,
         'gif_url' => true,

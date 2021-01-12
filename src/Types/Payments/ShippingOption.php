@@ -20,7 +20,7 @@ class ShippingOption extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'id' => true,
         'title' => true,
         'prices' => ArrayOfLabeledPrice::class

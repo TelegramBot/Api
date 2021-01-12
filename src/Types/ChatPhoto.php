@@ -18,7 +18,7 @@ class ChatPhoto extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'small_file_id' => true,
         'big_file_id' => true,
     ];

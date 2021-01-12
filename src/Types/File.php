@@ -29,7 +29,7 @@ class File extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'file_id' => true,
         'file_size' => true,
         'file_path' => true

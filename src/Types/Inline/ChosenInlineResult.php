@@ -26,7 +26,7 @@ class ChosenInlineResult extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'result_id' => true,
         'from' => User::class,
         'location' => Location::class,

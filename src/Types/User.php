@@ -26,7 +26,7 @@ class User extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'id' => true,
         'first_name' => true,
         'last_name' => true,

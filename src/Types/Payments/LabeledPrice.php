@@ -20,7 +20,7 @@ class LabeledPrice extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'label' => true,
         'amount' => true
     ];

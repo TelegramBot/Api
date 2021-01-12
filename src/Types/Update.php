@@ -30,7 +30,7 @@ class Update extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'update_id' => true,
         'message' => Message::class,
         'edited_message' => Message::class,

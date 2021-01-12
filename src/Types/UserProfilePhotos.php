@@ -26,7 +26,7 @@ class UserProfilePhotos extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'total_count' => true,
         'photos' => ArrayOfArrayOfPhotoSize::class,
     ];

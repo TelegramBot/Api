@@ -27,7 +27,7 @@ class ReplyKeyboardHide extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'hide_keyboard' => true,
         'selective' => true
     ];

@@ -24,7 +24,7 @@ class InlineKeyboardMarkup extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'inline_keyboard' => true,
     ];
 

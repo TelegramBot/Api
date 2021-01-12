@@ -26,7 +26,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'file_id' => true,
         'width' => true,
         'height' => true,

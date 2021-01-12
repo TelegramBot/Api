@@ -26,7 +26,7 @@ class ForceReply extends BaseType
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'force_reply' => true,
         'selective' => true
     ];

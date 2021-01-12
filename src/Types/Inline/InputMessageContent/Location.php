@@ -32,7 +32,7 @@ class Location extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static array $map = [
         'latitude' => true,
         'longitude' => true
     ];
