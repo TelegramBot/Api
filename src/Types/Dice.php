@@ -7,8 +7,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Dice
- * This object represents a dice with random value from 1 to 6. (Yes, we're aware of the “proper” singular of die.
- * But it's awkward, and we decided to help it change. One dice at a time!)
+ * This object represents an animated emoji that displays a random value.
  */
 class Dice extends BaseType implements TypeInterface
 {
@@ -17,7 +16,7 @@ class Dice extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['value'];
+    static protected $requiredParams = ['emoji', 'value'];
 
     /**
      * {@inheritdoc}
@@ -25,15 +24,39 @@ class Dice extends BaseType implements TypeInterface
      * @var array
      */
     static protected $map = [
+        'emoji' => true,
         'value' => true
     ];
 
     /**
-     * Value of the dice, 1-6
+     * Emoji on which the dice throw animation is based
+     *
+     * @var string
+     */
+    protected $emoji;
+
+    /**
+     * Value of the dice, 1-6 for “🎲” and “🎯” base emoji, 1-5 for “🏀” and “⚽” base emoji, 1-64 for “🎰” base emoji
      *
      * @var int
      */
     protected $value;
+
+    /**
+     * @return string
+     */
+    public function getEmoji()
+    {
+        return $this->emoji;
+    }
+
+    /**
+     * @param string $emoji
+     */
+    public function setEmoji($emoji)
+    {
+        $this->emoji = $emoji;
+    }
 
     /**
      * @return int

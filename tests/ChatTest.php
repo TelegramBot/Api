@@ -112,20 +112,6 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Gusev', $chat->getLastName());
     }
 
-    public function testSetAllMembersAreAdministrators()
-    {
-        $chat = new Chat();
-        $chat->setAllMembersAreAdministrators(true);
-        $this->assertAttributeEquals(true, 'allMembersAreAdministrators', $chat);
-    }
-
-    public function testGetAllMembersAreAdministrators()
-    {
-        $chat = new Chat();
-        $chat->setAllMembersAreAdministrators(true);
-        $this->assertEquals(true, $chat->getAllMembersAreAdministrators());
-    }
-
     public function testSetPhoto()
     {
         $chat = new Chat();
@@ -146,6 +132,20 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         ]);
         $chat->setPhoto($photo);
         $this->assertEquals($photo, $chat->getPhoto());
+    }
+
+    public function testSetBio()
+    {
+        $chat = new Chat();
+        $chat->setBio('PHP Telegram Bot API');
+        $this->assertAttributeEquals('PHP Telegram Bot API', 'bio', $chat);
+    }
+
+    public function testGetBio()
+    {
+        $chat = new Chat();
+        $chat->setBio('PHP Telegram Bot API');
+        $this->assertEquals('PHP Telegram Bot API', $chat);
     }
 
     public function testSetDescriptions()
@@ -176,6 +176,7 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Ilya', $item->getFirstName());
         $this->assertEquals('Gusev', $item->getLastName());
         $this->assertEquals('iGusev', $item->getUsername());
+        $this->assertEquals('PHP Telegram Bot API', $item->getBio());
     }
 
     /**
