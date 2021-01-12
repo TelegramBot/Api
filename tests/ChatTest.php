@@ -145,7 +145,7 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     {
         $chat = new Chat();
         $chat->setBio('PHP Telegram Bot API');
-        $this->assertEquals('PHP Telegram Bot API', $chat);
+        $this->assertEquals('PHP Telegram Bot API', $chat->getBio());
     }
 
     public function testSetDescriptions()
@@ -169,8 +169,10 @@ class ChatTest extends \PHPUnit_Framework_TestCase
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev',
-            'type' => 'private'
+            'type' => 'private',
+            'bio' => 'PHP Telegram Bot API'
         ));
+
         $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item);
         $this->assertEquals(123456, $item->getId());
         $this->assertEquals('Ilya', $item->getFirstName());

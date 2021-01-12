@@ -20,7 +20,7 @@ class ChatLocationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($location, $chatLocation->getLocation());
     }
 
-    public function testGetPollId()
+    public function testGetAddress()
     {
         $chatLocation = new ChatLocation();
         $chatLocation->setAddress('Wall St. 123');
