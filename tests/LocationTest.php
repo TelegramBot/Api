@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use TelegramBot\Api\Types\Location;
 
 class LocationTest extends \PHPUnit_Framework_TestCase
@@ -39,7 +38,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setHorizontalAccuracy(20.5);
-        $this->assertAttributeEquals(20.5, 'horizontal_accuracy', $location);
+        $this->assertAttributeEquals(20.5, 'horizontalAccuracy', $location);
     }
 
     public function testGetHorizontalAccuracy()
@@ -53,7 +52,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setLivePeriod(300);
-        $this->assertAttributeEquals(300, 'live_period', $location);
+        $this->assertAttributeEquals(300, 'livePeriod', $location);
     }
 
     public function testGetLivePeriod()
@@ -81,14 +80,14 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setProximityAlertRadius(15);
-        $this->assertAttributeEquals(15, 'proximity_alert_radius', $location);
+        $this->assertAttributeEquals(15, 'proximityAlertRadius', $location);
     }
 
     public function testGetProximityAlertRadius()
     {
         $location = new Location();
         $location->setProximityAlertRadius(100);
-        $this->assertEquals(15, $location->getProximityAlertRadius());
+        $this->assertEquals(100, $location->getProximityAlertRadius());
     }
 
     public function testFromResponse()
@@ -106,10 +105,10 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\TelegramBot\Api\Types\Location', $location);
         $this->assertAttributeEquals(55.585827, 'latitude', $location);
         $this->assertAttributeEquals(37.675309, 'longitude', $location);
-        $this->assertAttributeEquals(20.5, 'horizontal_accuracy', $location);
-        $this->assertAttributeEquals(300, 'live_period', $location);
+        $this->assertAttributeEquals(20.5, 'horizontalAccuracy', $location);
+        $this->assertAttributeEquals(300, 'livePeriod', $location);
         $this->assertAttributeEquals(100, 'heading', $location);
-        $this->assertAttributeEquals(15, 'proximity_alert_radius', $location);
+        $this->assertAttributeEquals(15, 'proximityAlertRadius', $location);
     }
 
     /**
