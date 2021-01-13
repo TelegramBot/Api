@@ -372,7 +372,7 @@ class BotApi
         $allowSendingWithoutReply = false,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendMessage', [
+        return Message::fromResponse($this->call('copyMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
