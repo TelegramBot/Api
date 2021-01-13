@@ -7,7 +7,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Contact
- * This object represents a sticker.
+ * This object represents a phone contact.
  *
  * @package TelegramBot\Api\Types
  */
@@ -29,7 +29,8 @@ class Contact extends BaseType implements TypeInterface
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,
-        'user_id' => true
+        'user_id' => true,
+        'vcard' => true,
     ];
 
     /**
@@ -59,6 +60,13 @@ class Contact extends BaseType implements TypeInterface
      * @var int
      */
     protected $userId;
+
+    /**
+     * Optional. Additional data about the contact in the form of a vCard
+     *
+     * @var string
+     */
+    protected $vCard;
 
     /**
      * @return string
@@ -122,5 +130,21 @@ class Contact extends BaseType implements TypeInterface
     public function setUserId($userId)
     {
         $this->userId = $userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVCard()
+    {
+        return $this->vCard;
+    }
+
+    /**
+     * @param string $vCard
+     */
+    public function setVCard($vCard)
+    {
+        $this->vCard = $vCard;
     }
 }
