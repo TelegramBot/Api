@@ -3,6 +3,7 @@
 namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
+use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
@@ -338,6 +339,50 @@ class BotApi
             'reply_to_message_id' => (int)$replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
+        ]));
+    }
+
+    /**
+     * @param int|string $chatId
+     * @param int|string $fromChatId
+     * @param int $messageId
+     * @param string|null $caption
+     * @param string|null $parseMode
+     * @param ArrayOfMessageEntity|null $captionEntities
+     * @param bool $disableNotification
+     * @param int|null $replyToMessageId
+     * @param bool $allowSendingWithoutReply
+     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
+     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     *
+     * @return Message
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function copyMessage(
+        $chatId,
+        $fromChatId,
+        $messageId,
+        $caption = null,
+        $parseMode = null,
+        $captionEntities = null,
+        $disableNotification = false,
+        $replyToMessageId = null,
+        $allowSendingWithoutReply = false,
+        $replyMarkup = null
+    ) {
+        return Message::fromResponse($this->call('sendMessage', [
+            'chat_id' => $chatId,
+            'from_chat_id' => $fromChatId,
+            'message_id' => (int)$messageId,
+            'caption' => $caption,
+            'parse_mode' => $parseMode,
+            'caption_entities' => $captionEntities,
+            'disable_notification' => (bool)$disableNotification,
+            'reply_to_message_id' => (int)$replyToMessageId,
+            'allow_sending_without_reply' => (bool)$allowSendingWithoutReply,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 
