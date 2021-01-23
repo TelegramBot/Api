@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
+use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
@@ -1138,6 +1139,39 @@ class BotApi
         ]);
     }
 
+    /**
+     * Use this method to change the list of the bot's commands. Returns True on success.
+     *
+     * @param $commands
+     *
+     * @return mixed
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function setMyCommands($commands)
+    {
+        return $this->call(
+            'setMyCommands',
+            [
+                'commands' => json_encode($commands)
+            ]
+        );
+    }
+
+    /**
+     * Use this method to get the current list of the bot's commands. Requires no parameters.
+     * Returns Array of BotCommand on success.
+     *
+     * @return mixed
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function getMyCommands()
+    {
+        return ArrayOfBotCommand::fromResponse($this->call('getMyCommands'));
+    }
 
     /**
      * Use this method to edit text messages sent by the bot or via the bot
