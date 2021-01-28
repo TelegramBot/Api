@@ -28,17 +28,27 @@ class Voice extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'duration' => true,
         'mime_type' => true,
         'file_size' => true
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file, which can be used to download or reuse the file
      *
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed
+     * to be thesame over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Duration of the audio in seconds as defined by sender
@@ -75,6 +85,22 @@ class Voice extends BaseType implements TypeInterface
     public function setFileId($fileId)
     {
         $this->fileId = $fileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**

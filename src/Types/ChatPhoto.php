@@ -24,18 +24,40 @@ class ChatPhoto extends BaseType
     ];
 
     /**
-     * Unique file identifier of small (160x160) chat photo. This file_id can be used only for photo download.
+     * File identifier of small (160x160) chat photo. This file_id
+     * can be used only for photo download and only for as long as
+     * the photo is not changed.
      *
      * @var string
      */
     protected $smallFileId;
 
     /**
-     * Unique file identifier of big (640x640) chat photo. This file_id can be used only for photo download.
+     * Unique file identifier of small (160x160) chat photo, which
+     * is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file
+     *
+     * @var string
+     */
+    protected $smallFileUniqueId;
+
+    /**
+     * File identifier of big (640x640) chat photo. This file_id
+     * can be used only for photo download and only for as long
+     * as the photo is not changed.
      *
      * @var string
      */
     protected $bigFileId;
+
+    /**
+     * Unique file identifier of big (640x640) chat photo, which
+     * is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $bigFileUniqueId;
 
     /**
      * @return string
@@ -56,6 +78,22 @@ class ChatPhoto extends BaseType
     /**
      * @return string
      */
+    public function getSmallFileUniqueId()
+    {
+        return $this->smallFileUniqueId;
+    }
+
+    /**
+     * @param string $smallFileUniqueId
+     */
+    public function setSmallFileUniqueId($smallFileUniqueId)
+    {
+        $this->smallFileUniqueId = $smallFileUniqueId;
+    }
+
+    /**
+     * @return string
+     */
     public function getBigFileId()
     {
         return $this->bigFileId;
@@ -67,5 +105,21 @@ class ChatPhoto extends BaseType
     public function setBigFileId($bigFileId)
     {
         $this->bigFileId = $bigFileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBigFileUniqueId()
+    {
+        return $this->bigFileUniqueId;
+    }
+
+    /**
+     * @param string $bigFileUniqueId
+     */
+    public function setBigFileUniqueId($bigFileUniqueId)
+    {
+        $this->bigFileUniqueId = $bigFileUniqueId;
     }
 }

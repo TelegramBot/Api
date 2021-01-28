@@ -28,6 +28,7 @@ class Video extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'duration' => true,
@@ -37,11 +38,20 @@ class Video extends BaseType implements TypeInterface
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file, which can be used to download or reuse the file
      *
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed
+     * to be thesame over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Video width as defined by sender
@@ -122,6 +132,22 @@ class Video extends BaseType implements TypeInterface
     public function setFileId($fileId)
     {
         $this->fileId = $fileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**

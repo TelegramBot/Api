@@ -31,16 +31,26 @@ class File extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_qunique_id' => true,
         'file_size' => true,
         'file_path' => true
     ];
 
     /**
-     * Unique identifier for this file
+     * Identifier for this file, which can be used to download or reuse the file
      *
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed
+     * to be thesame over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Optional. File size, if known
@@ -70,6 +80,22 @@ class File extends BaseType implements TypeInterface
     public function setFileId($fileId)
     {
         $this->fileId = $fileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**
