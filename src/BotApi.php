@@ -812,14 +812,17 @@ class BotApi
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
-     * @param int|string $chatId chat_id or @channel_name
+     * @param int|string       $chatId chat_id or @channel_name
      * @param \CURLFile|string $voice
-     * @param int|null $duration
-     * @param int|null $replyToMessageId
+     * @param string           $caption Voice message caption, 0-1024 characters after entities parsing
+     * @param int|null         $duration
+     * @param int|null         $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
-     * @param bool $disableNotification
-     * @param string|null $parseMode
+     * @param bool             $disableNotification
+     * @param bool             $allowSendingWithoutReply Pass True, if the message should be sent even if the specified
+     *     replied-to message is not found
+     * @param string|null      $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -828,19 +831,23 @@ class BotApi
     public function sendVoice(
         $chatId,
         $voice,
+        $caption = null,
         $duration = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
+        $allowSendingWithoutReply = false,
         $parseMode = null
     ) {
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
             'voice' => $voice,
+            'caption' => $caption,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
+            'allow_sending_without_reply' => $allowSendingWithoutReply,
             'parse_mode' => $parseMode
         ]));
     }
@@ -1943,13 +1950,19 @@ class BotApi
      * On success, the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
      * But it's awkward, and we decided to help it change. One dice at a time!)
      *
-     * @param $chatId string|int Unique identifier for the target chat or username of the target channel
+     * @param      $chatId string|int Unique identifier for the target chat or username of the target channel
      *                (in the format @channelusername)
+     * @param      $emoji string Emoji on which the dice throw animation is based. Currently, must be one of “🎲”,
+     *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
+     *     values 1-64 for “🎰”. Defaults to “🎲
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param null $replyToMessageId If the message is a reply, ID of the original message
+     * @param bool $$allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
+     *     message is not found,
      * @param null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
+     *
      * @return bool|Message
      * @throws Exception
      * @throws HttpException
@@ -1957,14 +1970,18 @@ class BotApi
      */
     public function sendDice(
         $chatId,
+        $emoji,
         $disableNotification = false,
         $replyToMessageId = null,
+        $allowSendingWithoutReply = false,
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
+            'emoji' => $emoji,
             'disable_notification' => (bool) $disableNotification,
             'reply_to_message_id' => (int) $replyToMessageId,
+            'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
             'reply_markup' => $replyMarkup === null ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
