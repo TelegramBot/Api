@@ -54,6 +54,12 @@ class KeyboardButton extends BaseType implements TypeInterface
      */
     protected bool $requestPoll;
 
+    /**
+     * @param string $text
+     * @param bool   $requestContact
+     * @param bool   $requestLocation
+     * @param bool   $requestPoll
+     */
     public function __construct(
         string $text,
         bool $requestContact = false,

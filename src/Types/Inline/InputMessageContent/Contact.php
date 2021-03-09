@@ -1,38 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 16:01
- */
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
-/**
- * Class Contact
- *
- * @see https://core.telegram.org/bots/api#inputcontactmessagecontent
- * Represents the content of a contact message to be sent as the result of an inline query.
- *
- * @package TelegramBot\Api\Types\Inline
- */
 class Contact extends InputMessageContent implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['phone_number', 'first_name'];
+    protected static array $requiredParams = ['phone_number', 'first_name'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'phone_number' => true,
@@ -45,41 +26,47 @@ class Contact extends InputMessageContent implements TypeInterface
      *
      * @var string
      */
-    protected $phoneNumber;
+    protected string $phoneNumber;
 
     /**
      * Contact's first name
      *
      * @var string
      */
-    protected $firstName;
+    protected string $firstName;
 
     /**
      * Optional. Contact's last name
      *
      * @var string
      */
-    protected $lastName;
+    protected ?string $lastName;
 
     /**
-     * Contact constructor.
+     * Optional. Additional data about the contact in the form of a vCard
      *
-     * @param string $phoneNumber
-     * @param string $firstName
-     * @param string|null $lastName
+     * @var string|null
      */
-    public function __construct($phoneNumber, $firstName, $lastName = null)
+    protected ?string $vCard;
+
+    /**
+     * @param string      $phoneNumber
+     * @param string      $firstName
+     * @param string|null $lastName
+     * @param string|null $vCard
+     */
+    public function __construct(string $phoneNumber, string $firstName, string $lastName = null, string $vCard = null)
     {
         $this->phoneNumber = $phoneNumber;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->vCard = $vCard;
     }
-
 
     /**
      * @return string
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
@@ -87,23 +74,23 @@ class Contact extends InputMessageContent implements TypeInterface
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
-     * @param mixed $firstName
+     * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -111,16 +98,32 @@ class Contact extends InputMessageContent implements TypeInterface
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVCard(): ?string
+    {
+        return $this->vCard;
+    }
+
+    /**
+     * @param string|null $vCard
+     */
+    public function setVCard(?string $vCard): void
+    {
+        $this->vCard = $vCard;
     }
 }

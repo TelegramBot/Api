@@ -45,7 +45,7 @@ class Photo extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'photo';
+    protected string $type = 'photo';
 
     /**
      * A valid URL of the photo. Photo size must not exceed 5MB

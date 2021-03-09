@@ -1,41 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 14:41
- */
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
+use TelegramBot\Api\Types\MessageEntity;
 
-/**
- * Class Text
- * @see https://core.telegram.org/bots/api#inputtextmessagecontent
- * Represents the content of a text message to be sent as the result of an inline query.
- *
- * @package TelegramBot\Api\Types\Inline\InputMessageContent
- */
 class Text extends InputMessageContent implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['message_text'];
+    protected static array $requiredParams = ['message_text'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'message_text' => true,
         'parse_mode' => true,
+        'entities' => ArrayOfMessageEntity::class,
         'disable_web_page_preview' => true,
     ];
 
@@ -44,40 +29,53 @@ class Text extends InputMessageContent implements TypeInterface
      *
      * @var string
      */
-    protected $messageText;
+    protected string $messageText;
 
     /**
      * Optional. Send Markdown or HTML,
      * if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.
      *
-     * @var string
+     * @var string|null
      */
-    protected $parseMode;
+    protected ?string $parseMode;
+
+    /**
+     * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
+     * array of \TelegramBot\Api\Types\MessageEntity
+     *
+     * @var MessageEntity[]
+     */
+    protected ?array $entities;
 
     /**
      * Optional. Disables link previews for links in the sent message
      *
      * @var bool
      */
-    protected $disableWebPagePreview;
+    protected bool $disableWebPagePreview;
 
     /**
-     * Text constructor.
-     * @param string $messageText
-     * @param string $parseMode
-     * @param bool $disableWebPagePreview
+     * @param string      $messageText
+     * @param string|null $parseMode
+     * @param array|null  $entities
+     * @param false       $disableWebPagePreview
      */
-    public function __construct($messageText, $parseMode = null, $disableWebPagePreview = false)
-    {
-        $this->messageText = $messageText;
-        $this->parseMode = $parseMode;
+    public function __construct(
+        string $messageText,
+        string $parseMode = null,
+        ?array $entities = null,
+        $disableWebPagePreview = false
+    ) {
+        $this->messageText           = $messageText;
+        $this->parseMode             = $parseMode;
+        $this->entities              = $entities;
         $this->disableWebPagePreview = $disableWebPagePreview;
     }
 
     /**
      * @return string
      */
-    public function getMessageText()
+    public function getMessageText(): string
     {
         return $this->messageText;
     }
@@ -85,39 +83,55 @@ class Text extends InputMessageContent implements TypeInterface
     /**
      * @param string $messageText
      */
-    public function setMessageText($messageText)
+    public function setMessageText(string $messageText): void
     {
         $this->messageText = $messageText;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getParseMode()
+    public function getParseMode(): ?string
     {
         return $this->parseMode;
     }
 
     /**
-     * @param string $parseMode
+     * @param string|null $parseMode
      */
-    public function setParseMode($parseMode)
+    public function setParseMode(?string $parseMode): void
     {
         $this->parseMode = $parseMode;
     }
 
     /**
-     * @return boolean
+     * @return MessageEntity[]
      */
-    public function isDisableWebPagePreview()
+    public function getEntities(): ?array
+    {
+        return $this->entities;
+    }
+
+    /**
+     * @param MessageEntity[] $entities
+     */
+    public function setEntities(?array $entities): void
+    {
+        $this->entities = $entities;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisableWebPagePreview(): bool
     {
         return $this->disableWebPagePreview;
     }
 
     /**
-     * @param boolean $disableWebPagePreview
+     * @param bool $disableWebPagePreview
      */
-    public function setDisableWebPagePreview($disableWebPagePreview)
+    public function setDisableWebPagePreview(bool $disableWebPagePreview): void
     {
         $this->disableWebPagePreview = $disableWebPagePreview;
     }

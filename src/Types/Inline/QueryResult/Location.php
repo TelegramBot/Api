@@ -54,7 +54,7 @@ class Location extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'location';
+    protected string $type = 'location';
 
     /**
      * Location latitude in degrees

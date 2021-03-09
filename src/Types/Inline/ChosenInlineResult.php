@@ -6,24 +6,14 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\User;
 
-/**
- * Class ChosenInlineResult
- * This object represents a result of an inline query that was chosen by the user and sent to their chat partner.
- *
- * @package TelegramBot\Api\Types
- */
 class ChosenInlineResult extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['result_id', 'from', 'query'];
+    protected static array $requiredParams = ['result_id', 'from', 'query'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -39,21 +29,21 @@ class ChosenInlineResult extends BaseType
      *
      * @var string
      */
-    protected $resultId;
+    protected string $resultId;
 
     /**
      * The user that chose the result.
      *
      * @var User
      */
-    protected $from;
+    protected User $from;
 
     /**
      * Optional. Sender location, only for bots that require user location
      *
      * @var Location
      */
-    protected $location;
+    protected Location $location;
 
     /**
      * Optional. Identifier of the sent inline message.
@@ -62,19 +52,19 @@ class ChosenInlineResult extends BaseType
      *
      * @var string
      */
-    protected $inlineMessageId;
+    protected string $inlineMessageId;
 
     /**
      * The query that was used to obtain the result.
      *
      * @var string
      */
-    protected $query;
+    protected string $query;
 
     /**
      * @return string
      */
-    public function getResultId()
+    public function getResultId(): string
     {
         return $this->resultId;
     }
@@ -82,7 +72,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @param string $resultId
      */
-    public function setResultId($resultId)
+    public function setResultId(string $resultId): void
     {
         $this->resultId = $resultId;
     }
@@ -90,7 +80,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @return User
      */
-    public function getFrom()
+    public function getFrom(): User
     {
         return $this->from;
     }
@@ -98,7 +88,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @param User $from
      */
-    public function setFrom(User $from)
+    public function setFrom(User $from): void
     {
         $this->from = $from;
     }
@@ -106,7 +96,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @return Location
      */
-    public function getLocation()
+    public function getLocation(): Location
     {
         return $this->location;
     }
@@ -114,7 +104,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @param Location $location
      */
-    public function setLocation($location)
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -122,7 +112,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @return string
      */
-    public function getInlineMessageId()
+    public function getInlineMessageId(): string
     {
         return $this->inlineMessageId;
     }
@@ -130,7 +120,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @param string $inlineMessageId
      */
-    public function setInlineMessageId($inlineMessageId)
+    public function setInlineMessageId(string $inlineMessageId): void
     {
         $this->inlineMessageId = $inlineMessageId;
     }
@@ -138,7 +128,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -146,7 +136,7 @@ class ChosenInlineResult extends BaseType
     /**
      * @param string $query
      */
-    public function setQuery($query)
+    public function setQuery(string $query): void
     {
         $this->query = $query;
     }

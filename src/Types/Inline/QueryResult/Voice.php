@@ -51,7 +51,7 @@ class Voice extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'voice';
+    protected string $type = 'voice';
 
     /**
      * A valid URL for the audio file

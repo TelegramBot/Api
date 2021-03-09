@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 03:58
- */
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
@@ -14,15 +8,11 @@ use TelegramBot\Api\Types\Inline\InputMessageContent;
 class Contact extends AbstractInlineQueryResult
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
+    protected static array $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -31,6 +21,7 @@ class Contact extends AbstractInlineQueryResult
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,
+        'vcard' => true,
         'reply_markup' => InlineKeyboardMarkup::class,
         'input_message_content' => InputMessageContent::class,
         'thumb_url' => true,
@@ -39,93 +30,100 @@ class Contact extends AbstractInlineQueryResult
     ];
 
     /**
-     * {@inheritdoc}
+     * Type of the result, must be contact
      *
      * @var string
      */
-    protected $type = 'contact';
+    protected string $type = 'contact';
 
     /**
      * Contact's phone number
      *
      * @var string
      */
-    protected $phoneNumber;
+    protected string $phoneNumber;
 
     /**
      * Contact's first name
      *
      * @var string
      */
-    protected $firstName;
+    protected string $firstName;
 
     /**
      * Optional. Contact's last name
      *
-     * @var string
+     * @var string|null
      */
-    protected $lastName;
+    protected ?string $lastName;
+
+    /**
+     * Optional. Additional data about the contact in the form of a vCard, 0-2048 byte
+     *
+     * @var string|null
+     */
+    protected ?string $vCard;
 
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
-    protected $thumbUrl;
+    protected ?string $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
-    protected $thumbWidth;
+    protected ?int $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
-    protected $thumbHeight;
+    protected ?int $thumbHeight;
 
     /**
-     * Contact constructor.
-     *
-     * @param string $id
-     * @param string $phoneNumber
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $thumbUrl
-     * @param int $thumbWidth
-     * @param int $thumbHeight
-     * @param InputMessageContent|null $inputMessageContent
-     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
+     * @param                           $id
+     * @param string                    $phoneNumber
+     * @param string                    $firstName
+     * @param string|null               $lastName
+     * @param string|null               $vCard
+     * @param InlineKeyboardMarkup|null $replyMarkup
+     * @param InputMessageContent|null  $inputMessageContent
+     * @param string|null               $thumbUrl
+     * @param int|null                  $thumbWidth
+     * @param int|null                  $thumbHeight
      */
     public function __construct(
         $id,
-        $phoneNumber,
-        $firstName,
-        $lastName = null,
-        $thumbUrl = null,
-        $thumbWidth = null,
-        $thumbHeight = null,
-        $inputMessageContent = null,
-        $inlineKeyboardMarkup = null
+        string $phoneNumber,
+        string $firstName,
+        ?string $lastName = null,
+        ?string $vCard = null,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+        ?InputMessageContent $inputMessageContent = null,
+        ?string $thumbUrl = null,
+        ?int $thumbWidth = null,
+        ?int $thumbHeight = null
     ) {
-        parent::__construct($id, null, $inputMessageContent, $inlineKeyboardMarkup);
+        parent::__construct($id, null, $inputMessageContent, $replyMarkup);
 
         $this->phoneNumber = $phoneNumber;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->thumbUrl = $thumbUrl;
-        $this->thumbWidth = $thumbWidth;
+        $this->firstName   = $firstName;
+        $this->lastName    = $lastName;
+        $this->vCard       = $vCard;
+        $this->thumbUrl    = $thumbUrl;
+        $this->thumbWidth  = $thumbWidth;
         $this->thumbHeight = $thumbHeight;
     }
-
 
     /**
      * @return string
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
@@ -133,7 +131,7 @@ class Contact extends AbstractInlineQueryResult
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -141,7 +139,7 @@ class Contact extends AbstractInlineQueryResult
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -149,71 +147,87 @@ class Contact extends AbstractInlineQueryResult
     /**
      * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getThumbUrl()
+    public function getVCard(): ?string
+    {
+        return $this->vCard;
+    }
+
+    /**
+     * @param string|null $vCard
+     */
+    public function setVCard(?string $vCard): void
+    {
+        $this->vCard = $vCard;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getThumbUrl(): ?string
     {
         return $this->thumbUrl;
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
      */
-    public function setThumbUrl($thumbUrl)
+    public function setThumbUrl(?string $thumbUrl): void
     {
         $this->thumbUrl = $thumbUrl;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getThumbWidth()
+    public function getThumbWidth(): ?int
     {
         return $this->thumbWidth;
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
      */
-    public function setThumbWidth($thumbWidth)
+    public function setThumbWidth(?int $thumbWidth): void
     {
         $this->thumbWidth = $thumbWidth;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getThumbHeight()
+    public function getThumbHeight(): ?int
     {
         return $this->thumbHeight;
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
      */
-    public function setThumbHeight($thumbHeight)
+    public function setThumbHeight(?int $thumbHeight): void
     {
         $this->thumbHeight = $thumbHeight;
     }

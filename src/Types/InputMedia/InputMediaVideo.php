@@ -2,18 +2,10 @@
 
 namespace TelegramBot\Api\Types\InputMedia;
 
-/**
- * Class InputMediaVideo
- * Represents a video to be sent.
- *
- * @package TelegramBot\Api
- */
 class InputMediaVideo extends InputMedia
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'type' => true,
@@ -29,50 +21,50 @@ class InputMediaVideo extends InputMedia
     /**
      * Optional. Video width.
      *
-     * @var string
+     * @var int|null
      */
-    protected $width;
+    protected ?int $width;
 
     /**
      * Optional. Video height.
      *
-     * @var string
+     * @var int|null
      */
-    protected $height;
+    protected ?int $height;
 
     /**
      * Optional. Video duration.
      *
-     * @var string
+     * @var int|null
      */
-    protected $duration;
+    protected ?int $duration;
 
     /**
      * Optional. Pass True, if the uploaded video is suitable for streaming.
      *
      * @var bool
      */
-    protected $supportsStreaming;
+    protected bool $supportsStreaming;
 
     /**
      * InputMediaVideo constructor.
      *
-     * @param string $media
-     * @param null $caption
-     * @param null $parseMode
-     * @param null $width
-     * @param null $height
-     * @param null $duration
-     * @param bool $supportsStreaming
+     * @param string      $media
+     * @param string|null $caption
+     * @param string|null $parseMode
+     * @param int|null    $width
+     * @param int|null    $height
+     * @param int|null    $duration
+     * @param bool        $supportsStreaming
      */
     public function __construct(
-        $media,
-        $caption = null,
-        $parseMode = null,
-        $width = null,
-        $height = null,
-        $duration = null,
-        $supportsStreaming = false
+        string $media,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?int $width = null,
+        ?int $height = null,
+        ?int $duration = null,
+        bool $supportsStreaming = false
     ) {
         $this->type = 'video';
         $this->media = $media;
@@ -85,49 +77,49 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getWidth()
+    public function getWidth(): ?int
     {
         return $this->width;
     }
 
     /**
-     * @param string $width
+     * @param int|null $width
      */
-    public function setWidth($width)
+    public function setWidth(?int $width): void
     {
         $this->width = $width;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getHeight()
+    public function getHeight(): ?int
     {
         return $this->height;
     }
 
     /**
-     * @param string $height
+     * @param int|null $height
      */
-    public function setHeight($height)
+    public function setHeight(?int $height): void
     {
         $this->height = $height;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getDuration()
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
     /**
-     * @param string $duration
+     * @param int|null $duration
      */
-    public function setDuration($duration)
+    public function setDuration(?int $duration): void
     {
         $this->duration = $duration;
     }
@@ -135,7 +127,7 @@ class InputMediaVideo extends InputMedia
     /**
      * @return bool
      */
-    public function getSupportsStreaming()
+    public function isSupportsStreaming(): bool
     {
         return $this->supportsStreaming;
     }
@@ -143,7 +135,7 @@ class InputMediaVideo extends InputMedia
     /**
      * @param bool $supportsStreaming
      */
-    public function setSupportsStreaming($supportsStreaming)
+    public function setSupportsStreaming(bool $supportsStreaming): void
     {
         $this->supportsStreaming = $supportsStreaming;
     }

@@ -45,7 +45,7 @@ class Mpeg4Gif extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'mpeg4_gif';
+    protected string $type = 'mpeg4_gif';
 
     /**
      * A valid URL for the MP4 file. File size must not exceed 1MB

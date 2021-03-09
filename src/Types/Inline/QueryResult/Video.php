@@ -46,7 +46,7 @@ class Video extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'video';
+    protected string $type = 'video';
 
     /**
      * A valid URL for the embedded video player or video file
@@ -136,7 +136,7 @@ class Video extends AbstractInlineQueryResult
         $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
-        
+
         $this->videoUrl = $videoUrl;
         $this->thumbUrl = $thumbUrl;
         $this->caption = $caption;

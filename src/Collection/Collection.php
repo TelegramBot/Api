@@ -12,27 +12,28 @@ class Collection
     /**
      * @var array
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * @var int Max items count, if set 0 - unlimited
      */
-    protected $maxCount = 0;
+    protected int $maxCount = 0;
 
     /**
      * @param CollectionItemInterface $item
-     * @param mixed $key
+     * @param mixed                   $key
+     *
      * @return void
      * @throws ReachedMaxSizeException
      * @throws KeyHasUseException
      */
-    public function addItem(CollectionItemInterface $item, $key = null)
+    public function addItem(CollectionItemInterface $item, $key = null): void
     {
         if ($this->maxCount > 0 && $this->count() + 1 >= $this->maxCount) {
             throw new ReachedMaxSizeException("Maximum collection items count reached. Max size: {$this->maxCount}");
         }
 
-        if ($key == null) {
+        if ($key === null) {
             $this->items[] = $item;
         } else {
             if (isset($this->items[$key])) {
@@ -44,10 +45,11 @@ class Collection
 
     /**
      * @param $key
-     * @throws KeyInvalidException
+     *
      * @return void
+     * @throws KeyInvalidException
      */
-    public function deleteItem($key)
+    public function deleteItem($key): void
     {
         $this->checkItemKey($key);
 
@@ -56,11 +58,12 @@ class Collection
 
     /**
      * @param $key
+     *
      * @return InputMedia
      * @return CollectionItemInterface
      * @throws KeyInvalidException
      */
-    public function getItem($key)
+    public function getItem($key): InputMedia
     {
         $this->checkItemKey($key);
 
@@ -70,39 +73,43 @@ class Collection
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
 
     /**
      * @param bool $inner
+     *
      * @return array|string
+     * @throws \JsonException
      */
-    public function toJson($inner = false)
+    public function toJson(bool $inner = false)
     {
         $output = [];
         foreach ($this->items as $item) {
             $output[] = $item->toJson(true);
         }
 
-        return $inner === false ? json_encode($output) : $output;
+        return $inner === false ? json_encode($output, JSON_THROW_ON_ERROR) : $output;
     }
 
     /**
      * @param int $maxCount
+     *
      * @return void
      */
-    public function setMaxCount($maxCount)
+    public function setMaxCount(int $maxCount): void
     {
         $this->maxCount = $maxCount;
     }
 
     /**
      * @param $key
+     *
      * @throws KeyInvalidException
      */
-    private function checkItemKey($key)
+    private function checkItemKey($key): void
     {
         if (!isset($this->items[$key])) {
             throw new KeyInvalidException("Invalid key $key.");

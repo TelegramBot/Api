@@ -5,24 +5,14 @@ namespace TelegramBot\Api\Types\Inline\QueryResult;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
-/**
- * Class InlineQueryResultArticle
- * Represents a link to an article or web page.
- *
- * @package TelegramBot\Api\Types\Inline
- */
 class Article extends AbstractInlineQueryResult
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['type', 'id', 'title', 'input_message_content'];
+    protected static array $requiredParams = ['type', 'id', 'title', 'input_message_content'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -40,177 +30,180 @@ class Article extends AbstractInlineQueryResult
     ];
 
     /**
-     * {@inheritdoc}
+     * Type of the result, must be article
      *
      * @var string
      */
-    protected $type = 'article';
+    protected string $type = 'article';
 
     /**
      * Optional. URL of the result
      *
-     * @var string
+     * @var string|null
      */
-    protected $url;
+    protected ?string $url;
 
     /**
      * Optional. Pass True, if you don't want the URL to be shown in the message
      *
      * @var bool
      */
-    protected $hideUrl;
+    protected bool $hideUrl;
 
     /**
      * Optional. Short description of the result
      *
-     * @var string
+     * @var string|null
      */
-    protected $description;
+    protected ?string $description;
 
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
-    protected $thumbUrl;
+    protected ?string $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
-    protected $thumbWidth;
+    protected ?int $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
-    protected $thumbHeight;
+    protected ?int $thumbHeight;
 
     /**
-     * InlineQueryResultArticle constructor.
-     *
-     * @param string $id
-     * @param string $title
-     * @param string|null $description
-     * @param string|null $thumbUrl
-     * @param int|null $thumbWidth
-     * @param int|null $thumbHeight
-     * @param InputMessageContent $inputMessageContent
-     * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
+     * @param string                    $id
+     * @param string                    $title
+     * @param InputMessageContent       $inputMessageContent
+     * @param InlineKeyboardMarkup|null $replyMarkup
+     * @param string|null               $url
+     * @param bool                      $hideUrl
+     * @param string|null               $description
+     * @param string|null               $thumbUrl
+     * @param int|null                  $thumbWidth
+     * @param int|null                  $thumbHeight
      */
     public function __construct(
-        $id,
-        $title,
-        $description = null,
-        $thumbUrl = null,
-        $thumbWidth = null,
-        $thumbHeight = null,
-        $inputMessageContent = null,
-        $inlineKeyboardMarkup = null
+        string $id,
+        string $title,
+        InputMessageContent $inputMessageContent,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+        ?string $url = null,
+        bool $hideUrl = false,
+        ?string $description = null,
+        ?string $thumbUrl = null,
+        ?int $thumbWidth = null,
+        ?int $thumbHeight = null
     ) {
-        parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
+        parent::__construct($id, $title, $inputMessageContent, $replyMarkup);
 
+        $this->url         = $url;
+        $this->hideUrl     = $hideUrl;
         $this->description = $description;
-        $this->thumbUrl = $thumbUrl;
-        $this->thumbWidth = $thumbWidth;
+        $this->thumbUrl    = $thumbUrl;
+        $this->thumbWidth  = $thumbWidth;
         $this->thumbHeight = $thumbHeight;
     }
 
-
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
-     * @param string $url
+     * @param string|null $url
      */
-    public function setUrl($url)
+    public function setUrl(?string $url): void
     {
         $this->url = $url;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function isHideUrl()
+    public function isHideUrl(): bool
     {
         return $this->hideUrl;
     }
 
     /**
-     * @param boolean $hideUrl
+     * @param bool $hideUrl
      */
-    public function setHideUrl($hideUrl)
+    public function setHideUrl(bool $hideUrl): void
     {
         $this->hideUrl = $hideUrl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getThumbUrl()
+    public function getThumbUrl(): ?string
     {
         return $this->thumbUrl;
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
      */
-    public function setThumbUrl($thumbUrl)
+    public function setThumbUrl(?string $thumbUrl): void
     {
         $this->thumbUrl = $thumbUrl;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getThumbWidth()
+    public function getThumbWidth(): ?int
     {
         return $this->thumbWidth;
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
      */
-    public function setThumbWidth($thumbWidth)
+    public function setThumbWidth(?int $thumbWidth): void
     {
         $this->thumbWidth = $thumbWidth;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getThumbHeight()
+    public function getThumbHeight(): ?int
     {
         return $this->thumbHeight;
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
      */
-    public function setThumbHeight($thumbHeight)
+    public function setThumbHeight(?int $thumbHeight): void
     {
         $this->thumbHeight = $thumbHeight;
     }

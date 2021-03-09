@@ -56,7 +56,7 @@ class Venue extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $type = 'venue';
+    protected string $type = 'venue';
 
     /**
      * Latitude of the venue location in degrees

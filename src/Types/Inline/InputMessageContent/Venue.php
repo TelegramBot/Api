@@ -1,43 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 15:45
- */
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
-/**
- * Class Venue
- * @see https://core.telegram.org/bots/api#inputvenuemessagecontent
- * Represents the content of a venue message to be sent as the result of an inline query.
- *
- * @package TelegramBot\Api\Types\Inline
- */
 class Venue extends InputMessageContent implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['latitude', 'longitude', 'title', 'address'];
+    protected static array $requiredParams = ['latitude', 'longitude', 'title', 'address'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'latitude' => true,
         'longitude' => true,
         'title' => true,
         'address' => true,
-        'foursquare_id' => true
+        'foursquare_id' => true,
+        'foursquare_type' => true,
+        'google_place_id' => true,
+        'google_place_type' => true,
     ];
 
     /**
@@ -45,58 +31,95 @@ class Venue extends InputMessageContent implements TypeInterface
      *
      * @var float
      */
-    protected $latitude;
+    protected float $latitude;
 
     /**
      * Longitude of the venue in degrees
      *
      * @var float
      */
-    protected $longitude;
+    protected float $longitude;
 
     /**
      * Name of the venue
      *
      * @var string
      */
-    protected $title;
+    protected string $title;
 
     /**
      * Address of the venue
      *
      * @var string
      */
-    protected $address;
+    protected string $address;
 
     /**
-     * Optional. Foursquare identifier of the venue, if known
+     * Optional. Foursquare identifier of the venue
      *
-     * @var string
+     * @var string|null
      */
-    protected $foursquareId;
+    protected ?string $foursquareId;
+
+    /**
+     * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”,
+     * “arts_entertainment/aquarium” or “food/icecream”.)
+     *
+     * @var string|null
+     */
+    protected ?string $foursquareType;
+
+    /**
+     * Optional. Google Places identifier of the venue
+     *
+     * @var string|null
+     */
+    protected ?string $googlePlaceId;
+
+    /**
+     * Optional. Google Places type of the venue. (See supported types:
+     * https://developers.google.com/places/web-service/supported_types)
+     *
+     * @var string|null
+     */
+    protected ?string $googlePlaceType;
 
     /**
      * Venue constructor.
-     * @param float $latitude
-     * @param float $longitude
-     * @param string $title
-     * @param string $address
-     * @param string $foursquareId
+     *
+     * @param float       $latitude
+     * @param float       $longitude
+     * @param string      $title
+     * @param string      $address
+     * @param string|null $foursquareId
+     * @param string|null $foursquareType
+     * @param string|null $googlePlaceId
+     * @param string|null $googlePlaceType
      */
-    public function __construct($latitude, $longitude, $title, $address, $foursquareId = null)
-    {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-        $this->title = $title;
-        $this->address = $address;
-        $this->foursquareId = $foursquareId;
+    public function __construct(
+        float $latitude,
+        float $longitude,
+        string $title,
+        string $address,
+        ?string $foursquareId = null,
+        ?string $foursquareType = null,
+        ?string $googlePlaceId = null,
+        ?string $googlePlaceType = null
+    ) {
+        $this->latitude        = $latitude;
+        $this->longitude       = $longitude;
+        $this->title           = $title;
+        $this->address         = $address;
+        $this->foursquareId    = $foursquareId;
+        $this->foursquareType  = $foursquareType;
+        $this->googlePlaceId   = $googlePlaceId;
+        $this->googlePlaceType = $googlePlaceType;
     }
-
 
     /**
      * @return float
      */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
@@ -104,7 +127,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @param float $latitude
      */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -112,7 +135,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
@@ -120,7 +143,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @param float $longitude
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
@@ -128,7 +151,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -136,7 +159,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -144,7 +167,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -152,24 +175,72 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * @param string $address
      */
-    public function setAddress($address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFoursquareId()
+    public function getFoursquareId(): ?string
     {
         return $this->foursquareId;
     }
 
     /**
-     * @param string $foursquareId
+     * @param string|null $foursquareId
      */
-    public function setFoursquareId($foursquareId)
+    public function setFoursquareId(?string $foursquareId): void
     {
         $this->foursquareId = $foursquareId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFoursquareType(): ?string
+    {
+        return $this->foursquareType;
+    }
+
+    /**
+     * @param string|null $foursquareType
+     */
+    public function setFoursquareType(?string $foursquareType): void
+    {
+        $this->foursquareType = $foursquareType;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGooglePlaceId(): ?string
+    {
+        return $this->googlePlaceId;
+    }
+
+    /**
+     * @param string|null $googlePlaceId
+     */
+    public function setGooglePlaceId(?string $googlePlaceId): void
+    {
+        $this->googlePlaceId = $googlePlaceId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGooglePlaceType(): ?string
+    {
+        return $this->googlePlaceType;
+    }
+
+    /**
+     * @param string|null $googlePlaceType
+     */
+    public function setGooglePlaceType(?string $googlePlaceType): void
+    {
+        $this->googlePlaceType = $googlePlaceType;
     }
 }

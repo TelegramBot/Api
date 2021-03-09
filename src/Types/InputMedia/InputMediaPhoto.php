@@ -11,13 +11,11 @@ namespace TelegramBot\Api\Types\InputMedia;
 class InputMediaPhoto extends InputMedia
 {
     /**
-     * InputMediaPhoto constructor.
-     *
-     * @param string $media
-     * @param null $caption
-     * @param null $parseMode
+     * @param string      $media
+     * @param string|null $caption
+     * @param string|null $parseMode
      */
-    public function __construct($media, $caption = null, $parseMode = null)
+    public function __construct(string $media, ?string $caption = null, ?string $parseMode = null)
     {
         $this->type = 'photo';
         $this->media = $media;

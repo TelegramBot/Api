@@ -6,25 +6,14 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\User;
 
-/**
- * Class InlineQuery
- * This object represents an incoming inline query.
- * When the user sends an empty query, your bot could return some default or trending results.
- *
- * @package TelegramBot\Api\Types
- */
 class InlineQuery extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var string[]
      */
-    static protected $requiredParams = ['id', 'from', 'query', 'offset'];
+    protected static array $requiredParams = ['id', 'from', 'query', 'offset'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -40,14 +29,14 @@ class InlineQuery extends BaseType
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * Sender
      *
      * @var User
      */
-    protected $from;
+    protected User $from;
 
 
     /**
@@ -55,26 +44,26 @@ class InlineQuery extends BaseType
      *
      * @var Location
      */
-    protected $location;
+    protected Location $location;
 
     /**
      * Text of the query
      *
      * @var string
      */
-    protected $query;
+    protected string $query;
 
     /**
      * Offset of the results to be returned, can be controlled by the bot
      *
      * @var string
      */
-    protected $offset;
+    protected string $offset;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -82,7 +71,7 @@ class InlineQuery extends BaseType
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -90,7 +79,7 @@ class InlineQuery extends BaseType
     /**
      * @return User
      */
-    public function getFrom()
+    public function getFrom(): User
     {
         return $this->from;
     }
@@ -98,7 +87,7 @@ class InlineQuery extends BaseType
     /**
      * @param User $from
      */
-    public function setFrom(User $from)
+    public function setFrom(User $from): void
     {
         $this->from = $from;
     }
@@ -106,7 +95,7 @@ class InlineQuery extends BaseType
     /**
      * @return Location
      */
-    public function getLocation()
+    public function getLocation(): Location
     {
         return $this->location;
     }
@@ -114,7 +103,7 @@ class InlineQuery extends BaseType
     /**
      * @param Location $location
      */
-    public function setLocation($location)
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -122,7 +111,7 @@ class InlineQuery extends BaseType
     /**
      * @return string
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -130,7 +119,7 @@ class InlineQuery extends BaseType
     /**
      * @param string $query
      */
-    public function setQuery($query)
+    public function setQuery(string $query): void
     {
         $this->query = $query;
     }
@@ -138,7 +127,7 @@ class InlineQuery extends BaseType
     /**
      * @return string
      */
-    public function getOffset()
+    public function getOffset(): string
     {
         return $this->offset;
     }
@@ -146,7 +135,7 @@ class InlineQuery extends BaseType
     /**
      * @param string $offset
      */
-    public function setOffset($offset)
+    public function setOffset(string $offset): void
     {
         $this->offset = $offset;
     }

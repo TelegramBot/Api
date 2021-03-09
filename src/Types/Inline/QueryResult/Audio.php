@@ -1,39 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 16:53
- */
 
 namespace TelegramBot\Api\Types\Inline\QueryResult;
 
+use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
+use TelegramBot\Api\Types\MessageEntity;
 
-/**
- * Class Audio
- *
- * @see https://core.telegram.org/bots/api#inlinequeryresultaudio
- * Represents a link to an mp3 audio file. By default, this audio file will be sent by the user.
- * Alternatively, you can use InputMessageContent to send a message with the specified content instead of the audio.
- *
- * Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
- *
- * @package TelegramBot\Api\Types\Inline\QueryResult
- */
 class Audio extends AbstractInlineQueryResult
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['type', 'id', 'audio_url', 'title'];
+    protected static array $requiredParams = ['type', 'id', 'audio_url', 'title'];
 
     /**
-     * {@inheritdoc}
-     *
      * @var array
      */
     protected static array $map = [
@@ -41,6 +22,9 @@ class Audio extends AbstractInlineQueryResult
         'id' => true,
         'audio_url' => true,
         'title' => true,
+        'caption' => true,
+        'parse_mode' => true,
+        'caption_entities' => ArrayOfMessageEntity::class,
         'performer' => true,
         'audio_duration' => true,
         'reply_markup' => InlineKeyboardMarkup::class,
@@ -48,64 +32,92 @@ class Audio extends AbstractInlineQueryResult
     ];
 
     /**
-     * {@inheritdoc}
+     * Type of the result, must be audio
      *
      * @var string
      */
-    protected $type = 'audio';
+    protected string $type = 'audio';
 
     /**
      * A valid URL for the audio file
      *
      * @var string
      */
-    protected $audioUrl;
+    protected string $audioUrl;
+
+    /**
+     * Optional. Caption, 0-1024 characters after entities parsing
+     *
+     * @var string|null
+     */
+    protected ?string $caption;
+
+    /**
+     * Optional. Mode for parsing entities in the audio caption. See formatting options for more details.
+     *
+     * @var string|null
+     */
+    protected ?string $parseMode;
+
+    /**
+     * Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode
+     *
+     * @var MessageEntity[]|null
+     */
+    protected ?array $captionEntities;
 
     /**
      * Optional. Performer
      *
-     * @var string
+     * @var string|null
      */
-    protected $performer;
+    protected ?string $performer;
 
     /**
      * Optional. Audio duration in seconds
      *
-     * @var int
+     * @var int|null
      */
-    protected $audioDuration;
+    protected ?int $audioDuration;
 
     /**
-     * Audio constructor.
-     *
-     * @param string $id
-     * @param string $audioUrl
-     * @param string $title
-     * @param string|null $performer
-     * @param int|null $audioDuration
-     * @param InputMessageContent|null $inputMessageContent
+     * @param string                    $id
+     * @param string                    $audioUrl
+     * @param string                    $title
+     * @param string|null               $caption
+     * @param string|null               $parseMode
+     * @param array|null                $captionEntities
+     * @param string|null               $performer
+     * @param int|null                  $audioDuration
+     * @param InputMessageContent|null  $inputMessageContent
      * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      */
     public function __construct(
-        $id,
-        $audioUrl,
-        $title,
-        $performer = null,
-        $audioDuration = null,
-        $inputMessageContent = null,
-        $inlineKeyboardMarkup = null
+        string $id,
+        string $audioUrl,
+        string $title,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        string $performer = null,
+        int $audioDuration = null,
+        ?InputMessageContent $inputMessageContent = null,
+        ?InlineKeyboardMarkup $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
-        $this->audioUrl = $audioUrl;
-        $this->performer = $performer;
-        $this->audioDuration = $audioDuration;
+        $this->audioUrl        = $audioUrl;
+        $this->caption         = $caption;
+        $this->parseMode       = $parseMode;
+        $this->captionEntities = $captionEntities;
+        $this->performer       = $performer;
+        $this->audioDuration   = $audioDuration;
     }
 
     /**
      * @return string
      */
-    public function getAudioUrl()
+    public function getAudioUrl(): string
     {
         return $this->audioUrl;
     }
@@ -113,39 +125,87 @@ class Audio extends AbstractInlineQueryResult
     /**
      * @param string $audioUrl
      */
-    public function setAudioUrl($audioUrl)
+    public function setAudioUrl(string $audioUrl): void
     {
         $this->audioUrl = $audioUrl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPerformer()
+    public function getCaption(): ?string
+    {
+        return $this->caption;
+    }
+
+    /**
+     * @param string|null $caption
+     */
+    public function setCaption(?string $caption): void
+    {
+        $this->caption = $caption;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getParseMode(): ?string
+    {
+        return $this->parseMode;
+    }
+
+    /**
+     * @param string|null $parseMode
+     */
+    public function setParseMode(?string $parseMode): void
+    {
+        $this->parseMode = $parseMode;
+    }
+
+    /**
+     * @return MessageEntity[]|null
+     */
+    public function getCaptionEntities(): ?array
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function setCaptionEntities(?array $captionEntities): void
+    {
+        $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPerformer(): ?string
     {
         return $this->performer;
     }
 
     /**
-     * @param string $performer
+     * @param string|null $performer
      */
-    public function setPerformer($performer)
+    public function setPerformer(?string $performer): void
     {
         $this->performer = $performer;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAudioDuration()
+    public function getAudioDuration(): ?int
     {
         return $this->audioDuration;
     }
 
     /**
-     * @param int $audioDuration
+     * @param int|null $audioDuration
      */
-    public function setAudioDuration($audioDuration)
+    public function setAudioDuration(?int $audioDuration): void
     {
         $this->audioDuration = $audioDuration;
     }

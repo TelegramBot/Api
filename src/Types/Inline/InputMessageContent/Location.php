@@ -1,36 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 14/04/16
- * Time: 15:41
- */
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
-/**
- * Class Location
- * @see https://core.telegram.org/bots/api#inputlocationmessagecontent
- * Represents the content of a location message to be sent as the result of an inline query.
- *
- * @package TelegramBot\Api\Types\Inline
- */
 class Location extends InputMessageContent implements TypeInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['latitude', 'longitude'];
+    protected static array $requiredParams = ['latitude', 'longitude'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'latitude' => true,
@@ -42,31 +25,49 @@ class Location extends InputMessageContent implements TypeInterface
      *
      * @var float
      */
-    protected $latitude;
+    protected float $latitude;
 
     /**
      * Longitude of the location in degrees
      *
      * @var float
      */
-    protected $longitude;
+    protected float $longitude;
 
     /**
-     * Location constructor.
-     * @param float $latitude
-     * @param float $longitude
+     * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
+     *
+     * @var float
      */
-    public function __construct($latitude, $longitude)
-    {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-    }
+    protected float $horizontalAccuracy;
 
+    /**
+     * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For
+     * active live locations only.
+     *
+     * @var int
+     */
+    protected int $livePeriod;
+
+    /**
+     * Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
+     *
+     * @var int
+     */
+    protected int $heading;
+
+    /**
+     * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live
+     * locations only.
+     *
+     * @var int
+     */
+    protected int $proximityAlertRadius;
 
     /**
      * @return float
      */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
@@ -74,7 +75,7 @@ class Location extends InputMessageContent implements TypeInterface
     /**
      * @param float $latitude
      */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -82,7 +83,7 @@ class Location extends InputMessageContent implements TypeInterface
     /**
      * @return float
      */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
@@ -90,8 +91,72 @@ class Location extends InputMessageContent implements TypeInterface
     /**
      * @param float $longitude
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getHorizontalAccuracy(): float
+    {
+        return $this->horizontalAccuracy;
+    }
+
+    /**
+     * @param float $horizontalAccuracy
+     */
+    public function setHorizontalAccuracy(float $horizontalAccuracy): void
+    {
+        $this->horizontalAccuracy = $horizontalAccuracy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivePeriod(): int
+    {
+        return $this->livePeriod;
+    }
+
+    /**
+     * @param int $livePeriod
+     */
+    public function setLivePeriod(int $livePeriod): void
+    {
+        $this->livePeriod = $livePeriod;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeading(): int
+    {
+        return $this->heading;
+    }
+
+    /**
+     * @param int $heading
+     */
+    public function setHeading(int $heading): void
+    {
+        $this->heading = $heading;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProximityAlertRadius(): int
+    {
+        return $this->proximityAlertRadius;
+    }
+
+    /**
+     * @param int $proximityAlertRadius
+     */
+    public function setProximityAlertRadius(int $proximityAlertRadius): void
+    {
+        $this->proximityAlertRadius = $proximityAlertRadius;
     }
 }

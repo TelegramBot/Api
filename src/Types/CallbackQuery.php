@@ -47,7 +47,7 @@ class CallbackQuery extends BaseType
      *
      * @var Message
      */
-    protected $message;
+    protected Message $message;
 
     /**
      * Optional. Identifier of the message sent via the bot in inline mode,
@@ -55,7 +55,7 @@ class CallbackQuery extends BaseType
      *
      * @var string
      */
-    protected $inlineMessageId;
+    protected string $inlineMessageId;
 
     /**
      * Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent.
@@ -63,7 +63,7 @@ class CallbackQuery extends BaseType
      *
      * @var string
      */
-    protected $chatInstance;
+    protected string $chatInstance;
 
     /**
      * Optional. Data associated with the callback button.
@@ -71,7 +71,7 @@ class CallbackQuery extends BaseType
      *
      * @var string
      */
-    protected $data;
+    protected string $data;
 
     /**
      * Optional. Short name of a Game to be returned,
@@ -79,13 +79,12 @@ class CallbackQuery extends BaseType
      *
      * @var string
      */
-    protected $gameShortName;
-
+    protected string $gameShortName;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -93,7 +92,7 @@ class CallbackQuery extends BaseType
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -101,7 +100,7 @@ class CallbackQuery extends BaseType
     /**
      * @return User
      */
-    public function getFrom()
+    public function getFrom(): User
     {
         return $this->from;
     }
@@ -109,7 +108,7 @@ class CallbackQuery extends BaseType
     /**
      * @param User $from
      */
-    public function setFrom(User $from)
+    public function setFrom(User $from): void
     {
         $this->from = $from;
     }
@@ -117,7 +116,7 @@ class CallbackQuery extends BaseType
     /**
      * @return Message
      */
-    public function getMessage()
+    public function getMessage(): Message
     {
         return $this->message;
     }
@@ -125,7 +124,7 @@ class CallbackQuery extends BaseType
     /**
      * @param Message $message
      */
-    public function setMessage($message)
+    public function setMessage(Message $message): void
     {
         $this->message = $message;
     }
@@ -133,7 +132,7 @@ class CallbackQuery extends BaseType
     /**
      * @return string
      */
-    public function getInlineMessageId()
+    public function getInlineMessageId(): string
     {
         return $this->inlineMessageId;
     }
@@ -141,7 +140,7 @@ class CallbackQuery extends BaseType
     /**
      * @param string $inlineMessageId
      */
-    public function setInlineMessageId($inlineMessageId)
+    public function setInlineMessageId(string $inlineMessageId): void
     {
         $this->inlineMessageId = $inlineMessageId;
     }
@@ -149,7 +148,7 @@ class CallbackQuery extends BaseType
     /**
      * @return string
      */
-    public function getChatInstance()
+    public function getChatInstance(): string
     {
         return $this->chatInstance;
     }
@@ -157,7 +156,7 @@ class CallbackQuery extends BaseType
     /**
      * @param string $chatInstance
      */
-    public function setChatInstance($chatInstance)
+    public function setChatInstance(string $chatInstance): void
     {
         $this->chatInstance = $chatInstance;
     }
@@ -165,7 +164,7 @@ class CallbackQuery extends BaseType
     /**
      * @return string
      */
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }
@@ -173,7 +172,7 @@ class CallbackQuery extends BaseType
     /**
      * @param string $data
      */
-    public function setData($data)
+    public function setData(string $data): void
     {
         $this->data = $data;
     }
@@ -181,7 +180,7 @@ class CallbackQuery extends BaseType
     /**
      * @return string
      */
-    public function getGameShortName()
+    public function getGameShortName(): string
     {
         return $this->gameShortName;
     }
@@ -189,7 +188,7 @@ class CallbackQuery extends BaseType
     /**
      * @param string $gameShortName
      */
-    public function setGameShortName($gameShortName)
+    public function setGameShortName(string $gameShortName): void
     {
         $this->gameShortName = $gameShortName;
     }

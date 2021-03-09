@@ -59,6 +59,12 @@ class ReplyKeyboardMarkup extends BaseType
      */
     protected ?bool $selective;
 
+    /**
+     * @param array     $keyboard
+     * @param bool|null $resizeKeyboard
+     * @param bool|null $oneTimeKeyboard
+     * @param bool|null $selective
+     */
     public function __construct(
         array $keyboard,
         ?bool $resizeKeyboard = null,

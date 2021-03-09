@@ -14,11 +14,9 @@ use TelegramBot\Api\Collection\CollectionItemInterface;
 class InputMedia extends BaseType implements CollectionItemInterface
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
-    static protected $requiredParams = ['type', 'media'];
+    protected static array $requiredParams = ['type', 'media'];
 
     /**
      * {@inheritdoc}
@@ -37,7 +35,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
      *
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended),
@@ -46,27 +44,27 @@ class InputMedia extends BaseType implements CollectionItemInterface
      *
      * @var string
      */
-    protected $media;
+    protected string $media;
 
     /**
      * Optional. Caption of the photo to be sent, 0-200 characters.
      *
-     * @var string
+     * @var string|null
      */
-    protected $caption;
+    protected ?string $caption;
 
     /**
      * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic,
      * fixed-width text or inline URLs in the media caption.
      *
-     * @var string
+     * @var string|null
      */
-    protected $parseMode;
+    protected ?string $parseMode;
 
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -74,7 +72,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -82,7 +80,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
     /**
      * @return string
      */
-    public function getMedia()
+    public function getMedia(): string
     {
         return $this->media;
     }
@@ -90,39 +88,39 @@ class InputMedia extends BaseType implements CollectionItemInterface
     /**
      * @param string $media
      */
-    public function setMedia($media)
+    public function setMedia(string $media): void
     {
         $this->media = $media;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCaption()
+    public function getCaption(): ?string
     {
         return $this->caption;
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
      */
-    public function setCaption($caption)
+    public function setCaption(?string $caption): void
     {
         $this->caption = $caption;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getParseMode()
+    public function getParseMode(): ?string
     {
         return $this->parseMode;
     }
 
     /**
-     * @param string $parseMode
+     * @param string|null $parseMode
      */
-    public function setParseMode($parseMode)
+    public function setParseMode(?string $parseMode): void
     {
         $this->parseMode = $parseMode;
     }

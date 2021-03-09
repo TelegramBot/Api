@@ -7,16 +7,12 @@ use TelegramBot\Api\BaseType;
 class ReplyKeyboardRemove extends BaseType
 {
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|string[]
      */
     protected static array $requiredParams = ['remove_keyboard'];
 
     /**
-     * {@inheritdoc}
-     *
-     * @var array
+     * @var array|bool[]
      */
     protected static array $map = [
         'remove_keyboard' => true,
@@ -41,6 +37,10 @@ class ReplyKeyboardRemove extends BaseType
      */
     protected bool $selective;
 
+    /**
+     * @param bool $remove_keyboard
+     * @param bool $selective
+     */
     public function __construct(bool $remove_keyboard = true, bool $selective = false)
     {
         $this->removeKeyboard = $remove_keyboard;

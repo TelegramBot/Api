@@ -6,12 +6,6 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
-/**
- * Class AbstractInlineQueryResult
- * Abstract class for representing one result of an inline query
- *
- * @package TelegramBot\Api\Types
- */
 class AbstractInlineQueryResult extends BaseType
 {
     /**
@@ -19,56 +13,58 @@ class AbstractInlineQueryResult extends BaseType
      *
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Unique identifier for this result, 1-64 bytes
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * Title for the result
      *
      * @var string
      */
-    protected $title;
+    protected string $title;
 
     /**
      * Content of the message to be sent instead of the file
      *
-     * @var InputMessageContent
+     * @var InputMessageContent|null
      */
-    protected $inputMessageContent;
+    protected ?InputMessageContent $inputMessageContent;
 
     /**
      * Optional. Inline keyboard attached to the message
      *
-     * @var InlineKeyboardMarkup
+     * @var InlineKeyboardMarkup|null
      */
-    protected $replyMarkup;
+    protected ?InlineKeyboardMarkup $replyMarkup;
 
     /**
-     * AbstractInlineQueryResult constructor.
-     *
-     * @param string $id
-     * @param string $title
-     * @param InputMessageContent|null $inputMessageContent
+     * @param string                    $id
+     * @param string                    $title
+     * @param InputMessageContent|null  $inputMessageContent
      * @param InlineKeyboardMarkup|null $replyMarkup
      */
-    public function __construct($id, $title, $inputMessageContent = null, $replyMarkup = null)
-    {
-        $this->id = $id;
-        $this->title = $title;
+    public function __construct(
+        string $id,
+        string $title,
+        ?InputMessageContent $inputMessageContent = null,
+        ?InlineKeyboardMarkup $replyMarkup = null
+    ) {
+        $this->id                  = $id;
+        $this->title               = $title;
         $this->inputMessageContent = $inputMessageContent;
-        $this->replyMarkup = $replyMarkup;
+        $this->replyMarkup         = $replyMarkup;
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -76,7 +72,7 @@ class AbstractInlineQueryResult extends BaseType
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -84,7 +80,7 @@ class AbstractInlineQueryResult extends BaseType
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -92,7 +88,7 @@ class AbstractInlineQueryResult extends BaseType
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -100,7 +96,7 @@ class AbstractInlineQueryResult extends BaseType
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -108,39 +104,39 @@ class AbstractInlineQueryResult extends BaseType
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return InputMessageContent
+     * @return InputMessageContent|null
      */
-    public function getInputMessageContent()
+    public function getInputMessageContent(): ?InputMessageContent
     {
         return $this->inputMessageContent;
     }
 
     /**
-     * @param InputMessageContent $inputMessageContent
+     * @param InputMessageContent|null $inputMessageContent
      */
-    public function setInputMessageContent($inputMessageContent)
+    public function setInputMessageContent(?InputMessageContent $inputMessageContent): void
     {
         $this->inputMessageContent = $inputMessageContent;
     }
 
     /**
-     * @return InlineKeyboardMarkup
+     * @return InlineKeyboardMarkup|null
      */
-    public function getReplyMarkup()
+    public function getReplyMarkup(): ?InlineKeyboardMarkup
     {
         return $this->replyMarkup;
     }
 
     /**
-     * @param InlineKeyboardMarkup $replyMarkup
+     * @param InlineKeyboardMarkup|null $replyMarkup
      */
-    public function setReplyMarkup($replyMarkup)
+    public function setReplyMarkup(?InlineKeyboardMarkup $replyMarkup): void
     {
         $this->replyMarkup = $replyMarkup;
     }

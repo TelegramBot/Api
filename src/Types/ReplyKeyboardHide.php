@@ -36,6 +36,10 @@ class ReplyKeyboardHide extends BaseType
      */
     protected ?bool $selective;
 
+    /**
+     * @param bool      $hideKeyboard
+     * @param bool|null $selective
+     */
     public function __construct(bool $hideKeyboard = true, ?bool $selective = null)
     {
         $this->hideKeyboard = $hideKeyboard;
