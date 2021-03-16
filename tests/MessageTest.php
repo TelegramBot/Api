@@ -605,6 +605,35 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\TelegramBot\Api\Types\Message', $item->getReplyToMessage());
     }
 
+    public function testSetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertAttributeEquals($bot, 'via_bot', $item);
+    }
+
+    public function testGetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertEquals($bot, $item->getViaBot());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getViaBot());
+    }
+
     public function testSetPhoto()
     {
         $item = new Message();
