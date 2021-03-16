@@ -156,7 +156,7 @@ class Message extends BaseType implements TypeInterface
      *
      * @var \TelegramBot\Api\Types\User
      */
-    protected $via_bot;
+    protected $viaBot;
 
     /**
      * Optional. Date the message was last edited in Unix time
@@ -604,15 +604,15 @@ class Message extends BaseType implements TypeInterface
      */
     public function getViaBot()
     {
-        return $this->via_bot;
+        return $this->viaBot;
     }
 
     /**
-     * @param User $via_bot
+     * @param User $viaBot
      */
-    public function setViaBot(User $via_bot)
+    public function setViaBot(User $viaBot)
     {
-        $this->via_bot = $via_bot;
+        $this->viaBot = $viaBot;
     }
 
     /**
