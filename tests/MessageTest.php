@@ -605,6 +605,63 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\TelegramBot\Api\Types\Message', $item->getReplyToMessage());
     }
 
+    public function testSetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertAttributeEquals($bot, 'viaBot', $item);
+    }
+
+    public function testGetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertEquals($bot, $item->getViaBot());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getViaBot());
+    }
+
+    public function testViaBotMessage()
+    {
+        $item = new Message();
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'via_bot' => array(
+                'first_name' => 'Test',
+                'last_name' => 'Bot',
+                'username' => 'TestingBot',
+                'is_bot' => 'true',
+                'id' => 654321
+            )
+        ));
+        $this->assertEquals(654321, $item->getViaBot()->getId());
+    }
+
     public function testSetPhoto()
     {
         $item = new Message();
