@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Audio;
@@ -304,6 +305,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $voice = Voice::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
@@ -317,6 +319,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $voice = Voice::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
@@ -367,6 +370,29 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item->setVideo($video);
         $this->assertEquals($video, $item->getVideo());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Video', $item->getVideo());
+    }
+
+    public function testSetDice()
+    {
+        $item = new Message();
+        $dice = Dice::fromResponse(array(
+            'emoji' => '🎲',
+            'value' => 3
+        ));
+        $item->setDice($dice);
+        $this->assertAttributeEquals($dice, 'dice', $item);
+    }
+
+    public function testGetDice()
+    {
+        $item = new Message();
+        $dice = Dice::fromResponse(array(
+            'emoji' => '🎲',
+            'value' => 3
+        ));
+        $item->setDice($dice);
+        $this->assertEquals($dice, $item->getDice());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\Dice', $item->getDice());
     }
 
     public function testSetSticker()
@@ -577,6 +603,63 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($replyMessage, $item->getReplyToMessage());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Message', $item->getReplyToMessage());
+    }
+
+    public function testSetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertAttributeEquals($bot, 'viaBot', $item);
+    }
+
+    public function testGetViaBot()
+    {
+        $item = new Message();
+        $bot = User::fromResponse(array(
+            'first_name' => 'Test',
+            'last_name' => 'Bot',
+            'username' => 'TestingBot',
+            'is_bot' => 'true',
+            'id' => 654321
+        ));
+        $item->setViaBot($bot);
+        $this->assertEquals($bot, $item->getViaBot());
+        $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getViaBot());
+    }
+
+    public function testViaBotMessage()
+    {
+        $item = new Message();
+        $item = Message::fromResponse(array(
+            'message_id' => 1,
+            'from' => array(
+                'first_name' => 'Ilya',
+                'last_name' => 'Gusev',
+                'id' => 123456,
+                'username' => 'iGusev'
+            ),
+            'date' => 2,
+            'chat' => array(
+                'id' => 1,
+                'type' => 'group',
+                'title' => 'test chat'
+            ),
+            'via_bot' => array(
+                'first_name' => 'Test',
+                'last_name' => 'Bot',
+                'username' => 'TestingBot',
+                'is_bot' => 'true',
+                'id' => 654321
+            )
+        ));
+        $this->assertEquals(654321, $item->getViaBot()->getId());
     }
 
     public function testSetPhoto()

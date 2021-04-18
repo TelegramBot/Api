@@ -28,7 +28,11 @@ class Location extends BaseType implements TypeInterface
      */
     static protected $map = [
         'latitude' => true,
-        'longitude' => true
+        'longitude' => true,
+        'horizontal_accuracy' => true,
+        'live_period' => true,
+        'heading' => true,
+        'proximity_alert_radius' => true,
     ];
 
     /**
@@ -44,6 +48,36 @@ class Location extends BaseType implements TypeInterface
      * @var float
      */
     protected $latitude;
+
+    /**
+     * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
+     *
+     * @var float
+     */
+    protected $horizontalAccuracy;
+
+    /**
+     * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For
+     * active live locations only.
+     *
+     * @var int
+     */
+    protected $livePeriod;
+
+    /**
+     * Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
+     *
+     * @var int
+     */
+    protected $heading;
+
+    /**
+     * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live
+     * locations only.
+     *
+     * @var int
+     */
+    protected $proximityAlertRadius;
 
     /**
      * @return float
@@ -87,5 +121,75 @@ class Location extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return float
+     */
+    public function getHorizontalAccuracy()
+    {
+        return $this->horizontalAccuracy;
+    }
+
+    /**
+     * @param float $horizontalAccuracy
+     *
+     * @throws InvalidArgumentException
+     */
+    public function setHorizontalAccuracy($horizontalAccuracy)
+    {
+        if (is_float($horizontalAccuracy)) {
+            $this->horizontalAccuracy = $horizontalAccuracy;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivePeriod()
+    {
+        return $this->livePeriod;
+    }
+
+    /**
+     * @param int $livePeriod
+     */
+    public function setLivePeriod($livePeriod)
+    {
+        $this->livePeriod = $livePeriod;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeading()
+    {
+        return $this->heading;
+    }
+
+    /**
+     * @param int $heading
+     */
+    public function setHeading($heading)
+    {
+        $this->heading = $heading;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProximityAlertRadius()
+    {
+        return $this->proximityAlertRadius;
+    }
+
+    /**
+     * @param int $proximityAlertRadius
+     */
+    public function setProximityAlertRadius($proximityAlertRadius)
+    {
+        $this->proximityAlertRadius = $proximityAlertRadius;
     }
 }

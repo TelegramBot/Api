@@ -41,6 +41,8 @@ class Update extends BaseType implements TypeInterface
         'callback_query' => CallbackQuery::class,
         'shipping_query' => ShippingQuery::class,
         'pre_checkout_query' => PreCheckoutQuery::class,
+        'poll_answer' => PollAnswer::class,
+        'poll' => Poll::class,
     ];
 
     /**
@@ -59,6 +61,17 @@ class Update extends BaseType implements TypeInterface
      * @var Message
      */
     protected $message;
+
+    /**
+     * @var PollAnswer
+     */
+    protected $pollAnswer;
+
+    /**
+     * @var Poll
+     */
+    protected $poll;
+
 
     /**
      * Optional. New version of a message that is known to the bot and was edited
@@ -178,6 +191,38 @@ class Update extends BaseType implements TypeInterface
     public function setChannelPost($channelPost)
     {
         $this->channelPost = $channelPost;
+    }
+
+    /**
+     * @return PollAnswer
+     */
+    public function getPollAnswer()
+    {
+        return $this->pollAnswer;
+    }
+
+    /**
+     * @return Poll
+     */
+    public function getPoll()
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll $poll
+     */
+    public function setPoll($poll)
+    {
+        $this->poll = $poll;
+    }
+
+    /**
+     * @param PollAnswer $pollAnswer
+     */
+    public function setPollAnswer($pollAnswer)
+    {
+        $this->pollAnswer = $pollAnswer;
     }
 
     /**

@@ -34,6 +34,7 @@ class Message extends BaseType implements TypeInterface
         'forward_signature' => true,
         'forward_sender_name' => true,
         'reply_to_message' => Message::class,
+        'via_bot' => User::class,
         'edit_date' => true,
         'media_group_id' => true,
         'author_signature' => true,
@@ -149,6 +150,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Message
      */
     protected $replyToMessage;
+
+    /**
+     * Optional. Bot through which the message was sent.
+     *
+     * @var \TelegramBot\Api\Types\User
+     */
+    protected $viaBot;
 
     /**
      * Optional. Date the message was last edited in Unix time
@@ -589,6 +597,22 @@ class Message extends BaseType implements TypeInterface
     public function setReplyToMessage(Message $replyToMessage)
     {
         $this->replyToMessage = $replyToMessage;
+    }
+
+    /**
+     * @return User
+     */
+    public function getViaBot()
+    {
+        return $this->viaBot;
+    }
+
+    /**
+     * @param User $viaBot
+     */
+    public function setViaBot(User $viaBot)
+    {
+        $this->viaBot = $viaBot;
     }
 
     /**

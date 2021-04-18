@@ -17,7 +17,7 @@ An extended native php wrapper for [Telegram Bot API](https://core.telegram.org/
 >The Bot API is an HTTP-based interface created for developers keen on building bots for Telegram.
 To learn how to create and set up a bot, please consult [Introduction to Bots](https://core.telegram.org/bots) and [Bot FAQ](https://core.telegram.org/bots/faq).
 
-## Install
+## Installation
 
 Via Composer
 
@@ -89,8 +89,18 @@ try {
     // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
     
 
+    //Handle /ping command
     $bot->command('ping', function ($message) use ($bot) {
         $bot->sendMessage($message->getChat()->getId(), 'pong!');
+    });
+    
+    //Handle text messages
+    $bot->on(function (\TelegramBot\Api\Types\Update $update) use ($bot) {
+        $message = $update->getMessage();
+        $id = $message->getChat()->getId();
+        $bot->sendMessage($id, 'Your message: ' . $message->getText());
+    }, function () {
+        return true;
     });
     
     $bot->run();
@@ -130,7 +140,7 @@ $bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API
 $bot->track($message, $eventName);
 ```
 
-_You can use method `getUpdates()` and all incoming messages will be automatically tracked as `Message`-event_
+ You can use method 'getUpdates()'and all incoming messages will be automatically tracked as `Message`-event.
 
 #### Client
 ```php

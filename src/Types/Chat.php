@@ -27,13 +27,17 @@ class Chat extends BaseType implements TypeInterface
         'username' => true,
         'first_name' => true,
         'last_name' => true,
-        'all_members_are_administrators' => true,
         'photo' => ChatPhoto::class,
+        'bio' => true,
         'description' => true,
         'invite_link' => true,
         'pinned_message' => Message::class,
+        'permissions' => ChatPermissions::class,
+        'slow_mode_delay' => true,
         'sticker_set_name' => true,
-        'can_set_sticker_set' => true
+        'can_set_sticker_set' => true,
+        'linked_chat_id' => true,
+        'location' => ChatLocation::class
     ];
 
     /**
@@ -78,14 +82,19 @@ class Chat extends BaseType implements TypeInterface
      */
     protected $lastName;
 
-    protected $allMembersAreAdministrators;
-
     /**
      * Optional. Chat photo. Returned only in getChat.
      *
      * @var ChatPhoto
      */
     protected $photo;
+
+    /**
+     * Optional. Bio of the other party in a private chat. Returned only in getChat
+     *
+     * @var string
+     */
+    protected $bio;
 
     /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
@@ -109,6 +118,21 @@ class Chat extends BaseType implements TypeInterface
     protected $pinnedMessage;
 
     /**
+     * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat.
+     *
+     * @var ChatPermissions
+     */
+    protected $permissions;
+
+    /**
+     * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged
+     * user. Returned only in getChat.
+     *
+     * @var int
+     */
+    protected $slowModeDelay;
+
+    /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
      *
      * @var string
@@ -121,6 +145,23 @@ class Chat extends BaseType implements TypeInterface
      * @var bool
      */
     protected $canSetStickerSet;
+
+    /**
+     * Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice
+     * versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming
+     * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64
+     * bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat.
+     *
+     * @var int
+     */
+    protected $linkedChatId;
+
+    /**
+     * Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat.
+     *
+     * @var ChatLocation
+     */
+    protected $location;
 
     /**
      * @return int|string
@@ -225,22 +266,6 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function getAllMembersAreAdministrators()
-    {
-        return $this->allMembersAreAdministrators;
-    }
-
-    /**
-     * @param mixed $allMembersAreAdministrators
-     */
-    public function setAllMembersAreAdministrators($allMembersAreAdministrators)
-    {
-        $this->allMembersAreAdministrators = $allMembersAreAdministrators;
-    }
-
-    /**
      * @return ChatPhoto
      */
     public function getPhoto()
@@ -254,6 +279,22 @@ class Chat extends BaseType implements TypeInterface
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    /**
+     * @param string $bio
+     */
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
     }
 
     /**
@@ -305,6 +346,38 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
+     * @return ChatPermissions
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * @param ChatPermissions $permissions
+     */
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSlowModeDelay()
+    {
+        return $this->slowModeDelay;
+    }
+
+    /**
+     * @param int $slowModeDelay
+     */
+    public function setSlowModeDelay($slowModeDelay)
+    {
+        $this->slowModeDelay = $slowModeDelay;
+    }
+
+    /**
      * @return string
      */
     public function getStickerSetName()
@@ -334,5 +407,37 @@ class Chat extends BaseType implements TypeInterface
     public function setCanSetStickerSet($canSetStickerSet)
     {
         $this->canSetStickerSet = $canSetStickerSet;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLinkedChatId()
+    {
+        return $this->linkedChatId;
+    }
+
+    /**
+     * @param int $linkedChatId
+     */
+    public function setLinkedChatId($linkedChatId)
+    {
+        $this->linkedChatId = $linkedChatId;
+    }
+
+    /**
+     * @return ChatLocation
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param ChatLocation $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
     }
 }
