@@ -217,7 +217,7 @@ class BotApi
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
-            CURLOPT_TIMEOUT => $data['timeout'] ? (int)$data['timeout'] : 10,
+            CURLOPT_TIMEOUT => isset($data['timeout']) ? (int)$data['timeout'] : 10,
         ];
 
         if ($data) {
