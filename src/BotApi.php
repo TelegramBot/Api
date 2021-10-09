@@ -210,14 +210,14 @@ class BotApi
      * @throws \TelegramBot\Api\HttpException
      * @throws \TelegramBot\Api\InvalidJsonException
      */
-    public function call($method, array $data = null)
+    public function call($method, array $data = null, $timeout = 10)
     {
         $options = $this->proxySettings + [
             CURLOPT_URL => $this->getUrl().'/'.$method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => null,
             CURLOPT_POSTFIELDS => null,
-            CURLOPT_TIMEOUT => isset($data['timeout']) ? (int)$data['timeout'] : 10,
+            CURLOPT_TIMEOUT => $timeout,
         ];
 
         if ($data) {
