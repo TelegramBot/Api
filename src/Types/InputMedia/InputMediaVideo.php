@@ -58,11 +58,11 @@ class InputMediaVideo extends InputMedia
      * InputMediaVideo constructor.
      *
      * @param string $media
-     * @param null $caption
-     * @param null $parseMode
-     * @param null $width
-     * @param null $height
-     * @param null $duration
+     * @param string|null $caption
+     * @param string|null $parseMode
+     * @param int|null $width
+     * @param int|null $height
+     * @param int|null $duration
      * @param bool $supportsStreaming
      */
     public function __construct(
