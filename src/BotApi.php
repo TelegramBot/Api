@@ -1132,7 +1132,7 @@ class BotApi
      * The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
      *
      * @param $callbackQueryId
-     * @param null $text
+     * @param string|null $text
      * @param bool $showAlert
      *
      * @return bool
@@ -1257,8 +1257,8 @@ class BotApi
      * @param $chatId
      * @param $messageId
      * @param InputMedia $media
-     * @param null $inlineMessageId
-     * @param null $replyMarkup
+     * @param string|null $inlineMessageId
+     * @param string|null $replyMarkup
      * @return bool|Message
      * @throws Exception
      * @throws HttpException
@@ -1902,14 +1902,14 @@ class BotApi
      * @param string $question Poll question, 1-255 characters
      * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
      * @param bool $isAnonymous True, if the poll needs to be anonymous, defaults to True
-     * @param null $type Poll type, “quiz” or “regular”, defaults to “regular”
+     * @param string|null $type Poll type, “quiz” or “regular”, defaults to “regular”
      * @param bool $allowsMultipleAnswers True, if the poll allows multiple answers,
      *                          ignored for polls in quiz mode, defaults to False
-     * @param null $correctOptionId 0-based identifier of the correct answer option, required for polls in quiz mode
+     * @param string|null $correctOptionId 0-based identifier of the correct answer option, required for polls in quiz mode
      * @param bool $isClosed Pass True, if the poll needs to be immediately closed. This can be useful for poll preview.
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param int|null $replyToMessageId If the message is a reply, ID of the original message
-     * @param null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
      * @return \TelegramBot\Api\Types\Message
@@ -1956,10 +1956,10 @@ class BotApi
      *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
      *     values 1-64 for “🎰”. Defaults to “🎲
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
-     * @param null $replyToMessageId If the message is a reply, ID of the original message
+     * @param string|null $replyToMessageId If the message is a reply, ID of the original message
      * @param bool $$allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
      *     message is not found,
-     * @param null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
      *
