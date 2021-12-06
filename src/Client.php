@@ -6,11 +6,18 @@ use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Update;
+use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\ReplyKeyboardRemove;
+use TelegramBot\Api\Types\ForceReply;
+use TelegramBot\Api\Types\ReplyKeyboardHide;
+use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 
 /**
  * Class Client
  *
  * @package TelegramBot\Api
+ * @method Message editMessageText(string $chatId, int $messageId, string $text, string $parseMode = null, bool $disablePreview = false, ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|InlineKeyboardMarkup|null $replyMarkup = null, string $inlineMessageId = null)
  */
 class Client
 {
