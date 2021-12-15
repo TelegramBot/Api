@@ -101,6 +101,31 @@ class Client
         return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
     }
 
+    public function poll(Closure $action)
+    {
+        return $this->on(self::getPollEvent($action), self::getPollChecker());
+    }
+
+    public function pollAnswer(Closure $action)
+    {
+        return $this->on(self::getPollAnswerEvent($action), self::getPollAnswerChecker());
+    }
+
+    public function myChatMember(Closure $action)
+    {
+        return $this->on(self::getMyChatMemberEvent($action), self::getMyChatMemberChecker());
+    }
+
+    public function chatMember(Closure $action)
+    {
+        return $this->on(self::getChatMemberEvent($action), self::getChatMemberChecker());
+    }
+
+    public function chatJoinRequest(Closure $action)
+    {
+        return $this->on(self::getChatJoinRequestEvent($action), self::getChatJoinRequestChecker());
+    }
+
     /**
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
@@ -287,6 +312,71 @@ class Client
         };
     }
 
+    protected static function getPollEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPoll()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPoll()]);
+            return false;
+        };
+    }
+
+    protected static function getPollAnswerEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getPollAnswer()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getPollAnswer()]);
+            return false;
+        };
+    }
+
+    protected static function getMyChatMemberEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChatMemberUpdated()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChatMemberUpdated()]);
+            return false;
+        };
+    }
+
+    protected static function getChatMemberEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChatMemberUpdated()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChatMemberUpdated()]);
+            return false;
+        };
+    }
+
+    protected static function getChatJoinRequestEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChatJoinRequest()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChatJoinRequest()]);
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -401,6 +491,69 @@ class Client
     {
         return function (Update $update) {
             return !is_null($update->getPreCheckoutQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the poll.
+     *
+     * @return Closure
+     */
+    protected static function getPollChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPoll());
+        };
+    }
+
+    /**
+     * Returns check function to handling the poll answers.
+     *
+     * @return Closure
+     */
+    protected static function getPollAnswerChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getPollAnswer());
+        };
+    }
+
+    /**
+     * Returns check function to handling the updated chat member.
+     * The bot's chat member status was updated in a chat.
+     * For private chats, this update is received only when the bot is blocked or unblocked by the user.
+     * @return Closure
+     */
+    protected static function getMyChatMemberChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChatMemberUpdated());
+        };
+    }
+
+    /**
+     * Returns check function to handling the updated chat member.
+     * The bot's chat member status was updated in a chat.
+     * For private chats, this update is received only when the bot is blocked or unblocked by the user.
+     * @return Closure
+     */
+    protected static function getChatMemberChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChatMemberUpdated());
+        };
+    }
+
+    /**
+     * Returns check function to handling the chat join requests.
+     * The bot's chat member status was updated in a chat.
+     * For private chats, this update is received only when the bot is blocked or unblocked by the user.
+     * @return Closure
+     */
+    protected static function getChatJoinRequestChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChatJoinRequest());
         };
     }
 

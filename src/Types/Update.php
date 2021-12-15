@@ -74,6 +74,12 @@ class Update extends BaseType implements TypeInterface
 
 
     /**
+     * @var ChatMemberUpdated
+     */
+    protected $chatMemberUpdated;
+
+
+    /**
      * Optional. New version of a message that is known to the bot and was edited
      *
      * @var Message
@@ -97,21 +103,21 @@ class Update extends BaseType implements TypeInterface
     /**
      * Optional. New incoming inline query
      *
-     * @var \TelegramBot\Api\Types\Inline\InlineQuery
+     * @var InlineQuery
      */
     protected $inlineQuery;
 
     /**
      * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
      *
-     * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult
+     * @var ChosenInlineResult
      */
     protected $chosenInlineResult;
 
     /**
      * Optional. New incoming callback query
      *
-     * @var \TelegramBot\Api\Types\CallbackQuery
+     * @var CallbackQuery
      */
     protected $callbackQuery;
 
@@ -128,6 +134,14 @@ class Update extends BaseType implements TypeInterface
      * @var PreCheckoutQuery
      */
     protected $preCheckoutQuery;
+
+    /**
+     * Optional. A request to join the chat has been sent.
+     * The bot must have the can_invite_users administrator right in the chat to receive these updates
+     *
+     * @var ChatJoinRequest
+     */
+    protected $chatJoinRequest;
 
     /**
      * @return int
@@ -207,6 +221,22 @@ class Update extends BaseType implements TypeInterface
     public function getPoll()
     {
         return $this->poll;
+    }
+
+    /**
+     * @return ChatMemberUpdated
+     */
+    public function getChatMemberUpdated()
+    {
+        return $this->chatMemberUpdated;
+    }
+
+    /**
+     * @return ChatJoinRequest
+     */
+    public function getChatJoinRequest()
+    {
+        return $this->chatJoinRequest;
     }
 
     /**
