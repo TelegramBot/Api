@@ -298,7 +298,7 @@ class Client
     {
         return function (Update $update) use ($name) {
             $message = $update->getMessage();
-            if (is_null($message) || !strlen($message->getText())) {
+            if (is_null($message) || !strlen($message->getText() ?? '')) {
                 return false;
             }
 
