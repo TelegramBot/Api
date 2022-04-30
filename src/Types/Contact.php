@@ -66,7 +66,7 @@ class Contact extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $vCard;
+    protected $vcard;
 
     /**
      * @return string
@@ -137,14 +137,14 @@ class Contact extends BaseType implements TypeInterface
      */
     public function getVCard()
     {
-        return $this->vCard;
+        return $this->vcard;
     }
 
     /**
-     * @param string $vCard
+     * @param string $vcard
      */
-    public function setVCard($vCard)
+    public function setVCard($vcard)
     {
-        $this->vCard = $vCard;
+        $this->vcard = $vcard;
     }
 }
