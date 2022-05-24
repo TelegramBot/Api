@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class File
@@ -31,8 +31,9 @@ class File extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'file_size' => true,
-        'file_path' => true
+        'file_path' => true,
     ];
 
     /**
@@ -43,18 +44,40 @@ class File extends BaseType implements TypeInterface
     protected $fileId;
 
     /**
+     * Optional. Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
+    /**
      * Optional. File size, if known
      *
      * @var int
      */
     protected $fileSize;
-
     /**
      * Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
      *
      * @var string
      */
     protected $filePath;
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
+    }
 
     /**
      * @return string
@@ -87,7 +110,7 @@ class File extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_integer($fileSize)) {
+        if (is_int($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();

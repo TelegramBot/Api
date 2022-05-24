@@ -84,12 +84,15 @@ abstract class BaseType
         return $inner === false ? json_encode($output) : $output;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
         if ($data === true) {
             return true;
         }
-        
+
         self::validate($data);
         $instance = new static();
         $instance->map($data);

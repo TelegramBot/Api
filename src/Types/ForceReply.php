@@ -28,7 +28,8 @@ class ForceReply extends BaseType
      */
     static protected $map = [
         'force_reply' => true,
-        'selective' => true
+        'input_field_placeholder' => true,
+        'selective' => true,
     ];
 
     /**
@@ -38,6 +39,12 @@ class ForceReply extends BaseType
      */
     protected $forceReply;
 
+    /**
+     * Optional. The placeholder to be shown in the input field when the reply is active; 1-64 characters
+     *
+     * @var string
+     */
+    protected $inputFieldPlaceholder;
     /**
      * Optional. Use this parameter if you want to show the keyboard to specific users only.
      * Targets:
@@ -52,6 +59,22 @@ class ForceReply extends BaseType
     {
         $this->forceReply = $forceReply;
         $this->selective = $selective;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInputFieldPlaceholder()
+    {
+        return $this->inputFieldPlaceholder;
+    }
+
+    /**
+     * @param string $inputFieldPlaceholder
+     */
+    public function setInputFieldPlaceholder($inputFieldPlaceholder)
+    {
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
 
     /**

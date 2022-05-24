@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class PhotoSize
@@ -19,7 +19,7 @@ class PhotoSize extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'width', 'height'];
+    static protected $requiredParams = ['file_id', 'file_unique_id', 'width', 'height'];
 
     /**
      * {@inheritdoc}
@@ -28,6 +28,7 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'file_size' => true,
@@ -39,6 +40,14 @@ class PhotoSize extends BaseType implements TypeInterface
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Photo width
@@ -92,7 +101,7 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_integer($fileSize)) {
+        if (is_int($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();
@@ -114,7 +123,7 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     public function setHeight($height)
     {
-        if (is_integer($height)) {
+        if (is_int($height)) {
             $this->height = $height;
         } else {
             throw new InvalidArgumentException();
@@ -136,10 +145,26 @@ class PhotoSize extends BaseType implements TypeInterface
      */
     public function setWidth($width)
     {
-        if (is_integer($width)) {
+        if (is_int($width)) {
             $this->width = $width;
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }

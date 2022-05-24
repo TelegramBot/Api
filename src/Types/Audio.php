@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class Audio
@@ -19,7 +19,7 @@ class Audio extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'duration'];
+    static protected $requiredParams = ['file_id', 'file_unique_id', 'duration'];
 
     /**
      * {@inheritdoc}
@@ -28,11 +28,14 @@ class Audio extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'duration' => true,
         'performer' => true,
         'title' => true,
+        'file_name' => true,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
+        'thumb' => PhotoSize::class,
     ];
 
     /**
@@ -41,6 +44,13 @@ class Audio extends BaseType implements TypeInterface
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Photo width
@@ -64,6 +74,13 @@ class Audio extends BaseType implements TypeInterface
     protected $title;
 
     /**
+     * Optional. Title of the audio as defined by sender or by audio tags
+     *
+     * @var string
+     */
+    protected $fileName;
+
+    /**
      * Optional. MIME type of the file as defined by sender
      *
      * @var string
@@ -76,6 +93,29 @@ class Audio extends BaseType implements TypeInterface
      * @var int
      */
     protected $fileSize;
+
+    /**
+     * Optional. Thumbnail of the album cover to which the music file belongs
+     *
+     * @var PhotoSize
+     */
+    protected $thumb;
+
+    /**
+     * @return PhotoSize
+     */
+    public function getThumb()
+    {
+        return $this->thumb;
+    }
+
+    /**
+     * @param PhotoSize $thumb
+     */
+    public function setThumb($thumb)
+    {
+        $this->thumb = $thumb;
+    }
 
     /**
      * @return int
@@ -92,7 +132,7 @@ class Audio extends BaseType implements TypeInterface
      */
     public function setDuration($duration)
     {
-        if (is_integer($duration)) {
+        if (is_int($duration)) {
             $this->duration = $duration;
         } else {
             throw new InvalidArgumentException();
@@ -134,6 +174,22 @@ class Audio extends BaseType implements TypeInterface
     /**
      * @return string
      */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param string $fileName
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @return string
+     */
     public function getFileId()
     {
         return $this->fileId;
@@ -145,6 +201,22 @@ class Audio extends BaseType implements TypeInterface
     public function setFileId($fileId)
     {
         $this->fileId = $fileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**
@@ -162,7 +234,7 @@ class Audio extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_integer($fileSize)) {
+        if (is_int($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();

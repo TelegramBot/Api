@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class User
@@ -32,7 +32,10 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
-        'is_bot' => true
+        'is_bot' => true,
+        'can_join_groups' => true,
+        'can_read_all_group_messages' => true,
+        'supports_inline_queries' => true,
     ];
 
     /**
@@ -78,6 +81,75 @@ class User extends BaseType implements TypeInterface
     protected $isBot;
 
     /**
+     * Optional. True, if the bot can be invited to groups. Returned only in getMe.
+     *
+     * @var bool
+     */
+    protected $canJoinGroups;
+
+    /**
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     *
+     * @var bool
+     */
+    protected $canReadAllGroupMessages;
+
+    /**
+     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     *
+     * @var bool
+     */
+    protected $supportsInlineQueries;
+
+    /**
+     * @return bool
+     */
+    public function isCanJoinGroups()
+    {
+        return $this->canJoinGroups;
+    }
+
+    /**
+     * @param bool $canJoinGroups
+     */
+    public function setCanJoinGroups($canJoinGroups)
+    {
+        $this->canJoinGroups = $canJoinGroups;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSupportsInlineQueries()
+    {
+        return $this->supportsInlineQueries;
+    }
+
+    /**
+     * @param bool $supportsInlineQueries
+     */
+    public function setSupportsInlineQueries($supportsInlineQueries)
+    {
+        $this->supportsInlineQueries = $supportsInlineQueries;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanReadAllGroupMessages()
+    {
+        return $this->canReadAllGroupMessages;
+    }
+
+    /**
+     * @param bool $canReadAllGroupMessages
+     */
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    {
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+    }
+
+    /**
      * @return string
      */
     public function getFirstName()
@@ -102,13 +174,13 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $id
+     * @param int|float $id
      *
      * @throws InvalidArgumentException
      */
     public function setId($id)
     {
-        if (is_integer($id) || is_float($id)) {
+        if (is_int($id) || is_float($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();

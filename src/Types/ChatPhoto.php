@@ -11,7 +11,7 @@ class ChatPhoto extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['small_file_id', 'big_file_id'];
+    static protected $requiredParams = ['small_file_id', 'small_file_unique_id', 'big_file_id', 'big_file_unique_id'];
 
     /**
      * {@inheritdoc}
@@ -20,52 +20,44 @@ class ChatPhoto extends BaseType
      */
     static protected $map = [
         'small_file_id' => true,
+        'small_file_unique_id' => true,
         'big_file_id' => true,
+        'big_file_unique_id' => true,
     ];
 
     /**
-     * Unique file identifier of small (160x160) chat photo. This file_id can be used only for photo download.
+     * File identifier of small (160x160) chat photo.
+     * This file_id can be used only for photo download and only for as long as
+     * the photo is not changed.
      *
      * @var string
      */
     protected $smallFileId;
 
     /**
-     * Unique file identifier of big (640x640) chat photo. This file_id can be used only for photo download.
+     * Unique file identifier of small (160x160) chat photo,
+     * which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file
+     *
+     * @var string
+     */
+    protected $smallFileUniqueId;
+
+    /**
+     * File identifier of big (640x640) chat photo.
+     * This file_id can be used only for photo download and only for as long as the photo is not changed
      *
      * @var string
      */
     protected $bigFileId;
 
     /**
-     * @return string
+     * Unique file identifier of big (640x640) chat photo,
+     * which is supposed to be the same over time and for different bots. C
+     * an't be used to download or reuse the file
+     *
+     * @var string
      */
-    public function getSmallFileId()
-    {
-        return $this->smallFileId;
-    }
+    protected $bigFileUniqueId;
 
-    /**
-     * @param string $smallFileId
-     */
-    public function setSmallFileId($smallFileId)
-    {
-        $this->smallFileId = $smallFileId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBigFileId()
-    {
-        return $this->bigFileId;
-    }
-
-    /**
-     * @param string $bigFileId
-     */
-    public function setBigFileId($bigFileId)
-    {
-        $this->bigFileId = $bigFileId;
-    }
 }

@@ -23,6 +23,10 @@ class ChatMember extends BaseType
         'status' => true,
         'until_date' => true,
         'can_be_edited' => true,
+        'is_anonymous' => true,
+        'is_member' => true,
+        'can_manage_chat' => true,
+        'can_manage_video_chats' => true,
         'can_change_info' => true,
         'can_post_messages' => true,
         'can_edit_messages' => true,
@@ -33,8 +37,10 @@ class ChatMember extends BaseType
         'can_promote_members' => true,
         'can_send_messages' => true,
         'can_send_media_messages' => true,
+        'can_send_polls' => true,
         'can_send_other_messages' => true,
-        'can_add_web_page_previews' => true
+        'can_add_web_page_previews' => true,
+        'custom_title' => true,
     ];
 
     /**
@@ -64,6 +70,36 @@ class ChatMember extends BaseType
      * @var bool
      */
     protected $canBeEdited;
+
+    /**
+     * True, if the user's presence in the chat is hidden
+     *
+     * @var bool
+     */
+    protected $isAnonymous = true;
+
+    /**
+     * True, if the user is a member of the chat at the moment of the request
+     *
+     * @var bool
+     */
+    protected $isMember = true;
+
+    /**
+     * True, if the administrator can access the chat event log, chat statistics, message statistics in channels,
+     * see channel members, see anonymous administrators in supergroups and ignore slow mode.
+     * Implied by any other administrator privilege
+     *
+     * @var bool
+     */
+    protected $canManageChat = true;
+
+    /**
+     * True, if the administrator can manage video chats
+     *
+     * @var bool
+     */
+    protected $canManageVideoChats = true;
 
     /**
      * Optional. Administrators only. True, if the administrator can change the chat title, photo and other settings
@@ -139,13 +175,18 @@ class ChatMember extends BaseType
     protected $canSendMediaMessages;
 
     /**
+     * True, if the user is allowed to send polls
+     *
+     * @var bool
+     */
+    protected $canSendPolls = true;
+    /**
      * Optional. Restricted only. True, if the user can send animations, games, stickers and use inline bots,
      * implies can_send_media_messages
      *
      * @var bool
      */
     protected $canSendOtherMessages;
-
     /**
      * Optional. Restricted only. True, if user may add web page previews to his messages,
      * implies can_send_media_messages
@@ -153,6 +194,108 @@ class ChatMember extends BaseType
      * @var bool
      */
     protected $canAddWebPagePreviews;
+    /**
+     * Optional. Custom title for this user
+     *
+     * @var string
+     */
+    protected $customTitle;
+
+    /**
+     * @return bool
+     */
+    public function isAnonymous()
+    {
+        return $this->isAnonymous;
+    }
+
+    /**
+     * @param bool $isAnonymous
+     */
+    public function setIsAnonymous($isAnonymous)
+    {
+        $this->isAnonymous = $isAnonymous;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMember()
+    {
+        return $this->isMember;
+    }
+
+    /**
+     * @param bool $isMember
+     */
+    public function setIsMember($isMember)
+    {
+        $this->isMember = $isMember;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanManageChat()
+    {
+        return $this->canManageChat;
+    }
+
+    /**
+     * @param bool $canManageChat
+     */
+    public function setCanManageChat($canManageChat)
+    {
+        $this->canManageChat = $canManageChat;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanManageVideoChats()
+    {
+        return $this->canManageVideoChats;
+    }
+
+    /**
+     * @param bool $canManageVideoChats
+     */
+    public function setCanManageVideoChats($canManageVideoChats)
+    {
+        $this->canManageVideoChats = $canManageVideoChats;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendPolls()
+    {
+        return $this->canSendPolls;
+    }
+
+    /**
+     * @param bool $canSendPolls
+     */
+    public function setCanSendPolls($canSendPolls)
+    {
+        $this->canSendPolls = $canSendPolls;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomTitle()
+    {
+        return $this->customTitle;
+    }
+
+    /**
+     * @param string $customTitle
+     */
+    public function setCustomTitle($customTitle)
+    {
+        $this->customTitle = $customTitle;
+    }
 
     /**
      * @return User

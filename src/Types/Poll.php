@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
 
 /**
@@ -45,6 +44,10 @@ class Poll extends BaseType implements TypeInterface
         'type' => true,
         'allows_multiple_answers' => true,
         'correct_option_id' => true,
+        'explanation' => true,
+        'explanation_entities' => true,
+        'open_period' => true,
+        'close_date' => true,
     ];
 
     /**
@@ -112,6 +115,31 @@ class Poll extends BaseType implements TypeInterface
      * @var int
      */
     protected $correctOptionId;
+    /**
+     * Optional. Text that is shown when a user chooses an incorrect answer or
+     * taps on the lamp icon in a quiz-style poll, 0-200 characters
+     *
+     * @var string
+     */
+    protected $explanation;
+    /**
+     * Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation
+     *
+     * @var array
+     */
+    protected $explanationEntities;
+    /**
+     * Optional. Amount of time in seconds the poll will be active after creation
+     *
+     * @var int
+     */
+    protected $openPeriod;
+    /**
+     * Optional. Point in time (Unix timestamp) when the poll will be automatically closed
+     *
+     * @var int
+     */
+    protected $closeDate;
 
     /**
      * @return string
@@ -256,4 +284,70 @@ class Poll extends BaseType implements TypeInterface
     {
         $this->correctOptionId = $correctOptionId;
     }
+
+    /**
+     * @return string
+     */
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
+    /**
+     * @param string $explanation
+     */
+    public function setExplanation($explanation)
+    {
+        $this->explanation = $explanation;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExplanationEntities()
+    {
+        return $this->explanationEntities;
+    }
+
+    /**
+     * @param array $explanationEntities
+     */
+    public function setExplanationEntities($explanationEntities)
+    {
+        $this->explanationEntities = $explanationEntities;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpenPeriod()
+    {
+        return $this->openPeriod;
+    }
+
+    /**
+     * @param int $openPeriod
+     */
+    public function setOpenPeriod($openPeriod)
+    {
+        $this->openPeriod = $openPeriod;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCloseDate()
+    {
+        return $this->closeDate;
+    }
+
+    /**
+     * @param int $closeDate
+     */
+    public function setCloseDate($closeDate)
+    {
+        $this->closeDate = $closeDate;
+    }
+
+
 }

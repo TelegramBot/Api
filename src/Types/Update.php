@@ -43,6 +43,9 @@ class Update extends BaseType implements TypeInterface
         'pre_checkout_query' => PreCheckoutQuery::class,
         'poll_answer' => PollAnswer::class,
         'poll' => Poll::class,
+        'my_chat_member' => ChatMemberUpdated::class,
+        'chat_member' => ChatMemberUpdated::class,
+        'chat_join_request' => ChatJoinRequest::class,
     ];
 
     /**

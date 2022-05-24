@@ -10,6 +10,9 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfMessageEntity
 {
+    /**
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
         $arrayOfMessageEntity = [];

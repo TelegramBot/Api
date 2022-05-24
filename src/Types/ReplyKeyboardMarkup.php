@@ -26,9 +26,10 @@ class ReplyKeyboardMarkup extends BaseType
      */
     static protected $map = [
         'keyboard' => true,
-        'one_time_keyboard' => true,
         'resize_keyboard' => true,
-        'selective' => true
+        'one_time_keyboard' => true,
+        'input_field_placeholder' => true,
+        'selective' => true,
     ];
 
     /**
@@ -65,6 +66,19 @@ class ReplyKeyboardMarkup extends BaseType
      */
     protected $selective;
 
+    /**
+     * Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters.
+     *
+     * @var string
+     */
+    protected $inputFieldPlaceholder;
+
+    /**
+     * @param $keyboard
+     * @param $oneTimeKeyboard
+     * @param $resizeKeyboard
+     * @param $selective
+     */
     public function __construct($keyboard, $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null)
     {
         $this->keyboard = $keyboard;
@@ -135,5 +149,21 @@ class ReplyKeyboardMarkup extends BaseType
     public function setSelective($selective)
     {
         $this->selective = $selective;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInputFieldPlaceholder()
+    {
+        return $this->inputFieldPlaceholder;
+    }
+
+    /**
+     * @param bool $inputFieldPlaceholder
+     */
+    public function setInputFieldPlaceholder($inputFieldPlaceholder)
+    {
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
 }

@@ -4,6 +4,9 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfPhotoSize
 {
+    /**
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
         $arrayOfPhotoSize = [];

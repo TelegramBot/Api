@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class Animation
@@ -19,7 +19,7 @@ class Animation extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'width', 'height', 'duration'];
+    static protected $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
@@ -28,13 +28,14 @@ class Animation extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'duration' => true,
         'thumb' => PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
     ];
 
     /**
@@ -43,6 +44,13 @@ class Animation extends BaseType implements TypeInterface
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique file identifier
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Video width as defined by sender
@@ -75,12 +83,12 @@ class Animation extends BaseType implements TypeInterface
     /**
      * Optional. Animation thumbnail as defined by sender
      *
-     * @var PhotoSize
+     * @var string
      */
     protected $fileName;
 
     /**
-     * Optional. Mime type of a file as defined by sender
+     * Optional. Mime type of file as defined by sender
      *
      * @var string
      */
@@ -108,7 +116,7 @@ class Animation extends BaseType implements TypeInterface
      */
     public function setDuration($duration)
     {
-        if (is_integer($duration)) {
+        if (is_int($duration)) {
             $this->duration = $duration;
         } else {
             throw new InvalidArgumentException();
@@ -132,6 +140,22 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
+    }
+
+    /**
      * @return int
      */
     public function getFileSize()
@@ -146,7 +170,7 @@ class Animation extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_integer($fileSize)) {
+        if (is_int($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();
@@ -168,7 +192,7 @@ class Animation extends BaseType implements TypeInterface
      */
     public function setHeight($height)
     {
-        if (is_integer($height)) {
+        if (is_int($height)) {
             $this->height = $height;
         } else {
             throw new InvalidArgumentException();
@@ -238,7 +262,7 @@ class Animation extends BaseType implements TypeInterface
      */
     public function setWidth($width)
     {
-        if (is_integer($width)) {
+        if (is_int($width)) {
             $this->width = $width;
         } else {
             throw new InvalidArgumentException();

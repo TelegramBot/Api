@@ -36,6 +36,9 @@ class Venue extends BaseType implements TypeInterface
         'title' => true,
         'address' => true,
         'foursquare_id' => true,
+        'foursquare_type' => true,
+        'google_place_id' => true,
+        'google_place_type' => true,
     ];
 
     /**
@@ -65,6 +68,75 @@ class Venue extends BaseType implements TypeInterface
      * @var string
      */
     protected $foursquareId;
+
+    /**
+     * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+     *
+     * @var string
+     */
+    protected $foursquareType;
+
+    /**
+     * Optional. Google Places identifier of the venue
+     *
+     * @var string
+     */
+    protected $googlePlaceId;
+
+    /**
+     * Optional. Google Places type of the venue. (See supported types.)
+     *
+     * @var string
+     */
+    protected $googlePlaceType;
+
+    /**
+     * @return string
+     */
+    public function getFoursquareType()
+    {
+        return $this->foursquareType;
+    }
+
+    /**
+     * @param string $foursquareType
+     */
+    public function setFoursquareType($foursquareType)
+    {
+        $this->foursquareType = $foursquareType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGooglePlaceId()
+    {
+        return $this->googlePlaceId;
+    }
+
+    /**
+     * @param string $googlePlaceId
+     */
+    public function setGooglePlaceId($googlePlaceId)
+    {
+        $this->googlePlaceId = $googlePlaceId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGooglePlaceType()
+    {
+        return $this->googlePlaceType;
+    }
+
+    /**
+     * @param string $googlePlaceType
+     */
+    public function setGooglePlaceType($googlePlaceType)
+    {
+        $this->googlePlaceType = $googlePlaceType;
+    }
 
     /**
      * @return Location

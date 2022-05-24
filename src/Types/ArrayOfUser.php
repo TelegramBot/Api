@@ -4,6 +4,9 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfUser
 {
+    /**
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
         $arrayOfUsers = [];

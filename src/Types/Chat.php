@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 class Chat extends BaseType implements TypeInterface
 {
@@ -29,15 +29,18 @@ class Chat extends BaseType implements TypeInterface
         'last_name' => true,
         'photo' => ChatPhoto::class,
         'bio' => true,
+        'has_private_forwards' => true,
         'description' => true,
         'invite_link' => true,
         'pinned_message' => Message::class,
         'permissions' => ChatPermissions::class,
         'slow_mode_delay' => true,
+        'message_auto_delete_time' => true,
+        'has_protected_content' => true,
         'sticker_set_name' => true,
         'can_set_sticker_set' => true,
         'linked_chat_id' => true,
-        'location' => ChatLocation::class
+        'location' => ChatLocation::class,
     ];
 
     /**
@@ -97,6 +100,14 @@ class Chat extends BaseType implements TypeInterface
     protected $bio;
 
     /**
+     * Optional. True, if privacy settings of the other party in the private chat allows to use
+     * tg://user?id=<user_id> links only in chats with the user. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasPrivateForwards = true;
+
+    /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
      *
      * @var string
@@ -125,12 +136,28 @@ class Chat extends BaseType implements TypeInterface
     protected $permissions;
 
     /**
-     * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged
+     * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged
      * user. Returned only in getChat.
      *
      * @var int
      */
     protected $slowModeDelay;
+
+    /**
+     * Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds.
+     * Returned only in getChat.
+     *
+     * @var int
+     */
+    protected $messageAutoDeleteTime;
+
+    /**
+     * Optional. True, if messages from the chat can't be forwarded to other chats.
+     * Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasProtectedContent = true;
 
     /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
@@ -149,8 +176,9 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice
      * versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming
-     * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64
-     * bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat.
+     * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed
+     * 64-bit integer or double-precision float type are safe for storing this identifier.
+     * Returned only in getChat.
      *
      * @var int
      */
@@ -172,13 +200,13 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int|string $id
+     * @param int|float|string $id
      *
      * @throws InvalidArgumentException
      */
     public function setId($id)
     {
-        if (is_integer($id) || is_float($id) || is_string($id)) {
+        if (is_int($id) || is_float($id) || is_string($id)) {
             $this->id = $id;
         } else {
             throw new InvalidArgumentException();
@@ -298,6 +326,22 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isHasPrivateForwards()
+    {
+        return $this->hasPrivateForwards;
+    }
+
+    /**
+     * @param bool $hasPrivateForwards
+     */
+    public function setHasPrivateForwards($hasPrivateForwards)
+    {
+        $this->hasPrivateForwards = $hasPrivateForwards;
+    }
+
+    /**
      * @return string
      */
     public function getDescription()
@@ -375,6 +419,38 @@ class Chat extends BaseType implements TypeInterface
     public function setSlowModeDelay($slowModeDelay)
     {
         $this->slowModeDelay = $slowModeDelay;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMessageAutoDeleteTime()
+    {
+        return $this->messageAutoDeleteTime;
+    }
+
+    /**
+     * @param int $messageAutoDeleteTime
+     */
+    public function setMessageAutoDeleteTime($messageAutoDeleteTime)
+    {
+        $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
     }
 
     /**

@@ -3,8 +3,8 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class Document
@@ -22,10 +22,11 @@ class Document extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'thumb' => PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
     ];
 
     /**
@@ -41,6 +42,13 @@ class Document extends BaseType implements TypeInterface
      * @var string
      */
     protected $fileId;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Document thumbnail as defined by sender
@@ -117,7 +125,7 @@ class Document extends BaseType implements TypeInterface
      */
     public function setFileSize($fileSize)
     {
-        if (is_integer($fileSize)) {
+        if (is_int($fileSize)) {
             $this->fileSize = $fileSize;
         } else {
             throw new InvalidArgumentException();
@@ -154,5 +162,21 @@ class Document extends BaseType implements TypeInterface
     public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }

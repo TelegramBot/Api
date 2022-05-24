@@ -4,14 +4,14 @@ namespace TelegramBot\Api;
 
 use Closure;
 use ReflectionFunction;
-use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\Message;
-use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
-use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\ForceReply;
+use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
+use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 
 /**
  * Class Client
@@ -27,12 +27,12 @@ class Client
     const REGEXP = '/^(?:@\w+\s)?\/([^\s@]+)(@\S+)?\s?(.*)$/';
 
     /**
-     * @var \TelegramBot\Api\BotApi
+     * @var BotApi
      */
     protected $api;
 
     /**
-     * @var \TelegramBot\Api\Events\EventCollection
+     * @var EventCollection
      */
     protected $events;
 
@@ -52,63 +52,23 @@ class Client
      * Use this method to add command. Parameters will be automatically parsed and passed to closure.
      *
      * @param string $name
-     * @param \Closure $action
+     * @param Closure $action
      *
-     * @return \TelegramBot\Api\Client
+     * @return Client
      */
     public function command($name, Closure $action)
     {
         return $this->on(self::getEvent($action), self::getChecker($name));
     }
 
-    public function editedMessage(Closure $action)
-    {
-        return $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
-    }
-
-    public function callbackQuery(Closure $action)
-    {
-        return $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
-    }
-
-    public function channelPost(Closure $action)
-    {
-        return $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
-    }
-
-    public function editedChannelPost(Closure $action)
-    {
-        return $this->on(self::getEditedChannelPostEvent($action), self::getEditedChannelPostChecker());
-    }
-
-    public function inlineQuery(Closure $action)
-    {
-        return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
-    }
-
-    public function chosenInlineResult(Closure $action)
-    {
-        return $this->on(self::getChosenInlineResultEvent($action), self::getChosenInlineResultChecker());
-    }
-
-    public function shippingQuery(Closure $action)
-    {
-        return $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
-    }
-
-    public function preCheckoutQuery(Closure $action)
-    {
-        return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
-    }
-
     /**
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
      *
-     * @param \Closure $event
-     * @param \Closure|null $checker
+     * @param Closure $event
+     * @param Closure|null $checker
      *
-     * @return \TelegramBot\Api\Client
+     * @return Client
      */
     public function on(Closure $event, Closure $checker = null)
     {
@@ -118,46 +78,15 @@ class Client
     }
 
     /**
-     * Handle updates
-     *
-     * @param Update[] $updates
-     */
-    public function handle(array $updates)
-    {
-        foreach ($updates as $update) {
-            /* @var \TelegramBot\Api\Types\Update $update */
-            $this->events->handle($update);
-        }
-    }
-
-    /**
-     * Webhook handler
-     *
-     * @return array
-     * @throws \TelegramBot\Api\InvalidJsonException
-     */
-    public function run()
-    {
-        if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
-            $this->handle([Update::fromResponse($data)]);
-        }
-    }
-
-    public function getRawBody()
-    {
-        return file_get_contents('php://input');
-    }
-
-    /**
      * Returns event function to handling the command.
      *
-     * @param \Closure $action
+     * @param Closure $action
      *
-     * @return \Closure
+     * @return Closure
      */
     protected static function getEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             $message = $update->getMessage();
             if (!$message) {
                 return true;
@@ -183,9 +112,65 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the command.
+     *
+     * @param string $name
+     *
+     * @return Closure
+     */
+    protected static function getChecker($name)
+    {
+        return function(Update $update) use ($name) {
+            $message = $update->getMessage();
+            if (is_null($message) || $message->getText() === '') {
+                return false;
+            }
+
+            preg_match(self::REGEXP, $message->getText(), $matches);
+
+            return !empty($matches) && $matches[1] == $name;
+        };
+    }
+
+    public function message(Closure $action)
+    {
+        return $this->on(self::getMessageEvent($action), self::getMessageChecker());
+    }
+
+    protected static function getMessageEvent(Closure $action)
+    {
+        return function(Update $update) use ($action) {
+            if (!$update->getMessage()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getMessage()]);
+            return false;
+        };
+    }
+
+    /**
+     * Returns check function to handling the message.
+     *
+     * @return Closure
+     */
+    protected static function getMessageChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getMessage());
+        };
+    }
+
+    public function editedMessage(Closure $action)
+    {
+        return $this->on(self::getEditedMessageEvent($action), self::getEditedMessageChecker());
+    }
+
     protected static function getEditedMessageEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getEditedMessage()) {
                 return true;
             }
@@ -196,22 +181,26 @@ class Client
         };
     }
 
-    protected static function getChannelPostEvent(Closure $action)
+    /**
+     * Returns check function to handling the edited message.
+     *
+     * @return Closure
+     */
+    protected static function getEditedMessageChecker()
     {
-        return function (Update $update) use ($action) {
-            if (!$update->getChannelPost()) {
-                return true;
-            }
-
-            $reflectionAction = new ReflectionFunction($action);
-            $reflectionAction->invokeArgs([$update->getChannelPost()]);
-            return false;
+        return function(Update $update) {
+            return !is_null($update->getEditedMessage());
         };
+    }
+
+    public function callbackQuery(Closure $action)
+    {
+        return $this->on(self::getCallbackQueryEvent($action), self::getCallbackQueryChecker());
     }
 
     protected static function getCallbackQueryEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getCallbackQuery()) {
                 return true;
             }
@@ -222,9 +211,56 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the callbackQuery.
+     *
+     * @return Closure
+     */
+    protected static function getCallbackQueryChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getCallbackQuery());
+        };
+    }
+
+    public function channelPost(Closure $action)
+    {
+        return $this->on(self::getChannelPostEvent($action), self::getChannelPostChecker());
+    }
+
+    protected static function getChannelPostEvent(Closure $action)
+    {
+        return function(Update $update) use ($action) {
+            if (!$update->getChannelPost()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChannelPost()]);
+            return false;
+        };
+    }
+
+    /**
+     * Returns check function to handling the channel post.
+     *
+     * @return Closure
+     */
+    protected static function getChannelPostChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getChannelPost());
+        };
+    }
+
+    public function editedChannelPost(Closure $action)
+    {
+        return $this->on(self::getEditedChannelPostEvent($action), self::getEditedChannelPostChecker());
+    }
+
     protected static function getEditedChannelPostEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getEditedChannelPost()) {
                 return true;
             }
@@ -235,9 +271,26 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the edited channel post.
+     *
+     * @return Closure
+     */
+    protected static function getEditedChannelPostChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getEditedChannelPost());
+        };
+    }
+
+    public function inlineQuery(Closure $action)
+    {
+        return $this->on(self::getInlineQueryEvent($action), self::getInlineQueryChecker());
+    }
+
     protected static function getInlineQueryEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getInlineQuery()) {
                 return true;
             }
@@ -248,9 +301,26 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the inline queries.
+     *
+     * @return Closure
+     */
+    protected static function getInlineQueryChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getInlineQuery());
+        };
+    }
+
+    public function chosenInlineResult(Closure $action)
+    {
+        return $this->on(self::getChosenInlineResultEvent($action), self::getChosenInlineResultChecker());
+    }
+
     protected static function getChosenInlineResultEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getChosenInlineResult()) {
                 return true;
             }
@@ -261,9 +331,26 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the chosen inline result.
+     *
+     * @return Closure
+     */
+    protected static function getChosenInlineResultChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getChosenInlineResult());
+        };
+    }
+
+    public function shippingQuery(Closure $action)
+    {
+        return $this->on(self::getShippingQueryEvent($action), self::getShippingQueryChecker());
+    }
+
     protected static function getShippingQueryEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getShippingQuery()) {
                 return true;
             }
@@ -274,9 +361,26 @@ class Client
         };
     }
 
+    /**
+     * Returns check function to handling the shipping queries.
+     *
+     * @return Closure
+     */
+    protected static function getShippingQueryChecker()
+    {
+        return function(Update $update) {
+            return !is_null($update->getShippingQuery());
+        };
+    }
+
+    public function preCheckoutQuery(Closure $action)
+    {
+        return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
+    }
+
     protected static function getPreCheckoutQueryEvent(Closure $action)
     {
-        return function (Update $update) use ($action) {
+        return function(Update $update) use ($action) {
             if (!$update->getPreCheckoutQuery()) {
                 return true;
             }
@@ -288,129 +392,66 @@ class Client
     }
 
     /**
-     * Returns check function to handling the command.
-     *
-     * @param string $name
-     *
-     * @return \Closure
-     */
-    protected static function getChecker($name)
-    {
-        return function (Update $update) use ($name) {
-            $message = $update->getMessage();
-            if (is_null($message) || !strlen($message->getText())) {
-                return false;
-            }
-
-            preg_match(self::REGEXP, $message->getText(), $matches);
-
-            return !empty($matches) && $matches[1] == $name;
-        };
-    }
-
-    /**
-     * Returns check function to handling the edited message.
-     *
-     * @return Closure
-     */
-    protected static function getEditedMessageChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getEditedMessage());
-        };
-    }
-
-    /**
-     * Returns check function to handling the channel post.
-     *
-     * @return Closure
-     */
-    protected static function getChannelPostChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getChannelPost());
-        };
-    }
-
-    /**
-     * Returns check function to handling the callbackQuery.
-     *
-     * @return Closure
-     */
-    protected static function getCallbackQueryChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getCallbackQuery());
-        };
-    }
-
-    /**
-     * Returns check function to handling the edited channel post.
-     *
-     * @return Closure
-     */
-    protected static function getEditedChannelPostChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getEditedChannelPost());
-        };
-    }
-
-    /**
-     * Returns check function to handling the chosen inline result.
-     *
-     * @return Closure
-     */
-    protected static function getChosenInlineResultChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getChosenInlineResult());
-        };
-    }
-
-    /**
-     * Returns check function to handling the inline queries.
-     *
-     * @return Closure
-     */
-    protected static function getInlineQueryChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getInlineQuery());
-        };
-    }
-
-    /**
-     * Returns check function to handling the shipping queries.
-     *
-     * @return Closure
-     */
-    protected static function getShippingQueryChecker()
-    {
-        return function (Update $update) {
-            return !is_null($update->getShippingQuery());
-        };
-    }
-
-    /**
      * Returns check function to handling the pre checkout queries.
      *
      * @return Closure
      */
     protected static function getPreCheckoutQueryChecker()
     {
-        return function (Update $update) {
+        return function(Update $update) {
             return !is_null($update->getPreCheckoutQuery());
         };
     }
 
+    /**
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws InvalidJsonException
+     */
+    public function run()
+    {
+        if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
+            $this->handle([Update::fromResponse($data)]);
+        }
+    }
+
+    /**
+     * @return false|string
+     */
+    public function getRawBody()
+    {
+        return file_get_contents('php://input');
+    }
+
+    /**
+     * Handle updates
+     *
+     * @param array $updates
+     * @return void
+     */
+    public function handle(array $updates)
+    {
+        foreach ($updates as $update) {
+            /* @var Update $update */
+            $this->events->handle($update);
+        }
+    }
+
+    /**
+     * @param $name
+     * @param array $arguments
+     * @return mixed
+     * @throws BadMethodCallException
+     */
     public function __call($name, array $arguments)
     {
         if (method_exists($this, $name)) {
             return call_user_func_array([$this, $name], $arguments);
-        } elseif (method_exists($this->api, $name)) {
+        }
+
+        if (method_exists($this->api, $name)) {
             return call_user_func_array([$this->api, $name], $arguments);
         }
-        throw new BadMethodCallException("Method {$name} not exists");
+        throw new BadMethodCallException("Method $name not exists");
     }
 }
