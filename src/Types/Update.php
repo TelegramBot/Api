@@ -43,6 +43,7 @@ class Update extends BaseType implements TypeInterface
         'pre_checkout_query' => PreCheckoutQuery::class,
         'poll_answer' => PollAnswer::class,
         'poll' => Poll::class,
+        'my_chat_member' => MyChatMember::class,
     ];
 
     /**
@@ -128,6 +129,11 @@ class Update extends BaseType implements TypeInterface
      * @var PreCheckoutQuery
      */
     protected $preCheckoutQuery;
+
+    /**
+     * @var MyChatMember
+     */
+    protected $myChatMember;
 
     /**
      * @return int
@@ -323,5 +329,21 @@ class Update extends BaseType implements TypeInterface
     public function setPreCheckoutQuery($preCheckoutQuery)
     {
         $this->preCheckoutQuery = $preCheckoutQuery;
+    }
+
+    /**
+     * @return MyChatMember
+     */
+    public function getMyChatMember()
+    {
+        return $this->myChatMember;
+    }
+
+    /**
+     * @param MyChatMember $myChatMember
+     */
+    public function setMyChatMember($myChatMember)
+    {
+        $this->myChatMember = $myChatMember;
     }
 }
