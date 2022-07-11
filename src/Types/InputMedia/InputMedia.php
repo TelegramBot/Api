@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Types\InputMedia;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Collection\CollectionItemInterface;
+use TelegramBot\Api\Types\File;
 
 /**
  * Class InputMedia
@@ -30,6 +31,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
         'media' => true,
         'caption' => true,
         'parse_mode' => true,
+        'thumb' => File::class,
     ];
 
     /**
@@ -56,12 +58,19 @@ class InputMedia extends BaseType implements CollectionItemInterface
     protected $caption;
 
     /**
-     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic,
-     * fixed-width text or inline URLs in the media caption.
+     * Optional. Thumbnail of the file sent;
      *
      * @var string
      */
     protected $parseMode;
+
+    /**
+     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic,
+     * fixed-width text or inline URLs in the media caption.
+     *
+     * @var File
+     */
+    protected $thumb;
 
     /**
      * @return string
