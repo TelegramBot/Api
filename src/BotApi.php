@@ -970,7 +970,7 @@ class BotApi
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param \CURLFile|string $document
+     * @param \CURLFile|\CURLStringFile|string $document
      * @param string|null $caption
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
