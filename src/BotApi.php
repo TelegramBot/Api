@@ -312,20 +312,22 @@ class BotApi
      *
      * @param int|string $chatId
      * @param string $text
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $parseMode
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendMessage(
         $chatId,
         $text,
+        $messageThreadId = null,
         $parseMode = null,
         $disablePreview = false,
         $replyToMessageId = null,
@@ -335,6 +337,7 @@ class BotApi
         return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => $chatId,
             'text' => $text,
+            'message_thread_id' => $messageThreadId,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_to_message_id' => (int)$replyToMessageId,
@@ -347,6 +350,7 @@ class BotApi
      * @param int|string $chatId
      * @param int|string $fromChatId
      * @param int $messageId
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $caption
      * @param string|null $parseMode
      * @param ArrayOfMessageEntity|null $captionEntities
@@ -365,6 +369,7 @@ class BotApi
         $chatId,
         $fromChatId,
         $messageId,
+        $messageThreadId = null,
         $caption = null,
         $parseMode = null,
         $captionEntities = null,
@@ -377,6 +382,7 @@ class BotApi
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'parse_mode' => $parseMode,
             'caption_entities' => $captionEntities,
@@ -393,6 +399,7 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param string $phoneNumber
      * @param string $firstName
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string $lastName
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -406,6 +413,7 @@ class BotApi
         $chatId,
         $phoneNumber,
         $firstName,
+        $messageThreadId = null,
         $lastName = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -415,6 +423,7 @@ class BotApi
             'chat_id' => $chatId,
             'phone_number' => $phoneNumber,
             'first_name' => $firstName,
+            'message_thread_id' => $messageThreadId,
             'last_name' => $lastName,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -565,18 +574,20 @@ class BotApi
      * @param int|string                                                              $chatId
      * @param float                                                                   $latitude
      * @param float                                                                   $longitude
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null                                                                $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
      * @param bool                                                                    $disableNotification
      *
      * @param null|int                                                                $livePeriod
+     *
      * @return \TelegramBot\Api\Types\Message
      */
     public function sendLocation(
         $chatId,
         $latitude,
         $longitude,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
@@ -587,6 +598,7 @@ class BotApi
             'latitude'             => $latitude,
             'longitude'            => $longitude,
             'live_period'          => $livePeriod,
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id'  => $replyToMessageId,
             'reply_markup'         => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
@@ -656,6 +668,7 @@ class BotApi
      * @param float $longitude
      * @param string $title
      * @param string $address
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $foursquareId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -671,6 +684,7 @@ class BotApi
         $longitude,
         $title,
         $address,
+        $messageThreadId = null,
         $foursquareId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -682,6 +696,7 @@ class BotApi
             'longitude' => $longitude,
             'title' => $title,
             'address' => $address,
+            'message_thread_id' => $messageThreadId,
             'foursquare_id' => $foursquareId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -694,6 +709,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
@@ -706,6 +722,7 @@ class BotApi
     public function sendSticker(
         $chatId,
         $sticker,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
@@ -713,6 +730,7 @@ class BotApi
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
             'sticker' => $sticker,
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
@@ -770,21 +788,23 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $animation
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendAnimation(
         $chatId,
         $animation,
+        $messageThreadId = null,
         $duration = null,
         $caption = null,
         $replyToMessageId = null,
@@ -795,6 +815,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
             'animation' => $animation,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
@@ -812,25 +833,27 @@ class BotApi
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
-     * @param int|string       $chatId chat_id or @channel_name
+     * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $voice
-     * @param string           $caption Voice message caption, 0-1024 characters after entities parsing
-     * @param int|null         $duration
-     * @param int|null         $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
-     * @param bool             $disableNotification
-     * @param bool             $allowSendingWithoutReply Pass True, if the message should be sent even if the specified
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @param string $caption Voice message caption, 0-1024 characters after entities parsing
+     * @param int|null $duration
+     * @param int|null $replyToMessageId
+     * @param null $replyMarkup
+     * @param bool $disableNotification
+     * @param bool $allowSendingWithoutReply Pass True, if the message should be sent even if the specified
      *     replied-to message is not found
-     * @param string|null      $parseMode
+     * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendVoice(
         $chatId,
         $voice,
+        $messageThreadId = null,
         $caption = null,
         $duration = null,
         $replyToMessageId = null,
@@ -842,6 +865,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
             'voice' => $voice,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
@@ -858,18 +882,20 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param int $fromChatId
      * @param int $messageId
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool $disableNotification
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
+    public function forwardMessage($chatId, $fromChatId, $messageId, $messageThreadId = null, $disableNotification = false)
     {
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool)$disableNotification,
         ]));
     }
@@ -892,22 +918,24 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $audio
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $duration
      * @param string|null $performer
      * @param string|null $title
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendAudio(
         $chatId,
         $audio,
+        $messageThreadId = null,
         $duration = null,
         $performer = null,
         $title = null,
@@ -919,6 +947,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => $chatId,
             'audio' => $audio,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'performer' => $performer,
             'title' => $title,
@@ -934,20 +963,22 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $photo
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendPhoto(
         $chatId,
         $photo,
+        $messageThreadId = null,
         $caption = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -957,6 +988,7 @@ class BotApi
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
             'photo' => $photo,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -971,20 +1003,22 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $document
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendDocument(
         $chatId,
         $document,
+        $messageThreadId = null,
         $caption = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -994,6 +1028,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
             'document' => $document,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -1399,6 +1434,7 @@ class BotApi
      * @param string $startParameter
      * @param string $currency
      * @param array $prices
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $photoUrl
      * @param int|null $photoSize
      * @param int|null $photoWidth
@@ -1427,6 +1463,7 @@ class BotApi
         $startParameter,
         $currency,
         $prices,
+        $messageThreadId = null,
         $isFlexible = false,
         $photoUrl = null,
         $photoSize = null,
@@ -1452,6 +1489,7 @@ class BotApi
             'start_parameter' => $startParameter,
             'currency' => $currency,
             'prices' => json_encode($prices),
+            'message_thread_id' => $messageThreadId,
             'is_flexible' => $isFlexible,
             'photo_url' => $photoUrl,
             'photo_size' => $photoSize,
@@ -1814,20 +1852,22 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $videoNote
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $duration
      * @param int|null $length
      * @param int|null $replyToMessageId
-     * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
-     *        Types\ReplyKeyboardRemove|null $replyMarkup
+     * @param null $replyMarkup
      * @param bool $disableNotification
      *
      * @return \TelegramBot\Api\Types\Message
-     * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
+     * @throws \TelegramBot\Api\HttpException
+     * @throws \TelegramBot\Api\InvalidJsonException
      */
     public function sendVideoNote(
         $chatId,
         $videoNote,
+        $messageThreadId = null,
         $duration = null,
         $length = null,
         $replyToMessageId = null,
@@ -1837,6 +1877,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVideoNote', [
             'chat_id' => $chatId,
             'video_note' => $videoNote,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'length' => $length,
             'reply_to_message_id' => $replyToMessageId,
@@ -1851,6 +1892,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param ArrayOfInputMedia $media
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $replyToMessageId
      * @param bool $disableNotification
      *
@@ -1860,12 +1902,14 @@ class BotApi
     public function sendMediaGroup(
         $chatId,
         $media,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null
     ) {
         return ArrayOfMessages::fromResponse($this->call('sendMediaGroup', [
             'chat_id' => $chatId,
             'media' => $media->toJson(),
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => (int)$replyToMessageId,
             'disable_notification' => (bool)$disableNotification
         ]));
@@ -1905,6 +1949,7 @@ class BotApi
      *                (in the format @channelusername)
      * @param string $question Poll question, 1-255 characters
      * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+     * @param null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool $isAnonymous True, if the poll needs to be anonymous, defaults to True
      * @param string|null $type Poll type, “quiz” or “regular”, defaults to “regular”
      * @param bool $allowsMultipleAnswers True, if the poll allows multiple answers,
@@ -1925,6 +1970,7 @@ class BotApi
         $chatId,
         $question,
         $options,
+        $messageThreadId = null,
         $isAnonymous = false,
         $type = null,
         $allowsMultipleAnswers = false,
@@ -1938,6 +1984,7 @@ class BotApi
             'chat_id' => $chatId,
             'question' => $question,
             'options' => json_encode($options),
+            'message_thread_id' => $messageThreadId,
             'is_anonymous' => (bool) $isAnonymous,
             'type' => (string) $type,
             'allows_multiple_answers' => (bool) $allowsMultipleAnswers,
@@ -1975,6 +2022,7 @@ class BotApi
     public function sendDice(
         $chatId,
         $emoji,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
@@ -1983,6 +2031,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
             'emoji' => $emoji,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool) $disableNotification,
             'reply_to_message_id' => (int) $replyToMessageId,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
