@@ -33,8 +33,10 @@ class WebhookInfo extends BaseType implements TypeInterface
         'url' => true,
         'has_custom_certificate' => true,
         'pending_update_count' => true,
+        'ip_address' => true,
         'last_error_date' => true,
         'last_error_message' => true,
+        'last_synchronization_error_date' => true,
         'max_connections' => true,
         'allowed_updates' => true
     ];
@@ -61,6 +63,13 @@ class WebhookInfo extends BaseType implements TypeInterface
     protected $pendingUpdateCount;
 
     /**
+     * Optional. Currently used webhook IP address
+     *
+     * @var string
+     */
+    protected $ipAddress;
+
+    /**
      * Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
      *
      * @var int
@@ -74,6 +83,14 @@ class WebhookInfo extends BaseType implements TypeInterface
      * @var string
      */
     protected $lastErrorMessage;
+
+    /**
+     * Optional. Unix time of the most recent error that happened when trying to synchronize available updates
+     * with Telegram datacenters
+     *
+     * @var int
+     */
+    protected $lastSynchronizationErrorDate;
 
     /**
      * Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
@@ -122,6 +139,22 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
+     * @param string $ipAddress
+     */
+    public function setIpAddress($ipAddress)
+    {
+        $this->ipAddress = $ipAddress;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIpAddress()
+    {
+        return $this->ipAddress;
+    }
+
+    /**
      * @return int
      */
     public function getPendingUpdateCount()
@@ -167,6 +200,22 @@ class WebhookInfo extends BaseType implements TypeInterface
     public function setLastErrorMessage($lastErrorMessage)
     {
         $this->lastErrorMessage = $lastErrorMessage;
+    }
+
+    /**
+     * @param string $lastSynchronizationErrorDate
+     */
+    public function setLastSynchronizationErrorDate($lastSynchronizationErrorDate)
+    {
+        $this->lastSynchronizationErrorDate = $lastSynchronizationErrorDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getlastSynchronizationErrorDate()
+    {
+        return $this->lastSynchronizationErrorDate;
     }
 
     /**
