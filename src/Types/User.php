@@ -32,6 +32,11 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
+        'is_premium' => true,
+        'added_to_attachment_menu' => true,
+        'can_join_groups' => true,
+        'can_read_all_group_messages' => true,
+        'supports_inline_queries' => true,
         'is_bot' => true
     ];
 
@@ -76,6 +81,41 @@ class User extends BaseType implements TypeInterface
      * @var bool
      */
     protected $isBot;
+
+    /**
+     * Optional. True, if this user is a Telegram Premium user
+     *
+     * @var bool
+     */
+    private $isPremium;
+
+    /**
+     * Optional. True, if this user added the bot to the attachment menu
+     *
+     * @var bool
+     */
+    private $addedToAttachmentMenu;
+
+    /**
+     * Optional. True, if the bot can be invited to groups. Returned only in getMe.
+     *
+     * @var bool
+     */
+    private $canJoinGroups;
+
+    /**
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     *
+     * @var bool
+     */
+    private $canReadAllGroupMessages;
+
+    /**
+     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     *
+     * @var bool
+     */
+    private $supportsInlineQueries;
 
     /**
      * @return string
@@ -177,5 +217,89 @@ class User extends BaseType implements TypeInterface
     public function setIsBot($isBot)
     {
         $this->isBot = $isBot;
+    }
+
+
+//'can_read_all_group_messages' => true,
+//'supports_inline_queries' => true,
+
+    /**
+     * @param bool $isPremium
+     */
+    public function setIsPremium($isPremium)
+    {
+        $this->isPremium = $isPremium;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsPremium()
+    {
+        return $this->isPremium;
+    }
+
+    /**
+     * @param bool $addedToAttachmentMenu
+     */
+    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
+    {
+        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAddedToAttachmentMenu()
+    {
+        return $this->addedToAttachmentMenu;
+    }
+
+    /**
+     * @param bool $canJoinGroups
+     */
+    public function setCanJoinGroups($canJoinGroups)
+    {
+        $this->canJoinGroups = $canJoinGroups;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanJoinGroups()
+    {
+        return $this->canJoinGroups;
+    }
+
+    /**
+     * @param bool $canReadAllGroupMessages
+     */
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    {
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanReadAllGroupMessages()
+    {
+        return $this->canReadAllGroupMessages;
+    }
+
+    /**
+     * @param bool $supportsInlineQueries
+     */
+    public function setSupportsInlineQueries($supportsInlineQueries)
+    {
+        $this->supportsInlineQueries = $supportsInlineQueries;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSupportsInlineQueries()
+    {
+        return $this->supportsInlineQueries;
     }
 }
