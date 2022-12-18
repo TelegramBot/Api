@@ -37,7 +37,16 @@ class Chat extends BaseType implements TypeInterface
         'sticker_set_name' => true,
         'can_set_sticker_set' => true,
         'linked_chat_id' => true,
-        'location' => ChatLocation::class
+        'location' => ChatLocation::class,
+        'join_to_send_messages' => true,
+        'join_by_request' => true,
+        'message_auto_delete_time' => true,
+        'has_protected_content' => true,
+        'is_forum' => true,
+        'active_usernames' => true,
+        'emoji_status_custom_emoji_id' => true,
+        'has_private_forwards' => true,
+        'has_restricted_voice_and_video_messages' => true,
     ];
 
     /**
@@ -162,6 +171,72 @@ class Chat extends BaseType implements TypeInterface
      * @var ChatLocation
      */
     protected $location;
+
+    /**
+     * Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $joinToSendMessages;
+
+    /**
+     * Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $joinByRequest;
+
+    /**
+     * Optional. Time after which all messages sent to the chat will be automatically deleted; in seconds. Returned
+     * only in getChat.
+     *
+     * @var int
+     */
+    protected $messageAutoDeleteTime;
+
+    /**
+     * Optional. True, if the chat has a custom title. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasProtectedContent;
+
+    /**
+     * Optional. True, if the chat is a forum. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $isForum;
+
+    /**
+     * Optional. True, if the chat is a forum. Returned only in getChat.
+     *
+     * @var array[]
+     */
+    protected $activeUsernames;
+
+    /**
+     * Optional. True, if the chat is a forum. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $emojiStatusCustomEmojiId;
+
+    /**
+     * Optional. True, if the chat is a forum. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasPrivateForwards;
+
+    /**
+     * Optional. True, if the chat is a forum. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasRestrictedVoiceAndVideoMessages;
+
+
 
     /**
      * @return int|string

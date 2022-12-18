@@ -22,6 +22,7 @@ class Document extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'thumb' => PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
@@ -69,6 +70,13 @@ class Document extends BaseType implements TypeInterface
      * @var int
      */
     protected $fileSize;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * @return string
@@ -154,5 +162,21 @@ class Document extends BaseType implements TypeInterface
     public function setThumb(PhotoSize $thumb)
     {
         $this->thumb = $thumb;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }

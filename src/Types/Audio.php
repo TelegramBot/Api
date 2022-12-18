@@ -19,7 +19,7 @@ class Audio extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'duration'];
+    static protected $requiredParams = ['file_id', 'file_unique_id', 'duration'];
 
     /**
      * {@inheritdoc}
@@ -28,6 +28,7 @@ class Audio extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'duration' => true,
         'performer' => true,
         'title' => true,
@@ -76,6 +77,13 @@ class Audio extends BaseType implements TypeInterface
      * @var int
      */
     protected $fileSize;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * @return int
@@ -183,5 +191,21 @@ class Audio extends BaseType implements TypeInterface
     public function setMimeType($mimeType)
     {
         $this->mimeType = $mimeType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }
