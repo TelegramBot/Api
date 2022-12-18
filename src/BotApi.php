@@ -15,6 +15,7 @@ use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
+use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -730,7 +731,9 @@ class BotApi
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
-     * @param bool $disableNotification
+     * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
+     * @param bool $protectContent Protects the contents of the sent message from forwarding and saving
+     * @param bool $allowSendingWithoutReply Pass True if the message should be sent even if the specified replied-to message is not found
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -741,7 +744,9 @@ class BotApi
         $sticker,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
+        $protectContent = false,
+        $allowSendingWithoutReply = false
     ) {
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
@@ -749,7 +754,184 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
+            'protect_content' => (bool)$protectContent,
+            'allow_sending_without_reply' => (bool)$allowSendingWithoutReply,
         ]));
+    }
+
+    /**
+     * @param string $name Name of the sticker set
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function getStickerSet($name)
+    {
+        return StickerSet::fromResponse($this->call('getStickerSet', [
+            'name' => $name,
+        ]));
+    }
+
+    /**
+     * @param array[] $customEmojiIds List of custom emoji identifiers.
+     *                                  At most 200 custom emoji identifiers can be specified.
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function getCustomEmojiStickers($customEmojiIds = [])
+    {
+        return StickerSet::fromResponse($this->call('getCustomEmojiStickers', [
+            'custom_emoji_ids' => $customEmojiIds,
+        ]));
+    }
+
+    /**
+     * Use this method to create a new sticker set owned by a user.
+     * The bot will be able to edit the sticker set thus created.
+     * You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker.
+     * Returns True on success.
+     *
+     * @param int $userId User identifier of created sticker set owner
+     * @param string $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size,
+     *                           dimensions must not exceed 512px, and either width or height must be exactly 512px.
+     *
+     * @return File
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function uploadStickerFile($userId, $pngSticker)
+    {
+        return File::fromResponse($this->call('uploadStickerFile', [
+            'user_id' => $userId,
+            'png_sticker' => $pngSticker,
+        ]));
+    }
+
+    /**
+     * Use this method to create a new sticker set owned by a user.
+     * The bot will be able to edit the sticker set thus created.
+     * You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Returns True on success.
+     *
+     * @param int $userId User identifier of created sticker set owner
+     * @param string $name Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals).
+     *                     Can contain only english letters, digits and underscores. Must begin with a letter,
+     *                     can't contain consecutive underscores and must end in “_by_<bot username>”.
+     *                     <bot_username> is case insensitive. 1-64 characters.
+     * @param string $title Sticker set title, 1-64 characters
+     * @param string $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size,
+     *                           dimensions must not exceed 512px, and either width or height must be exactly 512px.
+     *                           Pass a file_id as a String to send a file that already exists on the Telegram servers,
+     *                           pass an HTTP URL as a String for Telegram to get a file from the Internet,
+     *                           or upload a new one using multipart/form-data.
+     * @param string $tgsSticker TGS animation with the sticker, uploaded using multipart/form-data.
+     *                           See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
+     * @param string $webmSticker WebP animation with the sticker, uploaded using multipart/form-data.
+     *                            See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
+     * @param string $stickerType Sticker type, one of “png”, “tgs”, or “webp”
+     * @param string $emojis One or more emoji corresponding to the sticker
+     * @param \TelegramBot\Api\Types\MaskPosition|null $maskPosition A JSON-serialized object for position where the mask should be placed on faces
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function createNewStickerSet(
+        $userId,
+        $name,
+        $title,
+        $emojis,
+        $pngSticker,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $stickerType = null,
+        $maskPosition = null
+    ) {
+        return $this->call('createNewStickerSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'title' => $title,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'sticker_type' => $stickerType,
+            'emojis' => $emojis,
+            'mask_position' => is_null($maskPosition) ? $maskPosition : $maskPosition->toJson(),
+        ]);
+    }
+
+    /**
+     * Use this method to add a new sticker to a set created by the bot.
+     * You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker.
+     * Animated stickers can be added to animated sticker sets and only to them.
+     * Animated sticker sets can have up to 50 stickers.
+     * Static sticker sets can have up to 120 stickers. Returns True on success.
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function addStickerToSet(
+        $userId,
+        $name,
+        $emojis,
+        $pngSticker,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $maskPosition = null
+    ) {
+        return $this->call('addStickerToSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'emojis' => $emojis,
+            'mask_position' => is_null($maskPosition) ? $maskPosition : $maskPosition->toJson(),
+        ]);
+    }
+
+    /**
+     * Use this method to move a sticker in a set created by the bot to a specific position.
+     * Returns True on success.
+     *
+     * @param string $sticker File identifier of the sticker
+     * @param int $position New sticker position in the set, zero-based
+     *
+     * @return bool
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function setStickerPositionInSet($sticker, $position)
+    {
+        return $this->call('setStickerPositionInSet', [
+            'sticker' => $sticker,
+            'position' => $position,
+        ]);
+    }
+
+    /**
+     * Use this method to delete a sticker from a set created by the bot.
+     * Returns True on success.
+     *
+     * @param string $name Sticker set name
+     * @param string $userId User identifier of sticker set owner
+     * @param File|null $thumb A PNG image with the thumbnail,
+     *                         must be up to 128 kilobytes in size and have width and height exactly 100px,
+     *                         or a TGS animation with the thumbnail up to 32 kilobytes in size
+     *
+     * @return bool
+     *
+     * @throws \TelegramBot\Api\InvalidArgumentException
+     * @throws \TelegramBot\Api\Exception
+     */
+    public function setStickerSetThumb($name, $userId, $thumb = null)
+    {
+        return $this->call('setStickerSetThumb', [
+            'name' => $name,
+            'user_id' => $userId,
+            'thumb' => $thumb,
+        ]);
     }
 
     /**
