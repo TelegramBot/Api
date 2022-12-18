@@ -21,6 +21,7 @@ class MessageEntityTest extends \PHPUnit_Framework_TestCase
                 'username' => 'hunter',
                 'language_code' => 'en',
             ],
+            'custom_emoji_id' => 1,
         ]);
 
         $this->assertInstanceOf(MessageEntity::class, $messageEntity);
@@ -36,6 +37,7 @@ class MessageEntityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('hunter', $messageEntity->getUser()->getUsername());
         $this->assertEquals('en', $messageEntity->getUser()->getLanguageCode());
         $this->assertNull($messageEntity->getLanguage());
+        $this->assertEquals(1, $messageEntity->getCustomEmojiId());
     }
 
     public function testPreFromResponse()
