@@ -87,35 +87,35 @@ class User extends BaseType implements TypeInterface
      *
      * @var bool
      */
-    private $isPremium;
+    protected $isPremium;
 
     /**
      * Optional. True, if this user added the bot to the attachment menu
      *
      * @var bool
      */
-    private $addedToAttachmentMenu;
+    protected $addedToAttachmentMenu;
 
     /**
      * Optional. True, if the bot can be invited to groups. Returned only in getMe.
      *
      * @var bool
      */
-    private $canJoinGroups;
+    protected $canJoinGroups;
 
     /**
      * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
      *
      * @var bool
      */
-    private $canReadAllGroupMessages;
+    protected $canReadAllGroupMessages;
 
     /**
      * Optional. True, if the bot supports inline queries. Returned only in getMe.
      *
      * @var bool
      */
-    private $supportsInlineQueries;
+    protected $supportsInlineQueries;
 
     /**
      * @return string
@@ -219,10 +219,6 @@ class User extends BaseType implements TypeInterface
         $this->isBot = $isBot;
     }
 
-
-//'can_read_all_group_messages' => true,
-//'supports_inline_queries' => true,
-
     /**
      * @param bool $isPremium
      */
@@ -302,4 +298,6 @@ class User extends BaseType implements TypeInterface
     {
         return $this->supportsInlineQueries;
     }
+
+
 }
