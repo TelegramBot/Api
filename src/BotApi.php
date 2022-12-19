@@ -6,12 +6,14 @@ use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
+use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\BotCommand;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\ForceReply;
+use TelegramBot\Api\Types\ForumTopic;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
@@ -21,6 +23,7 @@ use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 use TelegramBot\Api\Types\ReplyKeyboardRemove;
+use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
@@ -803,6 +806,8 @@ class BotApi
      *
      * @throws InvalidArgumentException
      * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
      */
     public function getCustomEmojiStickers($customEmojiIds = [])
     {
@@ -860,6 +865,8 @@ class BotApi
      *
      * @throws InvalidArgumentException
      * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
      */
     public function createNewStickerSet(
         $userId,
@@ -1843,9 +1850,13 @@ class BotApi
      * @param bool $canPromoteMembers Pass True, if the administrator can add new administrators with a subset of his
      *                                own privileges or demote administrators that he has promoted,directly or
      *                                indirectly (promoted by administrators that were appointed by him)
-     *
+     * @param bool $canManageTopics Pass True if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
+     * @param bool $isAnonymous Pass True if the administrator's presence in the chat is hidden
      * @return bool
+     *
      * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
      */
     public function promoteChatMember(
         $chatId,
@@ -1857,11 +1868,14 @@ class BotApi
         $canInviteUsers = true,
         $canRestrictMembers = true,
         $canPinMessages = true,
-        $canPromoteMembers = true
+        $canPromoteMembers = true,
+        $canManageTopics = true,
+        $isAnonymous = false
     ) {
         return $this->call('promoteChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
+            'is_anonymous' => $isAnonymous,
             'can_change_info' => $canChangeInfo,
             'can_post_messages' => $canPostMessages,
             'can_edit_messages' => $canEditMessages,
@@ -1869,7 +1883,8 @@ class BotApi
             'can_invite_users' => $canInviteUsers,
             'can_restrict_members' => $canRestrictMembers,
             'can_pin_messages' => $canPinMessages,
-            'can_promote_members' => $canPromoteMembers
+            'can_promote_members' => $canPromoteMembers,
+            'can_manage_topics' => $canManageTopics
         ]);
     }
 
@@ -2308,6 +2323,170 @@ class BotApi
             'message_id' => $messageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
+    }
+
+    /**
+     * Use this method to create a topic in a forum supergroup chat.
+     * The bot must be an administrator in the chat for this to work
+     * and must have the can_manage_topics administrator rights.
+     * Returns information about the created topic as a ForumTopic object.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param string $name Topic name, 1-128 characters
+     * @param int $iconColor Color of the topic icon in RGB format.
+     *                       Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB),
+     *                       9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F)
+     * @param int|null $iconCustomEmojiId Unique identifier of the custom emoji shown as the topic icon.
+     *                                    Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+     *
+     * @return ForumTopic
+     *
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function createForumTopic(
+        $chatId,
+        $name,
+        $iconColor,
+        $iconCustomEmojiId = null
+    )
+    {
+        return ForumTopic::fromResponse($this->call('createForumTopic', [
+            'chat_id' => $chatId,
+            'name' => $name,
+            'icon_color' => $iconColor,
+            'icon_custom_emoji_id' => $iconCustomEmojiId,
+        ]));
+    }
+
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat.
+     * The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights,
+     * unless it is the creator of the topic. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $messageThreadId Unique identifier for the target message thread of the forum topic
+     * @param string $name Topic name, 1-128 characters
+     * @param int|null $iconCustomEmojiId Unique identifier of the custom emoji shown as the topic icon.
+     *                                    Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function editForumTopic(
+        $chatId,
+        $messageThreadId,
+        $name,
+        $iconCustomEmojiId = null
+    )
+    {
+        return $this->call('editForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+            'name' => $name,
+            'icon_custom_emoji_id' => $iconCustomEmojiId,
+        ]);
+    }
+
+    /**
+     * Use this method to delete a topic in a forum supergroup chat.
+     * The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights,
+     * unless it is the creator of the topic. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function closeForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('closeForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to reopen a closed topic in a forum supergroup chat.
+     * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights,
+     * unless it is the creator of the topic. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function reopenForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('reopenForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to delete a forum topic along with all its messages in a forum supergroup chat.
+     * The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights.
+     * Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function deleteForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('deleteForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to clear the list of pinned messages in a forum topic.
+     * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
+     * Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param int $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function unpinAllForumTopicMessages($chatId, $messageThreadId)
+    {
+        return $this->call('unpinAllForumTopicMessages', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user.
+     * Requires no parameters. Returns an Array of Sticker objects.
+     *
+     * @return Sticker[]
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function getForumTopicIconStickers()
+    {
+        return ArrayOfSticker::fromResponse($this->call('getForumTopicIconStickers'));
     }
 
     /**

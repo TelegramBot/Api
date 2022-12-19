@@ -10,6 +10,7 @@ use TelegramBot\Api\TypeInterface;
  * This object represents a sticker set.
  *
  * @package TelegramBot\Api\Types
+ * @author bernard-ng <bernard@devscast.tech>
  */
 class StickerSet extends BaseType implements TypeInterface
 {

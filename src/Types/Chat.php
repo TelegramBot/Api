@@ -195,48 +195,50 @@ class Chat extends BaseType implements TypeInterface
     protected $messageAutoDeleteTime;
 
     /**
-     * Optional. True, if the chat has a custom title. Returned only in getChat.
+     * 	Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
      *
      * @var bool
      */
     protected $hasProtectedContent;
 
     /**
-     * Optional. True, if the chat is a forum. Returned only in getChat.
+     * Optional. True, if the supergroup chat is a forum (has topics enabled)
      *
      * @var bool
      */
     protected $isForum;
 
     /**
-     * Optional. True, if the chat is a forum. Returned only in getChat.
+     * Optional. If non-empty, the list of all active chat usernames;
+     * for private chats, supergroups and channels. Returned only in getChat.
      *
      * @var array[]
      */
     protected $activeUsernames;
 
     /**
-     * Optional. True, if the chat is a forum. Returned only in getChat.
+     * Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat.
      *
-     * @var bool
+     * @var string
      */
     protected $emojiStatusCustomEmojiId;
 
     /**
-     * Optional. True, if the chat is a forum. Returned only in getChat.
+     * Optional. True, if privacy settings of the other party in the private chat allows
+     * to use tg://user?id=<user_id> links only in chats with the user.
+     * Returned only in getChat.
      *
      * @var bool
      */
     protected $hasPrivateForwards;
 
     /**
-     * Optional. True, if the chat is a forum. Returned only in getChat.
+     * Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat.
+     * Returned only in getChat.
      *
      * @var bool
      */
     protected $hasRestrictedVoiceAndVideoMessages;
-
-
 
     /**
      * @return int|string
@@ -471,7 +473,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @return bool
      */
-    public function isCanSetStickerSet()
+    public function getCanSetStickerSet()
     {
         return $this->canSetStickerSet;
     }
@@ -514,5 +516,149 @@ class Chat extends BaseType implements TypeInterface
     public function setLocation($location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getJoinToSendMessages()
+    {
+        return $this->joinToSendMessages;
+    }
+
+    /**
+     * @param bool $joinToSendMessages
+     */
+    public function setJoinToSendMessages($joinToSendMessages)
+    {
+        $this->joinToSendMessages = $joinToSendMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getJoinByRequest()
+    {
+        return $this->joinByRequest;
+    }
+
+    /**
+     * @param bool $joinByRequest
+     */
+    public function setJoinByRequest($joinByRequest)
+    {
+        $this->joinByRequest = $joinByRequest;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMessageAutoDeleteTime()
+    {
+        return $this->messageAutoDeleteTime;
+    }
+
+    /**
+     * @param int $messageAutoDeleteTime
+     */
+    public function setMessageAutoDeleteTime($messageAutoDeleteTime)
+    {
+        $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsForum()
+    {
+        return $this->isForum;
+    }
+
+    /**
+     * @param bool $isForum
+     */
+    public function setIsForum($isForum)
+    {
+        $this->isForum = $isForum;
+    }
+
+    /**
+     * @return array
+     */
+    public function getActiveUsernames()
+    {
+        return $this->activeUsernames;
+    }
+
+    /**
+     * @param array $activeUsernames
+     */
+    public function setActiveUsernames($activeUsernames)
+    {
+        $this->activeUsernames = $activeUsernames;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEmojiStatusCustomEmojiId()
+    {
+        return $this->emojiStatusCustomEmojiId;
+    }
+
+    /**
+     * @param bool $emojiStatusCustomEmojiId
+     */
+    public function setEmojiStatusCustomEmojiId($emojiStatusCustomEmojiId)
+    {
+        $this->emojiStatusCustomEmojiId = $emojiStatusCustomEmojiId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasPrivateForwards()
+    {
+        return $this->hasPrivateForwards;
+    }
+
+    /**
+     * @param bool $hasPrivateForwards
+     */
+    public function setHasPrivateForwards($hasPrivateForwards)
+    {
+        $this->hasPrivateForwards = $hasPrivateForwards;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasRestrictedVoiceAndVideoMessages()
+    {
+        return $this->hasRestrictedVoiceAndVideoMessages;
+    }
+
+    /**
+     * @param bool $hasRestrictedVoiceAndVideoMessages
+     */
+    public function setHasRestrictedVoiceAndVideoMessages($hasRestrictedVoiceAndVideoMessages)
+    {
+        $this->hasRestrictedVoiceAndVideoMessages = $hasRestrictedVoiceAndVideoMessages;
     }
 }
