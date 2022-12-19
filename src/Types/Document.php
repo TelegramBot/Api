@@ -34,7 +34,7 @@ class Document extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id'];
+    static protected $requiredParams = ['file_id', 'file_unique_id'];
 
     /**
      * Unique identifier for this file

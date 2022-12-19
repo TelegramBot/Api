@@ -13,8 +13,9 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * class MessageEntity.
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  *
- * @author bernard-ng <bernard@devscast.tech>
+ * @package TelegramBot\Api\Types
  */
 class MessageEntity extends BaseType implements TypeInterface
 {
@@ -110,7 +111,7 @@ class MessageEntity extends BaseType implements TypeInterface
      *
      * @var string
      */
-    protected $custom_emoji_id;
+    protected $customEmojiId;
 
     /**
      * @return string
@@ -213,14 +214,14 @@ class MessageEntity extends BaseType implements TypeInterface
      */
     public function getCustomEmojiId()
     {
-        return $this->custom_emoji_id;
+        return $this->customEmojiId;
     }
 
     /**
-     * @param string $custom_emoji_id
+     * @param string $customEmojiId
      */
-    public function setCustomEmojiId($custom_emoji_id)
+    public function setCustomEmojiId($customEmojiId)
     {
-        $this->custom_emoji_id = $custom_emoji_id;
+        $this->customEmojiId = $customEmojiId;
     }
 }

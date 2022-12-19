@@ -68,6 +68,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         $item = new Video();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -81,6 +82,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         $item = new Video();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -122,6 +124,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'duration' => 3,
@@ -129,6 +132,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -136,12 +140,14 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         ));
         $thumb = PhotoSize::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 5,
             'height' => 6,
             'file_size' => 7
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Video', $item);
         $this->assertAttributeEquals('testFileId1', 'fileId', $item);
+        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $item);
         $this->assertAttributeEquals(1, 'width', $item);
         $this->assertAttributeEquals(2, 'height', $item);
         $this->assertAttributeEquals(3, 'duration', $item);
@@ -187,11 +193,13 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * file_id is required
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException1()
     {
         $item = Video::fromResponse(array(
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'duration' => 3,
@@ -206,18 +214,21 @@ class VideoTest extends \PHPUnit_Framework_TestCase
         ));
     }
     /**
+     * width is required
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException2()
     {
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'height' => 2,
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -226,18 +237,21 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * height is required
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException3()
     {
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -246,18 +260,44 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * duration is required
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException4()
     {
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
+                'width' => 5,
+                'height' => 6,
+                'file_size' => 7
+            )
+        ));
+    }
+
+    /**
+     * file_unique_id is required
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testFromResponseException5()
+    {
+        $item = Video::fromResponse(array(
+            'file_id' => 'testFileId1',
+            'width' => 1,
+            'height' => 2,
+            'duration' => 1,
+            'mime_type' => 'video/mp4',
+            'file_size' => 4,
+            'thumb' => array(
+                'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7

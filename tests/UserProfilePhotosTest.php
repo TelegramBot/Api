@@ -30,6 +30,7 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
             $photos[] = array(
                 PhotoSize::fromResponse(array(
                     "file_id" => 'testFileId1',
+                    'file_unique_id' => 'testFileUniqueId1',
                     'width' => $i,
                     'height' => $i * 2,
                     'file_size' => $i * 3
@@ -48,6 +49,7 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < 10; $i++) {
             $photos[] = PhotoSize::fromResponse(array(
                 "file_id" => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => $i,
                 'height' => $i * 2,
                 'file_size' => $i * 3
@@ -66,6 +68,7 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
                 array(
                     array(
                         "file_id" => 'testFileId1',
+                        'file_unique_id' => 'testFileUniqueId1',
                         'width' => 1,
                         'height' => 2,
                         'file_size' => 3
@@ -77,6 +80,7 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
             array(
                 PhotoSize::fromResponse(array(
                     "file_id" => 'testFileId1',
+                    'file_unique_id' => 'testFileUniqueId1',
                     'width' => 1,
                     'height' => 2,
                     'file_size' => 3

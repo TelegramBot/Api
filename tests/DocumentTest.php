@@ -27,6 +27,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $item = new Document();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -40,6 +41,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $item = new Document();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -104,11 +106,13 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $item = Document::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -116,12 +120,14 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         ));
         $thumb = PhotoSize::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 5,
             'height' => 6,
             'file_size' => 7
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Document', $item);
         $this->assertAttributeEquals('testFileId1', 'fileId', $item);
+        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $item);
         $this->assertAttributeEquals('testFileName', 'fileName', $item);
         $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
         $this->assertAttributeEquals(3, 'fileSize', $item);
@@ -130,6 +136,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * file_id and file_unique_id are required
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException1()
@@ -140,6 +147,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
