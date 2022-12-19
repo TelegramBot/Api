@@ -73,6 +73,7 @@ class Message extends BaseType implements TypeInterface
         'forum_topic_reopened' => ForumTopicReopened::class,
         'is_topic_message' => true,
         'message_thread_id' => true,
+        'reply_markup' => true
     ];
 
     /**
