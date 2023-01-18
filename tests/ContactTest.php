@@ -62,11 +62,11 @@ class ContactTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('iGusev', $contact->getUserId());
     }
 
-    public function testSetVCard()
+    public function testSetVcard()
     {
         $contact = new Contact();
-        $contact->setVCard('testVCard');
-        $this->assertAttributeEquals('testVCard', 'vCard', $contact);
+        $contact->setVcard('testVcard');
+        $this->assertAttributeEquals('testVcard', 'vcard', $contact);
     }
 
     public function testGetVCard()
