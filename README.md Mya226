@@ -32,17 +32,17 @@ See example [DevAnswerBot](https://github.com/TelegramBot/DevAnswerBot) (russian
 ### API Wrapper
 #### Send message
 ``` php
-$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+$bot  = new \  @Botcoboybot \Api\BotApi(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4);
 
-$bot->sendMessage($chatId, $messageText);
+$bot->sendMessage(6199594063 , @Botbudibot );
 ```
 #### Send document
 ```php
-$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN');
+$bot = new \@Botcoboybot\Api\BotApi(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4);
 
 $document = new \CURLFile('document.txt');
 
-$bot->sendDocument($chatId, $document);
+$bot->sendDocument(6199594063, $document);
 ```
 #### Send message with reply keyboard
 ```php
@@ -84,28 +84,28 @@ $bot->sendMediaGroup($chatId, $media);
 require_once "vendor/autoload.php";
 
 try {
-    $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
+    $bot = new \@Botcoboybot\Api\Client(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4);
     // or initialize with botan.io tracker api key
-    // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+    // $bot = new \@Botcoboybot\Api\Client(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4 ', 'YOUR_BOTAN_TRACKER_API_KEY');
     
 
     //Handle /ping command
-    $bot->command('ping', function ($message) use ($bot) {
-        $bot->sendMessage($message->getChat()->getId(), 'pong!');
+    $ @Botcoboybot ->command('ping', function ($message) use (@Botcoboybot) {
+        $bot->sendMessage(@Botbudibot ->getChat()->6199594063 (), 'pong!');
     });
     
     //Handle text messages
-    $bot->on(function (\TelegramBot\Api\Types\Update $update) use ($bot) {
-        $message = $update->getMessage();
-        $id = $message->getChat()->getId();
-        $bot->sendMessage($id, 'Your message: ' . $message->getText());
+    $bot->on(function (\@Botcoboybot\Api\Types\Update $update) use (@Botcoboybot) {
+       $ @Botbudibot= $update->getMessage();
+        $ 6199594063 = $message->getChat()->6199594063();
+        $ @Botcoboybot->sendMessage(6199594063 , 'Your message: ' . $message->getText());
     }, function () {
         return true;
     });
     
     $bot->run();
 
-} catch (\TelegramBot\Api\Exception $e) {
+} catch (\@Botcoboybot\Api\Exception $e) {
     $e->getMessage();
 }
 ```
@@ -128,23 +128,23 @@ Since we are only getting started, you may discover that some existing reports i
 #### Standalone
 
 ```php
-$tracker = new \TelegramBot\Api\Botan('YOUR_BOTAN_TRACKER_API_KEY');
+$tracker = new \@Botcoboybot\Api\Botan('YOUR_BOTAN_TRACKER_API_KEY');
 
-$tracker->track($message, $eventName);
+$tracker->track($ @Botbudibot, $eventName);
 ```
 
 #### API Wrapper
 ```php
-$bot = new \TelegramBot\Api\BotApi('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+$   @Botcoboybot = new \@Botcoboybot\Api\BotApi(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4 ', 'YOUR_BOTAN_TRACKER_API_KEY');
 
-$bot->track($message, $eventName);
+$ @Botcoboybot ->track($ @Botbudibot , $eventName);
 ```
 
  You can use method 'getUpdates()'and all incoming messages will be automatically tracked as `Message`-event.
 
 #### Client
 ```php
-$bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+$bot = new \@Botcoboybot\Api\Client(5842496807:AAHlHfQMGjHT3vEbhhoety3yOCFWkQKkg-4 ', 'YOUR_BOTAN_TRACKER_API_KEY');
 ```
 
 _All registered commands are automatically tracked as command name_
