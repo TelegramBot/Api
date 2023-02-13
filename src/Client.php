@@ -19,7 +19,7 @@ use TelegramBot\Api\Types\ReplyKeyboardMarkup;
  * @package TelegramBot\Api
  * @method Message editMessageText(string $chatId, int $messageId, string $text, string $parseMode = null, bool $disablePreview = false, ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|InlineKeyboardMarkup|null $replyMarkup = null, string $inlineMessageId = null)
  */
-class Client
+class Client extends BotApi
 {
     /**
      * RegExp for bot commands
@@ -44,7 +44,7 @@ class Client
      */
     public function __construct($token, $trackerToken = null)
     {
-        $this->api = new BotApi($token);
+        parent::__construct($token, $trackerToken);
         $this->events = new EventCollection($trackerToken);
     }
 
