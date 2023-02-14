@@ -30,7 +30,7 @@ class Contact extends BaseType implements TypeInterface
         'first_name' => true,
         'last_name' => true,
         'user_id' => true,
-        'vcard' => true,
+        'v_card' => true,
     ];
 
     /**
