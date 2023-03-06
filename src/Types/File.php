@@ -31,6 +31,7 @@ class File extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'file_size' => true,
         'file_path' => true
     ];
@@ -55,6 +56,13 @@ class File extends BaseType implements TypeInterface
      * @var string
      */
     protected $filePath;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * @return string
@@ -108,5 +116,21 @@ class File extends BaseType implements TypeInterface
     public function setFilePath($filePath)
     {
         $this->filePath = $filePath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }

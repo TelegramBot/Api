@@ -11,6 +11,12 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
+/**
+ * class MessageEntity.
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+ *
+ * @package TelegramBot\Api\Types
+ */
 class MessageEntity extends BaseType implements TypeInterface
 {
 
@@ -29,6 +35,7 @@ class MessageEntity extends BaseType implements TypeInterface
     const TYPE_PRE = 'pre';
     const TYPE_TEXT_LINK = 'text_link';
     const TYPE_TEXT_MENTION = 'text_mention';
+    const TYPE_CUSTOM_EMOJI = 'custom_emoji';
 
     /**
      * {@inheritdoc}
@@ -49,6 +56,7 @@ class MessageEntity extends BaseType implements TypeInterface
         'url' => true,
         'user' => User::class,
         'language' => true,
+        'custom_emoji_id' => true,
     ];
 
     /**
@@ -96,6 +104,14 @@ class MessageEntity extends BaseType implements TypeInterface
      * @var string
      */
     protected $language;
+
+    /**
+     * Optional. For “custom_emoji” only, unique identifier of the custom emoji.
+     * Use getCustomEmojiStickers to get full information about the sticker
+     *
+     * @var string
+     */
+    protected $customEmojiId;
 
     /**
      * @return string
@@ -191,5 +207,21 @@ class MessageEntity extends BaseType implements TypeInterface
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomEmojiId()
+    {
+        return $this->customEmojiId;
+    }
+
+    /**
+     * @param string $customEmojiId
+     */
+    public function setCustomEmojiId($customEmojiId)
+    {
+        $this->customEmojiId = $customEmojiId;
     }
 }

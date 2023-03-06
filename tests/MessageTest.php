@@ -222,11 +222,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $document = Document::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -241,11 +243,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $document = Document::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -278,6 +282,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $audio = Audio::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
@@ -291,6 +296,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $audio = Audio::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
@@ -334,6 +340,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $video = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
             'height' => 2,
             'duration' => 3,
@@ -341,6 +348,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -355,6 +363,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $video = Video::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
             'height' => 2,
             'duration' => 3,
@@ -362,6 +371,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'file_size' => 4,
             'thumb' => array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -400,11 +410,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
             'height' => 2,
             'file_size' => 3,
+            'is_animated' => false,
+            'is_video' => false,
+            'type' => 'regular',
             'thumb' => array(
                 "file_id" => 'testFileId1',
+                'file_unique_id' => 'testUniqueFileId',
                 'width' => 1,
                 'height' => 2,
                 'file_size' => 3
@@ -419,11 +434,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
             'height' => 2,
             'file_size' => 3,
+            'is_animated' => false,
+            'is_video' => false,
+            'type' => 'regular',
             'thumb' => array(
                 "file_id" => 'testFileId1',
+                'file_unique_id' => 'testUniqueFileId',
                 'width' => 1,
                 'height' => 2,
                 'file_size' => 3
@@ -668,6 +688,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $photo = array(
             PhotoSize::fromResponse(array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -685,6 +706,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $photo = array(
             PhotoSize::fromResponse(array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -706,6 +728,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $photo = array(
             PhotoSize::fromResponse(array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
@@ -722,6 +745,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $photo = array(
             PhotoSize::fromResponse(array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7

@@ -66,12 +66,14 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
     {
         $photoSize = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photoSize);
         $this->assertAttributeEquals('testFileId1', 'fileId', $photoSize);
+        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $photoSize);
         $this->assertAttributeEquals(1, 'width', $photoSize);
         $this->assertAttributeEquals(2, 'height', $photoSize);
         $this->assertAttributeEquals(3, 'fileSize', $photoSize);

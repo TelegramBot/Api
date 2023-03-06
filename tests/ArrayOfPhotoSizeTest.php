@@ -15,6 +15,7 @@ class ArrayOfPhotoSizeTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'file_id' => 'testFileId1',
+                    'file_unique_id' => 'testFileUniqueId1',
                     'width' => 5,
                     'height' => 6,
                     'file_size' => 7
@@ -25,6 +26,7 @@ class ArrayOfPhotoSizeTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             PhotoSize::fromResponse(array(
                 'file_id' => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7

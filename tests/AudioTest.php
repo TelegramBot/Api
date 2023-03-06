@@ -94,6 +94,7 @@ class AudioTest extends \PHPUnit_Framework_TestCase
     {
         $item = Audio::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'performer' => 'testperformer',
             'title' => 'testtitle',
@@ -102,6 +103,7 @@ class AudioTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Audio', $item);
         $this->assertAttributeEquals('testFileId1', 'fileId', $item);
+        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $item);
         $this->assertAttributeEquals(1, 'duration', $item);
         $this->assertAttributeEquals('testperformer', 'performer', $item);
         $this->assertAttributeEquals('testtitle', 'title', $item);
@@ -110,23 +112,42 @@ class AudioTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * file_id is missing
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException()
     {
         $item = Audio::fromResponse(array(
+            'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
         ));
     }
+
     /**
+     * duration is missing
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
     public function testFromResponseException2()
     {
         $item = Audio::fromResponse(array(
             'file_id' => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
+            'mime_type' => 'audio/mp3',
+            'file_size' => 3
+        ));
+    }
+
+    /**
+     * file_unique_id is missing
+     * @expectedException \TelegramBot\Api\InvalidArgumentException
+     */
+    public function testFromResponseException3()
+    {
+        $item = Audio::fromResponse(array(
+            'file_id' => 'testFileId1',
+            'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
         ));

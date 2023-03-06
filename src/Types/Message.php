@@ -68,6 +68,12 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
+        'forum_topic_created' => ForumTopicCreated::class,
+        'forum_topic_closed' => ForumTopicClosed::class,
+        'forum_topic_reopened' => ForumTopicReopened::class,
+        'is_topic_message' => true,
+        'message_thread_id' => true,
+        'reply_markup' => InlineKeyboardMarkup::class
     ];
 
     /**
@@ -404,6 +410,42 @@ class Message extends BaseType implements TypeInterface
      * @var InlineKeyboardMarkup
      */
     protected $replyMarkup;
+
+    /**
+     * Optional. Service message: forum topic created
+     *
+     * @var ForumTopicCreated
+     */
+    protected $forumTopicCreated;
+
+    /**
+     * Optional. Service message: forum topic closed
+     *
+     * @var ForumTopicReopened
+     */
+    protected $forumTopicReopened;
+
+    /**
+     * Optional. Service message: forum topic reopened
+     *
+     * @var ForumTopicClosed
+     */
+    protected $forumTopicClosed;
+
+    /**
+     * Optional. True, if the message is sent to a forum topic
+     *
+     * @var bool
+     */
+    protected $isTopicMessage;
+
+    /**
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     *
+     * @var int
+     */
+    protected $messageThreadId;
+
 
     /**
      * @return int
@@ -1167,5 +1209,85 @@ class Message extends BaseType implements TypeInterface
     public function setReplyMarkup($replyMarkup)
     {
         $this->replyMarkup = $replyMarkup;
+    }
+
+    /**
+     * @return ForumTopicCreated
+     */
+    public function getForumTopicCreated()
+    {
+        return $this->forumTopicCreated;
+    }
+
+    /**
+     * @param ForumTopicCreated $forumTopicCreated
+     */
+    public function setForumTopicCreated($forumTopicCreated)
+    {
+        $this->forumTopicCreated = $forumTopicCreated;
+    }
+
+    /**
+     * @return ForumTopicClosed
+     */
+    public function getForumTopicClosed()
+    {
+        return $this->forumTopicClosed;
+    }
+
+    /**
+     * @param ForumTopicClosed $forumTopicClosed
+     */
+    public function setForumTopicClosed($forumTopicClosed)
+    {
+        $this->forumTopicClosed = $forumTopicClosed;
+    }
+
+    /**
+     * @return ForumTopicReopened
+     */
+    public function getForumTopicReopened()
+    {
+        return $this->forumTopicReopened;
+    }
+
+    /**
+     * @param ForumTopicReopened $forumTopicReopened
+     */
+    public function setForumTopicReopened($forumTopicReopened)
+    {
+        $this->forumTopicReopened = $forumTopicReopened;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsTopicMessage()
+    {
+        return $this->isTopicMessage;
+    }
+
+    /**
+     * @param bool $isTopicMessage
+     */
+    public function setIsTopicMessage($isTopicMessage)
+    {
+        $this->isTopicMessage = $isTopicMessage;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMessageThreadId()
+    {
+        return $this->messageThreadId;
+    }
+
+    /**
+     * @param int|null $messageThreadId
+     */
+    public function setMessageThreadId($messageThreadId)
+    {
+        $this->messageThreadId = $messageThreadId;
     }
 }

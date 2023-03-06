@@ -84,13 +84,25 @@ class UserTest extends \PHPUnit_Framework_TestCase
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'id' => 123456,
-            'username' => 'iGusev'
+            'username' => 'iGusev',
+            'language_code' => 'en',
+            'is_premium' => false,
+            'added_to_attachment_menu' => false,
+            'can_join_groups' => true,
+            'can_read_all_group_messages' => true,
+            'supports_inline_queries' => false,
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $user);
         $this->assertEquals(123456, $user->getId());
         $this->assertEquals('Ilya', $user->getFirstName());
         $this->assertEquals('Gusev', $user->getLastName());
         $this->assertEquals('iGusev', $user->getUsername());
+        $this->assertEquals('en', $user->getLanguageCode());
+        $this->assertEquals(false, $user->getIsPremium());
+        $this->assertEquals(false, $user->getAddedToAttachmentMenu());
+        $this->assertEquals(true, $user->getCanJoinGroups());
+        $this->assertEquals(true, $user->getCanReadAllGroupMessages());
+        $this->assertEquals(false, $user->getSupportsInlineQueries());
     }
 
     /**

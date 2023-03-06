@@ -19,7 +19,7 @@ class Animation extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'width', 'height', 'duration'];
+    static protected $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
@@ -28,6 +28,7 @@ class Animation extends BaseType implements TypeInterface
      */
     static protected $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'duration' => true,

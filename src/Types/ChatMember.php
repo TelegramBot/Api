@@ -34,7 +34,12 @@ class ChatMember extends BaseType
         'can_send_messages' => true,
         'can_send_media_messages' => true,
         'can_send_other_messages' => true,
-        'can_add_web_page_previews' => true
+        'can_add_web_page_previews' => true,
+        'can_manage_topics' => true,
+        'is_anonymous' => true,
+        'custom_title' => true,
+        'can_manage_chat' => true,
+        'can_send_polls' => true,
     ];
 
     /**
@@ -52,7 +57,7 @@ class ChatMember extends BaseType
     protected $status;
 
     /**
-     * Optional. Restictred and kicked only. Date when restrictions will be lifted for this user, unix time
+     * Optional. Restricted and kicked only. Date when restrictions will be lifted for this user, unix time
      *
      * @var integer
      */
@@ -153,6 +158,43 @@ class ChatMember extends BaseType
      * @var bool
      */
     protected $canAddWebPagePreviews;
+
+    /**
+     * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+     *
+     * @var bool
+     */
+    protected $canManageTopics;
+
+    /**
+     * True, if the user's presence in the chat is hidden
+     *
+     * @var bool
+     */
+    protected $isAnonymous;
+
+    /**
+     * Optional. Custom title for this user
+     *
+     * @var string
+     */
+    protected $customTitle;
+
+    /**
+     * True, if the administrator can access the chat event log, chat statistics, message statistics in channels,
+     * see channel members, see anonymous administrators in supergroups and ignore slow mode.
+     * Implied by any other administrator privilege
+     *
+     * @var bool
+     */
+    protected $canManageChat;
+
+    /**
+     * True, if the user is allowed to send polls
+     *
+     * @var bool
+     */
+    protected $canSendPolls;
 
     /**
      * @return User
@@ -408,5 +450,85 @@ class ChatMember extends BaseType
     public function setCanAddWebPagePreviews($canAddWebPagePreviews)
     {
         $this->canAddWebPagePreviews = $canAddWebPagePreviews;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanManageChat()
+    {
+        return $this->canManageChat;
+    }
+
+    /**
+     * @param bool $canManageChat
+     */
+    public function setCanManageChat($canManageChat)
+    {
+        $this->canManageChat = $canManageChat;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsAnonymous()
+    {
+        return $this->isAnonymous;
+    }
+
+    /**
+     * @param bool $isAnonymous
+     */
+    public function setIsAnonymous($isAnonymous)
+    {
+        $this->isAnonymous = $isAnonymous;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanSendPolls()
+    {
+        return $this->canSendPolls;
+    }
+
+    /**
+     * @param bool $canSendPolls
+     */
+    public function setCanSendPolls($canSendPolls)
+    {
+        $this->canSendPolls = $canSendPolls;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanManageTopics()
+    {
+        return $this->canManageTopics;
+    }
+
+    /**
+     * @param bool $canManageTopics
+     */
+    public function setCanManageTopics($canManageTopics)
+    {
+        $this->canManageTopics = $canManageTopics;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomTitle()
+    {
+        return $this->customTitle;
+    }
+
+    /**
+     * @param string $customTitle
+     */
+    public function setCustomTitle($customTitle)
+    {
+        $this->customTitle = $customTitle;
     }
 }

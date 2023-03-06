@@ -67,6 +67,7 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
         $sticker = new Sticker();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -80,6 +81,7 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
         $sticker = new Sticker();
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
@@ -93,11 +95,16 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
     {
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3,
+            'is_animated' => false,
+            'is_video' => false,
+            'type' => 'regular',
             'thumb' => array(
                 "file_id" => 'testFileId1',
+                'file_unique_id' => 'testFileUniqueId1',
                 'width' => 1,
                 'height' => 2,
                 'file_size' => 3
@@ -105,12 +112,14 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
         ));
         $thumb = PhotoSize::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $sticker);
         $this->assertAttributeEquals('testFileId1', 'fileId', $sticker);
+        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $sticker);
         $this->assertAttributeEquals(1, 'width', $sticker);
         $this->assertAttributeEquals(2, 'height', $sticker);
         $this->assertAttributeEquals(3, 'fileSize', $sticker);
