@@ -71,6 +71,9 @@ class BotCommand extends BaseType implements TypeInterface, JsonSerializable
         $this->description = $description;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize()
     {
         return [
