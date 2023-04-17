@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Types;
 
+use JsonSerializable;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
-class BotCommand extends BaseType implements TypeInterface
+class BotCommand extends BaseType implements TypeInterface, JsonSerializable
 {
     /**
      * {@inheritdoc}
@@ -68,5 +69,13 @@ class BotCommand extends BaseType implements TypeInterface
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'command' => $this->command,
+            'description' => $this->description,
+        ];
     }
 }
