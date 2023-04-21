@@ -3,58 +3,51 @@
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
+use PHPUnit\Framework\TestCase;
 
-class ReplyKeyboardMarkupTest extends \PHPUnit_Framework_TestCase
+class ReplyKeyboardMarkupTest extends TestCase
 {
     public function testConstructor()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
 
-        $this->assertAttributeEquals(array(array('one', 'two')), 'keyboard', $item);
-        $this->assertAttributeEquals(null, 'oneTimeKeyboard', $item);
-        $this->assertAttributeEquals(null, 'resizeKeyboard', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(array(array('one', 'two')),  $item->getKeyboard());
+        $this->assertEquals(null, $item->isOneTimeKeyboard());
+        $this->assertEquals(null, $item->isResizeKeyboard());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testConstructor2()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')), true);
 
-        $this->assertAttributeEquals(array(array('one', 'two')), 'keyboard', $item);
-        $this->assertAttributeEquals(true, 'oneTimeKeyboard', $item);
-        $this->assertAttributeEquals(null, 'resizeKeyboard', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(array(array('one', 'two')),  $item->getKeyboard());
+        $this->assertEquals(true, $item->isOneTimeKeyboard());
+        $this->assertEquals(null, $item->isResizeKeyboard());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testConstructor3()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')), true, true);
 
-        $this->assertAttributeEquals(array(array('one', 'two')), 'keyboard', $item);
-        $this->assertAttributeEquals(true, 'oneTimeKeyboard', $item);
-        $this->assertAttributeEquals(true, 'resizeKeyboard', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(array(array('one', 'two')),  $item->getKeyboard());
+        $this->assertEquals(true, $item->isOneTimeKeyboard());
+        $this->assertEquals(true, $item->isResizeKeyboard());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testConstructor4()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')), true, true, true);
 
-        $this->assertAttributeEquals(array(array('one', 'two')), 'keyboard', $item);
-        $this->assertAttributeEquals(true, 'oneTimeKeyboard', $item);
-        $this->assertAttributeEquals(true, 'resizeKeyboard', $item);
-        $this->assertAttributeEquals(true, 'selective', $item);
+        $this->assertEquals(array(array('one', 'two')),  $item->getKeyboard());
+        $this->assertEquals(true, $item->isOneTimeKeyboard());
+        $this->assertEquals(true, $item->isResizeKeyboard());
+        $this->assertEquals(true, $item->isSelective());
     }
 
     public function testSetKeyboard()
-    {
-        $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
-        $item->setKeyboard(array(array('one', 'two', 'three')));
-
-        $this->assertAttributeEquals(array(array('one', 'two', 'three')), 'keyboard', $item);
-    }
-
-    public function testGetKeyboard()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
         $item->setKeyboard(array(array('one', 'two', 'three')));
@@ -67,14 +60,6 @@ class ReplyKeyboardMarkupTest extends \PHPUnit_Framework_TestCase
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
         $item->setSelective(true);
 
-        $this->assertAttributeEquals(true, 'selective', $item);
-    }
-
-    public function testIsSelective()
-    {
-        $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
-        $item->setSelective(true);
-
         $this->assertEquals(true, $item->isSelective());
     }
 
@@ -83,26 +68,10 @@ class ReplyKeyboardMarkupTest extends \PHPUnit_Framework_TestCase
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
         $item->setOneTimeKeyboard(false);
 
-        $this->assertAttributeEquals(false, 'oneTimeKeyboard', $item);
-    }
-
-    public function testIsOneTimeKeyboard()
-    {
-        $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
-        $item->setOneTimeKeyboard(false);
-
         $this->assertEquals(false, $item->isOneTimeKeyboard());
     }
 
     public function testSetResizeKeyboard()
-    {
-        $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
-        $item->setResizeKeyboard(true);
-
-        $this->assertAttributeEquals(true, 'resizeKeyboard', $item);
-    }
-
-    public function testIsResizeKeyboard()
     {
         $item = new ReplyKeyboardMarkup(array(array('one', 'two')));
         $item->setResizeKeyboard(true);

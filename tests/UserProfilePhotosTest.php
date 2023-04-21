@@ -3,19 +3,14 @@
 namespace TelegramBot\Api\Test;
 
 
+use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\UserProfilePhotos;
+use PHPUnit\Framework\TestCase;
 
-class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
+class UserProfilePhotosTest extends TestCase
 {
     public function testSetTotalCount()
-    {
-        $userProfilePhotos = new UserProfilePhotos();
-        $userProfilePhotos->setTotalCount(1);
-        $this->assertAttributeEquals(1, 'totalCount', $userProfilePhotos);
-    }
-
-    public function testGetTotalCount()
     {
         $userProfilePhotos = new UserProfilePhotos();
         $userProfilePhotos->setTotalCount(1);
@@ -23,26 +18,6 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSetPhotos()
-    {
-        $userProfilePhotos = new UserProfilePhotos();
-        $photos = array();
-        for ($i = 0; $i < 10; $i++) {
-            $photos[] = array(
-                PhotoSize::fromResponse(array(
-                    "file_id" => 'testFileId1',
-                    'file_unique_id' => 'testFileUniqueId1',
-                    'width' => $i,
-                    'height' => $i * 2,
-                    'file_size' => $i * 3
-                ))
-            );
-        }
-
-        $userProfilePhotos->setPhotos($photos);
-        $this->assertAttributeEquals($photos, 'photos', $userProfilePhotos);
-    }
-
-    public function testGetPhotos()
     {
         $userProfilePhotos = new UserProfilePhotos();
         $photos = array();
@@ -87,21 +62,21 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
                 ))
             )
         );
-        $this->assertInstanceOf('\TelegramBot\Api\Types\UserProfilePhotos', $userProfilePhotos);
-        $this->assertAttributeEquals(1, 'totalCount', $userProfilePhotos);
-        $this->assertAttributeEquals($photos, 'photos', $userProfilePhotos);
+        $this->assertInstanceOf(UserProfilePhotos::class, $userProfilePhotos);
+        $this->assertEquals(1, $userProfilePhotos->getTotalCount());
+        $this->assertEquals($photos, $userProfilePhotos->getPhotos());
+
         foreach ($userProfilePhotos->getPhotos() as $photoArray) {
             foreach($photoArray as $photo) {
-                $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photo);
+                $this->assertInstanceOf(PhotoSize::class, $photo);
             }
         }
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetTotalCountException()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $item = new UserProfilePhotos();
         $item->setTotalCount('s');
     }

@@ -1,13 +1,14 @@
 <?php
 
-namespace TelegramBot\Api\Test\Types;
+namespace TelegramBot\Api\Test\Collection;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Collection\CollectionItemInterface;
 use TelegramBot\Api\Collection\ReachedMaxSizeException;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     protected $itemsOutput = [
         [
@@ -64,7 +65,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /** @test */
     public function can_not_add_more_then_max_limit() {
-        $this->setExpectedException(ReachedMaxSizeException::class);
+        $this->expectException(ReachedMaxSizeException::class);
         $media = new ArrayOfInputMedia();
         $media->setMaxCount(2);
         for ($i = 1; $i < 3; $i++) {

@@ -8,8 +8,9 @@
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\WebhookInfo;
+use PHPUnit\Framework\TestCase;
 
-class WebhookInfoTest extends \PHPUnit_Framework_TestCase
+class WebhookInfoTest extends TestCase
 {
     public function testFromResponse()
     {

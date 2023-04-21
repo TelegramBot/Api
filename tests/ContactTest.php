@@ -2,18 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Contact;
 
-class ContactTest extends \PHPUnit_Framework_TestCase
+class ContactTest extends TestCase
 {
     public function testSetPhoneNumber()
-    {
-        $contact = new Contact();
-        $contact->setPhoneNumber('123456');
-        $this->assertAttributeEquals('123456', 'phoneNumber', $contact);
-    }
-
-    public function testGetPhoneNumber()
     {
         $contact = new Contact();
         $contact->setPhoneNumber('123456');
@@ -24,24 +18,10 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setFirstName('Ilya');
-        $this->assertAttributeEquals('Ilya', 'firstName', $contact);
-    }
-
-    public function testGetFirstName()
-    {
-        $contact = new Contact();
-        $contact->setFirstName('Ilya');
         $this->assertEquals('Ilya', $contact->getFirstName());
     }
 
     public function testSetLastName()
-    {
-        $contact = new Contact();
-        $contact->setLastName('Gusev');
-        $this->assertAttributeEquals('Gusev', 'lastName', $contact);
-    }
-
-    public function testGetLastName()
     {
         $contact = new Contact();
         $contact->setLastName('Gusev');
@@ -52,24 +32,10 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setUserId('iGusev');
-        $this->assertAttributeEquals('iGusev', 'userId', $contact);
-    }
-
-    public function testGetUserId()
-    {
-        $contact = new Contact();
-        $contact->setUserId('iGusev');
         $this->assertEquals('iGusev', $contact->getUserId());
     }
 
     public function testSetVcard()
-    {
-        $contact = new Contact();
-        $contact->setVcard('testVcard');
-        $this->assertAttributeEquals('testVcard', 'vcard', $contact);
-    }
-
-    public function testGetVCard()
     {
         $contact = new Contact();
         $contact->setVCard('testVCard');

@@ -4,10 +4,11 @@ namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\PollOption;
+use PHPUnit\Framework\TestCase;
 
-class PollTest extends \PHPUnit_Framework_TestCase
+class PollTest extends TestCase
 {
-    public function testGetId()
+    public function testSetId()
     {
         $item = new Poll();
         $item->setId(123456789);
@@ -15,15 +16,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(123456789, $item->getId());
     }
 
-    public function testSetId()
-    {
-        $item = new Poll();
-        $item->setId(123456789);
-
-        $this->assertAttributeEquals(123456789, 'id', $item);
-    }
-
-    public function testGetQuestion()
+    public function testSetQuestion()
     {
         $item = new Poll();
         $item->setQuestion('What is the name of Heisenberg from "Breaking bad"?');
@@ -31,15 +24,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('What is the name of Heisenberg from "Breaking bad"?', $item->getQuestion());
     }
 
-    public function testSetQuestion()
-    {
-        $item = new Poll();
-        $item->setQuestion('What is the name of Heisenberg from "Breaking bad"?');
-
-        $this->assertAttributeEquals('What is the name of Heisenberg from "Breaking bad"?', 'question', $item);
-    }
-
-    public function testGetOptions()
+    public function testSetOptions()
     {
         $item = new Poll();
         $options = [
@@ -58,22 +43,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testSetOptions()
-    {
-        $item = new Poll();
-        $options = [
-            PollOption::fromResponse([
-                'text' => 'Walter White',
-                'voter_count' => 100
-            ]),
-        ];
-
-        $item->setOptions($options);
-
-        $this->assertAttributeEquals($options, 'options', $item);
-    }
-
-    public function testGetTotalVoterCount()
+    public function testSetTotalVoterCount()
     {
         $item = new Poll();
         $item->setTotalVoterCount(17);
@@ -81,15 +51,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(17, $item->getTotalVoterCount());
     }
 
-    public function testSetTotalVoterCount()
-    {
-        $item = new Poll();
-        $item->setTotalVoterCount(17);
-
-        $this->assertAttributeEquals(17, 'totalVoterCount', $item);
-    }
-
-    public function testIsClosed()
+    public function testSetIsClosed()
     {
         $item = new Poll();
         $item->setIsClosed(true);
@@ -97,15 +59,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($item->isClosed());
     }
 
-    public function testSetIsClosed()
-    {
-        $item = new Poll();
-        $item->setIsClosed(true);
-
-        $this->assertAttributeEquals(true, 'isClosed', $item);
-    }
-
-    public function testIsAnonymous()
+    public function testSetIsAnonymous()
     {
         $item = new Poll();
         $item->setIsAnonymous(false);
@@ -113,15 +67,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($item->isAnonymous());
     }
 
-    public function testSetIsAnonymous()
-    {
-        $item = new Poll();
-        $item->setIsAnonymous(false);
-
-        $this->assertAttributeEquals(false, 'isAnonymous', $item);
-    }
-
-    public function testGetType()
+    public function testSetType()
     {
         $item = new Poll();
         $item->setType('regular');
@@ -129,15 +75,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('regular', $item->getType());
     }
 
-    public function testSetType()
-    {
-        $item = new Poll();
-        $item->setType('regular');
-
-        $this->assertAttributeEquals('regular', 'type', $item);
-    }
-
-    public function testAllowsMultipleAnswers()
+    public function testSetAllowsMultipleAnswers()
     {
         $item = new Poll();
         $item->setAllowsMultipleAnswers(true);
@@ -145,27 +83,11 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($item->isAllowsMultipleAnswers());
     }
 
-    public function testSetAllowsMultipleAnswers()
-    {
-        $item = new Poll();
-        $item->setAllowsMultipleAnswers(true);
-
-        $this->assertAttributeEquals(true, 'allowsMultipleAnswers', $item);
-    }
-
-    public function testGetCorrectOptionId()
-    {
-        $item = new Poll();
-        $item->setCorrectOptionId(2);
-
-        $this->assertEquals(2, $item->getCorrectOptionId());
-    }
-
     public function testSetCorrectOptionId()
     {
         $item = new Poll();
         $item->setCorrectOptionId(2);
 
-        $this->assertAttributeEquals(2, 'correctOptionId', $item);
+        $this->assertEquals(2, $item->getCorrectOptionId());
     }
 }

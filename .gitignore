@@ -3,6 +3,8 @@ composer.lock
 docs
 vendor
 
+.phpunit.result.cache
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
