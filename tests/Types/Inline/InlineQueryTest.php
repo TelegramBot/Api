@@ -33,8 +33,8 @@ class InlineQueryTest extends TestCase
         $this->assertEquals('20', $item->getOffset());
     }
 
-
-    public function testFromResponse2() {
+    public function testFromResponse2()
+    {
         $this->inlineQueryFixture['offset'] = '';
         $item = InlineQuery::fromResponse($this->inlineQueryFixture);
 

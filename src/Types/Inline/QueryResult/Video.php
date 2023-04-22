@@ -18,14 +18,14 @@ class Video extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumb_url', 'title'];
+    protected static $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumb_url', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'video_url' => true,
@@ -104,7 +104,6 @@ class Video extends AbstractInlineQueryResult
      */
     protected $description;
 
-
     /**
      * Video constructor
      *
@@ -136,7 +135,7 @@ class Video extends AbstractInlineQueryResult
         $inlineKeyboardMarkup = null
     ) {
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
-        
+
         $this->videoUrl = $videoUrl;
         $this->thumbUrl = $thumbUrl;
         $this->caption = $caption;
@@ -146,7 +145,6 @@ class Video extends AbstractInlineQueryResult
         $this->videoHeight = $videoHeight;
         $this->videoDuration = $videoDuration;
     }
-
 
     /**
      * @return string

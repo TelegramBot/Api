@@ -22,14 +22,14 @@ class File extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id'];
+    protected static $requiredParams = ['file_id'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
         'file_size' => true,

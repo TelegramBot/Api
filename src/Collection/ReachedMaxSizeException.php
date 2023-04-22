@@ -12,5 +12,4 @@ use TelegramBot\Api\Exception;
  */
 class ReachedMaxSizeException extends Exception
 {
-
 }

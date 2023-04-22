@@ -53,7 +53,7 @@ class UserTest extends TestCase
 
     public function testFromResponse()
     {
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'id' => 123456,
@@ -64,7 +64,7 @@ class UserTest extends TestCase
             'can_join_groups' => true,
             'can_read_all_group_messages' => true,
             'supports_inline_queries' => false,
-        ));
+        ]);
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $user);
         $this->assertEquals(123456, $user->getId());
         $this->assertEquals('Ilya', $user->getFirstName());
@@ -82,22 +82,22 @@ class UserTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev'
-        ));
+        ]);
     }
 
     public function testFromResponseException2()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
     }
 
 }

@@ -40,13 +40,13 @@ class StickerTest extends TestCase
     public function testSetThumb()
     {
         $sticker = new Sticker();
-        $thumb = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $thumb = PhotoSize::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
-        ));
+        ]);
         $sticker->setThumb($thumb);
         $this->assertEquals($thumb, $sticker->getThumb());
         $this->assertInstanceOf(PhotoSize::class, $sticker->getThumb());
@@ -54,8 +54,8 @@ class StickerTest extends TestCase
 
     public function testFromResponse()
     {
-        $sticker = Sticker::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $sticker = Sticker::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
@@ -63,21 +63,21 @@ class StickerTest extends TestCase
             'is_animated' => false,
             'is_video' => false,
             'type' => 'regular',
-            'thumb' => array(
-                "file_id" => 'testFileId1',
+            'thumb' => [
+                'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 1,
                 'height' => 2,
                 'file_size' => 3
-            )
-        ));
-        $thumb = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
+            ]
+        ]);
+        $thumb = PhotoSize::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
-        ));
+        ]);
         $this->assertInstanceOf(Sticker::class, $sticker);
         $this->assertEquals('testFileId1', $sticker->getFileId());
         $this->assertEquals('testFileUniqueId1', $sticker->getFileUniqueId());

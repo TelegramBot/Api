@@ -29,14 +29,14 @@ class Audio extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'audio_url', 'title'];
+    protected static $requiredParams = ['type', 'id', 'audio_url', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'audio_url' => true,

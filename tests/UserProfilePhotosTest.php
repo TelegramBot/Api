@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -20,15 +19,15 @@ class UserProfilePhotosTest extends TestCase
     public function testSetPhotos()
     {
         $userProfilePhotos = new UserProfilePhotos();
-        $photos = array();
+        $photos = [];
         for ($i = 0; $i < 10; $i++) {
-            $photos[] = PhotoSize::fromResponse(array(
-                "file_id" => 'testFileId1',
+            $photos[] = PhotoSize::fromResponse([
+                'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => $i,
                 'height' => $i * 2,
                 'file_size' => $i * 3
-            ));
+            ]);
         }
 
         $userProfilePhotos->setPhotos($photos);
@@ -37,31 +36,31 @@ class UserProfilePhotosTest extends TestCase
 
     public function testFromResponse()
     {
-        $userProfilePhotos = UserProfilePhotos::fromResponse(array(
-            "total_count" => 1,
-            'photos' => array(
-                array(
-                    array(
-                        "file_id" => 'testFileId1',
+        $userProfilePhotos = UserProfilePhotos::fromResponse([
+            'total_count' => 1,
+            'photos' => [
+                [
+                    [
+                        'file_id' => 'testFileId1',
                         'file_unique_id' => 'testFileUniqueId1',
                         'width' => 1,
                         'height' => 2,
                         'file_size' => 3
-                    )
-                )
-            )
-        ));
-        $photos = array(
-            array(
-                PhotoSize::fromResponse(array(
-                    "file_id" => 'testFileId1',
+                    ]
+                ]
+            ]
+        ]);
+        $photos = [
+            [
+                PhotoSize::fromResponse([
+                    'file_id' => 'testFileId1',
                     'file_unique_id' => 'testFileUniqueId1',
                     'width' => 1,
                     'height' => 2,
                     'file_size' => 3
-                ))
-            )
-        );
+                ])
+            ]
+        ];
         $this->assertInstanceOf(UserProfilePhotos::class, $userProfilePhotos);
         $this->assertEquals(1, $userProfilePhotos->getTotalCount());
         $this->assertEquals($photos, $userProfilePhotos->getPhotos());

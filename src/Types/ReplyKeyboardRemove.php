@@ -18,14 +18,14 @@ class ReplyKeyboardRemove extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['remove_keyboard'];
+    protected static $requiredParams = ['remove_keyboard'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'remove_keyboard' => true,
         'selective' => true
     ];

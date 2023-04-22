@@ -12,14 +12,14 @@ class BotCommand extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['command', 'description'];
+    protected static $requiredParams = ['command', 'description'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'command' => true,
         'description' => true,
     ];

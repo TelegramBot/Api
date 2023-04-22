@@ -25,14 +25,14 @@ class Venue extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['latitude', 'longitude', 'title', 'address'];
+    protected static $requiredParams = ['latitude', 'longitude', 'title', 'address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'latitude' => true,
         'longitude' => true,
         'title' => true,
@@ -91,7 +91,6 @@ class Venue extends InputMessageContent implements TypeInterface
         $this->address = $address;
         $this->foursquareId = $foursquareId;
     }
-
 
     /**
      * @return float

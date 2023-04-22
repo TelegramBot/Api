@@ -8,7 +8,6 @@
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
@@ -27,14 +26,14 @@ class Contact extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['phone_number', 'first_name'];
+    protected static $requiredParams = ['phone_number', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,
@@ -74,7 +73,6 @@ class Contact extends InputMessageContent implements TypeInterface
         $this->firstName = $firstName;
         $this->lastName = $lastName;
     }
-
 
     /**
      * @return string

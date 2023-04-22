@@ -7,7 +7,6 @@ use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 
 class InlineKeyboardMarkupTest extends TestCase
 {
-
     public function testConstructor()
     {
         $item = new InlineKeyboardMarkup([[['url' => 'http://test.com', 'text' => 'Link'], ['url' => 'http://test.com', 'text' => 'Link']]]);

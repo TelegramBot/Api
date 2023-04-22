@@ -17,14 +17,14 @@ class ReplyKeyboardMarkup extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['keyboard'];
+    protected static $requiredParams = ['keyboard'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'keyboard' => true,
         'one_time_keyboard' => true,
         'resize_keyboard' => true,

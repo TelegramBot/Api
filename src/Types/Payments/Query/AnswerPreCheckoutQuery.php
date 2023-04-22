@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types\Payments\Query;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\Payments\ArrayOfLabeledPrice;
 
 /**
  * Class AnswerPreCheckoutQuery
@@ -16,12 +15,12 @@ class AnswerPreCheckoutQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['pre_checkout_query_id', 'ok'];
+    protected static $requiredParams = ['pre_checkout_query_id', 'ok'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'pre_checkout_query_id' => true,
         'ok' => true,
         'error_message' => true,

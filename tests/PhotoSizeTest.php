@@ -38,13 +38,13 @@ class PhotoSizeTest extends TestCase
 
     public function testFromResponse()
     {
-        $photoSize = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $photoSize = PhotoSize::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
-        ));
+        ]);
         $this->assertInstanceOf(PhotoSize::class, $photoSize);
         $this->assertEquals('testFileId1', $photoSize->getFileId());
         $this->assertEquals('testFileUniqueId1', $photoSize->getFileUniqueId());

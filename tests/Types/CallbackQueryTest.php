@@ -5,7 +5,6 @@ namespace TelegramBot\Api\Test\Types;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\CallbackQuery;
-use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\User;
 
 class CallbackQueryTest extends TestCase
@@ -62,32 +61,37 @@ class CallbackQueryTest extends TestCase
         $this->assertEquals($this->callbackQueryFixture['id'], $item->getId());
     }
 
-    public function testSetFrom() {
+    public function testSetFrom()
+    {
         $item = new CallbackQuery();
         $user = User::fromResponse($this->callbackQueryFixture['from']);
         $item->setFrom($user);
         $this->assertEquals($user, $item->getFrom());
     }
 
-    public function testSetInlineMessageId() {
+    public function testSetInlineMessageId()
+    {
         $item = new CallbackQuery();
         $item->setInlineMessageId('testInlineMessageId');
         $this->assertEquals('testInlineMessageId', $item->getInlineMessageId());
     }
 
-    public function testSetChatInstance() {
+    public function testSetChatInstance()
+    {
         $item = new CallbackQuery();
         $item->setChatInstance('testChatInstance');
         $this->assertEquals('testChatInstance', $item->getChatInstance());
     }
 
-    public function testSetData() {
+    public function testSetData()
+    {
         $item = new CallbackQuery();
         $item->setData('testData');
         $this->assertEquals('testData', $item->getData());
     }
 
-    public function testSetGameShortName() {
+    public function testSetGameShortName()
+    {
         $item = new CallbackQuery();
         $item->setGameShortName('testGameShortName');
         $this->assertEquals('testGameShortName', $item->getGameShortName());

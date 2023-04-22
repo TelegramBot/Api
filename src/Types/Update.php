@@ -23,14 +23,14 @@ class Update extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['update_id'];
+    protected static $requiredParams = ['update_id'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'update_id' => true,
         'message' => Message::class,
         'edited_message' => Message::class,
@@ -71,7 +71,6 @@ class Update extends BaseType implements TypeInterface
      * @var Poll
      */
     protected $poll;
-
 
     /**
      * Optional. New version of a message that is known to the bot and was edited

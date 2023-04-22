@@ -15,7 +15,7 @@ class InputMediaVideo extends InputMedia
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'media' => true,
         'caption' => true,

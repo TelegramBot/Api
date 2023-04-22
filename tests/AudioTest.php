@@ -52,7 +52,7 @@ class AudioTest extends TestCase
 
     public function testFromResponse()
     {
-        $item = Audio::fromResponse(array(
+        $item = Audio::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
@@ -60,7 +60,7 @@ class AudioTest extends TestCase
             'title' => 'testtitle',
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
         $this->assertInstanceOf(Audio::class, $item);
         $this->assertEquals('testFileId1', $item->getFileId());
         $this->assertEquals('testFileUniqueId1', $item->getFileUniqueId());
@@ -78,12 +78,12 @@ class AudioTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Audio::fromResponse(array(
+        $item = Audio::fromResponse([
             'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
     }
 
     /**
@@ -93,12 +93,12 @@ class AudioTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Audio::fromResponse(array(
+        $item = Audio::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
     }
 
     /**
@@ -108,12 +108,12 @@ class AudioTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Audio::fromResponse(array(
+        $item = Audio::fromResponse([
             'file_id' => 'testFileId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
     }
 
     public function testSetDurationException()

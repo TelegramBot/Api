@@ -15,12 +15,12 @@ class ShippingOption extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['id', 'title', 'prices'];
+    protected static $requiredParams = ['id', 'title', 'prices'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'title' => true,
         'prices' => ArrayOfLabeledPrice::class

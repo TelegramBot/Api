@@ -19,14 +19,14 @@ class ChosenInlineResult extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['result_id', 'from', 'query'];
+    protected static $requiredParams = ['result_id', 'from', 'query'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'result_id' => true,
         'from' => User::class,
         'location' => Location::class,

@@ -17,12 +17,12 @@ class AnswerShippingQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['shipping_query_id', 'ok'];
+    protected static $requiredParams = ['shipping_query_id', 'ok'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'shipping_query_id' => true,
         'ok' => true,
         'shipping_options' => ArrayOfLabeledPrice::class,

@@ -7,7 +7,6 @@ use TelegramBot\Api\Types\ArrayOfUpdates;
 
 class ArrayOfUpdatesTest extends TestCase
 {
-
     public function data()
     {
         return [

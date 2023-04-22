@@ -10,7 +10,6 @@ use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Audio;
 use TelegramBot\Api\Types\Contact;
-use TelegramBot\Api\Types\GroupChat;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
@@ -58,12 +57,12 @@ class MessageTest extends TestCase
     public function testSetFrom()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'id' => 1,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
         $item->setFrom($user);
         $this->assertEquals($user, $item->getFrom());
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getFrom());
@@ -72,12 +71,12 @@ class MessageTest extends TestCase
     public function testSetForwardFrom()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'id' => 1,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
         $item->setForwardFrom($user);
         $this->assertEquals($user, $item->getForwardFrom());
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getForwardFrom());
@@ -86,11 +85,11 @@ class MessageTest extends TestCase
     public function testSetChatGroup()
     {
         $item = new Message();
-        $chat = Chat::fromResponse(array(
+        $chat = Chat::fromResponse([
             'id' => 1,
             'type' => 'group',
             'title' => 'test chat'
-        ));
+        ]);
         $item->setChat($chat);
         $this->assertEquals($chat, $item->getChat());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item->getChat());
@@ -99,13 +98,13 @@ class MessageTest extends TestCase
     public function testSetChatUser()
     {
         $item = new Message();
-        $user = Chat::fromResponse(array(
+        $user = Chat::fromResponse([
             'id' => 1,
             'type' => 'private',
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
         $item->setChat($user);
         $this->assertEquals($user, $item->getChat());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item->getChat());
@@ -114,12 +113,12 @@ class MessageTest extends TestCase
     public function testSetContact()
     {
         $item = new Message();
-        $contact = Contact::fromResponse(array(
+        $contact = Contact::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'phone_number' => '123456',
             'user_id' => 'iGusev'
-        ));
+        ]);
         $item->setContact($contact);
         $this->assertEquals($contact, $item->getContact());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Contact', $item->getContact());
@@ -128,20 +127,20 @@ class MessageTest extends TestCase
     public function testSetDocument()
     {
         $item = new Message();
-        $document = Document::fromResponse(array(
+        $document = Document::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
         $item->setDocument($document);
         $this->assertEquals($document, $item->getDocument());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Document', $item->getDocument());
@@ -150,7 +149,7 @@ class MessageTest extends TestCase
     public function testSetLocation()
     {
         $item = new Message();
-        $location = Location::fromResponse(array('latitude' => 55.585827, 'longitude' => 37.675309));
+        $location = Location::fromResponse(['latitude' => 55.585827, 'longitude' => 37.675309]);
         $item->setLocation($location);
         $this->assertEquals($location, $item->getLocation());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Location', $item->getLocation());
@@ -159,13 +158,13 @@ class MessageTest extends TestCase
     public function testSetAudio()
     {
         $item = new Message();
-        $audio = Audio::fromResponse(array(
+        $audio = Audio::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
         $item->setAudio($audio);
         $this->assertEquals($audio, $item->getAudio());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Audio', $item->getAudio());
@@ -174,13 +173,13 @@ class MessageTest extends TestCase
     public function testSetVoice()
     {
         $item = new Message();
-        $voice = Voice::fromResponse(array(
+        $voice = Voice::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testUniqueFileId',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
         $item->setVoice($voice);
         $this->assertEquals($voice, $item->getVoice());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Voice', $item->getVoice());
@@ -189,7 +188,7 @@ class MessageTest extends TestCase
     public function testSetVideo()
     {
         $item = new Message();
-        $video = Video::fromResponse(array(
+        $video = Video::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
@@ -197,14 +196,14 @@ class MessageTest extends TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
         $item->setVideo($video);
         $this->assertEquals($video, $item->getVideo());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Video', $item->getVideo());
@@ -213,10 +212,10 @@ class MessageTest extends TestCase
     public function testSetDice()
     {
         $item = new Message();
-        $dice = Dice::fromResponse(array(
+        $dice = Dice::fromResponse([
             'emoji' => '🎲',
             'value' => 3
-        ));
+        ]);
         $item->setDice($dice);
         $this->assertEquals($dice, $item->getDice());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Dice', $item->getDice());
@@ -225,8 +224,8 @@ class MessageTest extends TestCase
     public function testSetSticker()
     {
         $item = new Message();
-        $sticker = Sticker::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $sticker = Sticker::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testUniqueFileId',
             'width' => 1,
             'height' => 2,
@@ -234,14 +233,14 @@ class MessageTest extends TestCase
             'is_animated' => false,
             'is_video' => false,
             'type' => 'regular',
-            'thumb' => array(
-                "file_id" => 'testFileId1',
+            'thumb' => [
+                'file_id' => 'testFileId1',
                 'file_unique_id' => 'testUniqueFileId',
                 'width' => 1,
                 'height' => 2,
                 'file_size' => 3
-            )
-        ));
+            ]
+        ]);
         $item->setSticker($sticker);
         $this->assertEquals($sticker, $item->getSticker());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item->getSticker());
@@ -266,12 +265,12 @@ class MessageTest extends TestCase
     public function testSetLeftChatParticipant()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'id' => 1,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
         $item->setLeftChatMember($user);
 
         $this->assertEquals($user, $item->getLeftChatMember());
@@ -281,12 +280,12 @@ class MessageTest extends TestCase
     public function testSetNewChatParticipant()
     {
         $item = new Message();
-        $user = User::fromResponse(array(
+        $user = User::fromResponse([
             'id' => 1,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
-        ));
+        ]);
         $item->setNewChatMembers([$user]);
 
         $this->assertEquals([$user], $item->getNewChatMembers());
@@ -312,21 +311,21 @@ class MessageTest extends TestCase
     public function testSetReplyToMessage()
     {
         $item = new Message();
-        $replyMessage = Message::fromResponse(array(
+        $replyMessage = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            )
-        ));
+            ]
+        ]);
         $item->setReplyToMessage($replyMessage);
 
         $this->assertEquals($replyMessage, $item->getReplyToMessage());
@@ -336,13 +335,13 @@ class MessageTest extends TestCase
     public function testSetViaBot()
     {
         $item = new Message();
-        $bot = User::fromResponse(array(
+        $bot = User::fromResponse([
             'first_name' => 'Test',
             'last_name' => 'Bot',
             'username' => 'TestingBot',
             'is_bot' => 'true',
             'id' => 654321
-        ));
+        ]);
         $item->setViaBot($bot);
         $this->assertEquals($bot, $item->getViaBot());
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getViaBot());
@@ -350,43 +349,43 @@ class MessageTest extends TestCase
 
     public function testViaBotMessage()
     {
-        $item = Message::fromResponse(array(
+        $item = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
-            'via_bot' => array(
+            ],
+            'via_bot' => [
                 'first_name' => 'Test',
                 'last_name' => 'Bot',
                 'username' => 'TestingBot',
                 'is_bot' => 'true',
                 'id' => 654321
-            )
-        ));
+            ]
+        ]);
         $this->assertEquals(654321, $item->getViaBot()->getId());
     }
 
     public function testSetPhoto()
     {
         $item = new Message();
-        $photo = array(
-            PhotoSize::fromResponse(array(
+        $photo = [
+            PhotoSize::fromResponse([
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            ))
-        );
+            ])
+        ];
 
         $item->setPhoto($photo);
 
@@ -400,15 +399,15 @@ class MessageTest extends TestCase
     public function testGetNewChatPhoto()
     {
         $item = new Message();
-        $photo = array(
-            PhotoSize::fromResponse(array(
+        $photo = [
+            PhotoSize::fromResponse([
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            ))
-        );
+            ])
+        ];
 
         $item->setNewChatPhoto($photo);
         $this->assertEquals($photo, $item->getNewChatPhoto());
@@ -452,22 +451,22 @@ class MessageTest extends TestCase
 
     public function testIsSupergroupChatCreated()
     {
-        $item = Message::fromResponse(array(
+        $item = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
+            ],
             'supergroup_chat_created' => true
-        ));
+        ]);
 
         $this->assertTrue($item->isSupergroupChatCreated());
     }
@@ -482,22 +481,22 @@ class MessageTest extends TestCase
 
     public function testIsChannelChatCreated()
     {
-        $item = Message::fromResponse(array(
+        $item = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
+            ],
             'channel_chat_created' => true
-        ));
+        ]);
 
         $this->assertTrue($item->isChannelChatCreated());
     }
@@ -511,22 +510,22 @@ class MessageTest extends TestCase
 
     public function testGetMigrateToChatId()
     {
-        $item = Message::fromResponse(array(
+        $item = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
+            ],
             'migrate_to_chat_id' => 2
-        ));
+        ]);
 
         $this->assertEquals(2, $item->getMigrateToChatId());
     }
@@ -540,44 +539,44 @@ class MessageTest extends TestCase
 
     public function testGetMigrateFromChatId()
     {
-        $item = Message::fromResponse(array(
+        $item = Message::fromResponse([
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
+            ],
             'migrate_from_chat_id' => 3
-        ));
+        ]);
 
         $this->assertEquals(3, $item->getMigrateFromChatId());
     }
 
     public function testToJson1()
     {
-        $data = array(
+        $data = [
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
+            ],
             'migrate_from_chat_id' => 3
-        );
+        ];
 
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());
@@ -585,29 +584,29 @@ class MessageTest extends TestCase
 
     public function testToJson2()
     {
-        $data = array(
+        $data = [
             'message_id' => 1,
-            'from' => array(
+            'from' => [
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
-            ),
+            ],
             'date' => 2,
-            'chat' => array(
+            'chat' => [
                 'id' => 1,
                 'type' => 'group',
                 'title' => 'test chat'
-            ),
-            'entities' => array(
-                array(
-                    "type" => "bot_command",
-                    "offset" => 0,
-                    "length" => 7,
-                )
-            ),
+            ],
+            'entities' => [
+                [
+                    'type' => 'bot_command',
+                    'offset' => 0,
+                    'length' => 7,
+                ]
+            ],
             'migrate_from_chat_id' => 3
-        );
+        ];
 
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());

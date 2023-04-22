@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types\Payments\Query;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\Payments\ArrayOfLabeledPrice;
 use TelegramBot\Api\Types\Payments\ShippingAddress;
 use TelegramBot\Api\Types\User;
 
@@ -18,14 +17,14 @@ class ShippingQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['id', 'from', 'invoice_payload', 'shipping_address'];
+    protected static $requiredParams = ['id', 'from', 'invoice_payload', 'shipping_address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'invoice_payload' => true,

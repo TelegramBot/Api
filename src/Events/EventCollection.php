@@ -35,7 +35,6 @@ class EventCollection
         }
     }
 
-
     /**
      * Add new event to collection
      *

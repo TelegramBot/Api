@@ -58,7 +58,7 @@ abstract class BaseType
 
     protected static function toCamelCase($str)
     {
-        return str_replace(" ", "", ucwords(str_replace("_", " ", $str)));
+        return str_replace(' ', '', ucwords(str_replace('_', ' ', $str)));
     }
 
     public function toJson($inner = false)
@@ -89,7 +89,7 @@ abstract class BaseType
         if ($data === true) {
             return true;
         }
-        
+
         self::validate($data);
         $instance = new static();
         $instance->map($data);

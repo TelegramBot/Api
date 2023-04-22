@@ -18,14 +18,14 @@ class Contact extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['phone_number', 'first_name'];
+    protected static $requiredParams = ['phone_number', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,

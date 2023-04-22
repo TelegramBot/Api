@@ -116,7 +116,6 @@ class BotApiTest extends TestCase
 
         $mock->expects($this->once())->method('call')->willReturn($updates);
 
-
         $expectedResult = ArrayOfUpdates::fromResponse($updates);
         $result = $mock->getUpdates();
 

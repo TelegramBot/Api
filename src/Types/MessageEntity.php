@@ -19,7 +19,6 @@ use TelegramBot\Api\TypeInterface;
  */
 class MessageEntity extends BaseType implements TypeInterface
 {
-
     const TYPE_MENTION = 'mention';
     const TYPE_HASHTAG = 'hashtag';
     const TYPE_CASHTAG = 'cashtag';
@@ -42,14 +41,14 @@ class MessageEntity extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'offset', 'length'];
+    protected static $requiredParams = ['type', 'offset', 'length'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'offset' => true,
         'length' => true,

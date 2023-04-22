@@ -24,14 +24,14 @@ class Venue extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['location', 'title', 'address'];
+    protected static $requiredParams = ['location', 'title', 'address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'location' => Location::class,
         'title' => true,
         'address' => true,

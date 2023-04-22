@@ -18,14 +18,14 @@ class Contact extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
+    protected static $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'phone_number' => true,
@@ -120,7 +120,6 @@ class Contact extends AbstractInlineQueryResult
         $this->thumbWidth = $thumbWidth;
         $this->thumbHeight = $thumbHeight;
     }
-
 
     /**
      * @return string

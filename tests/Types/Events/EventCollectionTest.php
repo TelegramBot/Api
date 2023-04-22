@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Test\Types\Events;
 
 use PHPUnit\Framework\TestCase;
-use TelegramBot\Api\Client;
 use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Update;
 
@@ -98,7 +97,8 @@ class EventCollectionTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testHandle1($action, $checker, $update) {
+    public function testHandle1($action, $checker, $update)
+    {
         $item = new EventCollection('testToken');
         $name = 'test';
         $item->add($action, function ($update) use ($name) {
@@ -129,7 +129,8 @@ class EventCollectionTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testHandle2($action, $checker, $update) {
+    public function testHandle2($action, $checker, $update)
+    {
         $item = new EventCollection();
         $name = 'test';
         $item->add($action, function ($update) use ($name) {

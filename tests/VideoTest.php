@@ -40,13 +40,13 @@ class VideoTest extends TestCase
     public function testSetThumb()
     {
         $item = new Video();
-        $thumb = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $thumb = PhotoSize::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
-        ));
+        ]);
         $item->setThumb($thumb);
         $this->assertEquals($thumb, $item->getThumb());
         $this->assertInstanceOf(PhotoSize::class, $item->getThumb());
@@ -68,7 +68,7 @@ class VideoTest extends TestCase
 
     public function testFromResponse()
     {
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
@@ -76,21 +76,21 @@ class VideoTest extends TestCase
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
-        $thumb = PhotoSize::fromResponse(array(
+            ]
+        ]);
+        $thumb = PhotoSize::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 5,
             'height' => 6,
             'file_size' => 7
-        ));
+        ]);
         $this->assertInstanceOf(Video::class, $item);
         $this->assertEquals('testFileId1', $item->getFileId());
         $this->assertEquals('testFileUniqueId1', $item->getFileUniqueId());
@@ -142,20 +142,20 @@ class VideoTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
     /**
      * width is required
@@ -164,21 +164,21 @@ class VideoTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'height' => 2,
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -188,21 +188,21 @@ class VideoTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -212,21 +212,21 @@ class VideoTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
@@ -236,20 +236,20 @@ class VideoTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Video::fromResponse(array(
+        $item = Video::fromResponse([
             'file_id' => 'testFileId1',
             'width' => 1,
             'height' => 2,
             'duration' => 1,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
 }

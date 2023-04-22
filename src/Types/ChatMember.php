@@ -11,14 +11,14 @@ class ChatMember extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['user', 'status'];
+    protected static $requiredParams = ['user', 'status'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'user' => User::class,
         'status' => true,
         'until_date' => true,

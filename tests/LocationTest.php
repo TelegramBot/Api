@@ -53,14 +53,14 @@ class LocationTest extends TestCase
     public function testFromResponse()
     {
         $location = Location::fromResponse(
-            array(
-                "latitude" => 55.585827,
+            [
+                'latitude' => 55.585827,
                 'longitude' => 37.675309,
                 'horizontal_accuracy' => 20.5,
                 'live_period' => 300,
                 'heading' => 100,
                 'proximity_alert_radius' => 15
-            )
+            ]
         );
         $this->assertInstanceOf(Location::class, $location);
         $this->assertEquals(55.585827, $location->getLatitude());

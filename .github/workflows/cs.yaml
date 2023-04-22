@@ -2,7 +2,7 @@ on:
     - pull_request
     - push
 
-name: Tests
+name: CS Check
 
 jobs:
     tests:
@@ -13,16 +13,7 @@ jobs:
                 os:
                     - ubuntu-latest
                 php:
-                    - "5.5"
-                    - "5.6"
-                    - "7.0"
-                    - "7.1"
-                    - "7.2"
-                    - "7.3"
-                    - "7.4"
-                    - "8.0"
                     - "8.1"
-                    - "8.2"
         steps:
             -
                 name: Checkout
@@ -46,19 +37,15 @@ jobs:
                     path: ${{ env.COMPOSER_CACHE_DIR }}
                     key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
-                        php${{ matrix.php }}-composer-{{ matrix.deps }}-
+                        php${{ matrix.php }}-composer-latest-
             -
                 name: Update composer
                 run: composer self-update
-
-            -
-                name: Remove php-cs-fixer
-                run: composer remove friendsofphp/php-cs-fixer --dev --no-update
 
             -
                 name: Install dependencies with composer
                 run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
             -
-                name: Run tests with phpunit
-                run: composer test
+                name: Run php-cs-fixer
+                run: composer cs-check
