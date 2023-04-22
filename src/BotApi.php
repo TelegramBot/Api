@@ -670,7 +670,7 @@ class BotApi
         $longitude,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendLocation', [
+        return Message::fromResponse($this->call('editMessageLiveLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,
             'inline_message_id' => $inlineMessageId,
@@ -699,7 +699,7 @@ class BotApi
         $inlineMessageId,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('sendLocation', [
+        return Message::fromResponse($this->call('stopMessageLiveLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,
             'inline_message_id' => $inlineMessageId,
