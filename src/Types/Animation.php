@@ -39,11 +39,18 @@ class Animation extends BaseType implements TypeInterface
     ];
 
     /**
-     * Unique file identifier
+     * File identifier
      *
      * @var string
      */
     protected $fileId;
+
+    /**
+     * File unique identifier
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * Video width as defined by sender
@@ -130,6 +137,22 @@ class Animation extends BaseType implements TypeInterface
     public function setFileId($fileId)
     {
         $this->fileId = $fileId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 
     /**
