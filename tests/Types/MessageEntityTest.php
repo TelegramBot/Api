@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test\Types;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\MessageEntity;
 use TelegramBot\Api\Types\User;
 
-class MessageEntityTest extends \PHPUnit_Framework_TestCase
+class MessageEntityTest extends TestCase
 {
     public function testTextMentionFromResponse()
     {

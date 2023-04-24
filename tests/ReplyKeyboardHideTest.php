@@ -3,51 +3,43 @@
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\ReplyKeyboardHide;
+use PHPUnit\Framework\TestCase;
 
-class ReplyKeyboardHideTest extends \PHPUnit_Framework_TestCase
+class ReplyKeyboardHideTest extends TestCase
 {
     public function testConstructor()
     {
         $item = new ReplyKeyboardHide();
 
-        $this->assertAttributeEquals(true, 'hideKeyboard', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(true, $item->isHideKeyboard());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testConstructor2()
     {
         $item = new ReplyKeyboardHide(true, true);
 
-        $this->assertAttributeEquals(true, 'hideKeyboard', $item);
-        $this->assertAttributeEquals(true, 'selective', $item);
+        $this->assertEquals(true, $item->isHideKeyboard());
+        $this->assertEquals(true, $item->isSelective());
     }
 
     public function testConstructor3()
     {
         $item = new ReplyKeyboardHide(false, true);
 
-        $this->assertAttributeEquals(false, 'hideKeyboard', $item);
-        $this->assertAttributeEquals(true, 'selective', $item);
+        $this->assertEquals(false, $item->isHideKeyboard());
+        $this->assertEquals(true, $item->isSelective());
     }
 
     public function testConstructor4()
     {
         $item = new ReplyKeyboardHide(true);
 
-        $this->assertAttributeEquals(true, 'hideKeyboard', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(true, $item->isHideKeyboard());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testSetHideKeyboard()
-    {
-        $item = new ReplyKeyboardHide(true);
-
-        $item->setHideKeyboard(false);
-
-        $this->assertAttributeEquals(false, 'hideKeyboard', $item);
-    }
-
-    public function testIsHideKeyboard()
     {
         $item = new ReplyKeyboardHide(true);
 
@@ -57,15 +49,6 @@ class ReplyKeyboardHideTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSetSelective()
-    {
-        $item = new ReplyKeyboardHide();
-
-        $item->setSelective(true);
-
-        $this->assertAttributeEquals(true, 'selective', $item);
-    }
-
-    public function testIsSelective()
     {
         $item = new ReplyKeyboardHide();
 

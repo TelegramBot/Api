@@ -2,9 +2,10 @@
 
 namespace TelegramBot\Api\Test\Types;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 
-class ArrayOfUpdatesTest extends \PHPUnit_Framework_TestCase
+class ArrayOfUpdatesTest extends TestCase
 {
 
     public function data()
@@ -47,7 +48,7 @@ class ArrayOfUpdatesTest extends \PHPUnit_Framework_TestCase
     {
         $items = ArrayOfUpdates::fromResponse($data);
 
-        $this->assertInternalType('array', $items);
+        $this->assertIsArray($items);
 
         foreach($items as $item) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\Update', $item);

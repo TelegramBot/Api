@@ -2,10 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
+use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatPhoto;
 
-class ChatTest extends \PHPUnit_Framework_TestCase
+class ChatTest extends TestCase
 {
     public function testFromResponseGroupChat()
     {
@@ -25,31 +27,17 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     {
         $chat = new Chat();
         $chat->setId(1);
-        $this->assertAttributeEquals(1, 'id', $chat);
+        $this->assertEquals(1, $chat->getId());
     }
 
     public function testSet64bitId()
     {
         $chat = new Chat();
         $chat->setId(2147483648);
-        $this->assertAttributeEquals(2147483648, 'id', $chat);
-    }
-
-    public function testGetId()
-    {
-        $chat = new Chat();
-        $chat->setId(1);
-        $this->assertEquals(1, $chat->getId());
+        $this->assertEquals(2147483648, $chat->getId());
     }
 
     public function testSetType()
-    {
-        $chat = new Chat();
-        $chat->setType('private');
-        $this->assertAttributeEquals('private', 'type', $chat);
-    }
-
-    public function testGetType()
     {
         $chat = new Chat();
         $chat->setType('private');
@@ -60,24 +48,10 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     {
         $chat = new Chat();
         $chat->setTitle('test chat');
-        $this->assertAttributeEquals('test chat', 'title', $chat);
-    }
-
-    public function testGetTitle()
-    {
-        $chat = new Chat();
-        $chat->setTitle('test chat');
         $this->assertEquals('test chat', $chat->getTitle());
     }
 
     public function testSetUsername()
-    {
-        $chat = new Chat();
-        $chat->setUsername('iGusev');
-        $this->assertAttributeEquals('iGusev', 'username', $chat);
-    }
-
-    public function testGetUsername()
     {
         $chat = new Chat();
         $chat->setUsername('iGusev');
@@ -88,24 +62,10 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     {
         $chat = new Chat();
         $chat->setFirstName('Ilya');
-        $this->assertAttributeEquals('Ilya', 'firstName', $chat);
-    }
-
-    public function testGetFirstName()
-    {
-        $chat = new Chat();
-        $chat->setFirstName('Ilya');
         $this->assertEquals('Ilya', $chat->getFirstName());
     }
 
     public function testSetLastName()
-    {
-        $chat = new Chat();
-        $chat->setLastName('Gusev');
-        $this->assertAttributeEquals('Gusev', 'lastName', $chat);
-    }
-
-    public function testGetLastName()
     {
         $chat = new Chat();
         $chat->setLastName('Gusev');
@@ -120,17 +80,6 @@ class ChatTest extends \PHPUnit_Framework_TestCase
             'big_file_id' => 'big_file_id'
         ]);
         $chat->setPhoto($photo);
-        $this->assertAttributeEquals($photo, 'photo', $chat);
-    }
-
-    public function testGetPhoto()
-    {
-        $chat = new Chat();
-        $photo = ChatPhoto::fromResponse([
-            'small_file_id' => 'small_file_id',
-            'big_file_id' => 'big_file_id'
-        ]);
-        $chat->setPhoto($photo);
         $this->assertEquals($photo, $chat->getPhoto());
     }
 
@@ -138,24 +87,10 @@ class ChatTest extends \PHPUnit_Framework_TestCase
     {
         $chat = new Chat();
         $chat->setBio('PHP Telegram Bot API');
-        $this->assertAttributeEquals('PHP Telegram Bot API', 'bio', $chat);
-    }
-
-    public function testGetBio()
-    {
-        $chat = new Chat();
-        $chat->setBio('PHP Telegram Bot API');
         $this->assertEquals('PHP Telegram Bot API', $chat->getBio());
     }
 
     public function testSetDescriptions()
-    {
-        $chat = new Chat();
-        $chat->setDescription('description');
-        $this->assertAttributeEquals('description', 'description', $chat);
-    }
-
-    public function testGetDescription()
     {
         $chat = new Chat();
         $chat->setDescription('description');
@@ -181,39 +116,35 @@ class ChatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('PHP Telegram Bot API', $item->getBio());
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetIdException1()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $chat = new Chat();
         $chat->setId([]);
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetIdException2()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $chat = new Chat();
         $chat->setId(null);
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testFromResponseException2()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $chat = Chat::fromResponse(array(
             'id' => 1
         ));
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testFromResponseException3()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $chat = Chat::fromResponse(array(
             'type' => 'private'
         ));

@@ -3,14 +3,17 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Inline;
+use TelegramBot\Api\BadMethodCallException;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Client;
+use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     public function data()
     {
@@ -133,24 +136,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(!is_null($update->getInlineQuery()), call_user_func($result, $update));
     }
 
-    /**
-     * @expectedException        \TelegramBot\Api\BadMethodCallException
-     * @expectedExceptionMessage Method testMethod not exists
-     */
     public function testBadMethodCallException()
     {
+        $this->expectException(BadMethodCallException::class);
+        $this->expectErrorMessage('Method testMethod not exists');
+
         $item = new Client('testToken');
 
         $item->testMethod();
-    }
-
-    public function testConstructor()
-    {
-        $item = new Client('testToken');
-
-        $this->assertInstanceOf('\TelegramBot\Api\Client', $item);
-        $this->assertAttributeInstanceOf('\TelegramBot\Api\BotApi', 'api', $item);
-        $this->assertAttributeInstanceOf('\TelegramBot\Api\Events\EventCollection', 'events', $item);
     }
 
     public function testOn()

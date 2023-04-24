@@ -2,39 +2,27 @@
 
 namespace TelegramBot\Api\Test;
 
+use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\User;
+use PHPUnit\Framework\TestCase;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
     public function testSetDuration()
-    {
-        $item = new User();
-        $item->setId(1);
-        $this->assertAttributeEquals(1, 'id', $item);
-    }
-
-    public function testSet64bitId()
-    {
-        $item = new User();
-        $item->setId(2147483648);
-        $this->assertAttributeEquals(2147483648, 'id', $item);
-    }
-
-    public function testGetDuration()
     {
         $item = new User();
         $item->setId(1);
         $this->assertEquals(1, $item->getId());
     }
 
-    public function testSetFirstName()
+    public function testSet64bitId()
     {
         $item = new User();
-        $item->setFirstName('Ilya');
-        $this->assertAttributeEquals('Ilya', 'firstName', $item);
+        $item->setId(2147483648);
+        $this->assertEquals(2147483648, $item->getId());
     }
 
-    public function testGetFirstName()
+    public function testSetFirstName()
     {
         $item = new User();
         $item->setFirstName('Ilya');
@@ -45,13 +33,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $item = new User();
         $item->setLastName('Gusev');
-        $this->assertAttributeEquals('Gusev', 'lastName', $item);
-    }
-
-    public function testGetLastName()
-    {
-        $item = new User();
-        $item->setLastName('Gusev');
         $this->assertEquals('Gusev', $item->getLastName());
     }
 
@@ -59,21 +40,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $item = new User();
         $item->setUsername('iGusev');
-        $this->assertAttributeEquals('iGusev', 'username', $item);
-    }
-
-    public function testGetUsername()
-    {
-        $item = new User();
-        $item->setUsername('iGusev');
         $this->assertEquals('iGusev', $item->getUsername());
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetIdException()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $item = new User();
         $item->setId('s');
     }
@@ -105,22 +78,21 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $user->getSupportsInlineQueries());
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testFromResponseException1()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $user = User::fromResponse(array(
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev'
         ));
     }
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
+
     public function testFromResponseException2()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $user = User::fromResponse(array(
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',

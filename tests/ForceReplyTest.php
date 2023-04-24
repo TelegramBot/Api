@@ -3,52 +3,44 @@
 namespace TelegramBot\Api\Test;
 
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ForceReply;
 
-class ForceReplyTest extends \PHPUnit_Framework_TestCase
+class ForceReplyTest extends TestCase
 {
     public function testConstructor()
     {
         $item = new ForceReply();
 
-        $this->assertAttributeEquals(true, 'forceReply', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(true, $item->isForceReply());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testConstructor2()
     {
         $item = new ForceReply(true, true);
 
-        $this->assertAttributeEquals(true, 'forceReply', $item);
-        $this->assertAttributeEquals(true, 'selective', $item);
+        $this->assertEquals(true, $item->isForceReply());
+        $this->assertEquals(true, $item->isSelective());
     }
 
     public function testConstructor3()
     {
         $item = new ForceReply(false, true);
 
-        $this->assertAttributeEquals(false, 'forceReply', $item);
-        $this->assertAttributeEquals(true, 'selective', $item);
+        $this->assertEquals(false, $item->isForceReply());
+        $this->assertEquals(true, $item->isSelective());
     }
 
     public function testConstructor4()
     {
         $item = new ForceReply(true);
 
-        $this->assertAttributeEquals(true, 'forceReply', $item);
-        $this->assertAttributeEquals(null, 'selective', $item);
+        $this->assertEquals(true, $item->isForceReply());
+        $this->assertEquals(null, $item->isSelective());
     }
 
     public function testSetforceReply()
-    {
-        $item = new ForceReply(true);
-
-        $item->setforceReply(false);
-
-        $this->assertAttributeEquals(false, 'forceReply', $item);
-    }
-
-    public function testIsforceReply()
     {
         $item = new ForceReply(true);
 
@@ -58,15 +50,6 @@ class ForceReplyTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSetSelective()
-    {
-        $item = new ForceReply();
-
-        $item->setSelective(true);
-
-        $this->assertAttributeEquals(true, 'selective', $item);
-    }
-
-    public function testIsSelective()
     {
         $item = new ForceReply();
 

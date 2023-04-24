@@ -2,18 +2,12 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\BotCommand;
 
-class BotCommandTest extends \PHPUnit_Framework_TestCase
+class BotCommandTest extends TestCase
 {
     public function testSetCommand()
-    {
-        $item = new BotCommand();
-        $item->setCommand('start');
-        $this->assertAttributeEquals('start', 'command', $item);
-    }
-
-    public function testGetCommand()
     {
         $item = new BotCommand();
         $item->setCommand('start');
@@ -21,13 +15,6 @@ class BotCommandTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSetDescription()
-    {
-        $item = new BotCommand();
-        $item->setDescription('This is a start command!');
-        $this->assertAttributeEquals('This is a start command!', 'description', $item);
-    }
-
-    public function testGetDescription()
     {
         $item = new BotCommand();
         $item->setDescription('This is a start command!');

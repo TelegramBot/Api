@@ -4,8 +4,9 @@ namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\Types\PollAnswer;
 use TelegramBot\Api\Types\User;
+use PHPUnit\Framework\TestCase;
 
-class PollAnswerAnswerTest extends \PHPUnit_Framework_TestCase
+class PollAnswerTest extends TestCase
 {
     public function testGetPollId()
     {
@@ -38,7 +39,7 @@ class PollAnswerAnswerTest extends \PHPUnit_Framework_TestCase
         $item = new PollAnswer();
         $item->setOptionIds([1,2,3,4,5,6]);
 
-        $this->assertArraySubset([1,2,3,4,5,6], $item->getOptionIds());
+        $this->assertEquals([1,2,3,4,5,6], $item->getOptionIds());
     }
 
 

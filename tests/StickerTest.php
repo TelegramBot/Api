@@ -2,18 +2,14 @@
 
 namespace TelegramBot\Api\Test;
 
+use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
+use PHPUnit\Framework\TestCase;
 
-class StickerTest extends \PHPUnit_Framework_TestCase {
+class StickerTest extends TestCase
+{
     public function testSetFileId()
-    {
-        $sticker = new Sticker();
-        $sticker->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $sticker);
-    }
-
-    public function testGetFileId()
     {
         $sticker = new Sticker();
         $sticker->setFileId('testfileId');
@@ -23,13 +19,6 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
     public function testSetWidth()
     {
         $sticker = new Sticker();
-        $sticker->setWidth(1);
-        $this->assertAttributeEquals(1, 'width', $sticker);
-    }
-
-    public function testGetWidth()
-    {
-        $sticker = new Sticker();
         $sticker->setWidth(2);
         $this->assertEquals(2, $sticker->getWidth());
     }
@@ -37,25 +26,11 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
     public function testSetHeight()
     {
         $sticker = new Sticker();
-        $sticker->setHeight(3);
-        $this->assertAttributeEquals(3, 'height', $sticker);
-    }
-
-    public function testGetHeight()
-    {
-        $sticker = new Sticker();
         $sticker->setHeight(4);
         $this->assertEquals(4, $sticker->getHeight());
     }
 
     public function testSetFileSize()
-    {
-        $sticker = new Sticker();
-        $sticker->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $sticker);
-    }
-
-    public function testGetFileSize()
     {
         $sticker = new Sticker();
         $sticker->setFileSize(6);
@@ -73,22 +48,8 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
             'file_size' => 3
         ));
         $sticker->setThumb($thumb);
-        $this->assertAttributeEquals($thumb, 'thumb', $sticker);
-    }
-
-    public function testGetThumb()
-    {
-        $sticker = new Sticker();
-        $thumb = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
-            'file_unique_id' => 'testFileUniqueId1',
-            'width' => 1,
-            'height' => 2,
-            'file_size' => 3
-        ));
-        $sticker->setThumb($thumb);
         $this->assertEquals($thumb, $sticker->getThumb());
-        $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $sticker->getThumb());
+        $this->assertInstanceOf(PhotoSize::class, $sticker->getThumb());
     }
 
     public function testFromResponse()
@@ -117,38 +78,35 @@ class StickerTest extends \PHPUnit_Framework_TestCase {
             'height' => 2,
             'file_size' => 3
         ));
-        $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $sticker);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $sticker);
-        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $sticker);
-        $this->assertAttributeEquals(1, 'width', $sticker);
-        $this->assertAttributeEquals(2, 'height', $sticker);
-        $this->assertAttributeEquals(3, 'fileSize', $sticker);
-        $this->assertAttributeEquals($thumb, 'thumb', $sticker);
+        $this->assertInstanceOf(Sticker::class, $sticker);
+        $this->assertEquals('testFileId1', $sticker->getFileId());
+        $this->assertEquals('testFileUniqueId1', $sticker->getFileUniqueId());
+        $this->assertEquals(1, $sticker->getWidth());
+        $this->assertEquals(2, $sticker->getHeight());
+        $this->assertEquals(3, $sticker->getFileSize());
+        $this->assertEquals($thumb, $sticker->getThumb());
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetFileSizeException()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $item = new Sticker();
         $item->setFileSize('s');
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetHeightException()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $item = new Sticker();
         $item->setHeight('s');
     }
 
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
     public function testSetWidthException()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $item = new Sticker();
         $item->setWidth('s');
     }
