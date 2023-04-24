@@ -101,6 +101,14 @@ class Client
         return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
     }
 
+    public function myChatMember(Closure $action) {
+        return $this->on(self::getMyChatMemberEvent($action), self::getMyChatMemberChecker());
+    }
+
+    public function chatMember(Closure $action) {
+        return $this->on(self::getChatMemberEvent($action), self::getChatMemberChecker());
+    }
+
     /**
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
@@ -287,6 +295,30 @@ class Client
         };
     }
 
+    protected static function getMyChatMemberEvent(Closure $action) {
+        return function (Update $update) use ($action) {
+            if (!$update->getMyChatMember()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getMyChatMember()]);
+            return false;
+        };
+    }
+
+    protected static function getChatMemberEvent(Closure $action) {
+        return function (Update $update) use ($action) {
+            if (!$update->getChatMember()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChatMember()]);
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -401,6 +433,28 @@ class Client
     {
         return function (Update $update) {
             return !is_null($update->getPreCheckoutQuery());
+        };
+    }
+
+    /**
+     * Returns check function to handling the myChatMember updates.
+     *
+     * @return Closure
+     */
+    public static function getMyChatMemberChecker() {
+        return function (Update $update) {
+            return !is_null($update->getMyChatMember());
+        };
+    }
+
+    /**
+     * Returns check function to handling the chatMember updates.
+     *
+     * @return Closure
+     */
+    public static function getChatMemberChecker() {
+        return function (Update $update) {
+            return !is_null($update->getChatMember());
         };
     }
 
