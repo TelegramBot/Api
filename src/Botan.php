@@ -4,6 +4,9 @@ namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\Message;
 
+/**
+ * @deprecated
+ */
 class Botan
 {
     /**

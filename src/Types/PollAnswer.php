@@ -82,19 +82,15 @@ class PollAnswer extends BaseType
     }
 
     /**
+     * @deprecated
+     *
      * @return User
      */
     public function getFrom()
     {
-        return $this->getUser();
-    }
+        @trigger_error(sprintf('Access user with %s is deprecated, use "%s::getUser" method', __METHOD__, __CLASS__), \E_USER_DEPRECATED);
 
-    /**
-     * @param User $from
-     */
-    public function setFrom(User $from)
-    {
-        return $this->setUser($from);
+        return $this->getUser();
     }
 
     /**

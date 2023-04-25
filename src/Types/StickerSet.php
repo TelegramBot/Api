@@ -32,8 +32,8 @@ class StickerSet extends BaseType implements TypeInterface
         'sticker_type' => true,
         'is_animated' => true,
         'is_video' => true,
-        'stickers' => true,
-        'thumb' => true,
+        'stickers' => ArrayOfSticker::class,
+        'thumb' => PhotoSize::class,
     ];
 
     /**

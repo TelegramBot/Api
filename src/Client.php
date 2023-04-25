@@ -44,6 +44,9 @@ class Client
      */
     public function __construct($token, $trackerToken = null)
     {
+        if ($trackerToken) {
+            @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
+        }
         $this->api = new BotApi($token);
         $this->events = new EventCollection($trackerToken);
     }
