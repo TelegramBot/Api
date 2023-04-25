@@ -17,14 +17,14 @@ class InlineKeyboardMarkup extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['inline_keyboard'];
+    protected static $requiredParams = ['inline_keyboard'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'inline_keyboard' => true,
     ];
 

@@ -14,7 +14,7 @@ class WebhookInfoTest extends TestCase
 {
     public function testFromResponse()
     {
-        $webhookInfo = WebhookInfo::fromResponse(array(
+        $webhookInfo = WebhookInfo::fromResponse([
             'url' => '',
             'has_custom_certificate' => false,
             'pending_update_count' => 0,
@@ -24,7 +24,7 @@ class WebhookInfoTest extends TestCase
             'last_synchronization_error_date' => null,
             'max_connections' => 40,
             'allowed_updates' => null
-        ));
+        ]);
         $this->assertInstanceOf('\TelegramBot\Api\Types\WebhookInfo', $webhookInfo);
         $this->assertEquals('', $webhookInfo->getUrl());
         $this->assertEquals(false, $webhookInfo->hasCustomCertificate());

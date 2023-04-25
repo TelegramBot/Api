@@ -15,12 +15,12 @@ class LabeledPrice extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['label', 'amount'];
+    protected static $requiredParams = ['label', 'amount'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'label' => true,
         'amount' => true
     ];

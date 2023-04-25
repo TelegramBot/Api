@@ -19,14 +19,14 @@ class Photo extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'photo_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'photo_url', 'thumb_url'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'photo_url' => true,
@@ -124,7 +124,6 @@ class Photo extends AbstractInlineQueryResult
         $this->description = $description;
         $this->caption = $caption;
     }
-
 
     /**
      * @return string

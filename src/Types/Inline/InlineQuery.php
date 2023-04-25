@@ -20,14 +20,14 @@ class InlineQuery extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'from', 'query', 'offset'];
+    protected static $requiredParams = ['id', 'from', 'query', 'offset'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'location' => Location::class,
@@ -48,7 +48,6 @@ class InlineQuery extends BaseType
      * @var User
      */
     protected $from;
-
 
     /**
      * Optional. Sender location, only for bots that request user location

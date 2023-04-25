@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ForceReply;
 
@@ -62,27 +61,27 @@ class ForceReplyTest extends TestCase
     {
         $item = new ForceReply();
 
-        $this->assertEquals(json_encode(array('force_reply' => true)), $item->toJson());
+        $this->assertEquals(json_encode(['force_reply' => true]), $item->toJson());
     }
 
     public function testToJson2()
     {
         $item = new ForceReply();
 
-        $this->assertEquals(array('force_reply' => true), $item->toJson(true));
+        $this->assertEquals(['force_reply' => true], $item->toJson(true));
     }
 
     public function testToJson3()
     {
         $item = new ForceReply(true, true);
 
-        $this->assertEquals(json_encode(array('force_reply' => true, 'selective' => true)), $item->toJson());
+        $this->assertEquals(json_encode(['force_reply' => true, 'selective' => true]), $item->toJson());
     }
 
     public function testToJson4()
     {
         $item = new ForceReply(true, true);
 
-        $this->assertEquals(array('force_reply' => true, 'selective' => true), $item->toJson(true));
+        $this->assertEquals(['force_reply' => true, 'selective' => true], $item->toJson(true));
     }
 }

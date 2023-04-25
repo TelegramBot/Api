@@ -55,7 +55,8 @@ class CollectionTest extends TestCase
     }
 
     /** @test */
-    public function check_count() {
+    public function check_count()
+    {
         $media = new ArrayOfInputMedia();
         for ($i = 0; $i < 5; $i++) {
             $media->addItem(new InputMediaPhoto('link'));
@@ -64,7 +65,8 @@ class CollectionTest extends TestCase
     }
 
     /** @test */
-    public function can_not_add_more_then_max_limit() {
+    public function can_not_add_more_then_max_limit()
+    {
         $this->expectException(ReachedMaxSizeException::class);
         $media = new ArrayOfInputMedia();
         $media->setMaxCount(2);
@@ -74,7 +76,8 @@ class CollectionTest extends TestCase
     }
 
     /** @test */
-    public function can_output_items_as_array() {
+    public function can_output_items_as_array()
+    {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'));
 
@@ -82,7 +85,8 @@ class CollectionTest extends TestCase
     }
 
     /** @test */
-    public function can_output_items_as_json() {
+    public function can_output_items_as_json()
+    {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'));
 

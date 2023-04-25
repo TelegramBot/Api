@@ -1,4 +1,5 @@
 <?php
+
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
@@ -15,14 +16,14 @@ class Message extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['message_id', 'date', 'chat'];
+    protected static $requiredParams = ['message_id', 'date', 'chat'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'message_id' => true,
         'from' => User::class,
         'date' => true,
@@ -445,7 +446,6 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $messageThreadId;
-
 
     /**
      * @return int

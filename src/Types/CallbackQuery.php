@@ -23,14 +23,14 @@ class CallbackQuery extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'from'];
+    protected static $requiredParams = ['id', 'from'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'message' => Message::class,
@@ -94,7 +94,6 @@ class CallbackQuery extends BaseType
      * @var string
      */
     protected $gameShortName;
-
 
     /**
      * @return string

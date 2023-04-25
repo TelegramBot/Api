@@ -11,11 +11,11 @@ class ChatTest extends TestCase
 {
     public function testFromResponseGroupChat()
     {
-        $item = Chat::fromResponse(array(
+        $item = Chat::fromResponse([
             'id' => 1,
             'type' => 'group',
             'title' => 'test chat'
-        ));
+        ]);
 
         $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item);
         $this->assertEquals(1, $item->getId());
@@ -99,14 +99,14 @@ class ChatTest extends TestCase
 
     public function testFromResponseUser()
     {
-        $item = Chat::fromResponse(array(
+        $item = Chat::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev',
             'type' => 'private',
             'bio' => 'PHP Telegram Bot API'
-        ));
+        ]);
 
         $this->assertInstanceOf('\TelegramBot\Api\Types\Chat', $item);
         $this->assertEquals(123456, $item->getId());
@@ -136,17 +136,17 @@ class ChatTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $chat = Chat::fromResponse(array(
+        $chat = Chat::fromResponse([
             'id' => 1
-        ));
+        ]);
     }
 
     public function testFromResponseException3()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $chat = Chat::fromResponse(array(
+        $chat = Chat::fromResponse([
             'type' => 'private'
-        ));
+        ]);
     }
 }

@@ -21,14 +21,14 @@ class PollAnswer extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['poll_id', 'option_ids', 'user'];
+    protected static $requiredParams = ['poll_id', 'option_ids', 'user'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'option_ids' => true,
         'user' => User::class,
         'poll_id' => true,

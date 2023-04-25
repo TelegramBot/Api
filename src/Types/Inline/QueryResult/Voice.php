@@ -29,14 +29,14 @@ class Voice extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'voice_url', 'title'];
+    protected static $requiredParams = ['type', 'id', 'voice_url', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'voice_url' => true,
@@ -59,7 +59,6 @@ class Voice extends AbstractInlineQueryResult
      * @var string
      */
     protected $voiceUrl;
-
 
     /**
      * Optional. Audio duration in seconds

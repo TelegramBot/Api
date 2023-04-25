@@ -15,12 +15,12 @@ class Invoice extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['title', 'description', 'start_parameter', 'currency', 'total_amount'];
+    protected static $requiredParams = ['title', 'description', 'start_parameter', 'currency', 'total_amount'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'title' => true,
         'description' => true,
         'start_parameter' => true,

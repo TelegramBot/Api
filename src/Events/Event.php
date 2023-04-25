@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Events;
 
-use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 class Event

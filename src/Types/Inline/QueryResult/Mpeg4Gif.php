@@ -20,14 +20,14 @@ class Mpeg4Gif extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'mpeg4_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'mpeg4_url', 'thumb_url'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'mpeg4_url' => true,
@@ -114,7 +114,6 @@ class Mpeg4Gif extends AbstractInlineQueryResult
         $this->mpeg4Height = $mpeg4Height;
         $this->caption = $caption;
     }
-
 
     /**
      * @return string

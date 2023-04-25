@@ -61,27 +61,27 @@ class ReplyKeyboardHideTest extends TestCase
     {
         $item = new ReplyKeyboardHide();
 
-        $this->assertEquals(json_encode(array('hide_keyboard' => true)), $item->toJson());
+        $this->assertEquals(json_encode(['hide_keyboard' => true]), $item->toJson());
     }
 
     public function testToJson2()
     {
         $item = new ReplyKeyboardHide();
 
-        $this->assertEquals(array('hide_keyboard' => true), $item->toJson(true));
+        $this->assertEquals(['hide_keyboard' => true], $item->toJson(true));
     }
 
     public function testToJson3()
     {
         $item = new ReplyKeyboardHide(true, true);
 
-        $this->assertEquals(json_encode(array('hide_keyboard' => true, 'selective' => true)), $item->toJson());
+        $this->assertEquals(json_encode(['hide_keyboard' => true, 'selective' => true]), $item->toJson());
     }
 
     public function testToJson4()
     {
         $item = new ReplyKeyboardHide(true, true);
 
-        $this->assertEquals(array('hide_keyboard' => true, 'selective' => true), $item->toJson(true));
+        $this->assertEquals(['hide_keyboard' => true, 'selective' => true], $item->toJson(true));
     }
 }

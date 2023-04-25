@@ -6,7 +6,6 @@ use TelegramBot\Api\Types\Message;
 
 class Botan
 {
-
     /**
      * @var string Tracker url
      */
@@ -18,7 +17,6 @@ class Botan
      * @var
      */
     protected $curl;
-
 
     /**
      * Yandex AppMetrica application api_key

@@ -15,7 +15,7 @@ class SuccessfulPayment extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = [
+    protected static $requiredParams = [
         'currency',
         'total_amount',
         'invoice_payload',
@@ -26,7 +26,7 @@ class SuccessfulPayment extends BaseType
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'currency' => true,
         'total_amount' => true,
         'invoice_payload' => true,

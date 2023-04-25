@@ -12,5 +12,4 @@ use TelegramBot\Api\BaseType;
 
 class InputMessageContent extends BaseType
 {
-
 }

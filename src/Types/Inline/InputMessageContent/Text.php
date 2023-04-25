@@ -8,7 +8,6 @@
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
@@ -26,14 +25,14 @@ class Text extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['message_text'];
+    protected static $requiredParams = ['message_text'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'message_text' => true,
         'parse_mode' => true,
         'disable_web_page_preview' => true,

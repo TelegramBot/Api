@@ -19,7 +19,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = [
+    protected static $requiredParams = [
         'file_id',
         'file_unique_id',
         'type',
@@ -34,7 +34,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
         'width' => true,
         'height' => true,

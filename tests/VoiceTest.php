@@ -1,4 +1,5 @@
 <?php
+
 namespace TelegramBot\Api\Test;
 
 use TelegramBot\Api\InvalidArgumentException;
@@ -44,13 +45,13 @@ class VoiceTest extends TestCase
 
     public function testFromResponse()
     {
-        $item = Voice::fromResponse(array(
+        $item = Voice::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
         $this->assertInstanceOf(Voice::class, $item);
         $this->assertEquals('testFileId1', $item->getFileId());
         $this->assertEquals('testFileUniqueId1', $item->getFileUniqueId());
@@ -59,29 +60,27 @@ class VoiceTest extends TestCase
         $this->assertEquals(3, $item->getFileSize());
     }
 
-
     public function testFromResponseException()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Voice::fromResponse(array(
+        $item = Voice::fromResponse([
             'duration' => 1,
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
     }
 
     public function testFromResponseException2()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Voice::fromResponse(array(
+        $item = Voice::fromResponse([
             'file_id' => 'testFileId1',
             'mime_type' => 'audio/mp3',
             'file_size' => 3
-        ));
+        ]);
     }
-
 
     public function testSetDurationException()
     {

@@ -15,12 +15,12 @@ class OrderInfo extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = [];
+    protected static $requiredParams = [];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'name' => true,
         'phone_number' => true,
         'email' => true,

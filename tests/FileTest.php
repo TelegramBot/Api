@@ -1,4 +1,5 @@
 <?php
+
 namespace TelegramBot\Api\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -30,11 +31,11 @@ class FileTest extends TestCase
 
     public function testFromResponse()
     {
-        $item = File::fromResponse(array(
+        $item = File::fromResponse([
             'file_id' => 'testFileId1',
             'file_size' => 3,
             'file_path' => 'testfilepath'
-        ));
+        ]);
         $this->assertInstanceOf(File::class, $item);
         $this->assertEquals('testFileId1', $item->getFileId());
         $this->assertEquals(3, $item->getFileSize());
@@ -45,10 +46,10 @@ class FileTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = File::fromResponse(array(
+        $item = File::fromResponse([
             'file_size' => 3,
             'file_path' => 'testfilepath'
-        ));
+        ]);
     }
 
     public function testSetFileSizeException()

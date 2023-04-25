@@ -44,12 +44,12 @@ class ContactTest extends TestCase
 
     public function testFromResponse()
     {
-        $contact = Contact::fromResponse(array(
+        $contact = Contact::fromResponse([
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'phone_number' => '123456',
             'user_id' => 'iGusev'
-        ));
+        ]);
         $this->assertInstanceOf('\TelegramBot\Api\Types\Contact', $contact);
         $this->assertEquals('123456', $contact->getPhoneNumber());
         $this->assertEquals('Ilya', $contact->getFirstName());

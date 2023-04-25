@@ -15,12 +15,12 @@ class ShippingAddress extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['country_code', 'state', 'city', 'street_line1', 'street_line2', 'post_code'];
+    protected static $requiredParams = ['country_code', 'state', 'city', 'street_line1', 'street_line2', 'post_code'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'country_code' => true,
         'state' => true,
         'city' => true,

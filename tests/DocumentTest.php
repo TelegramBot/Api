@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\InvalidArgumentException;
 use TelegramBot\Api\Types\Document;
@@ -20,13 +19,13 @@ class DocumentTest extends TestCase
     public function testSetThumb()
     {
         $item = new Document();
-        $thumb = PhotoSize::fromResponse(array(
-            "file_id" => 'testFileId1',
+        $thumb = PhotoSize::fromResponse([
+            'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 1,
             'height' => 2,
             'file_size' => 3
-        ));
+        ]);
         $item->setThumb($thumb);
         $this->assertEquals($thumb, $item->getThumb());
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $item->getThumb());
@@ -63,27 +62,27 @@ class DocumentTest extends TestCase
 
     public function testFromResponse()
     {
-        $item = Document::fromResponse(array(
+        $item = Document::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
-        $thumb = PhotoSize::fromResponse(array(
+            ]
+        ]);
+        $thumb = PhotoSize::fromResponse([
             'file_id' => 'testFileId1',
             'file_unique_id' => 'testFileUniqueId1',
             'width' => 5,
             'height' => 6,
             'file_size' => 7
-        ));
+        ]);
         $this->assertInstanceOf(Document::class, $item);
         $this->assertEquals('testFileId1', $item->getFileId());
         $this->assertEquals('testFileUniqueId1', $item->getFileUniqueId());
@@ -101,17 +100,17 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $item = Document::fromResponse(array(
+        $item = Document::fromResponse([
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
-            'thumb' => array(
+            'thumb' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
                 'height' => 6,
                 'file_size' => 7
-            )
-        ));
+            ]
+        ]);
     }
 }

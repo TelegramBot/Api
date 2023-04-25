@@ -2,13 +2,9 @@
 
 namespace TelegramBot\Api\Test;
 
-
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Yaml\Inline;
 use TelegramBot\Api\BadMethodCallException;
-use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Client;
-use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;

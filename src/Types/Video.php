@@ -19,14 +19,14 @@ class Video extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
+    protected static $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
         'width' => true,
@@ -71,7 +71,6 @@ class Video extends BaseType implements TypeInterface
      * @var PhotoSize
      */
     protected $thumb;
-
 
     /**
      * Optional. Mime type of a file as defined by sender

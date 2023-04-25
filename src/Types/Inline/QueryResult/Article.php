@@ -18,14 +18,14 @@ class Article extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'title', 'input_message_content'];
+    protected static $requiredParams = ['type', 'id', 'title', 'input_message_content'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'title' => true,
@@ -117,7 +117,6 @@ class Article extends AbstractInlineQueryResult
         $this->thumbWidth = $thumbWidth;
         $this->thumbHeight = $thumbHeight;
     }
-
 
     /**
      * @return string

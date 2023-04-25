@@ -209,7 +209,6 @@ class BotApi
         return $this;
     }
 
-
     /**
      * Call method
      *
@@ -288,7 +287,7 @@ class BotApi
      */
     public static function curlValidate($curl, $response = null)
     {
-        $json = json_decode($response, true)?: [];
+        $json = json_decode($response, true) ?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
             && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {
@@ -533,7 +532,6 @@ class BotApi
             'secret_token' => $secret_token
         ]);
     }
-
 
     /**
      * Use this method to clear webhook and use getUpdates again!
@@ -2202,7 +2200,6 @@ class BotApi
         return $this;
     }
 
-
     /**
      * Use this method to send a native poll. A native poll can't be sent to a private chat.
      * On success, the sent \TelegramBot\Api\Types\Message is returned.
@@ -2350,8 +2347,7 @@ class BotApi
         $name,
         $iconColor,
         $iconCustomEmojiId = null
-    )
-    {
+    ) {
         return ForumTopic::fromResponse($this->call('createForumTopic', [
             'chat_id' => $chatId,
             'name' => $name,
@@ -2381,8 +2377,7 @@ class BotApi
         $messageThreadId,
         $name,
         $iconCustomEmojiId = null
-    )
-    {
+    ) {
         return $this->call('editForumTopic', [
             'chat_id' => $chatId,
             'message_thread_id' => $messageThreadId,

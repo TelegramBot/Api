@@ -3,9 +3,7 @@
 namespace TelegramBot\Api\Types\Payments\Query;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\Payments\ArrayOfLabeledPrice;
 use TelegramBot\Api\Types\Payments\OrderInfo;
-use TelegramBot\Api\Types\Payments\ShippingAddress;
 use TelegramBot\Api\Types\User;
 
 /**
@@ -19,12 +17,12 @@ class PreCheckoutQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['id', 'from', 'currency', 'total_amount', 'invoice_payload'];
+    protected static $requiredParams = ['id', 'from', 'currency', 'total_amount', 'invoice_payload'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'currency' => true,

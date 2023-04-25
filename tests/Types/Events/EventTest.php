@@ -109,7 +109,8 @@ class EventTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testExecuteActionFalse($action, $checker, $update) {
+    public function testExecuteActionFalse($action, $checker, $update)
+    {
         $item = new Event($action, $checker);
 
         $reflection = new \ReflectionClass($item);
@@ -145,7 +146,8 @@ class EventTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testExecuteCheckerFalse($action, $checker, $update) {
+    public function testExecuteCheckerFalse($action, $checker, $update)
+    {
         $item = new Event($action, $checker);
 
         $reflection = new \ReflectionClass($item);
