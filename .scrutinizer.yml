@@ -17,6 +17,10 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 build:
+    dependencies:
+        before:
+            - composer remove friendsofphp/php-cs-fixer --dev --no-update
+
     tests:
         override:
             - true
