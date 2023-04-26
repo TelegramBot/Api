@@ -110,81 +110,81 @@ try {
 #### Call to already added commands from callback data
 
 ```php
-	require_once "vendor/autoload.php";
+require_once "vendor/autoload.php";
+
+try {
+	$bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
+	// or initialize with botan.io tracker api key
+	// $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
 	
-	try {
-		$bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
-		// or initialize with botan.io tracker api key
-		// $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+	//Handle /ping command
+	$bot->command('ping', function ($message) use ($bot) {
+		$bot->sendMessage($message->getChat()->getId(), 'pong!');
+	});
+	
+	//Make test inline button
+	$bot->command('test_inline', function ($message) use ($bot) 
+	{
+		$userid = $message->getChat()->getId();
 		
-		//Handle /ping command
-		$bot->command('ping', function ($message) use ($bot) {
-			$bot->sendMessage($message->getChat()->getId(), 'pong!');
-		});
+		$buttons = Array();
+		$buttons[] = array("text" => 'runping', "callback_data" => "command_/ping");
 		
-		//Make test inline button
-		$bot->command('test_inline', function ($message) use ($bot) 
+		$keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(array($buttons));
+		
+		$message = "✅ TEST INLINE.";
+		$bot->sendMessage($userid, $message, null, false, null, null, $keyboard);
+	});
+	
+	//Handle command event
+	$bot->callbackQuery(function ($message) use ($bot) 
+	{
+		$user_id = $message->getMessage()->getChat()->getId();
+		$callback_data = $message->getData();
+		
+		if(preg_match('/^command_/', $callback_data))
 		{
-			$userid = $message->getChat()->getId();
+			$command = preg_replace('/^command_/', '', $callback_data);
+			$message_json = $message->getMessage()->toJson();
 			
-			$buttons = Array();
-			$buttons[] = array("text" => 'runping', "callback_data" => "command_/ping");
+			$bot->answerCallbackQuery($message->getId(), "Request command: {$command}. Loading...");
 			
-			$keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(array($buttons));
-			
-			$message = "✅ TEST INLINE.";
-			$bot->sendMessage($userid, $message, null, false, null, null, $keyboard);
-		});
-		
-		//Handle command event
-		$bot->callbackQuery(function ($message) use ($bot) 
-		{
-			$user_id = $message->getMessage()->getChat()->getId();
-			$callback_data = $message->getData();
-			
-			if(preg_match('/^command_/', $callback_data))
+			if($messageSource = TelegramBot\Api\BotApi::jsonValidate($message_json, true))
 			{
-				$command = preg_replace('/^command_/', '', $callback_data);
-				$message_json = $message->getMessage()->toJson();
+				if(isset($messageSource['reply_markup']))
+				unset($messageSource['reply_markup']);
 				
-				$bot->answerCallbackQuery($message->getId(), "Request command: {$command}. Loading...");
+				$messageSource['text'] = $command;
 				
-				if($messageSource = TelegramBot\Api\BotApi::jsonValidate($message_json, true))
+				$event = $bot->get_event($command);
+				
+				if($event !== false)
 				{
-					if(isset($messageSource['reply_markup']))
-					unset($messageSource['reply_markup']);
+					$data_json = json_encode(["update_id" => rand(11111111,99999999), "message" => $messageSource]);
 					
-					$messageSource['text'] = $command;
-					
-					$event = $bot->get_event($command);
-					
-					if($event !== false)
+					if($data = TelegramBot\Api\BotApi::jsonValidate($data_json, true))
 					{
-						$data_json = json_encode(["update_id" => rand(11111111,99999999), "message" => $messageSource]);
-						
-						if($data = TelegramBot\Api\BotApi::jsonValidate($data_json, true))
-						{
-							$update = TelegramBot\Api\Types\Update::fromResponse($data);
-							$event->executeAction($update); 
-						}
-						else
-						$bot->sendMessage($userid, "🅰️JSON error parse new Update manual build!");
+						$update = TelegramBot\Api\Types\Update::fromResponse($data);
+						$event->executeAction($update); 
 					}
 					else
-					$bot->sendMessage($userid, "🅰️Command '{$command}' not found!");
+					$bot->sendMessage($userid, "🅰️JSON error parse new Update manual build!");
 				}
 				else
-				$bot->sendMessage($userid, "🅰️JSON error parse message source toJson build!");
+				$bot->sendMessage($userid, "🅰️Command '{$command}' not found!");
 			}
-			
-			/* OTHER CALLBACK CODE */
-		});
+			else
+			$bot->sendMessage($userid, "🅰️JSON error parse message source toJson build!");
+		}
 		
-		$bot->run();
-		
-		} catch (\TelegramBot\Api\Exception $e) {
-		$e->getMessage();
-	}
+		/* OTHER CALLBACK CODE */
+	});
+	
+	$bot->run();
+	
+	} catch (\TelegramBot\Api\Exception $e) {
+	$e->getMessage();
+}
 ```
 
 ### Botan SDK (not supported more)
