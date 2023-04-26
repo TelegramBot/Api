@@ -107,6 +107,86 @@ try {
 }
 ```
 
+#### Call to already added commands from callback data
+
+```php
+require_once "vendor/autoload.php";
+
+try {
+    $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
+    // or initialize with botan.io tracker api key
+    // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
+
+    //Handle /ping command
+    $bot->command('ping', function ($message) use ($bot) {
+        $bot->sendMessage($message->getChat()->getId(), 'pong!');
+    });
+    
+    //Make test inline button
+    $bot->command('test_inline', function ($message) use ($bot) 
+	{
+		$userid = $message->getChat()->getId();
+					
+		$buttons = Array();
+		$buttons[] = array("text" => 'runping', "callback_data" => "command_/ping");
+					
+		$keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(array($buttons));
+					
+		$message = "✅ TEST INLINE.";
+		$bot->sendMessage($userid, $message, null, false, null, null, $keyboard);
+	});
+    
+    //Handle command event
+	$bot->callbackQuery(function ($message) use ($bot) 
+	{
+		$user_id = $message->getMessage()->getChat()->getId();
+		$callback_data = $message->getData();
+					
+		if(preg_match('/^command_/', $callback_data))
+		{
+			$command = preg_replace('/^command_/', '', $callback_data);
+			$message_json = $message->getMessage()->toJson();
+						
+			$bot->answerCallbackQuery($message->getId(), "Request command: {$command}. Loading...");
+						
+			if($messageSource = TelegramBot\Api\BotApi::jsonValidate($message_json, true))
+			{
+					if(isset($messageSource['reply_markup']))
+						unset($messageSource['reply_markup']);
+						
+					$messageSource['text'] = $command;
+							
+					$event = $bot->get_event($command);
+							
+					if($event !== false)
+					{
+						$data_json = json_encode(["update_id" => rand(11111111,99999999), "message" => $messageSource]);
+								
+						if($data = TelegramBot\Api\BotApi::jsonValidate($data_json, true))
+						{
+							$update = TelegramBot\Api\Types\Update::fromResponse($data);
+							$event->executeAction($update); 
+						}
+						else
+						$bot->sendMessage($userid, "🅰️JSON error parse new Update manual build!");
+					}
+					else
+					$bot->sendMessage($userid, "🅰️Command '{$command}' not found!");
+			}
+			else
+			$bot->sendMessage($userid, "🅰️JSON error parse message source toJson build!");
+		}
+        
+        /* OTHER CALLBACK CODE */
+	});
+    
+    $bot->run();
+
+} catch (\TelegramBot\Api\Exception $e) {
+    $e->getMessage();
+}
+```
+
 ### Botan SDK (not supported more)
 
 [Botan](http://botan.io) is a telegram bot analytics system based on [Yandex.Appmetrica](http://appmetrica.yandex.com/).
