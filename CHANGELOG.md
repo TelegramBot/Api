@@ -10,6 +10,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 ### Fixed
 - Fix `\TelegramBot\Api\Collection\Collection::addItem` max count constraint (#333)
 - Fix `\TelegramBot\Api\Types\StickerSet` mapping
+- Fix `\TelegramBot\Api\BotApi::copyMessage` not returning `\TelegramBot\Api\Types\MessageId`
 
 ### Deprecated
 - Deprecate `\TelegramBot\Api\Botan` class

@@ -19,6 +19,7 @@ use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\MessageId;
 use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
@@ -369,7 +370,7 @@ class BotApi
      * @param bool $allowSendingWithoutReply
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      *
-     * @return Message
+     * @return MessageId
      * @throws Exception
      * @throws HttpException
      * @throws InvalidJsonException
@@ -387,7 +388,7 @@ class BotApi
         $allowSendingWithoutReply = false,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('copyMessage', [
+        return MessageId::fromResponse($this->call('copyMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
