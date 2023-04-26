@@ -1425,28 +1425,32 @@ class BotApi
     /**
      * Use this method to change the list of the bot's commands. Returns True on success.
      *
-     * @param $commands
+     * @param ArrayOfBotCommand $commands
      *
      * @return mixed
      * @throws Exception
      * @throws HttpException
      * @throws InvalidJsonException
      */
-    public function setMyCommands($commands)
+    public function setMyCommands($commands, $scope = null, $languageCode = null)
     {
-        return $this->call(
-            'setMyCommands',
-            [
-                'commands' => json_encode($commands)
-            ]
-        );
+        if (!$commands instanceof ArrayOfBotCommand) {
+            @trigger_error(sprintf('Passing array of BotCommand to "%s::%s" is deprecated. Use %s', __CLASS__, __METHOD__, ArrayOfBotCommand::class), \E_USER_DEPRECATED);
+            $commands = new ArrayOfBotCommand($commands);
+        }
+
+        return $this->call('setMyCommands', [
+            'commands' => $commands->toJson(),
+            'scope' => $scope,
+            'language_code' => $languageCode,
+        ]);
     }
 
     /**
      * Use this method to get the current list of the bot's commands. Requires no parameters.
      * Returns Array of BotCommand on success.
      *
-     * @return BotCommand[]
+     * @return ArrayOfBotCommand
      *
      * @throws Exception
      * @throws HttpException
