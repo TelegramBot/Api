@@ -142,6 +142,27 @@ class Client
             $this->handle([Update::fromResponse($data)]);
         }
     }
+    /**
+     * Use this method to get already added event by command.
+     *
+     * @return \TelegramBot\Api\Events\Event or false on non found event
+     */
+    public function get_event($command)
+    {
+	    $events = $this->events;
+	
+	    foreach($events->events as $event)
+		{
+		   $checker = $event->getChecker();
+		   $closureReflection = new ReflectionFunction($checker);
+           $variables = $closureReflection->getStaticVariables();
+		    
+		   if(preg_match('/'.$variables['name'].'/', $command))
+			  return $event;
+		}
+	
+        return false;
+    }
 
     public function getRawBody()
     {
