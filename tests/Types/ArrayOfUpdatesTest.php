@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Test\Types;
 
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ArrayOfUpdates;
+use TelegramBot\Api\Types\Update;
 
 class ArrayOfUpdatesTest extends TestCase
 {
@@ -50,7 +51,7 @@ class ArrayOfUpdatesTest extends TestCase
         $this->assertIsArray($items);
 
         foreach($items as $item) {
-            $this->assertInstanceOf('\TelegramBot\Api\Types\Update', $item);
+            $this->assertInstanceOf(Update::class, $item);
         }
     }
 }

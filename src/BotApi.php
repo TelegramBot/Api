@@ -191,6 +191,7 @@ class BotApi
         $this->token = $token;
 
         if ($trackerToken) {
+            @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
             $this->tracker = new Botan($trackerToken);
         }
     }

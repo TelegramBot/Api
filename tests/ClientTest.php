@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\BadMethodCallException;
 use TelegramBot\Api\Client;
+use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
@@ -122,12 +123,12 @@ class ClientTest extends TestCase
      */
     public function testGetInlineQueryChecker($update)
     {
-        $reflectionMethod = new \ReflectionMethod('TelegramBot\Api\Client', 'getInlineQueryChecker');
+        $reflectionMethod = new \ReflectionMethod(Client::class, 'getInlineQueryChecker');
         $reflectionMethod->setAccessible(true);
 
         $result = $reflectionMethod->invoke(null);
 
-        $this->assertInstanceOf('\Closure', $result);
+        $this->assertInstanceOf(\Closure::class, $result);
 
         $this->assertEquals(!is_null($update->getInlineQuery()), call_user_func($result, $update));
     }
@@ -146,7 +147,7 @@ class ClientTest extends TestCase
     {
         $item = new Client('testToken');
 
-        $mockedEventCollection = $this->getMockBuilder('\TelegramBot\Api\Events\EventCollection')
+        $mockedEventCollection = $this->getMockBuilder(EventCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -171,12 +172,12 @@ class ClientTest extends TestCase
      */
     public function testGetChecker($update, $command)
     {
-        $reflectionMethod = new \ReflectionMethod('TelegramBot\Api\Client', 'getChecker');
+        $reflectionMethod = new \ReflectionMethod(Client::class, 'getChecker');
         $reflectionMethod->setAccessible(true);
 
         $result = $reflectionMethod->invoke(null, $command);
 
-        $this->assertInstanceOf('\Closure', $result);
+        $this->assertInstanceOf(\Closure::class, $result);
 
         preg_match(Client::REGEXP, $update->getMessage() ? $update->getMessage()->getText() : '', $matches);
 
@@ -195,7 +196,7 @@ class ClientTest extends TestCase
     {
         $item = new Client('testToken');
 
-        $mockedEventCollection = $this->getMockBuilder('\TelegramBot\Api\Events\EventCollection')
+        $mockedEventCollection = $this->getMockBuilder(EventCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -218,7 +219,7 @@ class ClientTest extends TestCase
      */
     public function testGetEvent($update, $command, $attr1, $attr2)
     {
-        $reflectionMethod = new \ReflectionMethod('TelegramBot\Api\Client', 'getEvent');
+        $reflectionMethod = new \ReflectionMethod(Client::class, 'getEvent');
         $reflectionMethod->setAccessible(true);
         global $test;
 
@@ -243,7 +244,7 @@ class ClientTest extends TestCase
 
         $result = $reflectionMethod->invoke(null, $action);
 
-        $this->assertInstanceOf('\Closure', $result);
+        $this->assertInstanceOf(\Closure::class, $result);
 
         $mustBeCalled = !is_null($update->getMessage());
 
@@ -263,7 +264,7 @@ class ClientTest extends TestCase
      */
     public function testGetInlineQueryEvent($update)
     {
-        $reflectionMethod = new \ReflectionMethod('TelegramBot\Api\Client', 'getInlineQueryEvent');
+        $reflectionMethod = new \ReflectionMethod(Client::class, 'getInlineQueryEvent');
         $reflectionMethod->setAccessible(true);
         global $test;
 
@@ -280,7 +281,7 @@ class ClientTest extends TestCase
 
         $result = $reflectionMethod->invoke(null, $action);
 
-        $this->assertInstanceOf('\Closure', $result);
+        $this->assertInstanceOf(\Closure::class, $result);
 
         $mustBeCalled = !is_null($update->getInlineQuery());
 

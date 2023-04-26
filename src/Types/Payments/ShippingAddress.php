@@ -60,14 +60,14 @@ class ShippingAddress extends BaseType
     /**
      * Second line for the address
      *
-     * @var integer
+     * @var string
      */
     protected $streetLine2;
 
     /**
      * Address post code
      *
-     * @var integer
+     * @var string
      */
     protected $postCode;
 
@@ -145,7 +145,7 @@ class ShippingAddress extends BaseType
 
     /**
      * @author MY
-     * @return int
+     * @return string
      */
     public function getStreetLine2()
     {
@@ -154,7 +154,7 @@ class ShippingAddress extends BaseType
 
     /**
      * @author MY
-     * @param int $streetLine2
+     * @param string $streetLine2
      */
     public function setStreetLine2($streetLine2)
     {
@@ -163,7 +163,7 @@ class ShippingAddress extends BaseType
 
     /**
      * @author MY
-     * @return int
+     * @return string
      */
     public function getPostCode()
     {
@@ -172,7 +172,7 @@ class ShippingAddress extends BaseType
 
     /**
      * @author MY
-     * @param int $postCode
+     * @param string $postCode
      */
     public function setPostCode($postCode)
     {

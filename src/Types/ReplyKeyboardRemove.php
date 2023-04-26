@@ -48,9 +48,9 @@ class ReplyKeyboardRemove extends BaseType
      */
     protected $selective;
 
-    public function __construct($remove_keyboard = true, $selective = false)
+    public function __construct($removeKeyboard = true, $selective = false)
     {
-        $this->removeKeyboard = $remove_keyboard;
+        $this->removeKeyboard = $removeKeyboard;
         $this->selective = $selective;
     }
 
@@ -63,11 +63,11 @@ class ReplyKeyboardRemove extends BaseType
     }
 
     /**
-     * @param bool $remove_keyboard
+     * @param bool $removeKeyboard
      */
-    public function setRemoveKeyboard($remove_keyboard)
+    public function setRemoveKeyboard($removeKeyboard)
     {
-        $this->removeKeyboard = $remove_keyboard;
+        $this->removeKeyboard = $removeKeyboard;
     }
 
     /**

@@ -38,6 +38,7 @@
     },
     "scripts": {
         "test": "vendor/bin/simple-phpunit --colors=always",
+        "coverage": "XDEBUG_MODE=coverage vendor/bin/simple-phpunit --coverage-html build/coverage",
         "cs-fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi",
         "cs-check": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run"
     },

@@ -2,43 +2,66 @@
 
 namespace TelegramBot\Api\Test\Types;
 
-use PHPUnit\Framework\TestCase;
+use TelegramBot\Api\Test\AbstractTypeTest;
 use TelegramBot\Api\Types\MessageEntity;
-use TelegramBot\Api\Types\User;
 
-class MessageEntityTest extends TestCase
+class MessageEntityTest extends AbstractTypeTest
 {
-    public function testTextMentionFromResponse()
+    protected static function getType()
     {
-        $messageEntity = MessageEntity::fromResponse([
+        return MessageEntity::class;
+    }
+
+    public static function getMinResponse()
+    {
+        return [
             'type' => 'text_mention',
             'offset' => 108,
             'length' => 10,
-            'user' => [
-                'id' => 4815162342,
-                'is_bot' => false,
-                'first_name' => 'John',
-                'last_name' => 'Locke',
-                'username' => 'hunter',
-                'language_code' => 'en',
-            ],
-            'custom_emoji_id' => 1,
-        ]);
+        ];
+    }
 
-        $this->assertInstanceOf(MessageEntity::class, $messageEntity);
-        $this->assertEquals(MessageEntity::TYPE_TEXT_MENTION, $messageEntity->getType());
-        $this->assertEquals(108, $messageEntity->getOffset());
-        $this->assertEquals(10, $messageEntity->getLength());
-        $this->assertNull($messageEntity->getUrl());
-        $this->assertInstanceOf(User::class, $messageEntity->getUser());
-        $this->assertEquals(4815162342, $messageEntity->getUser()->getId());
-        $this->assertFalse($messageEntity->getUser()->isBot());
-        $this->assertEquals('John', $messageEntity->getUser()->getFirstName());
-        $this->assertEquals('Locke', $messageEntity->getUser()->getLastName());
-        $this->assertEquals('hunter', $messageEntity->getUser()->getUsername());
-        $this->assertEquals('en', $messageEntity->getUser()->getLanguageCode());
-        $this->assertNull($messageEntity->getLanguage());
-        $this->assertEquals(1, $messageEntity->getCustomEmojiId());
+    public static function getFullResponse()
+    {
+        return [
+            'type' => 'text_mention',
+            'offset' => 108,
+            'length' => 10,
+            'url' => 'url',
+            'user' => UserTest::getMinResponse(),
+            'language' => 'language',
+            'custom_emoji_id' => 'custom_emoji_id',
+        ];
+    }
+
+    /**
+     * @param MessageEntity $item
+     * @return void
+     */
+    protected function assertMinItem($item)
+    {
+        $this->assertEquals(MessageEntity::TYPE_TEXT_MENTION, $item->getType());
+        $this->assertEquals(108, $item->getOffset());
+        $this->assertEquals(10, $item->getLength());
+        $this->assertNull($item->getUrl());
+        $this->assertNull($item->getUser());
+        $this->assertNull($item->getLanguage());
+        $this->assertNull($item->getCustomEmojiId());
+    }
+
+    /**
+     * @param MessageEntity $item
+     * @return void
+     */
+    protected function assertFullItem($item)
+    {
+        $this->assertEquals(MessageEntity::TYPE_TEXT_MENTION, $item->getType());
+        $this->assertEquals(108, $item->getOffset());
+        $this->assertEquals(10, $item->getLength());
+        $this->assertEquals('url', $item->getUrl());
+        $this->assertEquals(UserTest::createMinInstance(), $item->getUser());
+        $this->assertEquals('language', $item->getLanguage());
+        $this->assertEquals('custom_emoji_id', $item->getCustomEmojiId());
     }
 
     public function testPreFromResponse()
