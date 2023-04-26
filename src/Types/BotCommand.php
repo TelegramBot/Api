@@ -3,9 +3,10 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
+use TelegramBot\Api\Collection\CollectionItemInterface;
 use TelegramBot\Api\TypeInterface;
 
-class BotCommand extends BaseType implements TypeInterface
+class BotCommand extends BaseType implements TypeInterface, CollectionItemInterface
 {
     /**
      * {@inheritdoc}
