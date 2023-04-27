@@ -52,7 +52,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value
      *
-     * @var int|string
+     * @var int|float|string
      */
     protected $id;
 
@@ -66,70 +66,70 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Optional. Title, for channels and group chats
      *
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
      * Optional. Username, for private chats and channels if available
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
 
     /**
      * Optional. First name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
 
     /**
      * Optional. Last name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. Chat photo. Returned only in getChat.
      *
-     * @var ChatPhoto
+     * @var ChatPhoto|null
      */
     protected $photo;
 
     /**
      * Optional. Bio of the other party in a private chat. Returned only in getChat
      *
-     * @var string
+     * @var string|null
      */
     protected $bio;
 
     /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $inviteLink;
 
     /**
      * Optional. Pinned message, for supergroups. Returned only in getChat.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $pinnedMessage;
 
     /**
      * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat.
      *
-     * @var ChatPermissions
+     * @var ChatPermissions|null
      */
     protected $permissions;
 
@@ -137,21 +137,21 @@ class Chat extends BaseType implements TypeInterface
      * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged
      * user. Returned only in getChat.
      *
-     * @var int
+     * @var int|null
      */
     protected $slowModeDelay;
 
     /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $stickerSetName;
 
     /**
      * Optional. True, if the bot can change the group sticker set. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSetStickerSet;
 
@@ -161,28 +161,28 @@ class Chat extends BaseType implements TypeInterface
      * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64
      * bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat.
      *
-     * @var int
+     * @var int|null
      */
     protected $linkedChatId;
 
     /**
      * Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat.
      *
-     * @var ChatLocation
+     * @var ChatLocation|null
      */
     protected $location;
 
     /**
      * Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $joinToSendMessages;
 
     /**
      * Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $joinByRequest;
 
@@ -190,21 +190,21 @@ class Chat extends BaseType implements TypeInterface
      * Optional. Time after which all messages sent to the chat will be automatically deleted; in seconds. Returned
      * only in getChat.
      *
-     * @var int
+     * @var int|null
      */
     protected $messageAutoDeleteTime;
 
     /**
      * 	Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $hasProtectedContent;
 
     /**
      * Optional. True, if the supergroup chat is a forum (has topics enabled)
      *
-     * @var bool
+     * @var bool|null
      */
     protected $isForum;
 
@@ -212,14 +212,14 @@ class Chat extends BaseType implements TypeInterface
      * Optional. If non-empty, the list of all active chat usernames;
      * for private chats, supergroups and channels. Returned only in getChat.
      *
-     * @var array[]
+     * @var array[]|null
      */
     protected $activeUsernames;
 
     /**
      * Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $emojiStatusCustomEmojiId;
 
@@ -228,7 +228,7 @@ class Chat extends BaseType implements TypeInterface
      * to use tg://user?id=<user_id> links only in chats with the user.
      * Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $hasPrivateForwards;
 
@@ -236,12 +236,12 @@ class Chat extends BaseType implements TypeInterface
      * Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat.
      * Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $hasRestrictedVoiceAndVideoMessages;
 
     /**
-     * @return int|string
+     * @return int|float|string
      */
     public function getId()
     {
@@ -249,8 +249,8 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int|string $id
-     *
+     * @param mixed $id
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setId($id)
@@ -272,6 +272,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $type
+     * @return void
      */
     public function setType($type)
     {
@@ -279,7 +280,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getTitle()
     {
@@ -288,6 +289,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $title
+     * @return void
      */
     public function setTitle($title)
     {
@@ -295,7 +297,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getUsername()
     {
@@ -304,6 +306,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $username
+     * @return void
      */
     public function setUsername($username)
     {
@@ -311,7 +314,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFirstName()
     {
@@ -320,6 +323,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $firstName
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -327,7 +331,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLastName()
     {
@@ -336,6 +340,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $lastName
+     * @return void
      */
     public function setLastName($lastName)
     {
@@ -343,7 +348,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatPhoto
+     * @return ChatPhoto|null
      */
     public function getPhoto()
     {
@@ -352,6 +357,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatPhoto $photo
+     * @return void
      */
     public function setPhoto($photo)
     {
@@ -359,7 +365,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getBio()
     {
@@ -368,6 +374,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $bio
+     * @return void
      */
     public function setBio($bio)
     {
@@ -375,7 +382,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -384,6 +391,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -391,7 +399,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getInviteLink()
     {
@@ -400,6 +408,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $inviteLink
+     * @return void
      */
     public function setInviteLink($inviteLink)
     {
@@ -407,7 +416,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getPinnedMessage()
     {
@@ -416,6 +425,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param Message $pinnedMessage
+     * @return void
      */
     public function setPinnedMessage($pinnedMessage)
     {
@@ -423,7 +433,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatPermissions
+     * @return ChatPermissions|null
      */
     public function getPermissions()
     {
@@ -432,6 +442,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatPermissions $permissions
+     * @return void
      */
     public function setPermissions($permissions)
     {
@@ -439,7 +450,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getSlowModeDelay()
     {
@@ -448,6 +459,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param int $slowModeDelay
+     * @return void
      */
     public function setSlowModeDelay($slowModeDelay)
     {
@@ -455,7 +467,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getStickerSetName()
     {
@@ -464,6 +476,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $stickerSetName
+     * @return void
      */
     public function setStickerSetName($stickerSetName)
     {
@@ -471,7 +484,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanSetStickerSet()
     {
@@ -480,6 +493,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $canSetStickerSet
+     * @return void
      */
     public function setCanSetStickerSet($canSetStickerSet)
     {
@@ -487,7 +501,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLinkedChatId()
     {
@@ -496,6 +510,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param int $linkedChatId
+     * @return void
      */
     public function setLinkedChatId($linkedChatId)
     {
@@ -503,7 +518,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatLocation
+     * @return ChatLocation|null
      */
     public function getLocation()
     {
@@ -512,6 +527,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatLocation $location
+     * @return void
      */
     public function setLocation($location)
     {
@@ -519,7 +535,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getJoinToSendMessages()
     {
@@ -528,6 +544,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $joinToSendMessages
+     * @return void
      */
     public function setJoinToSendMessages($joinToSendMessages)
     {
@@ -535,7 +552,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getJoinByRequest()
     {
@@ -544,6 +561,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $joinByRequest
+     * @return void
      */
     public function setJoinByRequest($joinByRequest)
     {
@@ -551,7 +569,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMessageAutoDeleteTime()
     {
@@ -560,6 +578,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param int $messageAutoDeleteTime
+     * @return void
      */
     public function setMessageAutoDeleteTime($messageAutoDeleteTime)
     {
@@ -567,7 +586,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getHasProtectedContent()
     {
@@ -576,6 +595,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $hasProtectedContent
+     * @return void
      */
     public function setHasProtectedContent($hasProtectedContent)
     {
@@ -583,7 +603,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getIsForum()
     {
@@ -592,6 +612,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $isForum
+     * @return void
      */
     public function setIsForum($isForum)
     {
@@ -599,7 +620,9 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return array
+     * @return array[]|null
+     *
+     * @psalm-return array<array>|null
      */
     public function getActiveUsernames()
     {
@@ -608,6 +631,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param array $activeUsernames
+     * @return void
      */
     public function setActiveUsernames($activeUsernames)
     {
@@ -615,7 +639,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return null|string
      */
     public function getEmojiStatusCustomEmojiId()
     {
@@ -623,7 +647,8 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param bool $emojiStatusCustomEmojiId
+     * @param string $emojiStatusCustomEmojiId
+     * @return void
      */
     public function setEmojiStatusCustomEmojiId($emojiStatusCustomEmojiId)
     {
@@ -631,7 +656,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getHasPrivateForwards()
     {
@@ -640,6 +665,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $hasPrivateForwards
+     * @return void
      */
     public function setHasPrivateForwards($hasPrivateForwards)
     {
@@ -647,7 +673,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getHasRestrictedVoiceAndVideoMessages()
     {
@@ -656,6 +682,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param bool $hasRestrictedVoiceAndVideoMessages
+     * @return void
      */
     public function setHasRestrictedVoiceAndVideoMessages($hasRestrictedVoiceAndVideoMessages)
     {

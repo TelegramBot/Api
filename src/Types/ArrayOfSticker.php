@@ -4,6 +4,10 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfSticker
 {
+    /**
+     * @param array $data
+     * @return Sticker[]
+     */
     public static function fromResponse($data)
     {
         $arrayOfStickers = [];

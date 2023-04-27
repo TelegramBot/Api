@@ -44,14 +44,14 @@ class ReplyKeyboardMarkup extends BaseType
      * (e.g., make the keyboard smaller if there are just two rows of buttons).
      * Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $resizeKeyboard;
 
     /**
      * Optional. Requests clients to hide the keyboard as soon as it's been used. Defaults to false.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $oneTimeKeyboard;
 
@@ -61,10 +61,16 @@ class ReplyKeyboardMarkup extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
+    /**
+     * @param array $keyboard
+     * @param bool|null $oneTimeKeyboard
+     * @param bool|null $resizeKeyboard
+     * @param bool|null $selective
+     */
     public function __construct($keyboard = [], $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null)
     {
         $this->keyboard = $keyboard;
@@ -83,6 +89,7 @@ class ReplyKeyboardMarkup extends BaseType
 
     /**
      * @param array $keyboard
+     * @return void
      */
     public function setKeyboard($keyboard)
     {
@@ -90,7 +97,7 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isOneTimeKeyboard()
     {
@@ -98,7 +105,8 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @param boolean $oneTimeKeyboard
+     * @param bool $oneTimeKeyboard
+     * @return void
      */
     public function setOneTimeKeyboard($oneTimeKeyboard)
     {
@@ -106,7 +114,7 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isResizeKeyboard()
     {
@@ -114,7 +122,8 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @param boolean $resizeKeyboard
+     * @param bool $resizeKeyboard
+     * @return void
      */
     public function setResizeKeyboard($resizeKeyboard)
     {
@@ -122,7 +131,7 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isSelective()
     {
@@ -130,7 +139,8 @@ class ReplyKeyboardMarkup extends BaseType
     }
 
     /**
-     * @param boolean $selective
+     * @param bool $selective
+     * @return void
      */
     public function setSelective($selective)
     {

@@ -7,7 +7,7 @@ use TelegramBot\Api\Types\Update;
 class Event
 {
     /**
-     * @var \Closure
+     * @var \Closure|null
      */
     protected $checker;
 
@@ -22,7 +22,7 @@ class Event
      * @param \Closure $action
      * @param \Closure|null $checker
      */
-    public function __construct(\Closure $action, \Closure $checker)
+    public function __construct(\Closure $action, \Closure $checker = null)
     {
         $this->action = $action;
         $this->checker = $checker;
@@ -45,8 +45,6 @@ class Event
     }
 
     /**
-     * @param \TelegramBot\Api\Types\Update
-     *
      * @return mixed
      */
     public function executeChecker(Update $message)
@@ -59,16 +57,10 @@ class Event
     }
 
     /**
-     * @param \TelegramBot\Api\Types\Update
-     *
      * @return mixed
      */
     public function executeAction(Update $message)
     {
-        if (is_callable($this->action)) {
-            return call_user_func($this->action, $message);
-        }
-
-        return false;
+        return call_user_func($this->action, $message);
     }
 }

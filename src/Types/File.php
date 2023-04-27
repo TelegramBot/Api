@@ -46,14 +46,14 @@ class File extends BaseType implements TypeInterface
     /**
      * Optional. File size, if known
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
     /**
      * Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
      *
-     * @var string
+     * @var string|null
      */
     protected $filePath;
 
@@ -74,6 +74,7 @@ class File extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -81,7 +82,7 @@ class File extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -89,8 +90,8 @@ class File extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
-     *
+     * @param mixed $fileSize
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
@@ -103,7 +104,7 @@ class File extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFilePath()
     {
@@ -112,6 +113,7 @@ class File extends BaseType implements TypeInterface
 
     /**
      * @param string $filePath
+     * @return void
      */
     public function setFilePath($filePath)
     {
@@ -128,6 +130,7 @@ class File extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {

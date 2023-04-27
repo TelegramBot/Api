@@ -33,7 +33,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     /**
      * Optional. True, if the user is allowed to send text messages, contacts, locations and venues
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendMessages;
 
@@ -41,14 +41,14 @@ class ChatPermissions extends BaseType implements TypeInterface
      * Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes,
      * implies can_send_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendMediaMessages;
 
     /**
      * Optional. True, if the user is allowed to send polls, implies can_send_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendPolls;
 
@@ -56,7 +56,7 @@ class ChatPermissions extends BaseType implements TypeInterface
      * Optional. True, if the user is allowed to send animations, games, stickers and use inline bots, implies
      * can_send_media_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendOtherMessages;
 
@@ -64,7 +64,7 @@ class ChatPermissions extends BaseType implements TypeInterface
      * Optional. True, if the user is allowed to add web page previews to their messages, implies
      * can_send_media_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canAddWebPagePreviews;
 
@@ -72,26 +72,26 @@ class ChatPermissions extends BaseType implements TypeInterface
      * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public
      * supergroups
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canChangeInfo;
 
     /**
      * Optional. True, if the user is allowed to invite new users to the chat
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canInviteUsers;
 
     /**
      * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canPinMessages;
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanSendMessages()
     {
@@ -100,6 +100,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canSendMessages
+     * @return void
      */
     public function setCanSendMessages($canSendMessages)
     {
@@ -107,7 +108,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanSendMediaMessages()
     {
@@ -116,6 +117,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canSendMediaMessages
+     * @return void
      */
     public function setCanSendMediaMessages($canSendMediaMessages)
     {
@@ -123,7 +125,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanSendPolls()
     {
@@ -132,6 +134,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canSendPolls
+     * @return void
      */
     public function setCanSendPolls($canSendPolls)
     {
@@ -139,7 +142,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanSendOtherMessages()
     {
@@ -148,6 +151,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canSendOtherMessages
+     * @return void
      */
     public function setCanSendOtherMessages($canSendOtherMessages)
     {
@@ -155,7 +159,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanAddWebPagePreviews()
     {
@@ -164,6 +168,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canAddWebPagePreviews
+     * @return void
      */
     public function setCanAddWebPagePreviews($canAddWebPagePreviews)
     {
@@ -171,7 +176,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanChangeInfo()
     {
@@ -180,6 +185,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canChangeInfo
+     * @return void
      */
     public function setCanChangeInfo($canChangeInfo)
     {
@@ -187,7 +193,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanInviteUsers()
     {
@@ -196,6 +202,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canInviteUsers
+     * @return void
      */
     public function setCanInviteUsers($canInviteUsers)
     {
@@ -203,7 +210,7 @@ class ChatPermissions extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function isCanPinMessages()
     {
@@ -212,6 +219,7 @@ class ChatPermissions extends BaseType implements TypeInterface
 
     /**
      * @param bool $canPinMessages
+     * @return void
      */
     public function setCanPinMessages($canPinMessages)
     {

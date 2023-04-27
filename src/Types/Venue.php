@@ -65,28 +65,28 @@ class Venue extends BaseType implements TypeInterface
     /**
      * Optional. Foursquare identifier of the venue
      *
-     * @var string
+     * @var string|null
      */
     protected $foursquareId;
 
     /**
      * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
      *
-     * @var string
+     * @var string|null
      */
     protected $foursquareType;
 
     /**
      * Optional. Google Places identifier of the venue
      *
-     * @var string
+     * @var string|null
      */
     protected $googlePlaceId;
 
     /**
      * Optional. Google Places type of the venue.
      *
-     * @var string
+     * @var string|null
      */
     protected $googlePlaceType;
 
@@ -100,6 +100,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param Location $location
+     *
+     * @return void
      */
     public function setLocation($location)
     {
@@ -116,6 +118,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -132,6 +136,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $address
+     *
+     * @return void
      */
     public function setAddress($address)
     {
@@ -139,7 +145,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFoursquareId()
     {
@@ -148,6 +154,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $foursquareId
+     *
+     * @return void
      */
     public function setFoursquareId($foursquareId)
     {
@@ -155,7 +163,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFoursquareType()
     {
@@ -164,6 +172,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $foursquareType
+     *
+     * @return void
      */
     public function setFoursquareType($foursquareType)
     {
@@ -171,7 +181,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getGooglePlaceId()
     {
@@ -180,6 +190,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $googlePlaceId
+     *
+     * @return void
      */
     public function setGooglePlaceId($googlePlaceId)
     {
@@ -187,7 +199,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getGooglePlaceType()
     {
@@ -196,6 +208,8 @@ class Venue extends BaseType implements TypeInterface
 
     /**
      * @param string $googlePlaceType
+     *
+     * @return void
      */
     public function setGooglePlaceType($googlePlaceType)
     {

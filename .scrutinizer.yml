@@ -20,6 +20,7 @@ build:
     dependencies:
         before:
             - composer remove friendsofphp/php-cs-fixer --dev --no-update
+            - composer remove vimeo/psalm --dev --no-update
 
     tests:
         override:

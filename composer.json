@@ -24,7 +24,8 @@
     },
     "require-dev": {
         "symfony/phpunit-bridge" : "*",
-        "friendsofphp/php-cs-fixer": "^3.16"
+        "friendsofphp/php-cs-fixer": "^3.16",
+        "vimeo/psalm": "^5.9"
     },
     "autoload": {
         "psr-4": {
@@ -39,6 +40,7 @@
     "scripts": {
         "test": "vendor/bin/simple-phpunit --colors=always",
         "coverage": "XDEBUG_MODE=coverage vendor/bin/simple-phpunit --coverage-html build/coverage",
+        "psalm": "vendor/bin/psalm",
         "cs-fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi",
         "cs-check": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run"
     },

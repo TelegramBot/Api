@@ -59,63 +59,63 @@ class ChatMember extends BaseType
     /**
      * Optional. Restricted and kicked only. Date when restrictions will be lifted for this user, unix time
      *
-     * @var integer
+     * @var integer|null
      */
     protected $untilDate;
 
     /**
      * Optional. Administrators only. True, if the bot is allowed to edit administrator privileges of that user
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canBeEdited;
 
     /**
      * Optional. Administrators only. True, if the administrator can change the chat title, photo and other settings
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canChangeInfo;
 
     /**
      * Optional. Administrators only. True, if the administrator can post in the channel, channels only
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canPostMessages;
 
     /**
      * Optional. Administrators only. True, if the administrator can edit messages of other users, channels only
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canEditMessages;
 
     /**
      * Optional. Administrators only. True, if the administrator can delete messages of other users
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canDeleteMessages;
 
     /**
      * Optional. Administrators only. True, if the administrator can invite new users to the chat
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canInviteUsers;
 
     /**
      * Optional. Administrators only. True, if the administrator can restrict, ban or unban chat members
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canRestrictMembers;
 
     /**
      * Optional. Administrators only. True, if the administrator can pin messages, supergroups only
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canPinMessages;
 
@@ -124,14 +124,14 @@ class ChatMember extends BaseType
      * privileges or demote administrators that he has promoted, directly or indirectly
      * (promoted by administrators that were appointed by the user)
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canPromoteMembers;
 
     /**
      * Optional. Restricted only. True, if the user can send text messages, contacts, locations and venues
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendMessages;
 
@@ -139,7 +139,7 @@ class ChatMember extends BaseType
      * Optional. Restricted only. True, if the user can send audios, documents, photos, videos, video notes
      * and voice notes, implies can_send_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendMediaMessages;
 
@@ -147,7 +147,7 @@ class ChatMember extends BaseType
      * Optional. Restricted only. True, if the user can send animations, games, stickers and use inline bots,
      * implies can_send_media_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSendOtherMessages;
 
@@ -155,14 +155,14 @@ class ChatMember extends BaseType
      * Optional. Restricted only. True, if user may add web page previews to his messages,
      * implies can_send_media_messages
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canAddWebPagePreviews;
 
     /**
      * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canManageTopics;
 
@@ -176,7 +176,7 @@ class ChatMember extends BaseType
     /**
      * Optional. Custom title for this user
      *
-     * @var string
+     * @var string|null
      */
     protected $customTitle;
 
@@ -206,6 +206,7 @@ class ChatMember extends BaseType
 
     /**
      * @param User $user
+     * @return void
      */
     public function setUser($user)
     {
@@ -222,6 +223,7 @@ class ChatMember extends BaseType
 
     /**
      * @param string $status
+     * @return void
      */
     public function setStatus($status)
     {
@@ -229,7 +231,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getUntilDate()
     {
@@ -238,6 +240,7 @@ class ChatMember extends BaseType
 
     /**
      * @param int $untilDate
+     * @return void
      */
     public function setUntilDate($untilDate)
     {
@@ -245,7 +248,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanBeEdited()
     {
@@ -254,6 +257,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canBeEdited
+     * @return void
      */
     public function setCanBeEdited($canBeEdited)
     {
@@ -261,7 +265,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanChangeInfo()
     {
@@ -270,6 +274,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canChangeInfo
+     * @return void
      */
     public function setCanChangeInfo($canChangeInfo)
     {
@@ -277,7 +282,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanPostMessages()
     {
@@ -286,6 +291,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canPostMessages
+     * @return void
      */
     public function setCanPostMessages($canPostMessages)
     {
@@ -293,7 +299,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanEditMessages()
     {
@@ -302,6 +308,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canEditMessages
+     * @return void
      */
     public function setCanEditMessages($canEditMessages)
     {
@@ -309,7 +316,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanDeleteMessages()
     {
@@ -318,6 +325,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canDeleteMessages
+     * @return void
      */
     public function setCanDeleteMessages($canDeleteMessages)
     {
@@ -325,7 +333,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanInviteUsers()
     {
@@ -334,6 +342,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canInviteUsers
+     * @return void
      */
     public function setCanInviteUsers($canInviteUsers)
     {
@@ -341,7 +350,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanRestrictMembers()
     {
@@ -350,6 +359,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canRestrictMembers
+     * @return void
      */
     public function setCanRestrictMembers($canRestrictMembers)
     {
@@ -357,7 +367,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanPinMessages()
     {
@@ -366,6 +376,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canPinMessages
+     * @return void
      */
     public function setCanPinMessages($canPinMessages)
     {
@@ -373,7 +384,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanPromoteMembers()
     {
@@ -382,6 +393,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canPromoteMembers
+     * @return void
      */
     public function setCanPromoteMembers($canPromoteMembers)
     {
@@ -389,7 +401,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanSendMessages()
     {
@@ -398,6 +410,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canSendMessages
+     * @return void
      */
     public function setCanSendMessages($canSendMessages)
     {
@@ -405,7 +418,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanSendMediaMessages()
     {
@@ -414,6 +427,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canSendMediaMessages
+     * @return void
      */
     public function setCanSendMediaMessages($canSendMediaMessages)
     {
@@ -421,7 +435,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanSendOtherMessages()
     {
@@ -430,6 +444,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canSendOtherMessages
+     * @return void
      */
     public function setCanSendOtherMessages($canSendOtherMessages)
     {
@@ -437,7 +452,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanAddWebPagePreviews()
     {
@@ -446,6 +461,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canAddWebPagePreviews
+     * @return void
      */
     public function setCanAddWebPagePreviews($canAddWebPagePreviews)
     {
@@ -462,6 +478,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canManageChat
+     * @return void
      */
     public function setCanManageChat($canManageChat)
     {
@@ -478,6 +495,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $isAnonymous
+     * @return void
      */
     public function setIsAnonymous($isAnonymous)
     {
@@ -494,6 +512,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canSendPolls
+     * @return void
      */
     public function setCanSendPolls($canSendPolls)
     {
@@ -501,7 +520,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanManageTopics()
     {
@@ -510,6 +529,7 @@ class ChatMember extends BaseType
 
     /**
      * @param bool $canManageTopics
+     * @return void
      */
     public function setCanManageTopics($canManageTopics)
     {
@@ -517,7 +537,7 @@ class ChatMember extends BaseType
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getCustomTitle()
     {
@@ -526,6 +546,7 @@ class ChatMember extends BaseType
 
     /**
      * @param string $customTitle
+     * @return void
      */
     public function setCustomTitle($customTitle)
     {

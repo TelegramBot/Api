@@ -109,26 +109,6 @@ class EventTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testExecuteActionFalse($action, $checker, $update)
-    {
-        $item = new Event($action, $checker);
-
-        $reflection = new \ReflectionClass($item);
-        $reflectionProperty = $reflection->getProperty('action');
-        $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($item, 1);
-        $reflectionProperty->setAccessible(false);
-
-        $this->assertFalse($item->executeAction($update));
-    }
-
-    /**
-     * @param \Closure $action
-     * @param \Closure $checker
-     * @param Update $update
-     *
-     * @dataProvider data
-     */
     public function testExecuteCheker($action, $checker, $update)
     {
         $item = new Event($action, $checker);

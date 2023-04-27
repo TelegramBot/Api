@@ -75,14 +75,14 @@ class Sticker extends BaseType implements TypeInterface
     /**
      * 	Optional. Sticker thumbnail in the .WEBP or .JPG format
      *
-     * @var PhotoSize
+     * @var PhotoSize|null
      */
     protected $thumb;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -106,7 +106,7 @@ class Sticker extends BaseType implements TypeInterface
     /**
      * Optional. For premium regular stickers, premium animation for the sticker
      *
-     * @var File
+     * @var File|null
      */
     protected $premiumAnimation;
 
@@ -127,28 +127,28 @@ class Sticker extends BaseType implements TypeInterface
     /**
      * Optional. Emoji associated with the sticker
      *
-     * @var string
+     * @var string|null
      */
     protected $emoji;
 
     /**
      * Optional. Name of the sticker set to which the sticker belongs
      *
-     * @var string
+     * @var string|null
      */
     protected $setName;
 
     /**
      * Optional. For mask stickers, the position where the mask should be placed
      *
-     * @var MaskPosition
+     * @var MaskPosition|null
      */
     protected $maskPosition;
 
     /**
      * Optional. For custom emoji stickers, unique identifier of the custom emoji
      *
-     * @var string
+     * @var string|null
      */
     protected $customEmojiId;
 
@@ -162,6 +162,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     *
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -169,7 +171,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -177,9 +179,11 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
+     * @param mixed $fileSize
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setFileSize($fileSize)
     {
@@ -199,9 +203,11 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $height
+     * @param mixed $height
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setHeight($height)
     {
@@ -213,7 +219,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PhotoSize
+     * @return PhotoSize|null
      */
     public function getThumb()
     {
@@ -222,6 +228,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     *
+     * @return void
      */
     public function setThumb(PhotoSize $thumb)
     {
@@ -237,9 +245,11 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $width
+     * @param mixed $width
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setWidth($width)
     {
@@ -260,6 +270,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $type
+     *
+     * @return void
      */
     public function setType($type)
     {
@@ -276,6 +288,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     *
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {
@@ -283,7 +297,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return File
+     * @return File|null
      */
     public function getPremiumAnimation()
     {
@@ -292,6 +306,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param File $premiumAnimation
+     *
+     * @return void
      */
     public function setPremiumAnimation(File $premiumAnimation)
     {
@@ -308,6 +324,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param bool $isAnimated
+     *
+     * @return void
      */
     public function setIsAnimated($isAnimated)
     {
@@ -324,6 +342,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param bool $isVideo
+     *
+     * @return void
      */
     public function setIsVideo($isVideo)
     {
@@ -331,7 +351,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getEmoji()
     {
@@ -340,6 +360,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $emoji
+     *
+     * @return void
      */
     public function setEmoji($emoji)
     {
@@ -347,7 +369,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getSetName()
     {
@@ -356,6 +378,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $setName
+     *
+     * @return void
      */
     public function setSetName($setName)
     {
@@ -363,7 +387,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return MaskPosition
+     * @return MaskPosition|null
      */
     public function getMaskPosition()
     {
@@ -372,6 +396,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param MaskPosition $maskPosition
+     *
+     * @return void
      */
     public function setMaskPosition(MaskPosition $maskPosition)
     {
@@ -379,7 +405,7 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getCustomEmojiId()
     {
@@ -388,6 +414,8 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * @param string $customEmojiId
+     *
+     * @return void
      */
     public function setCustomEmojiId($customEmojiId)
     {

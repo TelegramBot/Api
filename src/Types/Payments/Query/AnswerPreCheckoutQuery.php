@@ -49,7 +49,7 @@ class AnswerPreCheckoutQuery extends BaseType
 
     /**
      * @author MY
-     * @return true
+     * @return bool
      */
     public function getOk()
     {
@@ -58,7 +58,10 @@ class AnswerPreCheckoutQuery extends BaseType
 
     /**
      * @author MY
-     * @param true $ok
+     *
+     * @param bool $ok
+     *
+     * @return void
      */
     public function setOk($ok)
     {
@@ -76,7 +79,10 @@ class AnswerPreCheckoutQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $errorMessage
+     *
+     * @return void
      */
     public function setErrorMessage($errorMessage)
     {
@@ -94,7 +100,10 @@ class AnswerPreCheckoutQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $preCheckoutQueryId
+     *
+     * @return void
      */
     public function setPreCheckoutQueryId($preCheckoutQueryId)
     {

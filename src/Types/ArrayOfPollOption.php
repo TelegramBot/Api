@@ -4,6 +4,10 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfPollOption
 {
+    /**
+     * @param array $data
+     * @return PollOption[]
+     */
     public static function fromResponse($data)
     {
         $arrayOfPollOption = [];

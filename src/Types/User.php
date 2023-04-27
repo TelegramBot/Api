@@ -43,7 +43,7 @@ class User extends BaseType implements TypeInterface
     /**
      * Unique identifier for this user or bot
      *
-     * @var int
+     * @var int|float
      */
     protected $id;
 
@@ -57,21 +57,21 @@ class User extends BaseType implements TypeInterface
     /**
      * Optional. User‘s or bot’s last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. User‘s or bot’s username
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
 
     /**
      * Optional. IETF language tag of the user's language
      *
-     * @var string
+     * @var string|null
      */
     protected $languageCode;
 
@@ -85,35 +85,35 @@ class User extends BaseType implements TypeInterface
     /**
      * Optional. True, if this user is a Telegram Premium user
      *
-     * @var bool
+     * @var bool|null
      */
     protected $isPremium;
 
     /**
      * Optional. True, if this user added the bot to the attachment menu
      *
-     * @var bool
+     * @var bool|null
      */
     protected $addedToAttachmentMenu;
 
     /**
      * Optional. True, if the bot can be invited to groups. Returned only in getMe.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canJoinGroups;
 
     /**
      * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canReadAllGroupMessages;
 
     /**
      * Optional. True, if the bot supports inline queries. Returned only in getMe.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $supportsInlineQueries;
 
@@ -127,6 +127,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param string $firstName
+     *
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -134,7 +136,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|float
      */
     public function getId()
     {
@@ -142,9 +144,11 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setId($id)
     {
@@ -156,7 +160,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLastName()
     {
@@ -165,6 +169,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param string $lastName
+     *
+     * @return void
      */
     public function setLastName($lastName)
     {
@@ -172,7 +178,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getUsername()
     {
@@ -181,6 +187,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param string $username
+     *
+     * @return void
      */
     public function setUsername($username)
     {
@@ -188,7 +196,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLanguageCode()
     {
@@ -197,6 +205,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param string $languageCode
+     *
+     * @return void
      */
     public function setLanguageCode($languageCode)
     {
@@ -213,6 +223,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $isBot
+     *
+     * @return void
      */
     public function setIsBot($isBot)
     {
@@ -221,6 +233,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $isPremium
+     *
+     * @return void
      */
     public function setIsPremium($isPremium)
     {
@@ -228,7 +242,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getIsPremium()
     {
@@ -237,6 +251,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $addedToAttachmentMenu
+     *
+     * @return void
      */
     public function setAddedToAttachmentMenu($addedToAttachmentMenu)
     {
@@ -244,7 +260,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getAddedToAttachmentMenu()
     {
@@ -253,6 +269,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $canJoinGroups
+     *
+     * @return void
      */
     public function setCanJoinGroups($canJoinGroups)
     {
@@ -260,7 +278,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanJoinGroups()
     {
@@ -269,6 +287,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $canReadAllGroupMessages
+     *
+     * @return void
      */
     public function setCanReadAllGroupMessages($canReadAllGroupMessages)
     {
@@ -276,7 +296,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getCanReadAllGroupMessages()
     {
@@ -285,6 +305,8 @@ class User extends BaseType implements TypeInterface
 
     /**
      * @param bool $supportsInlineQueries
+     *
+     * @return void
      */
     public function setSupportsInlineQueries($supportsInlineQueries)
     {
@@ -292,7 +314,7 @@ class User extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getSupportsInlineQueries()
     {

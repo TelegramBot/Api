@@ -65,14 +65,14 @@ class WebhookInfo extends BaseType implements TypeInterface
     /**
      * Optional. Currently used webhook IP address
      *
-     * @var string
+     * @var string|null
      */
     protected $ipAddress;
 
     /**
      * Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook
      *
-     * @var int
+     * @var int|null
      */
     protected $lastErrorDate;
 
@@ -80,7 +80,7 @@ class WebhookInfo extends BaseType implements TypeInterface
      * Optional. Error message in human-readable format for the most recent error that happened when trying to deliver
      * an update via webhook
      *
-     * @var string
+     * @var string|null
      */
     protected $lastErrorMessage;
 
@@ -88,21 +88,21 @@ class WebhookInfo extends BaseType implements TypeInterface
      * Optional. Unix time of the most recent error that happened when trying to synchronize available updates
      * with Telegram datacenters
      *
-     * @var int
+     * @var int|null
      */
     protected $lastSynchronizationErrorDate;
 
     /**
      * Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery
      *
-     * @var int
+     * @var int|null
      */
     protected $maxConnections;
 
     /**
      * Optional. A list of update types the bot is subscribed to. Defaults to all update types
      *
-     * @var array
+     * @var array|null
      */
     protected $allowedUpdates;
 
@@ -116,6 +116,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param string $url
+     *
+     * @return void
      */
     public function setUrl($url)
     {
@@ -132,6 +134,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param bool $hasCustomCertificate
+     *
+     * @return void
      */
     public function setHasCustomCertificate($hasCustomCertificate)
     {
@@ -140,6 +144,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param string $ipAddress
+     *
+     * @return void
      */
     public function setIpAddress($ipAddress)
     {
@@ -147,7 +153,7 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getIpAddress()
     {
@@ -164,6 +170,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param int $pendingUpdateCount
+     *
+     * @return void
      */
     public function setPendingUpdateCount($pendingUpdateCount)
     {
@@ -171,7 +179,7 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLastErrorDate()
     {
@@ -180,6 +188,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param int $lastErrorDate
+     *
+     * @return void
      */
     public function setLastErrorDate($lastErrorDate)
     {
@@ -187,7 +197,7 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLastErrorMessage()
     {
@@ -196,6 +206,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param string $lastErrorMessage
+     *
+     * @return void
      */
     public function setLastErrorMessage($lastErrorMessage)
     {
@@ -203,7 +215,9 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $lastSynchronizationErrorDate
+     * @param int $lastSynchronizationErrorDate
+     *
+     * @return void
      */
     public function setLastSynchronizationErrorDate($lastSynchronizationErrorDate)
     {
@@ -211,15 +225,15 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getlastSynchronizationErrorDate()
+    public function getLastSynchronizationErrorDate()
     {
         return $this->lastSynchronizationErrorDate;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMaxConnections()
     {
@@ -228,6 +242,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param int $maxConnections
+     *
+     * @return void
      */
     public function setMaxConnections($maxConnections)
     {
@@ -235,7 +251,7 @@ class WebhookInfo extends BaseType implements TypeInterface
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getAllowedUpdates()
     {
@@ -244,6 +260,8 @@ class WebhookInfo extends BaseType implements TypeInterface
 
     /**
      * @param array $allowedUpdates
+     *
+     * @return void
      */
     public function setAllowedUpdates($allowedUpdates)
     {

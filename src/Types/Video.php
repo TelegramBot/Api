@@ -75,14 +75,14 @@ class Video extends BaseType implements TypeInterface
     /**
      * Optional. Mime type of a file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -102,9 +102,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $duration
+     * @param mixed $duration
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setDuration($duration)
     {
@@ -125,6 +127,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     *
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -132,7 +136,7 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -140,9 +144,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
+     * @param mixed $fileSize
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setFileSize($fileSize)
     {
@@ -162,9 +168,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $height
+     * @param mixed $height
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setHeight($height)
     {
@@ -176,7 +184,7 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getMimeType()
     {
@@ -185,6 +193,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $mimeType
+     *
+     * @return void
      */
     public function setMimeType($mimeType)
     {
@@ -201,6 +211,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     *
+     * @return void
      */
     public function setThumb(PhotoSize $thumb)
     {
@@ -216,9 +228,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $width
+     * @param mixed $width
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setWidth($width)
     {
@@ -239,6 +253,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     *
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {

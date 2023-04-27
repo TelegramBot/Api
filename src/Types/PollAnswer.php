@@ -59,6 +59,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param string $id
+     * @return void
      */
     public function setPollId($id)
     {
@@ -75,6 +76,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param User $from
+     * @return void
      */
     public function setUser(User $from)
     {
@@ -103,6 +105,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param int[] $optionIds
+     * @return void
      */
     public function setOptionIds($optionIds)
     {

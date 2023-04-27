@@ -57,7 +57,7 @@ class ForumTopic extends BaseType implements TypeInterface
     /**
      * Optional. Unique identifier of the custom emoji shown as the topic icon
      *
-     * @var string
+     * @var string|null
      */
     protected $iconCustomEmojiId;
 
@@ -71,6 +71,7 @@ class ForumTopic extends BaseType implements TypeInterface
 
     /**
      * @param int $messageThreadId
+     * @return void
      */
     public function setMessageThreadId($messageThreadId)
     {
@@ -87,6 +88,7 @@ class ForumTopic extends BaseType implements TypeInterface
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -103,6 +105,7 @@ class ForumTopic extends BaseType implements TypeInterface
 
     /**
      * @param int $iconColor
+     * @return void
      */
     public function setIconColor($iconColor)
     {
@@ -110,7 +113,7 @@ class ForumTopic extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getIconCustomEmojiId()
     {
@@ -119,6 +122,7 @@ class ForumTopic extends BaseType implements TypeInterface
 
     /**
      * @param string $iconCustomEmojiId
+     * @return void
      */
     public function setIconCustomEmojiId($iconCustomEmojiId)
     {

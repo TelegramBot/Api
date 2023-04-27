@@ -54,6 +54,8 @@ class InlineKeyboardMarkup extends BaseType
 
     /**
      * @param array $inlineKeyboard
+     *
+     * @return void
      */
     public function setInlineKeyboard($inlineKeyboard)
     {

@@ -78,7 +78,7 @@ class Poll extends BaseType implements TypeInterface
     /**
      * True, if the poll is closed
      *
-     * @var boolean
+     * @var bool
      */
     protected $isClosed;
 
@@ -108,7 +108,7 @@ class Poll extends BaseType implements TypeInterface
      * Available only for polls in the quiz mode, which are closed, or was sent (not forwarded)
      * by the bot or to the private chat with the bot.
      *
-     * @var int
+     * @var int|null
      */
     protected $correctOptionId;
 
@@ -122,6 +122,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param string $id
+     * @return void
      */
     public function setId($id)
     {
@@ -138,6 +139,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param string $question
+     * @return void
      */
     public function setQuestion($question)
     {
@@ -154,6 +156,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param array $options
+     * @return void
      */
     public function setOptions($options)
     {
@@ -170,6 +173,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param int $totalVoterCount
+     * @return void
      */
     public function setTotalVoterCount($totalVoterCount)
     {
@@ -186,6 +190,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param bool $isClosed
+     * @return void
      */
     public function setIsClosed($isClosed)
     {
@@ -202,6 +207,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param bool $isAnonymous
+     * @return void
      */
     public function setIsAnonymous($isAnonymous)
     {
@@ -218,6 +224,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param string $type
+     * @return void
      */
     public function setType($type)
     {
@@ -234,6 +241,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param bool $allowsMultipleAnswers
+     * @return void
      */
     public function setAllowsMultipleAnswers($allowsMultipleAnswers)
     {
@@ -241,7 +249,7 @@ class Poll extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getCorrectOptionId()
     {
@@ -250,6 +258,7 @@ class Poll extends BaseType implements TypeInterface
 
     /**
      * @param int $correctOptionId
+     * @return void
      */
     public function setCorrectOptionId($correctOptionId)
     {

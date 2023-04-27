@@ -51,7 +51,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
     /**
      * Optional. Caption of the photo to be sent, 0-200 characters.
      *
-     * @var string
+     * @var string|null
      */
     protected $caption;
 
@@ -59,7 +59,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
      * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic,
      * fixed-width text or inline URLs in the media caption.
      *
-     * @var string
+     * @var string|null
      */
     protected $parseMode;
 
@@ -73,6 +73,8 @@ class InputMedia extends BaseType implements CollectionItemInterface
 
     /**
      * @param string $type
+     *
+     * @return void
      */
     public function setType($type)
     {
@@ -89,6 +91,8 @@ class InputMedia extends BaseType implements CollectionItemInterface
 
     /**
      * @param string $media
+     *
+     * @return void
      */
     public function setMedia($media)
     {
@@ -96,7 +100,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCaption()
     {
@@ -104,7 +108,9 @@ class InputMedia extends BaseType implements CollectionItemInterface
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
+     *
+     * @return void
      */
     public function setCaption($caption)
     {
@@ -112,7 +118,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getParseMode()
     {
@@ -120,7 +126,9 @@ class InputMedia extends BaseType implements CollectionItemInterface
     }
 
     /**
-     * @param string $parseMode
+     * @param string|null $parseMode
+     *
+     * @return void
      */
     public function setParseMode($parseMode)
     {

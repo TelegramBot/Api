@@ -52,7 +52,7 @@ class Location extends BaseType implements TypeInterface
     /**
      * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
      *
-     * @var float
+     * @var float|null
      */
     protected $horizontalAccuracy;
 
@@ -60,14 +60,14 @@ class Location extends BaseType implements TypeInterface
      * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For
      * active live locations only.
      *
-     * @var int
+     * @var int|null
      */
     protected $livePeriod;
 
     /**
      * Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
      *
-     * @var int
+     * @var int|null
      */
     protected $heading;
 
@@ -75,7 +75,7 @@ class Location extends BaseType implements TypeInterface
      * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live
      * locations only.
      *
-     * @var int
+     * @var int|null
      */
     protected $proximityAlertRadius;
 
@@ -88,8 +88,8 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param float $latitude
-     *
+     * @param mixed $latitude
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setLatitude($latitude)
@@ -110,8 +110,8 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param float $longitude
-     *
+     * @param mixed $longitude
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setLongitude($longitude)
@@ -124,7 +124,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getHorizontalAccuracy()
     {
@@ -132,8 +132,8 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param float $horizontalAccuracy
-     *
+     * @param mixed $horizontalAccuracy
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setHorizontalAccuracy($horizontalAccuracy)
@@ -146,7 +146,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLivePeriod()
     {
@@ -155,6 +155,7 @@ class Location extends BaseType implements TypeInterface
 
     /**
      * @param int $livePeriod
+     * @return void
      */
     public function setLivePeriod($livePeriod)
     {
@@ -162,7 +163,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getHeading()
     {
@@ -171,6 +172,7 @@ class Location extends BaseType implements TypeInterface
 
     /**
      * @param int $heading
+     * @return void
      */
     public function setHeading($heading)
     {
@@ -178,7 +180,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getProximityAlertRadius()
     {
@@ -187,6 +189,7 @@ class Location extends BaseType implements TypeInterface
 
     /**
      * @param int $proximityAlertRadius
+     * @return void
      */
     public function setProximityAlertRadius($proximityAlertRadius)
     {

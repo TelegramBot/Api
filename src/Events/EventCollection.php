@@ -19,7 +19,7 @@ class EventCollection
     /**
      * Botan tracker
      *
-     * @var \TelegramBot\Api\Botan
+     * @var \TelegramBot\Api\Botan|null
      */
     protected $tracker;
 
@@ -30,6 +30,7 @@ class EventCollection
      */
     public function __construct($trackerToken = null)
     {
+        $this->events = [];
         if ($trackerToken) {
             @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
             $this->tracker = new Botan($trackerToken);
@@ -54,17 +55,17 @@ class EventCollection
     }
 
     /**
-     * @param \TelegramBot\Api\Types\Update
+     * @return void
      */
     public function handle(Update $update)
     {
         foreach ($this->events as $event) {
             /* @var \TelegramBot\Api\Events\Event $event */
             if ($event->executeChecker($update) === true) {
-                if (false === $event->executeAction($update)) {
-                    if (!is_null($this->tracker)) {
+                if ($event->executeAction($update) === false) {
+                    if ($this->tracker && ($message = $update->getMessage())) {
                         $checker = new ReflectionFunction($event->getChecker());
-                        $this->tracker->track($update->getMessage(), $checker->getStaticVariables()['name']);
+                        $this->tracker->track($message, $checker->getStaticVariables()['name']);
                     }
                     break;
                 }

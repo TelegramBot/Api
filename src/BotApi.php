@@ -14,6 +14,7 @@ use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\ForceReply;
 use TelegramBot\Api\Types\ForumTopic;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
@@ -110,6 +111,9 @@ class BotApi
         511 => 'Network Authentication Required',                             // RFC6585
     ];
 
+    /**
+     * @var array
+     */
     private $proxySettings = [];
 
     /**
@@ -140,7 +144,7 @@ class BotApi
     /**
      * CURL object
      *
-     * @var
+     * @var resource
      */
     protected $curl;
 
@@ -161,7 +165,7 @@ class BotApi
     /**
      * Botan tracker
      *
-     * @var Botan
+     * @var Botan|null
      */
     protected $tracker;
 
@@ -216,6 +220,7 @@ class BotApi
      *
      * @param string $method
      * @param array|null $data
+     * @param int $timeout
      *
      * @return mixed
      * @throws Exception
@@ -237,13 +242,13 @@ class BotApi
             $options[CURLOPT_POSTFIELDS] = $data;
         }
 
-        if (!empty($this->customCurlOptions) && is_array($this->customCurlOptions)) {
+        if (!empty($this->customCurlOptions)) {
             $options = $this->customCurlOptions + $options;
         }
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
-        if ($this->returnArray) {
+        if (\is_array($response)) {
             if (!isset($response['ok']) || !$response['ok']) {
                 throw new Exception($response['description'], $response['error_code']);
             }
@@ -271,6 +276,7 @@ class BotApi
     {
         curl_setopt_array($this->curl, $options);
 
+        /** @var string|false $result */
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl, $result);
         if ($result === false) {
@@ -284,12 +290,19 @@ class BotApi
      * Response validation
      *
      * @param resource $curl
-     * @param string $response
+     * @param string|false|null $response
+     *
      * @throws HttpException
+     *
+     * @return void
      */
     public static function curlValidate($curl, $response = null)
     {
-        $json = json_decode($response, true) ?: [];
+        if ($response) {
+            $json = json_decode($response, true) ?: [];
+        } else {
+            $json = [];
+        }
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
             && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {
@@ -303,7 +316,7 @@ class BotApi
      * JSON validation
      *
      * @param string $jsonString
-     * @param boolean $asArray
+     * @param bool $asArray
      *
      * @return object|array
      * @throws InvalidJsonException
@@ -328,7 +341,7 @@ class BotApi
      * @param bool $disablePreview
      * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardHide|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      *
      * @return Message
@@ -650,6 +663,7 @@ class BotApi
 
     /**
      * Use this method to edit live location messages sent by the bot or via the bot (for inline bots).
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string                                                              $chatId
      * @param int                                                                     $messageId
@@ -658,7 +672,7 @@ class BotApi
      * @param float                                                                   $longitude
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      *
-     * @return Message
+     * @return Message|true
      *
      * @throws Exception
      */
@@ -670,26 +684,32 @@ class BotApi
         $longitude,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('editMessageLiveLocation', [
+        $response = $this->call('editMessageLiveLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,
             'inline_message_id' => $inlineMessageId,
             'latitude'          => $latitude,
             'longitude'         => $longitude,
             'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
      * Use this method to stop updating a live location message sent by the bot or via the bot (for inline bots) before
      * live_period expires.
+     * On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string                                                              $chatId
      * @param int                                                                     $messageId
      * @param string                                                                  $inlineMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      *
-     * @return Message
+     * @return Message|true
      *
      * @throws Exception
      */
@@ -699,12 +719,17 @@ class BotApi
         $inlineMessageId,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('stopMessageLiveLocation', [
+        $response = $this->call('stopMessageLiveLocation', [
             'chat_id'           => $chatId,
             'message_id'        => $messageId,
             'inline_message_id' => $inlineMessageId,
             'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
@@ -755,8 +780,9 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
+     * @param string|null $messageThreadId
      * @param int|null $replyToMessageId
-     * @param null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param bool $protectContent Protects the contents of the sent message from forwarding and saving
      * @param bool $allowSendingWithoutReply Pass True if the message should be sent even if the specified replied-to message is not found
@@ -789,7 +815,7 @@ class BotApi
 
     /**
      * @param string $name Name of the sticker set
-     *
+     * @return StickerSet
      * @throws InvalidArgumentException
      * @throws Exception
      */
@@ -803,7 +829,7 @@ class BotApi
     /**
      * @param array[] $customEmojiIds List of custom emoji identifiers.
      *                                  At most 200 custom emoji identifiers can be specified.
-     *
+     * @return StickerSet
      * @throws InvalidArgumentException
      * @throws Exception
      *
@@ -866,6 +892,8 @@ class BotApi
      * @throws InvalidArgumentException
      * @throws Exception
      *
+     * @return bool
+     *
      * @author bernard-ng <bernard@devscast.tech>
      */
     public function createNewStickerSet(
@@ -899,8 +927,17 @@ class BotApi
      * Animated sticker sets can have up to 50 stickers.
      * Static sticker sets can have up to 120 stickers. Returns True on success.
      *
-     * @throws InvalidArgumentException
+     * @param string $userId
+     * @param string $name
+     * @param string $emojis
+     * @param string $pngSticker
+     * @param string|null $tgsSticker
+     * @param string|null $webmSticker
+     * @param MaskPosition|null $maskPosition
+     * @return bool
      * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
      */
     public function addStickerToSet(
         $userId,
@@ -1111,7 +1148,7 @@ class BotApi
      *
      * @param int|string $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param int $fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-     * @param $messageId Message identifier in the chat specified in from_chat_id
+     * @param string $messageId Message identifier in the chat specified in from_chat_id
      * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool $protectContent Protects the contents of the forwarded message from forwarding and saving
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
@@ -1279,7 +1316,7 @@ class BotApi
      * It is guaranteed that the link will be valid for at least 1 hour.
      * When the link expires, a new one can be requested by calling getFile again.
      *
-     * @param $fileId
+     * @param string $fileId
      *
      * @return File
      * @throws InvalidArgumentException
@@ -1293,7 +1330,7 @@ class BotApi
     /**
      * Get file contents via cURL
      *
-     * @param $fileId
+     * @param string $fileId
      *
      * @return string
      *
@@ -1337,10 +1374,19 @@ class BotApi
         $switchPmText = null,
         $switchPmParameter = null
     ) {
-        $results = array_map(function ($item) {
-            /* @var AbstractInlineQueryResult $item */
-            return json_decode($item->toJson(), true);
-        }, $results);
+        $results = array_map(
+            /**
+             * @param AbstractInlineQueryResult $item
+             * @return array
+             */
+            function ($item) {
+                /** @var array $array */
+                $array = $item->toJson(true);
+
+                return $array;
+            },
+            $results
+        );
 
         return $this->call('answerInlineQuery', [
             'inline_query_id' => $inlineQueryId,
@@ -1402,7 +1448,7 @@ class BotApi
      * Use this method to send answers to callback queries sent from inline keyboards.
      * The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
      *
-     * @param $callbackQueryId
+     * @param string $callbackQueryId
      * @param string|null $text
      * @param bool $showAlert
      * @param string|null $url
@@ -1425,7 +1471,9 @@ class BotApi
     /**
      * Use this method to change the list of the bot's commands. Returns True on success.
      *
-     * @param ArrayOfBotCommand $commands
+     * @param ArrayOfBotCommand|BotCommand[] $commands
+     * @param string|null $scope
+     * @param string|null $languageCode
      *
      * @return mixed
      * @throws Exception
@@ -1463,6 +1511,7 @@ class BotApi
 
     /**
      * Use this method to edit text messages sent by the bot or via the bot
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string $chatId
      * @param int $messageId
@@ -1472,7 +1521,7 @@ class BotApi
      * @param bool $disablePreview
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      *
-     * @return Message
+     * @return Message|true
      * @throws Exception
      */
     public function editMessageText(
@@ -1484,7 +1533,7 @@ class BotApi
         $replyMarkup = null,
         $inlineMessageId = null
     ) {
-        return Message::fromResponse($this->call('editMessageText', [
+        $response = $this->call('editMessageText', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
             'text' => $text,
@@ -1492,11 +1541,17 @@ class BotApi
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
      * Use this method to edit text messages sent by the bot or via the bot
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string $chatId
      * @param int $messageId
@@ -1505,7 +1560,7 @@ class BotApi
      * @param string $inlineMessageId
      * @param string|null $parseMode
      *
-     * @return Message
+     * @return Message|true
      * @throws InvalidArgumentException
      * @throws Exception
      */
@@ -1517,14 +1572,19 @@ class BotApi
         $inlineMessageId = null,
         $parseMode = null
     ) {
-        return Message::fromResponse($this->call('editMessageCaption', [
+        $response = $this->call('editMessageCaption', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
             'caption' => $caption,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'parse_mode' => $parseMode
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
@@ -1535,12 +1595,12 @@ class BotApi
      * Use previously uploaded file via its file_id or specify a URL.
      * On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned
      *
-     * @param $chatId
-     * @param $messageId
+     * @param string $chatId
+     * @param string $messageId
      * @param InputMedia $media
      * @param string|null $inlineMessageId
-     * @param string|null $replyMarkup
-     * @return bool|Message
+     * @param InlineKeyboardMarkup|null $replyMarkup
+     * @return Message|true
      *
      * @throws Exception
      * @throws HttpException
@@ -1553,24 +1613,30 @@ class BotApi
         $inlineMessageId = null,
         $replyMarkup = null
     ) {
-        return Message::fromResponse($this->call('editMessageMedia', [
+        $response = $this->call('editMessageMedia', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
             'media' => $media->toJson(),
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
      * Use this method to edit only the reply markup of messages sent by the bot or via the bot
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      *
      * @param int|string $chatId
      * @param int $messageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param string $inlineMessageId
      *
-     * @return Message
+     * @return Message|true
      * @throws Exception
      */
     public function editMessageReplyMarkup(
@@ -1579,12 +1645,17 @@ class BotApi
         $replyMarkup = null,
         $inlineMessageId = null
     ) {
-        return Message::fromResponse($this->call('editMessageReplyMarkup', [
+        $response = $this->call('editMessageReplyMarkup', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]));
+        ]);
+        if ($response === true) {
+            return true;
+        }
+
+        return Message::fromResponse($response);
     }
 
     /**
@@ -1614,7 +1685,7 @@ class BotApi
      */
     public function __destruct()
     {
-        $this->curl && curl_close($this->curl);
+        curl_close($this->curl);
     }
 
     /**
@@ -1638,16 +1709,22 @@ class BotApi
      * @param string $eventName
      *
      * @throws Exception
+     *
+     * @return void
      */
     public function trackUpdate(Update $update, $eventName = 'Message')
     {
         if (!in_array($update->getUpdateId(), $this->trackedEvents)) {
+            $message = $update->getMessage();
+            if (!$message) {
+                return;
+            }
             $this->trackedEvents[] = $update->getUpdateId();
 
-            $this->track($update->getMessage(), $eventName);
+            $this->track($message, $eventName);
 
             if (count($this->trackedEvents) > self::MAX_TRACKED_EVENTS) {
-                $this->trackedEvents = array_slice($this->trackedEvents, round(self::MAX_TRACKED_EVENTS / 4));
+                $this->trackedEvents = array_slice($this->trackedEvents, (int) round(self::MAX_TRACKED_EVENTS / 4));
             }
         }
     }
@@ -1659,6 +1736,8 @@ class BotApi
      * @param string $eventName
      *
      * @throws Exception
+     *
+     * @return void
      */
     public function track(Message $message, $eventName = 'Message')
     {
@@ -1782,7 +1861,7 @@ class BotApi
      * @param bool $ok
      * @param null|string $errorMessage
      *
-     * @return mixed
+     * @return bool
      * @throws Exception
      */
     public function answerPreCheckoutQuery($preCheckoutQueryId, $ok = true, $errorMessage = null)
@@ -2185,6 +2264,7 @@ class BotApi
      * Enable proxy for curl requests. Empty string will disable proxy.
      *
      * @param string $proxyString
+     * @param bool $socks5
      *
      * @return BotApi
      */
@@ -2210,7 +2290,7 @@ class BotApi
      * Use this method to send a native poll. A native poll can't be sent to a private chat.
      * On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
-     * @param $chatId string|int Unique identifier for the target chat or username of the target channel
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
      *                (in the format @channelusername)
      * @param string $question Poll question, 1-255 characters
      * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
@@ -2266,9 +2346,9 @@ class BotApi
      * On success, the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
      * But it's awkward, and we decided to help it change. One dice at a time!)
      *
-     * @param      $chatId string|int Unique identifier for the target chat or username of the target channel
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel
      *                (in the format @channelusername)
-     * @param      $emoji string Emoji on which the dice throw animation is based. Currently, must be one of “🎲”,
+     * @param string $emoji Emoji on which the dice throw animation is based. Currently, must be one of “🎲”,
      *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
      *     values 1-64 for “🎰”. Defaults to “🎲
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
@@ -2280,7 +2360,7 @@ class BotApi
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
      *
-     * @return bool|Message
+     * @return Message
      * @throws Exception
      * @throws HttpException
      * @throws InvalidJsonException
@@ -2495,6 +2575,8 @@ class BotApi
      *
      * @param int $option The CURLOPT_XXX option to set
      * @param mixed $value The value to be set on option
+     *
+     * @return void
      */
     public function setCurlOption($option, $value)
     {
@@ -2505,6 +2587,8 @@ class BotApi
      * Unset an option for a cURL transfer
      *
      * @param int $option The CURLOPT_XXX option to unset
+     *
+     * @return void
      */
     public function unsetCurlOption($option)
     {
@@ -2513,6 +2597,8 @@ class BotApi
 
     /**
      * Clean custom options
+     *
+     * @return void
      */
     public function resetCurlOptions()
     {

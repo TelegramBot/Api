@@ -63,6 +63,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -79,6 +80,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
 
     /**
      * @param string $iconColor
+     * @return void
      */
     public function setIconColor($iconColor)
     {
@@ -95,6 +97,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
 
     /**
      * @param string $iconCustomEmojiId
+     * @return void
      */
     public function setIconCustomEmojiId($iconCustomEmojiId)
     {
