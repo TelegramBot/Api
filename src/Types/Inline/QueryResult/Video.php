@@ -65,21 +65,21 @@ class Video extends AbstractInlineQueryResult
     /**
      * Optional. Video width
      *
-     * @var int
+     * @var int|null
      */
     protected $videoWidth;
 
     /**
      * Optional. Video height
      *
-     * @var int
+     * @var int|null
      */
     protected $videoHeight;
 
     /**
      * Optional. Video duration in seconds
      *
-     * @var int
+     * @var int|null
      */
     protected $videoDuration;
 
@@ -93,14 +93,14 @@ class Video extends AbstractInlineQueryResult
     /**
      * Optional. Short description of the result
      *
-     * @var string
+     * @var string|null
      */
     protected $caption;
 
     /**
      * Optional. Short description of the result
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
@@ -156,6 +156,8 @@ class Video extends AbstractInlineQueryResult
 
     /**
      * @param string $videoUrl
+     *
+     * @return void
      */
     public function setVideoUrl($videoUrl)
     {
@@ -172,6 +174,8 @@ class Video extends AbstractInlineQueryResult
 
     /**
      * @param string $mimeType
+     *
+     * @return void
      */
     public function setMimeType($mimeType)
     {
@@ -179,7 +183,7 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getVideoWidth()
     {
@@ -187,7 +191,9 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $videoWidth
+     * @param int|null $videoWidth
+     *
+     * @return void
      */
     public function setVideoWidth($videoWidth)
     {
@@ -195,7 +201,7 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getVideoHeight()
     {
@@ -203,7 +209,9 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $videoHeight
+     * @param int|null $videoHeight
+     *
+     * @return void
      */
     public function setVideoHeight($videoHeight)
     {
@@ -211,7 +219,7 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getVideoDuration()
     {
@@ -219,7 +227,9 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $videoDuration
+     * @param int|null $videoDuration
+     *
+     * @return void
      */
     public function setVideoDuration($videoDuration)
     {
@@ -236,6 +246,8 @@ class Video extends AbstractInlineQueryResult
 
     /**
      * @param mixed $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -243,7 +255,7 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCaption()
     {
@@ -251,7 +263,9 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
+     *
+     * @return void
      */
     public function setCaption($caption)
     {
@@ -259,7 +273,7 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -267,7 +281,9 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
+     *
+     * @return void
      */
     public function setDescription($description)
     {

@@ -54,6 +54,7 @@ class PollOption extends BaseType implements TypeInterface
 
     /**
      * @param string $text
+     * @return void
      */
     public function setText($text)
     {
@@ -70,6 +71,7 @@ class PollOption extends BaseType implements TypeInterface
 
     /**
      * @param int $voterCount
+     * @return void
      */
     public function setVoterCount($voterCount)
     {

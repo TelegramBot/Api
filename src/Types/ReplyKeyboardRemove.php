@@ -44,10 +44,14 @@ class ReplyKeyboardRemove extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
+    /**
+     * @param bool $removeKeyboard
+     * @param bool $selective
+     */
     public function __construct($removeKeyboard = true, $selective = false)
     {
         $this->removeKeyboard = $removeKeyboard;
@@ -64,6 +68,7 @@ class ReplyKeyboardRemove extends BaseType
 
     /**
      * @param bool $removeKeyboard
+     * @return void
      */
     public function setRemoveKeyboard($removeKeyboard)
     {
@@ -71,7 +76,7 @@ class ReplyKeyboardRemove extends BaseType
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getSelective()
     {
@@ -79,7 +84,8 @@ class ReplyKeyboardRemove extends BaseType
     }
 
     /**
-     * @param bool $selective
+     * @param bool|null $selective
+     * @return void
      */
     public function setSelective($selective)
     {

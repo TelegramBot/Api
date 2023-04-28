@@ -71,7 +71,7 @@ class Venue extends InputMessageContent implements TypeInterface
     /**
      * Optional. Foursquare identifier of the venue, if known
      *
-     * @var string
+     * @var string|null
      */
     protected $foursquareId;
 
@@ -81,7 +81,7 @@ class Venue extends InputMessageContent implements TypeInterface
      * @param float $longitude
      * @param string $title
      * @param string $address
-     * @param string $foursquareId
+     * @param string|null $foursquareId
      */
     public function __construct($latitude, $longitude, $title, $address, $foursquareId = null)
     {
@@ -102,6 +102,8 @@ class Venue extends InputMessageContent implements TypeInterface
 
     /**
      * @param float $latitude
+     *
+     * @return void
      */
     public function setLatitude($latitude)
     {
@@ -118,6 +120,8 @@ class Venue extends InputMessageContent implements TypeInterface
 
     /**
      * @param float $longitude
+     *
+     * @return void
      */
     public function setLongitude($longitude)
     {
@@ -134,6 +138,8 @@ class Venue extends InputMessageContent implements TypeInterface
 
     /**
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -150,6 +156,8 @@ class Venue extends InputMessageContent implements TypeInterface
 
     /**
      * @param string $address
+     *
+     * @return void
      */
     public function setAddress($address)
     {
@@ -157,7 +165,7 @@ class Venue extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFoursquareId()
     {
@@ -165,7 +173,9 @@ class Venue extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @param string $foursquareId
+     * @param string|null $foursquareId
+     *
+     * @return void
      */
     public function setFoursquareId($foursquareId)
     {

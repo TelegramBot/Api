@@ -55,14 +55,14 @@ class VideoNote extends BaseType implements TypeInterface
     /**
      * Optional. Video thumbnail
      *
-     * @var PhotoSize
+     * @var PhotoSize|null
      */
     protected $thumb;
 
     /**
      * Optional. File size in bytes
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -76,6 +76,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     *
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -92,6 +94,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     *
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {
@@ -108,6 +112,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param int $length
+     *
+     * @return void
      */
     public function setLength($length)
     {
@@ -124,6 +130,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param int $duration
+     *
+     * @return void
      */
     public function setDuration($duration)
     {
@@ -131,7 +139,7 @@ class VideoNote extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PhotoSize
+     * @return PhotoSize|null
      */
     public function getThumb()
     {
@@ -140,6 +148,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     *
+     * @return void
      */
     public function setThumb($thumb)
     {
@@ -147,7 +157,7 @@ class VideoNote extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -156,6 +166,8 @@ class VideoNote extends BaseType implements TypeInterface
 
     /**
      * @param int $fileSize
+     *
+     * @return void
      */
     public function setFileSize($fileSize)
     {

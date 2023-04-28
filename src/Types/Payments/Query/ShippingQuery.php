@@ -70,7 +70,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $id
+     *
+     * @return void
      */
     public function setId($id)
     {
@@ -88,7 +91,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param User $from
+     *
+     * @return void
      */
     public function setFrom($from)
     {
@@ -106,7 +112,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $invoicePayload
+     *
+     * @return void
      */
     public function setInvoicePayload($invoicePayload)
     {
@@ -124,7 +133,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param ShippingAddress $shippingAddress
+     *
+     * @return void
      */
     public function setShippingAddress($shippingAddress)
     {

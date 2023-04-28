@@ -30,34 +30,35 @@ class OrderInfo extends BaseType
     /**
      * Optional. User name
      *
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
      * Optional. User's phone number
      *
-     * @var string
+     * @var string|null
      */
     protected $phoneNumber;
 
     /**
      * Optional. User email
      *
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
      * Optional. User shipping address
      *
-     * @var ShippingAddress
+     * @var ShippingAddress|null
      */
     protected $shippingAddress;
 
     /**
      * @author MY
-     * @return string
+     *
+     * @return null|string
      */
     public function getName()
     {
@@ -66,7 +67,10 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $name
+     *
+     * @return void
      */
     public function setName($name)
     {
@@ -75,7 +79,8 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
-     * @return string
+     *
+     * @return null|string
      */
     public function getPhoneNumber()
     {
@@ -84,7 +89,10 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $phoneNumber
+     *
+     * @return void
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -93,7 +101,8 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
-     * @return string
+     *
+     * @return null|string
      */
     public function getEmail()
     {
@@ -102,7 +111,10 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $email
+     *
+     * @return void
      */
     public function setEmail($email)
     {
@@ -111,7 +123,8 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
-     * @return ShippingAddress
+     *
+     * @return ShippingAddress|null
      */
     public function getShippingAddress()
     {
@@ -120,7 +133,10 @@ class OrderInfo extends BaseType
 
     /**
      * @author MY
+     *
      * @param ShippingAddress $shippingAddress
+     *
+     * @return void
      */
     public function setShippingAddress($shippingAddress)
     {

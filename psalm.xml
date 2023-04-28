@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="2"
+    phpVersion="5.5"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <MissingConstructor errorLevel="suppress" />
+        <PropertyNotSetInConstructor errorLevel="suppress" />
+        <RedundantCastGivenDocblockType errorLevel="suppress" />
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="TelegramBot\Api\Botan" />
+            </errorLevel>
+        </DeprecatedClass>
+    </issueHandlers>
+</psalm>

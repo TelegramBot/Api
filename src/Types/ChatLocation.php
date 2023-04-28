@@ -48,6 +48,7 @@ class ChatLocation extends BaseType implements TypeInterface
 
     /**
      * @param Location $location
+     * @return void
      */
     public function setLocation($location)
     {
@@ -64,6 +65,7 @@ class ChatLocation extends BaseType implements TypeInterface
 
     /**
      * @param string $address
+     * @return void
      */
     public function setAddress($address)
     {

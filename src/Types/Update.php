@@ -58,73 +58,77 @@ class Update extends BaseType implements TypeInterface
     /**
      * Optional. New incoming message of any kind — text, photo, sticker, etc.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $message;
 
     /**
-     * @var PollAnswer
+     * Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
+     *
+     * @var PollAnswer|null
      */
     protected $pollAnswer;
 
     /**
-     * @var Poll
+     * Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
+     *
+     * @var Poll|null
      */
     protected $poll;
 
     /**
      * Optional. New version of a message that is known to the bot and was edited
      *
-     * @var Message
+     * @var Message|null
      */
     protected $editedMessage;
 
     /**
      * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $channelPost;
 
     /**
      * Optional. New version of a channel post that is known to the bot and was edited
      *
-     * @var Message
+     * @var Message|null
      */
     protected $editedChannelPost;
 
     /**
      * Optional. New incoming inline query
      *
-     * @var \TelegramBot\Api\Types\Inline\InlineQuery
+     * @var \TelegramBot\Api\Types\Inline\InlineQuery|null
      */
     protected $inlineQuery;
 
     /**
      * Optional. The result of a inline query that was chosen by a user and sent to their chat partner
      *
-     * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult
+     * @var \TelegramBot\Api\Types\Inline\ChosenInlineResult|null
      */
     protected $chosenInlineResult;
 
     /**
      * Optional. New incoming callback query
      *
-     * @var \TelegramBot\Api\Types\CallbackQuery
+     * @var \TelegramBot\Api\Types\CallbackQuery|null
      */
     protected $callbackQuery;
 
     /**
      * Optional. New incoming shipping query. Only for invoices with flexible price
      *
-     * @var ShippingQuery
+     * @var ShippingQuery|null
      */
     protected $shippingQuery;
 
     /**
      * Optional. New incoming pre-checkout query. Contains full information about checkout
      *
-     * @var PreCheckoutQuery
+     * @var PreCheckoutQuery|null
      */
     protected $preCheckoutQuery;
 
@@ -138,6 +142,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param int $updateId
+     *
+     * @return void
      */
     public function setUpdateId($updateId)
     {
@@ -145,7 +151,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getMessage()
     {
@@ -154,6 +160,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param Message $message
+     *
+     * @return void
      */
     public function setMessage(Message $message)
     {
@@ -161,7 +169,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getEditedMessage()
     {
@@ -170,6 +178,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param Message $editedMessage
+     *
+     * @return void
      */
     public function setEditedMessage($editedMessage)
     {
@@ -177,7 +187,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getChannelPost()
     {
@@ -186,6 +196,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param Message $channelPost
+     *
+     * @return void
      */
     public function setChannelPost($channelPost)
     {
@@ -193,7 +205,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PollAnswer
+     * @return PollAnswer|null
      */
     public function getPollAnswer()
     {
@@ -201,7 +213,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Poll
+     * @return Poll|null
      */
     public function getPoll()
     {
@@ -210,6 +222,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param Poll $poll
+     *
+     * @return void
      */
     public function setPoll($poll)
     {
@@ -218,6 +232,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param PollAnswer $pollAnswer
+     *
+     * @return void
      */
     public function setPollAnswer($pollAnswer)
     {
@@ -225,7 +241,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getEditedChannelPost()
     {
@@ -234,6 +250,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param Message $editedChannelPost
+     *
+     * @return void
      */
     public function setEditedChannelPost($editedChannelPost)
     {
@@ -241,7 +259,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return InlineQuery
+     * @return InlineQuery|null
      */
     public function getInlineQuery()
     {
@@ -250,6 +268,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param InlineQuery $inlineQuery
+     *
+     * @return void
      */
     public function setInlineQuery($inlineQuery)
     {
@@ -257,7 +277,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChosenInlineResult
+     * @return ChosenInlineResult|null
      */
     public function getChosenInlineResult()
     {
@@ -266,6 +286,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param ChosenInlineResult $chosenInlineResult
+     *
+     * @return void
      */
     public function setChosenInlineResult($chosenInlineResult)
     {
@@ -273,7 +295,7 @@ class Update extends BaseType implements TypeInterface
     }
 
     /**
-     * @return CallbackQuery
+     * @return CallbackQuery|null
      */
     public function getCallbackQuery()
     {
@@ -282,6 +304,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @param CallbackQuery $callbackQuery
+     *
+     * @return void
      */
     public function setCallbackQuery($callbackQuery)
     {
@@ -290,7 +314,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @author MY
-     * @return ShippingQuery
+     *
+     * @return ShippingQuery|null
      */
     public function getShippingQuery()
     {
@@ -299,7 +324,10 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @author MY
+     *
      * @param ShippingQuery $shippingQuery
+     *
+     * @return void
      */
     public function setShippingQuery($shippingQuery)
     {
@@ -308,7 +336,8 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @author MY
-     * @return PreCheckoutQuery
+     *
+     * @return PreCheckoutQuery|null
      */
     public function getPreCheckoutQuery()
     {
@@ -317,7 +346,10 @@ class Update extends BaseType implements TypeInterface
 
     /**
      * @author MY
+     *
      * @param PreCheckoutQuery $preCheckoutQuery
+     *
+     * @return void
      */
     public function setPreCheckoutQuery($preCheckoutQuery)
     {

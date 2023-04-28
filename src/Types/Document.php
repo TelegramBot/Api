@@ -53,21 +53,21 @@ class Document extends BaseType implements TypeInterface
     /**
      * Optional. Original filename as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $fileName;
 
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -88,6 +88,7 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -95,7 +96,7 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFileName()
     {
@@ -104,6 +105,7 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param string $fileName
+     * @return void
      */
     public function setFileName($fileName)
     {
@@ -111,7 +113,7 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -119,8 +121,8 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
-     *
+     * @param mixed $fileSize
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
@@ -133,7 +135,7 @@ class Document extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getMimeType()
     {
@@ -142,6 +144,7 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param string $mimeType
+     * @return void
      */
     public function setMimeType($mimeType)
     {
@@ -158,6 +161,7 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     * @return void
      */
     public function setThumb(PhotoSize $thumb)
     {
@@ -174,6 +178,7 @@ class Document extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {

@@ -42,10 +42,14 @@ abstract class BaseType
         throw new InvalidArgumentException();
     }
 
+    /**
+     * @param array $data
+     * @return void
+     */
     public function map($data)
     {
         foreach (static::$map as $key => $item) {
-            if (isset($data[$key]) && (!is_array($data[$key]) || (is_array($data[$key]) && !empty($data[$key])))) {
+            if (isset($data[$key]) && (!is_array($data[$key]) || !empty($data[$key]))) {
                 $method = 'set' . self::toCamelCase($key);
                 if ($item === true) {
                     $this->$method($data[$key]);
@@ -56,11 +60,19 @@ abstract class BaseType
         }
     }
 
+    /**
+     * @param string $str
+     * @return string
+     */
     protected static function toCamelCase($str)
     {
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $str)));
     }
 
+    /**
+     * @param bool $inner
+     * @return array|string
+     */
     public function toJson($inner = false)
     {
         $output = [];
@@ -70,6 +82,10 @@ abstract class BaseType
             if (!is_null($this->$property)) {
                 if (is_array($this->$property)) {
                     $output[$key] = array_map(
+                        /**
+                         * @param mixed $v
+                         * @return array|false|string
+                         */
                         function ($v) {
                             return is_object($v) ? $v->toJson(true) : $v;
                         },
@@ -84,13 +100,15 @@ abstract class BaseType
         return $inner === false ? json_encode($output) : $output;
     }
 
+    /**
+     * @param array $data
+     * @return static
+     * @throws InvalidArgumentException
+     */
     public static function fromResponse($data)
     {
-        if ($data === true) {
-            return true;
-        }
-
         self::validate($data);
+        /** @psalm-suppress UnsafeInstantiation */
         $instance = new static();
         $instance->map($data);
 

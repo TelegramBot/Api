@@ -57,14 +57,14 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     /**
      * Optional. Video width
      *
-     * @var int
+     * @var int|null
      */
     protected $mpeg4Width;
 
     /**
      * Optional. Video height
      *
-     * @var int
+     * @var int|null
      */
     protected $mpeg4Height;
 
@@ -78,7 +78,7 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     /**
      * Optional. Caption of the MPEG-4 file to be sent, 0-200 characters
      *
-     * @var string
+     * @var string|null
      */
     protected $caption;
 
@@ -125,6 +125,8 @@ class Mpeg4Gif extends AbstractInlineQueryResult
 
     /**
      * @param string $mpeg4Url
+     *
+     * @return void
      */
     public function setMpeg4Url($mpeg4Url)
     {
@@ -132,7 +134,7 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMpeg4Width()
     {
@@ -140,7 +142,9 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $mpeg4Width
+     * @param int|null $mpeg4Width
+     *
+     * @return void
      */
     public function setMpeg4Width($mpeg4Width)
     {
@@ -148,7 +152,7 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMpeg4Height()
     {
@@ -156,7 +160,9 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $mpeg4Height
+     * @param int|null $mpeg4Height
+     *
+     * @return void
      */
     public function setMpeg4Height($mpeg4Height)
     {
@@ -173,6 +179,8 @@ class Mpeg4Gif extends AbstractInlineQueryResult
 
     /**
      * @param string $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -180,7 +188,7 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCaption()
     {
@@ -188,7 +196,9 @@ class Mpeg4Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
+     *
+     * @return void
      */
     public function setCaption($caption)
     {

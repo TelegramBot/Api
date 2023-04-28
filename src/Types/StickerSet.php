@@ -81,7 +81,7 @@ class StickerSet extends BaseType implements TypeInterface
     /**
      * Optional. Sticker set thumbnail in the .WEBP or .TGS format
      *
-     * @var PhotoSize
+     * @var PhotoSize|null
      */
     protected $thumb;
 
@@ -95,6 +95,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param string $name
+     *
+     * @return void
      */
     public function setName($name)
     {
@@ -111,6 +113,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -127,6 +131,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param string $stickerType
+     *
+     * @return void
      */
     public function setStickerType($stickerType)
     {
@@ -143,6 +149,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param bool $isAnimated
+     *
+     * @return void
      */
     public function setIsAnimated($isAnimated)
     {
@@ -159,6 +167,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param bool $isVideo
+     *
+     * @return void
      */
     public function setIsVideo($isVideo)
     {
@@ -175,6 +185,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param ArrayOfSticker $stickers
+     *
+     * @return void
      */
     public function setStickers($stickers)
     {
@@ -182,7 +194,7 @@ class StickerSet extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PhotoSize
+     * @return PhotoSize|null
      */
     public function getThumb()
     {
@@ -191,6 +203,8 @@ class StickerSet extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     *
+     * @return void
      */
     public function setThumb($thumb)
     {

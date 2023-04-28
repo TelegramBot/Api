@@ -69,7 +69,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $shippingQueryId
+     *
+     * @return void
      */
     public function setShippingQueryId($shippingQueryId)
     {
@@ -87,7 +90,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param true $ok
+     *
+     * @return void
      */
     public function setOk($ok)
     {
@@ -105,7 +111,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param array $shippingOptions
+     *
+     * @return void
      */
     public function setShippingOptions($shippingOptions)
     {
@@ -123,7 +132,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $errorMessage
+     *
+     * @return void
      */
     public function setErrorMessage($errorMessage)
     {

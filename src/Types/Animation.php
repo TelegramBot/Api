@@ -83,21 +83,21 @@ class Animation extends BaseType implements TypeInterface
     /**
      * Optional. Animation thumbnail as defined by sender
      *
-     * @var PhotoSize
+     * @var string|null
      */
     protected $fileName;
 
     /**
      * Optional. Mime type of a file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -110,8 +110,8 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $duration
-     *
+     * @param mixed $duration
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setDuration($duration)
@@ -133,6 +133,7 @@ class Animation extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -149,6 +150,7 @@ class Animation extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {
@@ -156,7 +158,7 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -164,8 +166,8 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
-     *
+     * @param mixed $fileSize
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
@@ -186,8 +188,8 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $height
-     *
+     * @param mixed $height
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setHeight($height)
@@ -200,7 +202,7 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getMimeType()
     {
@@ -209,6 +211,7 @@ class Animation extends BaseType implements TypeInterface
 
     /**
      * @param string $mimeType
+     * @return void
      */
     public function setMimeType($mimeType)
     {
@@ -225,6 +228,7 @@ class Animation extends BaseType implements TypeInterface
 
     /**
      * @param PhotoSize $thumb
+     * @return void
      */
     public function setThumb(PhotoSize $thumb)
     {
@@ -232,7 +236,7 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string $fileName
+     * @return null|string $fileName
      */
     public function getFileName()
     {
@@ -241,6 +245,7 @@ class Animation extends BaseType implements TypeInterface
 
     /**
      * @param string $fileName
+     * @return void
      */
     public function setFileName($fileName)
     {
@@ -256,8 +261,8 @@ class Animation extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $width
-     *
+     * @param mixed $width
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setWidth($width)

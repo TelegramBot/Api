@@ -49,21 +49,21 @@ class Text extends InputMessageContent implements TypeInterface
      * Optional. Send Markdown or HTML,
      * if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.
      *
-     * @var string
+     * @var string|null
      */
     protected $parseMode;
 
     /**
      * Optional. Disables link previews for links in the sent message
      *
-     * @var bool
+     * @var bool|null
      */
     protected $disableWebPagePreview;
 
     /**
      * Text constructor.
      * @param string $messageText
-     * @param string $parseMode
+     * @param string|null $parseMode
      * @param bool $disableWebPagePreview
      */
     public function __construct($messageText, $parseMode = null, $disableWebPagePreview = false)
@@ -83,6 +83,8 @@ class Text extends InputMessageContent implements TypeInterface
 
     /**
      * @param string $messageText
+     *
+     * @return void
      */
     public function setMessageText($messageText)
     {
@@ -90,7 +92,7 @@ class Text extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getParseMode()
     {
@@ -98,7 +100,9 @@ class Text extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @param string $parseMode
+     * @param string|null $parseMode
+     *
+     * @return void
      */
     public function setParseMode($parseMode)
     {
@@ -106,7 +110,7 @@ class Text extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isDisableWebPagePreview()
     {
@@ -114,7 +118,9 @@ class Text extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @param boolean $disableWebPagePreview
+     * @param bool|null $disableWebPagePreview
+     *
+     * @return void
      */
     public function setDisableWebPagePreview($disableWebPagePreview)
     {

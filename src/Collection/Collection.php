@@ -2,10 +2,8 @@
 
 namespace TelegramBot\Api\Collection;
 
-use TelegramBot\Api\Types\InputMedia\InputMedia;
-
 /**
- * Class Collection
+ * @extends \ArrayObject<string|array-key, CollectionItemInterface>
  */
 class Collection extends \ArrayObject
 {
@@ -46,7 +44,7 @@ class Collection extends \ArrayObject
     }
 
     /**
-     * @param $key
+     * @param int|string $key
      * @throws KeyInvalidException
      * @return void
      */
@@ -58,8 +56,7 @@ class Collection extends \ArrayObject
     }
 
     /**
-     * @param $key
-     * @return InputMedia
+     * @param int|string $key
      * @return CollectionItemInterface
      * @throws KeyInvalidException
      */
@@ -94,8 +91,11 @@ class Collection extends \ArrayObject
     }
 
     /**
-     * @param $key
+     * @param int|string $key
+     *
      * @throws KeyInvalidException
+     *
+     * @return void
      */
     private function checkItemKey($key)
     {

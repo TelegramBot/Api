@@ -60,14 +60,14 @@ class SuccessfulPayment extends BaseType
     /**
      * Optional. Identifier of the shipping option chosen by the user
      *
-     * @var string
+     * @var string|null
      */
     protected $shippingOptionId;
 
     /**
      * Optional. Order info provided by the user
      *
-     * @var OrderInfo
+     * @var OrderInfo|null
      */
     protected $orderInfo;
 
@@ -96,7 +96,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $currency
+     *
+     * @return void
      */
     public function setCurrency($currency)
     {
@@ -114,7 +117,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param int $totalAmount
+     *
+     * @return void
      */
     public function setTotalAmount($totalAmount)
     {
@@ -132,7 +138,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param array $invoicePayload
+     *
+     * @return void
      */
     public function setInvoicePayload($invoicePayload)
     {
@@ -141,7 +150,8 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
-     * @return string
+     *
+     * @return null|string
      */
     public function getShippingOptionId()
     {
@@ -150,7 +160,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $shippingOptionId
+     *
+     * @return void
      */
     public function setShippingOptionId($shippingOptionId)
     {
@@ -168,7 +181,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $telegramPaymentChargeId
+     *
+     * @return void
      */
     public function setTelegramPaymentChargeId($telegramPaymentChargeId)
     {
@@ -186,7 +202,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param mixed $providerPaymentChargeId
+     *
+     * @return void
      */
     public function setProviderPaymentChargeId($providerPaymentChargeId)
     {
@@ -195,7 +214,8 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
-     * @return OrderInfo
+     *
+     * @return OrderInfo|null
      */
     public function getOrderInfo()
     {
@@ -204,7 +224,10 @@ class SuccessfulPayment extends BaseType
 
     /**
      * @author MY
+     *
      * @param OrderInfo $orderInfo
+     *
+     * @return void
      */
     public function setOrderInfo($orderInfo)
     {

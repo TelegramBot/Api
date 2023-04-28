@@ -8,4 +8,5 @@
 /.scrutinizer.yml           export-ignore
 /phpunit.xml.dist           export-ignore
 /.php-cs-fixer.dist.php     export-ignore
+/psalm.xml                  export-ignore
 /tests                      export-ignore

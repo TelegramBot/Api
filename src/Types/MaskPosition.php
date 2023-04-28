@@ -63,6 +63,7 @@ class MaskPosition extends BaseType implements TypeInterface
 
     /**
      * @param string $point
+     * @return void
      */
     public function setPoint($point)
     {
@@ -79,6 +80,7 @@ class MaskPosition extends BaseType implements TypeInterface
 
     /**
      * @param float $xShift
+     * @return void
      */
     public function setXShift($xShift)
     {
@@ -95,6 +97,7 @@ class MaskPosition extends BaseType implements TypeInterface
 
     /**
      * @param float $yShift
+     * @return void
      */
     public function setYShift($yShift)
     {
@@ -111,6 +114,7 @@ class MaskPosition extends BaseType implements TypeInterface
 
     /**
      * @param float $scale
+     * @return void
      */
     public function setScale($scale)
     {

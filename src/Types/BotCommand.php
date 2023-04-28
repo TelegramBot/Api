@@ -49,6 +49,7 @@ class BotCommand extends BaseType implements TypeInterface, CollectionItemInterf
 
     /**
      * @param string $command
+     * @return void
      */
     public function setCommand($command)
     {
@@ -65,6 +66,7 @@ class BotCommand extends BaseType implements TypeInterface, CollectionItemInterf
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {

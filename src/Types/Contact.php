@@ -50,21 +50,21 @@ class Contact extends BaseType implements TypeInterface
     /**
      * Optional. Contact's last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. Contact's user identifier in Telegram
      *
-     * @var int
+     * @var int|null
      */
     protected $userId;
 
     /**
      * Optional. Additional data about the contact in the form of a vCard
      *
-     * @var string
+     * @var string|null
      */
     protected $vcard;
 
@@ -78,6 +78,7 @@ class Contact extends BaseType implements TypeInterface
 
     /**
      * @param string $firstName
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -85,7 +86,7 @@ class Contact extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLastName()
     {
@@ -94,6 +95,7 @@ class Contact extends BaseType implements TypeInterface
 
     /**
      * @param string $lastName
+     * @return void
      */
     public function setLastName($lastName)
     {
@@ -110,6 +112,7 @@ class Contact extends BaseType implements TypeInterface
 
     /**
      * @param string $phoneNumber
+     * @return void
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -117,7 +120,7 @@ class Contact extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getUserId()
     {
@@ -126,6 +129,7 @@ class Contact extends BaseType implements TypeInterface
 
     /**
      * @param int $userId
+     * @return void
      */
     public function setUserId($userId)
     {
@@ -133,7 +137,7 @@ class Contact extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getVCard()
     {
@@ -142,6 +146,7 @@ class Contact extends BaseType implements TypeInterface
 
     /**
      * @param string $vcard
+     * @return void
      */
     public function setVCard($vcard)
     {
