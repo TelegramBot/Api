@@ -19,10 +19,9 @@
         <MissingConstructor errorLevel="suppress" />
         <PropertyNotSetInConstructor errorLevel="suppress" />
         <RedundantCastGivenDocblockType errorLevel="suppress" />
-        <DeprecatedClass>
-            <errorLevel type="suppress">
-                <referencedClass name="TelegramBot\Api\Botan" />
-            </errorLevel>
-        </DeprecatedClass>
+        <DeprecatedConstant errorLevel="suppress" />
+        <DeprecatedMethod errorLevel="suppress" />
+        <DeprecatedClass errorLevel="suppress" />
+        <DeprecatedProperty errorLevel="suppress" />
     </issueHandlers>
 </psalm>

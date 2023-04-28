@@ -48,8 +48,7 @@ class EventCollection
     public function add(Closure $event, $checker = null)
     {
         $this->events[] = !is_null($checker) ? new Event($event, $checker)
-            : new Event($event, function () {
-            });
+            : new Event($event, function () {});
 
         return $this;
     }

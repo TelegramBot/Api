@@ -11,11 +11,11 @@ class ArrayOfMessageEntityTest extends TestCase
     public function testFromResponse()
     {
         $items = ArrayOfMessageEntity::fromResponse([
-           [
-               'type' => 'mention',
-               'offset' => 0,
-               'length' => 10,
-           ],
+            [
+                'type' => 'mention',
+                'offset' => 0,
+                'length' => 10,
+            ],
         ]);
 
         $expected = [

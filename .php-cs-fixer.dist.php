@@ -23,10 +23,12 @@ return (new PhpCsFixer\Config())
         'no_unused_imports' => true,
         'single_quote' => true,
         'no_extra_blank_lines' => true,
+        'array_indentation' => true,
         'cast_spaces' => true,
         'phpdoc_align' => [
             'align' => 'left',
         ],
         'binary_operator_spaces' => true,
+        'single_line_empty_body' => false,
     ])
 ;
