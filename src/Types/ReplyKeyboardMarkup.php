@@ -28,7 +28,8 @@ class ReplyKeyboardMarkup extends BaseType
         'keyboard' => true,
         'one_time_keyboard' => true,
         'resize_keyboard' => true,
-        'selective' => true
+        'selective' => true,
+        'is_persistent' => true
     ];
 
     /**
@@ -66,17 +67,27 @@ class ReplyKeyboardMarkup extends BaseType
     protected $selective;
 
     /**
+     * Optional. Requests clients to always show the keyboard when the regular keyboard is hidden.
+     * Defaults to false, in which case the custom keyboard can be hidden and opened with a keyboard icon.
+     *
+     * @var bool|null
+     */
+    protected $isPersistent;
+
+    /**
      * @param array $keyboard
      * @param bool|null $oneTimeKeyboard
      * @param bool|null $resizeKeyboard
      * @param bool|null $selective
+     * @param bool|null $isPersistent
      */
-    public function __construct($keyboard = [], $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null)
+    public function __construct($keyboard = [], $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null, $isPersistent = null)
     {
         $this->keyboard = $keyboard;
         $this->oneTimeKeyboard = $oneTimeKeyboard;
         $this->resizeKeyboard = $resizeKeyboard;
         $this->selective = $selective;
+        $this->isPersistent = $isPersistent;
     }
 
     /**
@@ -145,5 +156,22 @@ class ReplyKeyboardMarkup extends BaseType
     public function setSelective($selective)
     {
         $this->selective = $selective;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsPersistent()
+    {
+        return $this->isPersistent;
+    }
+
+    /**
+     * @param bool $isPersistent
+     * @return void
+     */
+    public function setIsPersistent($isPersistent)
+    {
+        $this->isPersistent = $isPersistent;
     }
 }
