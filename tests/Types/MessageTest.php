@@ -89,6 +89,7 @@ class MessageTest extends AbstractTypeTest
             'forum_topic_reopened' => ForumTopicReopenedTest::getMinResponse(),
             'is_topic_message' => true,
             'message_thread_id' => 6,
+            'web_app_data' => WebAppDataTest::getMinResponse(),
             'reply_markup' => InlineKeyboardMarkupTest::getMinResponse()
         ];
     }
@@ -150,6 +151,7 @@ class MessageTest extends AbstractTypeTest
         $this->assertNull($item->getForumTopicReopened());
         $this->assertNull($item->getIsTopicMessage());
         $this->assertNull($item->getMessageThreadId());
+        $this->assertNull($item->getWebAppData());
         $this->assertNull($item->getReplyMarkup());
     }
 
@@ -210,6 +212,7 @@ class MessageTest extends AbstractTypeTest
         // $this->assertEquals(ForumTopicReopenedTest::createMinInstance(), $item->getForumTopicReopened());
         $this->assertTrue($item->getIsTopicMessage());
         $this->assertEquals(6, $item->getMessageThreadId());
+        $this->assertEquals(WebAppDataTest::createMinInstance(), $item->getWebAppData());
         $this->assertEquals(InlineKeyboardMarkupTest::createMinInstance(), $item->getReplyMarkup());
     }
 

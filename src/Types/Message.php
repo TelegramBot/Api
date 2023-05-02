@@ -74,7 +74,8 @@ class Message extends BaseType implements TypeInterface
         'forum_topic_reopened' => ForumTopicReopened::class,
         'is_topic_message' => true,
         'message_thread_id' => true,
-        'reply_markup' => InlineKeyboardMarkup::class
+        'web_app_data' => WebAppData::class,
+        'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**
@@ -404,6 +405,13 @@ class Message extends BaseType implements TypeInterface
      * @var string|null
      */
     protected $connectedWebsite;
+
+    /**
+     * Optional. Service message: data sent by a Web App
+     *
+     * @var WebAppData|null
+     */
+    protected $webAppData;
 
     /**
      * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
@@ -1236,6 +1244,23 @@ class Message extends BaseType implements TypeInterface
     public function setConnectedWebsite($connectedWebsite)
     {
         $this->connectedWebsite = $connectedWebsite;
+    }
+
+    /**
+     * @return WebAppData|null
+     */
+    public function getWebAppData()
+    {
+        return $this->webAppData;
+    }
+
+    /**
+     * @param WebAppData|null $webAppData
+     * @return void
+     */
+    public function setWebAppData($webAppData)
+    {
+        $this->webAppData = $webAppData;
     }
 
     /**
