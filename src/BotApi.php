@@ -25,6 +25,7 @@ use TelegramBot\Api\Types\Poll;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 use TelegramBot\Api\Types\ReplyKeyboardRemove;
+use TelegramBot\Api\Types\SentWebAppMessage;
 use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
@@ -335,7 +336,7 @@ class BotApi
     /**
      * Use this method to send text messages. On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
-     * @param int|string $chatId
+     * @param int|float|string $chatId
      * @param string $text
      * @param string|null $parseMode
      * @param bool $disablePreview
@@ -2568,6 +2569,23 @@ class BotApi
     public function getForumTopicIconStickers()
     {
         return ArrayOfSticker::fromResponse($this->call('getForumTopicIconStickers'));
+    }
+
+    /**
+     * @param string $webAppQueryId
+     * @param AbstractInlineQueryResult $result
+     * @return SentWebAppMessage
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidArgumentException
+     * @throws InvalidJsonException
+     */
+    public function answerWebAppQuery($webAppQueryId, $result)
+    {
+        return SentWebAppMessage::fromResponse($this->call('answerWebAppQuery', [
+            'web_app_query_id' => $webAppQueryId,
+            'result' => $result->toJson(),
+        ]));
     }
 
     /**
