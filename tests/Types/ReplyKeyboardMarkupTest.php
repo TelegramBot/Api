@@ -25,7 +25,8 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
             'keyboard' => [['one', 'two']],
             'one_time_keyboard' => true,
             'resize_keyboard' => true,
-            'selective' => true
+            'selective' => true,
+            'is_persistent' => true,
         ];
     }
 
@@ -39,6 +40,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertNull($item->isOneTimeKeyboard());
         $this->assertNull($item->isResizeKeyboard());
         $this->assertNull($item->isSelective());
+        $this->assertNull($item->getIsPersistent());
     }
 
     /**
@@ -51,6 +53,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(true, $item->getIsPersistent());
     }
 
     public function testConstructor()
@@ -61,6 +64,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(null, $item->isOneTimeKeyboard());
         $this->assertEquals(null, $item->isResizeKeyboard());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getIsPersistent());
     }
 
     public function testConstructor2()
@@ -71,6 +75,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(null, $item->isResizeKeyboard());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getIsPersistent());
     }
 
     public function testConstructor3()
@@ -81,6 +86,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getIsPersistent());
     }
 
     public function testConstructor4()
@@ -91,5 +97,17 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(null, $item->getIsPersistent());
+    }
+
+    public function testConstructor5()
+    {
+        $item = new ReplyKeyboardMarkup([['one', 'two']], true, true, true, true);
+
+        $this->assertEquals([['one', 'two']], $item->getKeyboard());
+        $this->assertEquals(true, $item->isOneTimeKeyboard());
+        $this->assertEquals(true, $item->isResizeKeyboard());
+        $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(true, $item->getIsPersistent());
     }
 }
