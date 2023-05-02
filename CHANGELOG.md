@@ -9,6 +9,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add `scope` and `languageCode` parameters to `\TelegramBot\Api\BotApi::setMyCommands`
 - Add WebApp support: `\TelegramBot\Api\BotApi::answerWebAppQuery` method and `\TelegramBot\Api\Types\Message::$webAppData` property
 - Add `\TelegramBot\Api\Types\ReplyKeyboardMarkup::$isPersistent` property
+- Add `\TelegramBot\Api\Types\ReplyKeyboardMarkup::$inputFieldPlaceholder` property
 
 ### Fixed
 - Fix `\TelegramBot\Api\Collection\Collection::addItem` max count constraint (#333)

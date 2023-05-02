@@ -27,6 +27,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
             'resize_keyboard' => true,
             'selective' => true,
             'is_persistent' => true,
+            'input_field_placeholder' => 'input_field_placeholder',
         ];
     }
 
@@ -41,6 +42,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertNull($item->isResizeKeyboard());
         $this->assertNull($item->isSelective());
         $this->assertNull($item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
     }
 
     /**
@@ -54,6 +56,7 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(true, $item->isSelective());
         $this->assertEquals(true, $item->getIsPersistent());
+        $this->assertEquals('input_field_placeholder', $item->getInputFieldPlaceholder());
     }
 
     public function testConstructor()
@@ -61,10 +64,11 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $item = new ReplyKeyboardMarkup([['one', 'two']]);
 
         $this->assertEquals([['one', 'two']], $item->getKeyboard());
-        $this->assertEquals(null, $item->isOneTimeKeyboard());
-        $this->assertEquals(null, $item->isResizeKeyboard());
-        $this->assertEquals(null, $item->isSelective());
-        $this->assertEquals(null, $item->getIsPersistent());
+        $this->assertNull($item->isOneTimeKeyboard());
+        $this->assertNull($item->isResizeKeyboard());
+        $this->assertNull($item->isSelective());
+        $this->assertNull($item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
     }
 
     public function testConstructor2()
@@ -73,9 +77,10 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
 
         $this->assertEquals([['one', 'two']], $item->getKeyboard());
         $this->assertEquals(true, $item->isOneTimeKeyboard());
-        $this->assertEquals(null, $item->isResizeKeyboard());
-        $this->assertEquals(null, $item->isSelective());
-        $this->assertEquals(null, $item->getIsPersistent());
+        $this->assertNull($item->isResizeKeyboard());
+        $this->assertNull($item->isSelective());
+        $this->assertNull($item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
     }
 
     public function testConstructor3()
@@ -85,8 +90,9 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals([['one', 'two']], $item->getKeyboard());
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(true, $item->isResizeKeyboard());
-        $this->assertEquals(null, $item->isSelective());
-        $this->assertEquals(null, $item->getIsPersistent());
+        $this->assertNull($item->isSelective());
+        $this->assertNull($item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
     }
 
     public function testConstructor4()
@@ -97,7 +103,8 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isOneTimeKeyboard());
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(true, $item->isSelective());
-        $this->assertEquals(null, $item->getIsPersistent());
+        $this->assertNull($item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
     }
 
     public function testConstructor5()
@@ -109,5 +116,18 @@ class ReplyKeyboardMarkupTest extends AbstractTypeTest
         $this->assertEquals(true, $item->isResizeKeyboard());
         $this->assertEquals(true, $item->isSelective());
         $this->assertEquals(true, $item->getIsPersistent());
+        $this->assertNull($item->getInputFieldPlaceholder());
+    }
+
+    public function testConstructor6()
+    {
+        $item = new ReplyKeyboardMarkup([['one', 'two']], true, true, true, true, 'input_field_placeholder');
+
+        $this->assertEquals([['one', 'two']], $item->getKeyboard());
+        $this->assertEquals(true, $item->isOneTimeKeyboard());
+        $this->assertEquals(true, $item->isResizeKeyboard());
+        $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(true, $item->getIsPersistent());
+        $this->assertEquals('input_field_placeholder', $item->getInputFieldPlaceholder());
     }
 }
