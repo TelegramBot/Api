@@ -29,7 +29,8 @@ class ReplyKeyboardMarkup extends BaseType
         'one_time_keyboard' => true,
         'resize_keyboard' => true,
         'selective' => true,
-        'is_persistent' => true
+        'is_persistent' => true,
+        'input_field_placeholder' => true,
     ];
 
     /**
@@ -75,19 +76,28 @@ class ReplyKeyboardMarkup extends BaseType
     protected $isPersistent;
 
     /**
+     * Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
+     *
+     * @var string|null
+     */
+    protected $inputFieldPlaceholder;
+
+    /**
      * @param array $keyboard
      * @param bool|null $oneTimeKeyboard
      * @param bool|null $resizeKeyboard
      * @param bool|null $selective
      * @param bool|null $isPersistent
+     * @param string|null $inputFieldPlaceholder
      */
-    public function __construct($keyboard = [], $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null, $isPersistent = null)
+    public function __construct($keyboard = [], $oneTimeKeyboard = null, $resizeKeyboard = null, $selective = null, $isPersistent = null, $inputFieldPlaceholder = null)
     {
         $this->keyboard = $keyboard;
         $this->oneTimeKeyboard = $oneTimeKeyboard;
         $this->resizeKeyboard = $resizeKeyboard;
         $this->selective = $selective;
         $this->isPersistent = $isPersistent;
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
 
     /**
@@ -173,5 +183,22 @@ class ReplyKeyboardMarkup extends BaseType
     public function setIsPersistent($isPersistent)
     {
         $this->isPersistent = $isPersistent;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInputFieldPlaceholder()
+    {
+        return $this->inputFieldPlaceholder;
+    }
+
+    /**
+     * @param string|null $inputFieldPlaceholder
+     * @return void
+     */
+    public function setInputFieldPlaceholder($inputFieldPlaceholder)
+    {
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
 }
