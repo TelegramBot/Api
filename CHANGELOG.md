@@ -15,6 +15,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Fix `\TelegramBot\Api\Collection\Collection::addItem` max count constraint (#333)
 - Fix `\TelegramBot\Api\Types\StickerSet` mapping
 - Fix `\TelegramBot\Api\BotApi::copyMessage` not returning `\TelegramBot\Api\Types\MessageId`
+- Fix new `$messageThreadId` parameter in `\TelegramBot\Api\BotApi` methods placed not in the end of the list of parameters
 
 ### Changed
 - `\TelegramBot\Api\BotApi::getMyCommands` now returns instance `\TelegramBot\Api\Types\ArrayOfBotCommand` instead of `\TelegramBot\Api\Types\BotCommand` array
