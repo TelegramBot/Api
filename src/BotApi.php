@@ -340,10 +340,10 @@ class BotApi
      * @param string $text
      * @param string|null $parseMode
      * @param bool $disablePreview
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardHide|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -354,10 +354,10 @@ class BotApi
         $text,
         $parseMode = null,
         $disablePreview = false,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => $chatId,
@@ -379,10 +379,10 @@ class BotApi
      * @param string|null $parseMode
      * @param ArrayOfMessageEntity|null $captionEntities
      * @param bool $disableNotification
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param bool $allowSendingWithoutReply
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param int|null $messageThreadId
      *
      * @return MessageId
      * @throws Exception
@@ -397,10 +397,10 @@ class BotApi
         $parseMode = null,
         $captionEntities = null,
         $disableNotification = false,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
-        $replyMarkup = null
+        $replyMarkup = null,
+        $messageThreadId = null
     ) {
         return MessageId::fromResponse($this->call('copyMessage', [
             'chat_id' => $chatId,
@@ -424,10 +424,10 @@ class BotApi
      * @param string $phoneNumber
      * @param string $firstName
      * @param string $lastName
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws Exception
@@ -437,10 +437,10 @@ class BotApi
         $phoneNumber,
         $firstName,
         $lastName = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendContact', [
             'chat_id' => $chatId,
@@ -629,12 +629,11 @@ class BotApi
      * @param int|string $chatId
      * @param float $latitude
      * @param float $longitude
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
-     *
      * @param null|int $livePeriod
+     * @param int|null $messageThreadId
      *
      * @return Message
      *
@@ -644,11 +643,11 @@ class BotApi
         $chatId,
         $latitude,
         $longitude,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $livePeriod = null
+        $livePeriod = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendLocation', [
             'chat_id'              => $chatId,
@@ -742,10 +741,10 @@ class BotApi
      * @param string $title
      * @param string $address
      * @param string|null $foursquareId
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws Exception
@@ -757,10 +756,10 @@ class BotApi
         $title,
         $address,
         $foursquareId = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendVenue', [
             'chat_id' => $chatId,
@@ -781,12 +780,12 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
-     * @param string|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param bool $protectContent Protects the contents of the sent message from forwarding and saving
      * @param bool $allowSendingWithoutReply Pass True if the message should be sent even if the specified replied-to message is not found
+     * @param string|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -795,12 +794,12 @@ class BotApi
     public function sendSticker(
         $chatId,
         $sticker,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
         $protectContent = false,
-        $allowSendingWithoutReply = false
+        $allowSendingWithoutReply = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
@@ -1013,12 +1012,12 @@ class BotApi
      * @param \CURLFile|string $video
      * @param int|null $duration
      * @param string|null $caption
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param bool $supportsStreaming Pass True, if the uploaded video is suitable for streaming
      * @param string|null $parseMode
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1029,12 +1028,12 @@ class BotApi
         $video,
         $duration = null,
         $caption = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
         $supportsStreaming = false,
-        $parseMode = null
+        $parseMode = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
@@ -1059,11 +1058,11 @@ class BotApi
      * @param \CURLFile|string $animation
      * @param int|null $duration
      * @param string|null $caption
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
-     * @param string|null $parseMode
+     * @param string|null $parseMode,
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1074,11 +1073,11 @@ class BotApi
         $animation,
         $duration = null,
         $caption = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
@@ -1105,13 +1104,13 @@ class BotApi
      * @param \CURLFile|string $voice
      * @param string $caption Voice message caption, 0-1024 characters after entities parsing
      * @param int|null $duration
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param bool $allowSendingWithoutReply Pass True, if the message should be sent even if the specified
      *     replied-to message is not found
      * @param string|null $parseMode
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1122,12 +1121,12 @@ class BotApi
         $voice,
         $caption = null,
         $duration = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
         $allowSendingWithoutReply = false,
-        $parseMode = null
+        $parseMode = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
@@ -1150,9 +1149,9 @@ class BotApi
      * @param int|string $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param int $fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
      * @param string $messageId Message identifier in the chat specified in from_chat_id
-     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool $protectContent Protects the contents of the forwarded message from forwarding and saving
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
+     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      *
      * @return Message
      * @throws Exception
@@ -1163,9 +1162,9 @@ class BotApi
         $chatId,
         $fromChatId,
         $messageId,
-        $messageThreadId = null,
         $protectContent = false,
-        $disableNotification = false
+        $disableNotification = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
@@ -1237,11 +1236,11 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $photo
      * @param string|null $caption
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1251,11 +1250,11 @@ class BotApi
         $chatId,
         $photo,
         $caption = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
@@ -1276,11 +1275,11 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|\CURLStringFile|string $document
      * @param string|null $caption
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1290,11 +1289,11 @@ class BotApi
         $chatId,
         $document,
         $caption = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
@@ -1767,13 +1766,13 @@ class BotApi
      * @param bool $needPhoneNumber
      * @param bool $needEmail
      * @param bool $needShippingAddress
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $providerData
      * @param bool $sendPhoneNumberToProvider
      * @param bool $sendEmailToProvider
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws Exception
@@ -1796,13 +1795,13 @@ class BotApi
         $needPhoneNumber = false,
         $needEmail = false,
         $needShippingAddress = false,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
         $providerData = null,
         $sendPhoneNumberToProvider = false,
-        $sendEmailToProvider = false
+        $sendEmailToProvider = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendInvoice', [
             'chat_id' => $chatId,
@@ -1822,6 +1821,7 @@ class BotApi
             'need_phone_number' => $needPhoneNumber,
             'need_email' => $needEmail,
             'need_shipping_address' => $needShippingAddress,
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
@@ -2201,10 +2201,10 @@ class BotApi
      * @param \CURLFile|string $videoNote
      * @param int|null $duration
      * @param int|null $length
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -2215,10 +2215,10 @@ class BotApi
         $videoNote,
         $duration = null,
         $length = null,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendVideoNote', [
             'chat_id' => $chatId,
@@ -2239,8 +2239,8 @@ class BotApi
      * @param int|string $chatId
      * @param ArrayOfInputMedia $media
      * @param bool $disableNotification
-     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
+     * @param int|null $messageThreadId
      *
      * @return Message[]
      * @throws Exception
@@ -2249,8 +2249,8 @@ class BotApi
         $chatId,
         $media,
         $disableNotification = false,
-        $messageThreadId = null,
-        $replyToMessageId = null
+        $replyToMessageId = null,
+        $messageThreadId = null
     ) {
         return ArrayOfMessages::fromResponse($this->call('sendMediaGroup', [
             'chat_id' => $chatId,
@@ -2301,12 +2301,12 @@ class BotApi
      *                          ignored for polls in quiz mode, defaults to False
      * @param string|null $correctOptionId 0-based identifier of the correct answer option, required for polls in quiz mode
      * @param bool $isClosed Pass True, if the poll needs to be immediately closed. This can be useful for poll preview.
-     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param int|null $replyToMessageId If the message is a reply, ID of the original message
      * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
+     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @return Message
      * @throws Exception
      * @throws HttpException
@@ -2321,10 +2321,10 @@ class BotApi
         $allowsMultipleAnswers = false,
         $correctOptionId = null,
         $isClosed = false,
-        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null,
-        $replyMarkup = null
+        $replyMarkup = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendPoll', [
             'chat_id' => $chatId,
@@ -2353,13 +2353,13 @@ class BotApi
      *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
      *     values 1-64 for “🎰”. Defaults to “🎲
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
-     * @param int|null $messageThreadId
      * @param string|null $replyToMessageId If the message is a reply, ID of the original message
      * @param bool $allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
      *     message is not found,
      * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
      *                          custom reply keyboard, instructions to remove reply
      *                          keyboard or to force a reply from the user.
+     * @param int|null $messageThreadId
      *
      * @return Message
      * @throws Exception
@@ -2370,10 +2370,10 @@ class BotApi
         $chatId,
         $emoji,
         $disableNotification = false,
-        $messageThreadId = null,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
-        $replyMarkup = null
+        $replyMarkup = null,
+        $messageThreadId = null
     ) {
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
