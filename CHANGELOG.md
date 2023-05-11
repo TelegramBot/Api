@@ -2,7 +2,7 @@
 
 All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
-## [Unreleased] - [YYYY-MM-DD]
+## 2.4.0 - 2023-05-11
 
 ### Added
 - Add `\TelegramBot\Api\Types\Venue` mapping (`foursquare_type`, `google_place_id`, `google_place_type`)
