@@ -6,9 +6,14 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
 ### Added
 - Add missing `protect_content` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods
+- Add support `attach://<file_attach_name>` in `\TelegramBot\Api\BotApi` methods `sendMediaGroup`, `createNewStickerSet`, `addStickerToSet`, `editMessageMedia`
+- Rename `thumb` to `thumbnail` parameter in `Animation`, `Document`, `Sticker`, `StickerSet`, `Video`, `VideoNote` types
+- Rename `thumb_*` to `thumbnail_*` parameter in `Inline/QueryResult` types
 - Add missing phpDoc for `$replyMarkup` parameters
-
+- 
 ### Deprecated
+- Deprecate using `thumb*` methods in `\TelegramBot\Api\BotApi`
+- Deprecate method `\TelegramBot\Api\BotApi::setStickerSetThumb`. Use `\TelegramBot\Api\BotApi::setStickerSetThumbnail` instead
 - Deprecate `\TelegramBot\Api\Types\ReplyKeyboardHide` class
 
 ## 2.4.0 - 2023-05-11

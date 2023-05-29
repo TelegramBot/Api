@@ -33,7 +33,7 @@ class StickerSet extends BaseType implements TypeInterface
         'is_animated' => true,
         'is_video' => true,
         'stickers' => ArrayOfSticker::class,
-        'thumb' => PhotoSize::class,
+        'thumbnail' => PhotoSize::class,
     ];
 
     /**
@@ -83,7 +83,7 @@ class StickerSet extends BaseType implements TypeInterface
      *
      * @var PhotoSize|null
      */
-    protected $thumb;
+    protected $thumbnail;
 
     /**
      * @return string
@@ -196,18 +196,40 @@ class StickerSet extends BaseType implements TypeInterface
     /**
      * @return PhotoSize|null
      */
-    public function getThumb()
+    public function getThumbnail()
     {
-        return $this->thumb;
+        return $this->thumbnail;
     }
 
     /**
+     * @param PhotoSize $thumbnail
+     *
+     * @return void
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @deprecated use getThumbnail method
+     *
+     * @return PhotoSize|null
+     */
+    public function getThumb()
+    {
+        return $this->getThumbnail();
+    }
+
+    /**
+     * @deprecated use setThumbnail method
+     *
      * @param PhotoSize $thumb
      *
      * @return void
      */
     public function setThumb($thumb)
     {
-        $this->thumb = $thumb;
+        $this->setThumbnail($thumb);
     }
 }

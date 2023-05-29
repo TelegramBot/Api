@@ -20,7 +20,7 @@ class Gif extends AbstractInlineQueryResult
      *
      * @var array
      */
-    protected static $requiredParams = ['type', 'id', 'gif_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'gif_url', 'thumbnail_url'];
 
     /**
      * {@inheritdoc}
@@ -33,7 +33,7 @@ class Gif extends AbstractInlineQueryResult
         'gif_url' => true,
         'gif_width' => true,
         'gif_height' => true,
-        'thumb_url' => true,
+        'thumbnail_url' => true,
         'title' => true,
         'caption' => true,
         'reply_markup' => InlineKeyboardMarkup::class,
@@ -73,7 +73,7 @@ class Gif extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $thumbUrl;
+    protected $thumbnailUrl;
 
     /**
      * Optional. Caption of the GIF file to be sent, 0-200 characters
@@ -87,7 +87,7 @@ class Gif extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $gifUrl
-     * @param string $thumbUrl
+     * @param string|null $thumbnailUrl
      * @param int|null $gifWidth
      * @param int|null $gifHeight
      * @param string|null $title
@@ -98,7 +98,7 @@ class Gif extends AbstractInlineQueryResult
     public function __construct(
         $id,
         $gifUrl,
-        $thumbUrl = null,
+        $thumbnailUrl = null,
         $title = null,
         $caption = null,
         $gifWidth = null,
@@ -109,7 +109,7 @@ class Gif extends AbstractInlineQueryResult
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->gifUrl = $gifUrl;
-        $this->thumbUrl = is_null($thumbUrl) ? $gifUrl : $thumbUrl;
+        $this->thumbnailUrl = is_null($thumbnailUrl) ? $gifUrl : $thumbnailUrl;
         $this->gifWidth = $gifWidth;
         $this->gifHeight = $gifHeight;
         $this->caption = $caption;
@@ -172,19 +172,41 @@ class Gif extends AbstractInlineQueryResult
     /**
      * @return string
      */
-    public function getThumbUrl()
+    public function getThumbnailUrl()
     {
-        return $this->thumbUrl;
+        return $this->thumbnailUrl;
     }
 
     /**
+     * @param string $thumbnailUrl
+     *
+     * @return void
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+    }
+
+    /**
+     * @deprecated Use getThumbnailUrl
+     *
+     * @return string
+     */
+    public function getThumbUrl()
+    {
+        return $this->getThumbnailUrl();
+    }
+
+    /**
+     * @deprecated Use setThumbnailUrl
+     *
      * @param string $thumbUrl
      *
      * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
-        $this->thumbUrl = $thumbUrl;
+        $this->setThumbnailUrl($thumbUrl);
     }
 
     /**

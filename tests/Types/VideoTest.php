@@ -34,7 +34,7 @@ class VideoTest extends AbstractTypeTest
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => PhotoSizeTest::getMinResponse()
+            'thumbnail' => PhotoSizeTest::getMinResponse()
         ];
     }
 
@@ -51,7 +51,7 @@ class VideoTest extends AbstractTypeTest
         $this->assertEquals(3, $item->getDuration());
         $this->assertNull($item->getMimeType());
         $this->assertNull($item->getFileSize());
-        $this->assertNull($item->getThumb());
+        $this->assertNull($item->getThumbnail());
     }
 
     /**
@@ -67,7 +67,7 @@ class VideoTest extends AbstractTypeTest
         $this->assertEquals(3, $item->getDuration());
         $this->assertEquals('video/mp4', $item->getMimeType());
         $this->assertEquals(4, $item->getFileSize());
-        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumb());
+        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumbnail());
     }
 
     public function testSetHeightException()
@@ -116,7 +116,7 @@ class VideoTest extends AbstractTypeTest
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'width' => 5,
                 'height' => 6,
@@ -138,7 +138,7 @@ class VideoTest extends AbstractTypeTest
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
@@ -162,7 +162,7 @@ class VideoTest extends AbstractTypeTest
             'duration' => 3,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
@@ -186,7 +186,7 @@ class VideoTest extends AbstractTypeTest
             'height' => 2,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,
@@ -210,7 +210,7 @@ class VideoTest extends AbstractTypeTest
             'duration' => 1,
             'mime_type' => 'video/mp4',
             'file_size' => 4,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,

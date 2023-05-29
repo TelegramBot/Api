@@ -914,6 +914,7 @@ class BotApi
      * @param string $stickerType Sticker type, one of “png”, “tgs”, or “webp”
      * @param string $emojis One or more emoji corresponding to the sticker
      * @param MaskPosition|null $maskPosition A JSON-serialized object for position where the mask should be placed on faces
+     * @param array<string, \CURLFile|\CURLStringFile> $attachments Attachments to use in attach://<attachment>
      *
      * @throws InvalidArgumentException
      * @throws Exception
@@ -931,7 +932,8 @@ class BotApi
         $tgsSticker = null,
         $webmSticker = null,
         $stickerType = null,
-        $maskPosition = null
+        $maskPosition = null,
+        $attachments = []
     ) {
         return $this->call('createNewStickerSet', [
             'user_id' => $userId,
@@ -943,7 +945,7 @@ class BotApi
             'sticker_type' => $stickerType,
             'emojis' => $emojis,
             'mask_position' => is_null($maskPosition) ? $maskPosition : $maskPosition->toJson(),
-        ]);
+        ] + $attachments);
     }
 
     /**
@@ -960,6 +962,8 @@ class BotApi
      * @param string|null $tgsSticker
      * @param string|null $webmSticker
      * @param MaskPosition|null $maskPosition
+     * @param array<string, \CURLFile|\CURLStringFile> $attachments Attachments to use in attach://<attachment>
+     *
      * @return bool
      * @throws Exception
      * @throws HttpException
@@ -972,7 +976,8 @@ class BotApi
         $pngSticker,
         $tgsSticker = null,
         $webmSticker = null,
-        $maskPosition = null
+        $maskPosition = null,
+        $attachments = []
     ) {
         return $this->call('addStickerToSet', [
             'user_id' => $userId,
@@ -982,7 +987,7 @@ class BotApi
             'webm_sticker' => $webmSticker,
             'emojis' => $emojis,
             'mask_position' => is_null($maskPosition) ? $maskPosition : $maskPosition->toJson(),
-        ]);
+        ] + $attachments);
     }
 
     /**
@@ -1011,6 +1016,32 @@ class BotApi
      *
      * @param string $name Sticker set name
      * @param string $userId User identifier of sticker set owner
+     * @param File|null $thumbnail A PNG image with the thumbnail,
+     *                             must be up to 128 kilobytes in size and have width and height exactly 100px,
+     *                             or a TGS animation with the thumbnail up to 32 kilobytes in size
+     *
+     * @return bool
+     *
+     * @throws InvalidArgumentException
+     * @throws Exception
+     */
+    public function setStickerSetThumbnail($name, $userId, $thumbnail = null)
+    {
+        return $this->call('setStickerSetThumb', [
+            'name' => $name,
+            'user_id' => $userId,
+            'thumbnail' => $thumbnail,
+        ]);
+    }
+
+    /**
+     * @deprecated Use setStickerSetThumbnail
+     *
+     * Use this method to delete a sticker from a set created by the bot.
+     * Returns True on success.
+     *
+     * @param string $name Sticker set name
+     * @param string $userId User identifier of sticker set owner
      * @param File|null $thumb A PNG image with the thumbnail,
      *                         must be up to 128 kilobytes in size and have width and height exactly 100px,
      *                         or a TGS animation with the thumbnail up to 32 kilobytes in size
@@ -1022,11 +1053,7 @@ class BotApi
      */
     public function setStickerSetThumb($name, $userId, $thumb = null)
     {
-        return $this->call('setStickerSetThumb', [
-            'name' => $name,
-            'user_id' => $userId,
-            'thumb' => $thumb,
-        ]);
+        return $this->setStickerSetThumbnail($name, $userId, $thumb);
     }
 
     /**
@@ -1046,6 +1073,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1063,7 +1091,8 @@ class BotApi
         $parseMode = null,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $thumbnail = null
     ) {
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
@@ -1078,6 +1107,7 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
+            'thumbnail' => $thumbnail,
         ]));
     }
 
@@ -1097,6 +1127,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1113,7 +1144,8 @@ class BotApi
         $parseMode = null,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $thumbnail = null
     ) {
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
@@ -1127,6 +1159,7 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
+            'thumbnail' => $thumbnail,
         ]));
     }
 
@@ -1240,6 +1273,7 @@ class BotApi
      * @param string|null $parseMode
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1260,7 +1294,8 @@ class BotApi
         $disableNotification = false,
         $parseMode = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $thumbnail = null
     ) {
         return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => $chatId,
@@ -1274,6 +1309,7 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
+            'thumbnail' => $thumbnail,
         ]));
     }
 
@@ -1335,6 +1371,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1350,7 +1387,8 @@ class BotApi
         $parseMode = null,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $thumbnail = null
     ) {
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
@@ -1363,6 +1401,7 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
+            'thumbnail' => $thumbnail,
         ]));
     }
 
@@ -1659,6 +1698,8 @@ class BotApi
      * @param InputMedia $media
      * @param string|null $inlineMessageId
      * @param InlineKeyboardMarkup|null $replyMarkup
+     * @param array<string, \CURLFile|\CURLStringFile> $attachments Attachments to use in attach://<attachment>
+     *
      * @return Message|true
      *
      * @throws Exception
@@ -1670,7 +1711,8 @@ class BotApi
         $messageId,
         InputMedia $media,
         $inlineMessageId = null,
-        $replyMarkup = null
+        $replyMarkup = null,
+        $attachments = []
     ) {
         $response = $this->call('editMessageMedia', [
             'chat_id' => $chatId,
@@ -1678,7 +1720,7 @@ class BotApi
             'inline_message_id' => $inlineMessageId,
             'media' => $media->toJson(),
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-        ]);
+        ] + $attachments);
         if ($response === true) {
             return true;
         }
@@ -2272,6 +2314,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -2287,7 +2330,8 @@ class BotApi
         $disableNotification = false,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $thumbnail = null
     ) {
         return Message::fromResponse($this->call('sendVideoNote', [
             'chat_id' => $chatId,
@@ -2300,6 +2344,7 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
+            'thumbnail' => $thumbnail,
         ]));
     }
 
@@ -2314,6 +2359,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param array<string, \CURLFile|\CURLStringFile> $attachments Attachments to use in attach://<attachment>
      *
      * @return Message[]
      * @throws Exception
@@ -2325,7 +2371,8 @@ class BotApi
         $replyToMessageId = null,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $attachments = []
     ) {
         return ArrayOfMessages::fromResponse($this->call('sendMediaGroup', [
             'chat_id' => $chatId,
@@ -2335,7 +2382,7 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
-        ]));
+        ] + $attachments));
     }
 
     /**

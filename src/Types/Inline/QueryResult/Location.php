@@ -42,9 +42,9 @@ class Location extends AbstractInlineQueryResult
         'latitude' => true,
         'longitude' => true,
         'title' => true,
-        'thumb_url' => true,
-        'thumb_width' => true,
-        'thumb_height' => true,
+        'thumbnail_url' => true,
+        'thumbnail_width' => true,
+        'thumbnail_height' => true,
         'reply_markup' => InlineKeyboardMarkup::class,
         'input_message_content' => InputMessageContent::class,
     ];
@@ -75,21 +75,21 @@ class Location extends AbstractInlineQueryResult
      *
      * @var string|null
      */
-    protected $thumbUrl;
+    protected $thumbnailUrl;
 
     /**
      * Optional. Thumbnail width
      *
      * @var int|null
      */
-    protected $thumbWidth;
+    protected $thumbnailWidth;
 
     /**
      * Optional. Thumbnail height
      *
      * @var int|null
      */
-    protected $thumbHeight;
+    protected $thumbnailHeight;
 
     /**
      * Voice constructor
@@ -98,9 +98,9 @@ class Location extends AbstractInlineQueryResult
      * @param float $latitude
      * @param float $longitude
      * @param string $title
-     * @param string|null $thumbUrl
-     * @param int|null $thumbWidth
-     * @param int|null $thumbHeight
+     * @param string|null $thumbnailUrl
+     * @param int|null $thumbnailWidth
+     * @param int|null $thumbnailHeight
      * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      * @param InputMessageContent|null $inputMessageContent
      */
@@ -109,9 +109,9 @@ class Location extends AbstractInlineQueryResult
         $latitude,
         $longitude,
         $title,
-        $thumbUrl = null,
-        $thumbWidth = null,
-        $thumbHeight = null,
+        $thumbnailUrl = null,
+        $thumbnailWidth = null,
+        $thumbnailHeight = null,
         $inlineKeyboardMarkup = null,
         $inputMessageContent = null
     ) {
@@ -119,9 +119,9 @@ class Location extends AbstractInlineQueryResult
 
         $this->latitude = $latitude;
         $this->longitude = $longitude;
-        $this->thumbUrl = $thumbUrl;
-        $this->thumbWidth = $thumbWidth;
-        $this->thumbHeight = $thumbHeight;
+        $this->thumbnailUrl = $thumbnailUrl;
+        $this->thumbnailWidth = $thumbnailWidth;
+        $this->thumbnailHeight = $thumbnailHeight;
     }
 
     /**
@@ -163,54 +163,120 @@ class Location extends AbstractInlineQueryResult
     /**
      * @return string|null
      */
-    public function getThumbUrl()
+    public function getThumbnailUrl()
     {
-        return $this->thumbUrl;
+        return $this->thumbnailUrl;
     }
 
     /**
+     * @param string|null $thumbnailUrl
+     *
+     * @return void
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+    }
+
+    /**
+     * @deprecated Use getThumbnailUrl
+     *
+     * @return string|null
+     */
+    public function getThumbUrl()
+    {
+        return $this->getThumbnailUrl();
+    }
+
+    /**
+     * @deprecated Use setThumbnailUrl
+     *
      * @param string|null $thumbUrl
      *
      * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
-        $this->thumbUrl = $thumbUrl;
+        $this->setThumbnailUrl($thumbUrl);
     }
 
     /**
      * @return int|null
      */
-    public function getThumbWidth()
+    public function getThumbnailWidth()
     {
-        return $this->thumbWidth;
+        return $this->thumbnailWidth;
     }
 
     /**
+     * @param int|null $thumbnailWidth
+     *
+     * @return void
+     */
+    public function setThumbnailWidth($thumbnailWidth)
+    {
+        $this->thumbnailWidth = $thumbnailWidth;
+    }
+
+    /**
+     * @deprecated Use getThumbnailWidth
+     *
+     * @return int|null
+     */
+    public function getThumbWidth()
+    {
+        return $this->getThumbnailWidth();
+    }
+
+    /**
+     * @deprecated Use setThumbnailWidth
+     *
      * @param int|null $thumbWidth
      *
      * @return void
      */
     public function setThumbWidth($thumbWidth)
     {
-        $this->thumbWidth = $thumbWidth;
+        $this->setThumbnailWidth($thumbWidth);
     }
 
     /**
      * @return int|null
      */
-    public function getThumbHeight()
+    public function getThumbnailHeight()
     {
-        return $this->thumbHeight;
+        return $this->thumbnailHeight;
     }
 
     /**
+     * @param int|null $thumbnailHeight
+     *
+     * @return void
+     */
+    public function setThumbnailHeight($thumbnailHeight)
+    {
+        $this->thumbnailHeight = $thumbnailHeight;
+    }
+
+    /**
+     * @deprecated Use getThumbnailHeight
+     *
+     * @return int|null
+     */
+    public function getThumbHeight()
+    {
+        return $this->getThumbnailHeight();
+    }
+
+    /**
+     * @deprecated Use setThumbnailWidth
+     *
      * @param int|null $thumbHeight
      *
      * @return void
      */
     public function setThumbHeight($thumbHeight)
     {
-        $this->thumbHeight = $thumbHeight;
+        $this->setThumbnailHeight($thumbHeight);
     }
 }

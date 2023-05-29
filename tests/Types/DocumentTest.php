@@ -29,7 +29,7 @@ class DocumentTest extends AbstractTypeTest
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
-            'thumb' => PhotoSizeTest::getMinResponse(),
+            'thumbnail' => PhotoSizeTest::getMinResponse(),
         ];
     }
 
@@ -44,7 +44,7 @@ class DocumentTest extends AbstractTypeTest
         $this->assertNull($item->getFileName());
         $this->assertNull($item->getMimeType());
         $this->assertNull($item->getFileSize());
-        $this->assertNull($item->getThumb());
+        $this->assertNull($item->getThumbnail());
     }
 
     /**
@@ -58,7 +58,7 @@ class DocumentTest extends AbstractTypeTest
         $this->assertEquals('testFileName', $item->getFileName());
         $this->assertEquals('audio/mp3', $item->getMimeType());
         $this->assertEquals(3, $item->getFileSize());
-        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumb());
+        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumbnail());
     }
 
     public function testSetFileSizeException()
@@ -80,7 +80,7 @@ class DocumentTest extends AbstractTypeTest
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',
             'file_size' => 3,
-            'thumb' => [
+            'thumbnail' => [
                 'file_id' => 'testFileId1',
                 'file_unique_id' => 'testFileUniqueId1',
                 'width' => 5,

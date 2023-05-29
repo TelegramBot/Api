@@ -20,7 +20,7 @@ class VideoNote extends BaseType implements TypeInterface
         'file_unique_id' => true,
         'length' => true,
         'duration' => true,
-        'thumb' => PhotoSize::class,
+        'thumbnail' => PhotoSize::class,
         'file_size' => true,
     ];
 
@@ -57,7 +57,7 @@ class VideoNote extends BaseType implements TypeInterface
      *
      * @var PhotoSize|null
      */
-    protected $thumb;
+    protected $thumbnail;
 
     /**
      * Optional. File size in bytes
@@ -141,19 +141,41 @@ class VideoNote extends BaseType implements TypeInterface
     /**
      * @return PhotoSize|null
      */
-    public function getThumb()
+    public function getThumbnail()
     {
-        return $this->thumb;
+        return $this->thumbnail;
     }
 
     /**
+     * @param PhotoSize $thumbnail
+     *
+     * @return void
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @deprecated use getThumbnail method
+     *
+     * @return PhotoSize|null
+     */
+    public function getThumb()
+    {
+        return $this->getThumbnail();
+    }
+
+    /**
+     * @deprecated use setThumbnail method
+     *
      * @param PhotoSize $thumb
      *
      * @return void
      */
     public function setThumb($thumb)
     {
-        $this->thumb = $thumb;
+        $this->setThumbnail($thumb);
     }
 
     /**
