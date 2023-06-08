@@ -6,6 +6,10 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
 ### Added
 - Add missing `protect_content` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods
+- Add missing phpDoc for `$replyMarkup` parameters
+
+### Deprecated
+- Deprecate `\TelegramBot\Api\Types\ReplyKeyboardHide` class
 
 ## 2.4.0 - 2023-05-11
 

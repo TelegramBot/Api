@@ -22,7 +22,6 @@ use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\MessageId;
 use TelegramBot\Api\Types\Poll;
-use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\SentWebAppMessage;
@@ -341,7 +340,7 @@ class BotApi
      * @param string|null $parseMode
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
-     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardHide|ReplyKeyboardRemove|ForceReply|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
@@ -387,7 +386,7 @@ class BotApi
      * @param bool $disableNotification
      * @param int|null $replyToMessageId
      * @param bool $allowSendingWithoutReply
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      *
@@ -434,7 +433,7 @@ class BotApi
      * @param string $firstName
      * @param string $lastName
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
@@ -645,7 +644,7 @@ class BotApi
      * @param float $latitude
      * @param float $longitude
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param null|int $livePeriod
      * @param int|null $messageThreadId
@@ -691,7 +690,7 @@ class BotApi
      * @param string $inlineMessageId
      * @param float $latitude
      * @param float $longitude
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      *
      * @return Message|true
      *
@@ -728,7 +727,7 @@ class BotApi
      * @param int|string $chatId
      * @param int $messageId
      * @param string $inlineMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      *
      * @return Message|true
      *
@@ -763,7 +762,7 @@ class BotApi
      * @param string $address
      * @param string|null $foursquareId
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
@@ -1040,7 +1039,7 @@ class BotApi
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param bool $supportsStreaming Pass True, if the uploaded video is suitable for streaming
      * @param string|null $parseMode
@@ -1092,7 +1091,7 @@ class BotApi
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode,
      * @param int|null $messageThreadId
@@ -1144,7 +1143,7 @@ class BotApi
      * @param string $caption Voice message caption, 0-1024 characters after entities parsing
      * @param int|null $duration
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param bool $allowSendingWithoutReply Pass True, if the message should be sent even if the specified
      *                                       replied-to message is not found
@@ -1236,7 +1235,7 @@ class BotApi
      * @param string|null $performer
      * @param string|null $title
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      * @param bool|null $protectContent
@@ -1285,7 +1284,7 @@ class BotApi
      * @param \CURLFile|string $photo
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      * @param int|null $messageThreadId
@@ -1330,7 +1329,7 @@ class BotApi
      * @param \CURLFile|\CURLStringFile|string $document
      * @param string|null $caption
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
      * @param int|null $messageThreadId
@@ -1579,7 +1578,7 @@ class BotApi
      * @param string $inlineMessageId
      * @param string|null $parseMode
      * @param bool $disablePreview
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|null $replyMarkup
      *
      * @return Message|true
      * @throws Exception
@@ -1616,7 +1615,7 @@ class BotApi
      * @param int|string $chatId
      * @param int $messageId
      * @param string|null $caption
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|null $replyMarkup
      * @param string $inlineMessageId
      * @param string|null $parseMode
      *
@@ -1693,7 +1692,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param int $messageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|null $replyMarkup
      * @param string $inlineMessageId
      *
      * @return Message|true
@@ -1827,7 +1826,7 @@ class BotApi
      * @param bool $needEmail
      * @param bool $needShippingAddress
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $providerData
      * @param bool $sendPhoneNumberToProvider
@@ -2268,7 +2267,7 @@ class BotApi
      * @param int|null $duration
      * @param int|null $length
      * @param int|null $replyToMessageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup
      * @param bool $disableNotification
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
@@ -2381,9 +2380,9 @@ class BotApi
      * @param bool $isClosed Pass True, if the poll needs to be immediately closed. This can be useful for poll preview.
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param int|null $replyToMessageId If the message is a reply, ID of the original message
-     * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
-     *                                 custom reply keyboard, instructions to remove reply
-     *                                 keyboard or to force a reply from the user.
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     *                                                                                                  custom reply keyboard, instructions to remove reply
+     *                                                                                                  keyboard or to force a reply from the user.
      * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
@@ -2441,9 +2440,9 @@ class BotApi
      * @param string|null $replyToMessageId If the message is a reply, ID of the original message
      * @param bool $allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
      *                                       message is not found,
-     * @param object|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
-     *                                 custom reply keyboard, instructions to remove reply
-     *                                 keyboard or to force a reply from the user.
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard,
+     *                                                                                                  custom reply keyboard, instructions to remove reply
+     *                                                                                                  keyboard or to force a reply from the user.
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      *
@@ -2480,7 +2479,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param int $messageId
-     * @param ReplyKeyboardMarkup|ReplyKeyboardHide|ForceReply|ReplyKeyboardRemove|null $replyMarkup
+     * @param InlineKeyboardMarkup|null $replyMarkup
      * @return Poll
      * @throws InvalidArgumentException
      * @throws Exception
