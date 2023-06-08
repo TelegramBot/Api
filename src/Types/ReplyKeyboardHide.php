@@ -5,6 +5,8 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 
 /**
+ * @deprecated Use ReplyKeyboardRemove
+ *
  * Class ReplyKeyboardHide
  * Upon receiving a message with this object, Telegram clients will hide the current custom keyboard
  * and display the default letter-keyboard. By default, custom keyboards are displayed
