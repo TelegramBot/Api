@@ -60,7 +60,7 @@ class ForceReply extends BaseType
      * @param bool $forceReply
      * @param bool|null $selective
      */
-    public function __construct($forceReply = true, $inputFieldPlaceholder = false, $selective = null)
+    public function __construct($forceReply = true, $selective = null, $inputFieldPlaceholder = false)
     {
         $this->forceReply = $forceReply;
         $this->inputFieldPlaceholder = $inputFieldPlaceholder;
@@ -73,23 +73,6 @@ class ForceReply extends BaseType
     public function isForceReply()
     {
         return $this->forceReply;
-    }
-
-    /**
-     * @param string $inputFieldPlaceholder
-     * @return void
-     */
-    public function setInputFieldPlaceholder($inputFieldPlaceholder)
-    {
-        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
-    }
-    
-    /**
-     * @return string|null
-     */
-    public function getInputFieldPlaceholder()
-    {
-        return $this->inputFieldPlaceholder;
     }
     
     /**
@@ -116,5 +99,22 @@ class ForceReply extends BaseType
     public function setSelective($selective)
     {
         $this->selective = $selective;
+    }
+
+    /**
+     * @param string $inputFieldPlaceholder
+     * @return void
+     */
+    public function setInputFieldPlaceholder($inputFieldPlaceholder)
+    {
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
+    }
+    
+    /**
+     * @return string|null
+     */
+    public function getInputFieldPlaceholder()
+    {
+        return $this->inputFieldPlaceholder;
     }
 }
