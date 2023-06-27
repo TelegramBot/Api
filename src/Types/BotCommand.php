@@ -3,23 +3,24 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
+use TelegramBot\Api\Collection\CollectionItemInterface;
 use TelegramBot\Api\TypeInterface;
 
-class BotCommand extends BaseType implements TypeInterface
+class BotCommand extends BaseType implements TypeInterface, CollectionItemInterface
 {
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $requiredParams = ['command', 'description'];
+    protected static $requiredParams = ['command', 'description'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'command' => true,
         'description' => true,
     ];
@@ -48,6 +49,7 @@ class BotCommand extends BaseType implements TypeInterface
 
     /**
      * @param string $command
+     * @return void
      */
     public function setCommand($command)
     {
@@ -64,6 +66,7 @@ class BotCommand extends BaseType implements TypeInterface
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {

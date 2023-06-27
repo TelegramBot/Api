@@ -2,22 +2,23 @@
 
 namespace TelegramBot\Api\Collection;
 
-use TelegramBot\Api\Types\InputMedia\InputMedia;
-
 /**
- * Class Collection
+ * @extends \ArrayObject<string|array-key, CollectionItemInterface>
  */
-class Collection
+class Collection extends \ArrayObject
 {
-    /**
-     * @var array
-     */
-    protected $items = [];
-
     /**
      * @var int Max items count, if set 0 - unlimited
      */
     protected $maxCount = 0;
+
+    /**
+     * @param CollectionItemInterface[] $items
+     */
+    public function __construct(array $items = [])
+    {
+        parent::__construct($items);
+    }
 
     /**
      * @param CollectionItemInterface $item
@@ -28,22 +29,22 @@ class Collection
      */
     public function addItem(CollectionItemInterface $item, $key = null)
     {
-        if ($this->maxCount > 0 && $this->count() + 1 >= $this->maxCount) {
+        if ($this->maxCount > 0 && $this->count() + 1 > $this->maxCount) {
             throw new ReachedMaxSizeException("Maximum collection items count reached. Max size: {$this->maxCount}");
         }
 
         if ($key == null) {
-            $this->items[] = $item;
+            $this->append($item);
         } else {
-            if (isset($this->items[$key])) {
+            if ($this->offsetExists($key)) {
                 throw new KeyHasUseException("Key $key already in use.");
             }
-            $this->items[$key] = $item;
+            $this->offsetSet($key, $item);
         }
     }
 
     /**
-     * @param $key
+     * @param int|string $key
      * @throws KeyInvalidException
      * @return void
      */
@@ -51,12 +52,11 @@ class Collection
     {
         $this->checkItemKey($key);
 
-        unset($this->items[$key]);
+        $this->offsetUnset($key);
     }
 
     /**
-     * @param $key
-     * @return InputMedia
+     * @param int|string $key
      * @return CollectionItemInterface
      * @throws KeyInvalidException
      */
@@ -64,15 +64,7 @@ class Collection
     {
         $this->checkItemKey($key);
 
-        return $this->items[$key];
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->items);
+        return $this->offsetGet($key);
     }
 
     /**
@@ -82,7 +74,7 @@ class Collection
     public function toJson($inner = false)
     {
         $output = [];
-        foreach ($this->items as $item) {
+        foreach ($this as $item) {
             $output[] = $item->toJson(true);
         }
 
@@ -99,12 +91,15 @@ class Collection
     }
 
     /**
-     * @param $key
+     * @param int|string $key
+     *
      * @throws KeyInvalidException
+     *
+     * @return void
      */
     private function checkItemKey($key)
     {
-        if (!isset($this->items[$key])) {
+        if (!$this->offsetExists($key)) {
             throw new KeyInvalidException("Invalid key $key.");
         }
     }

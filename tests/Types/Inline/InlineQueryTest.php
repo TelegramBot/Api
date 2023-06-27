@@ -2,129 +2,62 @@
 
 namespace TelegramBot\Api\Test\Types\Inline;
 
+use TelegramBot\Api\Test\AbstractTypeTest;
+use TelegramBot\Api\Test\Types\LocationTest;
+use TelegramBot\Api\Test\Types\UserTest;
 use TelegramBot\Api\Types\Inline\InlineQuery;
-use TelegramBot\Api\Types\User;
 
-class InlineQueryTest extends \PHPUnit_Framework_TestCase
+class InlineQueryTest extends AbstractTypeTest
 {
-    protected $inlineQueryFixture = [
-        'id' => 1,
-        'from' => [
-            'first_name' => 'Ilya',
-            'last_name' => 'Gusev',
-            'id' => 123456,
-            'username' => 'iGusev',
-        ],
-        'query' => 'test_query',
-        'offset' => '20'
-    ];
-
-    public function testFromResponse1()
+    protected static function getType()
     {
-        $item = InlineQuery::fromResponse($this->inlineQueryFixture);
+        return InlineQuery::class;
+    }
 
-        $user = User::fromResponse($this->inlineQueryFixture['from']);
+    public static function getMinResponse()
+    {
+        return [
+            'id' => 1,
+            'from' => UserTest::getMinResponse(),
+            'query' => 'test_query',
+            'offset' => '20'
+        ];
+    }
 
-        $this->assertInstanceOf('\TelegramBot\Api\Types\Inline\InlineQuery', $item);
+    public static function getFullResponse()
+    {
+        return [
+            'id' => 1,
+            'from' => UserTest::getMinResponse(),
+            'location' => LocationTest::getMinResponse(),
+            'query' => 'test_query',
+            'offset' => '20'
+        ];
+    }
+
+    /**
+     * @param InlineQuery $item
+     * @return void
+     */
+    protected function assertMinItem($item)
+    {
         $this->assertEquals(1, $item->getId());
-        $this->assertEquals($user, $item->getFrom());
+        $this->assertEquals(UserTest::createMinInstance(), $item->getFrom());
+        $this->assertEquals('test_query', $item->getQuery());
         $this->assertEquals('20', $item->getOffset());
+        $this->assertNull($item->getLocation());
     }
 
-
-    public function testFromResponse2() {
-        $this->inlineQueryFixture['offset'] = '';
-        $item = InlineQuery::fromResponse($this->inlineQueryFixture);
-
-        $user = User::fromResponse($this->inlineQueryFixture['from']);
-
-        $this->assertInstanceOf('\TelegramBot\Api\Types\Inline\InlineQuery', $item);
+    /**
+     * @param InlineQuery $item
+     * @return void
+     */
+    protected function assertFullItem($item)
+    {
         $this->assertEquals(1, $item->getId());
-        $this->assertEquals($user, $item->getFrom());
-        $this->assertEquals('', $item->getOffset());
-    }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException1() {
-        unset($this->inlineQueryFixture['id']);
-        InlineQuery::fromResponse($this->inlineQueryFixture);
-    }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException2() {
-        unset($this->inlineQueryFixture['from']);
-        InlineQuery::fromResponse($this->inlineQueryFixture);
-    }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException3() {
-        unset($this->inlineQueryFixture['query']);
-        InlineQuery::fromResponse($this->inlineQueryFixture);
-    }
-
-    /**
-     * @expectedException \TelegramBot\Api\InvalidArgumentException
-     */
-    public function testFromResponseException4() {
-        unset($this->inlineQueryFixture['offset']);
-        InlineQuery::fromResponse($this->inlineQueryFixture);
-    }
-
-    public function testSetId()
-    {
-        $item = new InlineQuery();
-        $item->setId('testId');
-        $this->assertAttributeEquals('testId', 'id', $item);
-    }
-
-    public function testGetId()
-    {
-        $item = new InlineQuery();
-        $item->setId('testId');
-        $this->assertEquals('testId', $item->getId());
-    }
-
-    public function testSetFrom() {
-        $item = new InlineQuery();
-        $user = User::fromResponse($this->inlineQueryFixture['from']);
-        $item->setFrom($user);
-        $this->assertAttributeEquals($user, 'from', $item);
-    }
-
-    public function testGetFrom() {
-        $item = new InlineQuery();
-        $user = User::fromResponse($this->inlineQueryFixture['from']);
-        $item->setFrom($user);
-        $this->assertEquals($user, $item->getFrom());
-    }
-
-    public function testSetQuery() {
-        $item = new InlineQuery();
-        $item->setQuery('testQuery');
-        $this->assertAttributeEquals('testQuery', 'query', $item);
-    }
-
-    public function testGetQuery() {
-        $item = new InlineQuery();
-        $item->setQuery('testQuery');
-        $this->assertEquals('testQuery', $item->getQuery());
-    }
-
-    public function testSetOffset() {
-        $item = new InlineQuery();
-        $item->setOffset('20');
-        $this->assertAttributeEquals('20', 'offset', $item);
-    }
-
-    public function testGetOffset() {
-        $item = new InlineQuery();
-        $item->setOffset('20');
+        $this->assertEquals(UserTest::createMinInstance(), $item->getFrom());
+        $this->assertEquals('test_query', $item->getQuery());
         $this->assertEquals('20', $item->getOffset());
+        $this->assertEquals(LocationTest::createMinInstance(), $item->getLocation());
     }
 }

@@ -19,14 +19,14 @@ class Photo extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'photo_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'photo_url', 'thumb_url'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'photo_url' => true,
@@ -57,35 +57,35 @@ class Photo extends AbstractInlineQueryResult
     /**
      * Optional. Width of the photo
      *
-     * @var int
+     * @var int|null
      */
     protected $photoWidth;
 
     /**
      * Optional. Height of the photo
      *
-     * @var int
+     * @var int|null
      */
     protected $photoHeight;
 
     /**
      * URL of the thumbnail for the photo
      *
-     * @var
+     * @var string
      */
     protected $thumbUrl;
 
     /**
      * Optional. Short description of the result
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Optional. Caption of the photo to be sent, 0-200 characters
      *
-     * @var string
+     * @var string|null
      */
     protected $caption;
 
@@ -125,7 +125,6 @@ class Photo extends AbstractInlineQueryResult
         $this->caption = $caption;
     }
 
-
     /**
      * @return string
      */
@@ -136,6 +135,8 @@ class Photo extends AbstractInlineQueryResult
 
     /**
      * @param string $photoUrl
+     *
+     * @return void
      */
     public function setPhotoUrl($photoUrl)
     {
@@ -143,7 +144,7 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPhotoWidth()
     {
@@ -151,7 +152,9 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $photoWidth
+     * @param int|null $photoWidth
+     *
+     * @return void
      */
     public function setPhotoWidth($photoWidth)
     {
@@ -159,7 +162,7 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPhotoHeight()
     {
@@ -167,7 +170,9 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $photoHeight
+     * @param int|null $photoHeight
+     *
+     * @return void
      */
     public function setPhotoHeight($photoHeight)
     {
@@ -175,7 +180,7 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getThumbUrl()
     {
@@ -183,7 +188,9 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param mixed $thumbUrl
+     * @param string $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -191,7 +198,7 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -199,7 +206,9 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
+     *
+     * @return void
      */
     public function setDescription($description)
     {
@@ -207,7 +216,7 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCaption()
     {
@@ -215,7 +224,9 @@ class Photo extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
+     *
+     * @return void
      */
     public function setCaption($caption)
     {

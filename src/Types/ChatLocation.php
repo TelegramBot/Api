@@ -12,14 +12,14 @@ class ChatLocation extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['location', 'address'];
+    protected static $requiredParams = ['location', 'address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'location' => Location::class,
         'address' => true,
     ];
@@ -48,6 +48,7 @@ class ChatLocation extends BaseType implements TypeInterface
 
     /**
      * @param Location $location
+     * @return void
      */
     public function setLocation($location)
     {
@@ -64,6 +65,7 @@ class ChatLocation extends BaseType implements TypeInterface
 
     /**
      * @param string $address
+     * @return void
      */
     public function setAddress($address)
     {

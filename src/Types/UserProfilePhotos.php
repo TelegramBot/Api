@@ -19,14 +19,14 @@ class UserProfilePhotos extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['total_count', 'photos'];
+    protected static $requiredParams = ['total_count', 'photos'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'total_count' => true,
         'photos' => ArrayOfArrayOfPhotoSize::class,
     ];
@@ -34,7 +34,7 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     /**
      * Total number of profile pictures the target user has
      *
-     * @var Integer
+     * @var int
      */
     protected $totalCount;
 
@@ -56,6 +56,8 @@ class UserProfilePhotos extends BaseType implements TypeInterface
 
     /**
      * @param array $photos
+     *
+     * @return void
      */
     public function setPhotos($photos)
     {
@@ -71,9 +73,11 @@ class UserProfilePhotos extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $totalCount
+     * @param mixed $totalCount
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setTotalCount($totalCount)
     {

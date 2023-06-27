@@ -18,14 +18,14 @@ class Article extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'title', 'input_message_content'];
+    protected static $requiredParams = ['type', 'id', 'title', 'input_message_content'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'title' => true,
@@ -49,42 +49,42 @@ class Article extends AbstractInlineQueryResult
     /**
      * Optional. URL of the result
      *
-     * @var string
+     * @var string|null
      */
     protected $url;
 
     /**
      * Optional. Pass True, if you don't want the URL to be shown in the message
      *
-     * @var bool
+     * @var bool|null
      */
     protected $hideUrl;
 
     /**
      * Optional. Short description of the result
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
     protected $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbHeight;
 
@@ -118,9 +118,8 @@ class Article extends AbstractInlineQueryResult
         $this->thumbHeight = $thumbHeight;
     }
 
-
     /**
-     * @return string
+     * @return string|null
      */
     public function getUrl()
     {
@@ -128,7 +127,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $url
+     * @param string|null $url
+     *
+     * @return void
      */
     public function setUrl($url)
     {
@@ -136,7 +137,7 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isHideUrl()
     {
@@ -144,7 +145,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param boolean $hideUrl
+     * @param bool|null $hideUrl
+     *
+     * @return void
      */
     public function setHideUrl($hideUrl)
     {
@@ -152,7 +155,7 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -160,7 +163,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
+     *
+     * @return void
      */
     public function setDescription($description)
     {
@@ -168,7 +173,7 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getThumbUrl()
     {
@@ -176,7 +181,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -184,7 +191,7 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbWidth()
     {
@@ -192,7 +199,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
+     *
+     * @return void
      */
     public function setThumbWidth($thumbWidth)
     {
@@ -200,7 +209,7 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbHeight()
     {
@@ -208,7 +217,9 @@ class Article extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
+     *
+     * @return void
      */
     public function setThumbHeight($thumbHeight)
     {

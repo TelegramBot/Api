@@ -8,7 +8,6 @@
 
 namespace TelegramBot\Api\Types\Inline\InputMessageContent;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\Inline\InputMessageContent;
 
@@ -27,14 +26,14 @@ class Contact extends InputMessageContent implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['phone_number', 'first_name'];
+    protected static $requiredParams = ['phone_number', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'phone_number' => true,
         'first_name' => true,
         'last_name' => true,
@@ -57,7 +56,7 @@ class Contact extends InputMessageContent implements TypeInterface
     /**
      * Optional. Contact's last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
@@ -75,7 +74,6 @@ class Contact extends InputMessageContent implements TypeInterface
         $this->lastName = $lastName;
     }
 
-
     /**
      * @return string
      */
@@ -86,6 +84,8 @@ class Contact extends InputMessageContent implements TypeInterface
 
     /**
      * @param string $phoneNumber
+     *
+     * @return void
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -102,6 +102,8 @@ class Contact extends InputMessageContent implements TypeInterface
 
     /**
      * @param mixed $firstName
+     *
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -109,7 +111,7 @@ class Contact extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLastName()
     {
@@ -117,7 +119,9 @@ class Contact extends InputMessageContent implements TypeInterface
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
+     *
+     * @return void
      */
     public function setLastName($lastName)
     {

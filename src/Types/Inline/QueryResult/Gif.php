@@ -20,14 +20,14 @@ class Gif extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'gif_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'gif_url', 'thumb_url'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'gif_url' => true,
@@ -57,14 +57,14 @@ class Gif extends AbstractInlineQueryResult
     /**
      * Optional. Width of the GIF
      *
-     * @var int
+     * @var int|null
      */
     protected $gifWidth;
 
     /**
      * Optional. Height of the GIF
      *
-     * @var int
+     * @var int|null
      */
     protected $gifHeight;
 
@@ -78,7 +78,7 @@ class Gif extends AbstractInlineQueryResult
     /**
      * Optional. Caption of the GIF file to be sent, 0-200 characters
      *
-     * @var string
+     * @var string|null
      */
     protected $caption;
 
@@ -125,6 +125,8 @@ class Gif extends AbstractInlineQueryResult
 
     /**
      * @param string $gifUrl
+     *
+     * @return void
      */
     public function setGifUrl($gifUrl)
     {
@@ -132,7 +134,7 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getGifWidth()
     {
@@ -140,7 +142,9 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $gifWidth
+     * @param int|null $gifWidth
+     *
+     * @return void
      */
     public function setGifWidth($gifWidth)
     {
@@ -148,7 +152,7 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getGifHeight()
     {
@@ -156,7 +160,9 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $gifHeight
+     * @param int|null $gifHeight
+     *
+     * @return void
      */
     public function setGifHeight($gifHeight)
     {
@@ -173,6 +179,8 @@ class Gif extends AbstractInlineQueryResult
 
     /**
      * @param string $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -180,7 +188,7 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCaption()
     {
@@ -188,7 +196,9 @@ class Gif extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $caption
+     * @param string|null $caption
+     *
+     * @return void
      */
     public function setCaption($caption)
     {

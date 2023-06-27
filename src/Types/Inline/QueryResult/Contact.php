@@ -18,14 +18,14 @@ class Contact extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
+    protected static $requiredParams = ['type', 'id', 'phone_number', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'phone_number' => true,
@@ -62,28 +62,28 @@ class Contact extends AbstractInlineQueryResult
     /**
      * Optional. Contact's last name
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
     protected $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbHeight;
 
@@ -121,7 +121,6 @@ class Contact extends AbstractInlineQueryResult
         $this->thumbHeight = $thumbHeight;
     }
 
-
     /**
      * @return string
      */
@@ -132,6 +131,8 @@ class Contact extends AbstractInlineQueryResult
 
     /**
      * @param string $phoneNumber
+     *
+     * @return void
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -148,6 +149,8 @@ class Contact extends AbstractInlineQueryResult
 
     /**
      * @param string $firstName
+     *
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -155,7 +158,7 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLastName()
     {
@@ -163,7 +166,9 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
+     *
+     * @return void
      */
     public function setLastName($lastName)
     {
@@ -171,7 +176,7 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getThumbUrl()
     {
@@ -179,7 +184,9 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -187,7 +194,7 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbWidth()
     {
@@ -195,7 +202,9 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
+     *
+     * @return void
      */
     public function setThumbWidth($thumbWidth)
     {
@@ -203,7 +212,7 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbHeight()
     {
@@ -211,7 +220,9 @@ class Contact extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
+     *
+     * @return void
      */
     public function setThumbHeight($thumbHeight)
     {

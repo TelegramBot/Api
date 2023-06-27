@@ -4,6 +4,10 @@ namespace TelegramBot\Api\Types;
 
 abstract class ArrayOfUpdates
 {
+    /**
+     * @param array $data
+     * @return Update[]
+     */
     public static function fromResponse($data)
     {
         $arrayOfUpdates = [];

@@ -15,12 +15,12 @@ class LabeledPrice extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['label', 'amount'];
+    protected static $requiredParams = ['label', 'amount'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'label' => true,
         'amount' => true
     ];
@@ -49,6 +49,8 @@ class LabeledPrice extends BaseType
 
     /**
      * @param string $label
+     *
+     * @return void
      */
     public function setLabel($label)
     {
@@ -65,6 +67,8 @@ class LabeledPrice extends BaseType
 
     /**
      * @param int $amount
+     *
+     * @return void
      */
     public function setAmount($amount)
     {

@@ -4,9 +4,12 @@ namespace TelegramBot\Api;
 
 use TelegramBot\Api\Types\Message;
 
+/**
+ * @deprecated
+ * @psalm-suppress all
+ */
 class Botan
 {
-
     /**
      * @var string Tracker url
      */
@@ -15,10 +18,9 @@ class Botan
     /**
      * CURL object
      *
-     * @var
+     * @var resource
      */
     protected $curl;
-
 
     /**
      * Yandex AppMetrica application api_key
@@ -40,8 +42,8 @@ class Botan
             throw new Exception('CURL not installed');
         }
 
-        if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Token should be a string');
+        if (empty($token)) {
+            throw new InvalidArgumentException('Token should not be empty');
         }
 
         $this->token = $token;
@@ -56,6 +58,8 @@ class Botan
      *
      * @throws \TelegramBot\Api\Exception
      * @throws \TelegramBot\Api\HttpException
+     *
+     * @return void
      */
     public function track(Message $message, $eventName = 'Message')
     {
@@ -73,7 +77,10 @@ class Botan
         ];
 
         curl_setopt_array($this->curl, $options);
-        $result = BotApi::jsonValidate(curl_exec($this->curl), true);
+        /** @var string $response */
+        $response = curl_exec($this->curl);
+        /** @var array $result */
+        $result = BotApi::jsonValidate($response, true);
 
         BotApi::curlValidate($this->curl);
 

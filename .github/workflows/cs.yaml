@@ -1,0 +1,55 @@
+on:
+    - pull_request
+    - push
+
+name: CS Check
+
+jobs:
+    tests:
+        name: PHP ${{ matrix.php }}-${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os:
+                    - ubuntu-latest
+                php:
+                    - "8.1"
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v2
+
+            -
+                name: Install PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    tools: composer:v2
+
+            -
+                name: Determine composer cache directory
+                run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+
+            -
+                name: Cache dependencies installed with composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ env.COMPOSER_CACHE_DIR }}
+                    key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        php${{ matrix.php }}-composer-latest-
+            -
+                name: Update composer
+                run: composer self-update
+
+            -
+                name: Remove psalm
+                run: composer remove vimeo/psalm --dev --no-update
+
+            -
+                name: Install dependencies with composer
+                run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
+
+            -
+                name: Run php-cs-fixer
+                run: composer cs-check

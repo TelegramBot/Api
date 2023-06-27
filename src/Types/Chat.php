@@ -13,14 +13,14 @@ class Chat extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'type'];
+    protected static $requiredParams = ['id', 'type'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'type' => true,
         'title' => true,
@@ -37,13 +37,22 @@ class Chat extends BaseType implements TypeInterface
         'sticker_set_name' => true,
         'can_set_sticker_set' => true,
         'linked_chat_id' => true,
-        'location' => ChatLocation::class
+        'location' => ChatLocation::class,
+        'join_to_send_messages' => true,
+        'join_by_request' => true,
+        'message_auto_delete_time' => true,
+        'has_protected_content' => true,
+        'is_forum' => true,
+        'active_usernames' => true,
+        'emoji_status_custom_emoji_id' => true,
+        'has_private_forwards' => true,
+        'has_restricted_voice_and_video_messages' => true,
     ];
 
     /**
      * Unique identifier for this chat, not exceeding 1e13 by absolute value
      *
-     * @var int|string
+     * @var int|float|string
      */
     protected $id;
 
@@ -57,70 +66,70 @@ class Chat extends BaseType implements TypeInterface
     /**
      * Optional. Title, for channels and group chats
      *
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
      * Optional. Username, for private chats and channels if available
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
 
     /**
      * Optional. First name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $firstName;
 
     /**
      * Optional. Last name of the other party in a private chat
      *
-     * @var string
+     * @var string|null
      */
     protected $lastName;
 
     /**
      * Optional. Chat photo. Returned only in getChat.
      *
-     * @var ChatPhoto
+     * @var ChatPhoto|null
      */
     protected $photo;
 
     /**
      * Optional. Bio of the other party in a private chat. Returned only in getChat
      *
-     * @var string
+     * @var string|null
      */
     protected $bio;
 
     /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Optional. Chat invite link, for supergroups and channel chats. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $inviteLink;
 
     /**
      * Optional. Pinned message, for supergroups. Returned only in getChat.
      *
-     * @var Message
+     * @var Message|null
      */
     protected $pinnedMessage;
 
     /**
      * Optional. Default chat member permissions, for groups and supergroups. Returned only in getChat.
      *
-     * @var ChatPermissions
+     * @var ChatPermissions|null
      */
     protected $permissions;
 
@@ -128,21 +137,21 @@ class Chat extends BaseType implements TypeInterface
      * Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged
      * user. Returned only in getChat.
      *
-     * @var int
+     * @var int|null
      */
     protected $slowModeDelay;
 
     /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
      *
-     * @var string
+     * @var string|null
      */
     protected $stickerSetName;
 
     /**
      * Optional. True, if the bot can change the group sticker set. Returned only in getChat.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $canSetStickerSet;
 
@@ -152,19 +161,87 @@ class Chat extends BaseType implements TypeInterface
      * languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64
      * bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat.
      *
-     * @var int
+     * @var int|null
      */
     protected $linkedChatId;
 
     /**
      * Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat.
      *
-     * @var ChatLocation
+     * @var ChatLocation|null
      */
     protected $location;
 
     /**
-     * @return int|string
+     * Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat.
+     *
+     * @var bool|null
+     */
+    protected $joinToSendMessages;
+
+    /**
+     * Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in getChat.
+     *
+     * @var bool|null
+     */
+    protected $joinByRequest;
+
+    /**
+     * Optional. Time after which all messages sent to the chat will be automatically deleted; in seconds. Returned
+     * only in getChat.
+     *
+     * @var int|null
+     */
+    protected $messageAutoDeleteTime;
+
+    /**
+     * 	Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
+     *
+     * @var bool|null
+     */
+    protected $hasProtectedContent;
+
+    /**
+     * Optional. True, if the supergroup chat is a forum (has topics enabled)
+     *
+     * @var bool|null
+     */
+    protected $isForum;
+
+    /**
+     * Optional. If non-empty, the list of all active chat usernames;
+     * for private chats, supergroups and channels. Returned only in getChat.
+     *
+     * @var array[]|null
+     */
+    protected $activeUsernames;
+
+    /**
+     * Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat.
+     *
+     * @var string|null
+     */
+    protected $emojiStatusCustomEmojiId;
+
+    /**
+     * Optional. True, if privacy settings of the other party in the private chat allows
+     * to use tg://user?id=<user_id> links only in chats with the user.
+     * Returned only in getChat.
+     *
+     * @var bool|null
+     */
+    protected $hasPrivateForwards;
+
+    /**
+     * Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat.
+     * Returned only in getChat.
+     *
+     * @var bool|null
+     */
+    protected $hasRestrictedVoiceAndVideoMessages;
+
+    /**
+     * @return int|float|string
      */
     public function getId()
     {
@@ -172,8 +249,8 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int|string $id
-     *
+     * @param mixed $id
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setId($id)
@@ -195,6 +272,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $type
+     * @return void
      */
     public function setType($type)
     {
@@ -202,7 +280,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getTitle()
     {
@@ -211,6 +289,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $title
+     * @return void
      */
     public function setTitle($title)
     {
@@ -218,7 +297,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getUsername()
     {
@@ -227,6 +306,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $username
+     * @return void
      */
     public function setUsername($username)
     {
@@ -234,7 +314,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getFirstName()
     {
@@ -243,6 +323,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $firstName
+     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -250,7 +331,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getLastName()
     {
@@ -259,6 +340,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $lastName
+     * @return void
      */
     public function setLastName($lastName)
     {
@@ -266,7 +348,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatPhoto
+     * @return ChatPhoto|null
      */
     public function getPhoto()
     {
@@ -275,6 +357,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatPhoto $photo
+     * @return void
      */
     public function setPhoto($photo)
     {
@@ -282,7 +365,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getBio()
     {
@@ -291,6 +374,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $bio
+     * @return void
      */
     public function setBio($bio)
     {
@@ -298,7 +382,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -307,6 +391,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $description
+     * @return void
      */
     public function setDescription($description)
     {
@@ -314,7 +399,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getInviteLink()
     {
@@ -323,6 +408,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $inviteLink
+     * @return void
      */
     public function setInviteLink($inviteLink)
     {
@@ -330,7 +416,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getPinnedMessage()
     {
@@ -339,6 +425,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param Message $pinnedMessage
+     * @return void
      */
     public function setPinnedMessage($pinnedMessage)
     {
@@ -346,7 +433,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatPermissions
+     * @return ChatPermissions|null
      */
     public function getPermissions()
     {
@@ -355,6 +442,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatPermissions $permissions
+     * @return void
      */
     public function setPermissions($permissions)
     {
@@ -362,7 +450,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getSlowModeDelay()
     {
@@ -371,6 +459,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param int $slowModeDelay
+     * @return void
      */
     public function setSlowModeDelay($slowModeDelay)
     {
@@ -378,7 +467,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getStickerSetName()
     {
@@ -387,6 +476,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param string $stickerSetName
+     * @return void
      */
     public function setStickerSetName($stickerSetName)
     {
@@ -394,15 +484,16 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isCanSetStickerSet()
+    public function getCanSetStickerSet()
     {
         return $this->canSetStickerSet;
     }
 
     /**
      * @param bool $canSetStickerSet
+     * @return void
      */
     public function setCanSetStickerSet($canSetStickerSet)
     {
@@ -410,7 +501,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLinkedChatId()
     {
@@ -419,6 +510,7 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param int $linkedChatId
+     * @return void
      */
     public function setLinkedChatId($linkedChatId)
     {
@@ -426,7 +518,7 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ChatLocation
+     * @return ChatLocation|null
      */
     public function getLocation()
     {
@@ -435,9 +527,165 @@ class Chat extends BaseType implements TypeInterface
 
     /**
      * @param ChatLocation $location
+     * @return void
      */
     public function setLocation($location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getJoinToSendMessages()
+    {
+        return $this->joinToSendMessages;
+    }
+
+    /**
+     * @param bool $joinToSendMessages
+     * @return void
+     */
+    public function setJoinToSendMessages($joinToSendMessages)
+    {
+        $this->joinToSendMessages = $joinToSendMessages;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getJoinByRequest()
+    {
+        return $this->joinByRequest;
+    }
+
+    /**
+     * @param bool $joinByRequest
+     * @return void
+     */
+    public function setJoinByRequest($joinByRequest)
+    {
+        $this->joinByRequest = $joinByRequest;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMessageAutoDeleteTime()
+    {
+        return $this->messageAutoDeleteTime;
+    }
+
+    /**
+     * @param int $messageAutoDeleteTime
+     * @return void
+     */
+    public function setMessageAutoDeleteTime($messageAutoDeleteTime)
+    {
+        $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     * @return void
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsForum()
+    {
+        return $this->isForum;
+    }
+
+    /**
+     * @param bool $isForum
+     * @return void
+     */
+    public function setIsForum($isForum)
+    {
+        $this->isForum = $isForum;
+    }
+
+    /**
+     * @return array[]|null
+     *
+     * @psalm-return array<array>|null
+     */
+    public function getActiveUsernames()
+    {
+        return $this->activeUsernames;
+    }
+
+    /**
+     * @param array $activeUsernames
+     * @return void
+     */
+    public function setActiveUsernames($activeUsernames)
+    {
+        $this->activeUsernames = $activeUsernames;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getEmojiStatusCustomEmojiId()
+    {
+        return $this->emojiStatusCustomEmojiId;
+    }
+
+    /**
+     * @param string $emojiStatusCustomEmojiId
+     * @return void
+     */
+    public function setEmojiStatusCustomEmojiId($emojiStatusCustomEmojiId)
+    {
+        $this->emojiStatusCustomEmojiId = $emojiStatusCustomEmojiId;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHasPrivateForwards()
+    {
+        return $this->hasPrivateForwards;
+    }
+
+    /**
+     * @param bool $hasPrivateForwards
+     * @return void
+     */
+    public function setHasPrivateForwards($hasPrivateForwards)
+    {
+        $this->hasPrivateForwards = $hasPrivateForwards;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHasRestrictedVoiceAndVideoMessages()
+    {
+        return $this->hasRestrictedVoiceAndVideoMessages;
+    }
+
+    /**
+     * @param bool $hasRestrictedVoiceAndVideoMessages
+     * @return void
+     */
+    public function setHasRestrictedVoiceAndVideoMessages($hasRestrictedVoiceAndVideoMessages)
+    {
+        $this->hasRestrictedVoiceAndVideoMessages = $hasRestrictedVoiceAndVideoMessages;
     }
 }

@@ -5,6 +5,8 @@ namespace TelegramBot\Api\Types;
 use TelegramBot\Api\BaseType;
 
 /**
+ * @deprecated Use ReplyKeyboardRemove
+ *
  * Class ReplyKeyboardHide
  * Upon receiving a message with this object, Telegram clients will hide the current custom keyboard
  * and display the default letter-keyboard. By default, custom keyboards are displayed
@@ -20,14 +22,14 @@ class ReplyKeyboardHide extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['hide_keyboard'];
+    protected static $requiredParams = ['hide_keyboard'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'hide_keyboard' => true,
         'selective' => true
     ];
@@ -45,10 +47,14 @@ class ReplyKeyboardHide extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
+    /**
+     * @param bool $hideKeyboard
+     * @param bool|null $selective
+     */
     public function __construct($hideKeyboard = true, $selective = null)
     {
         $this->hideKeyboard = $hideKeyboard;
@@ -56,7 +62,7 @@ class ReplyKeyboardHide extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHideKeyboard()
     {
@@ -64,7 +70,8 @@ class ReplyKeyboardHide extends BaseType
     }
 
     /**
-     * @param boolean $hideKeyboard
+     * @param bool $hideKeyboard
+     * @return void
      */
     public function setHideKeyboard($hideKeyboard)
     {
@@ -72,7 +79,7 @@ class ReplyKeyboardHide extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isSelective()
     {
@@ -80,7 +87,8 @@ class ReplyKeyboardHide extends BaseType
     }
 
     /**
-     * @param boolean $selective
+     * @param bool $selective
+     * @return void
      */
     public function setSelective($selective)
     {

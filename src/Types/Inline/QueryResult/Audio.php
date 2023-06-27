@@ -29,14 +29,14 @@ class Audio extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'audio_url', 'title'];
+    protected static $requiredParams = ['type', 'id', 'audio_url', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'audio_url' => true,
@@ -64,14 +64,14 @@ class Audio extends AbstractInlineQueryResult
     /**
      * Optional. Performer
      *
-     * @var string
+     * @var string|null
      */
     protected $performer;
 
     /**
      * Optional. Audio duration in seconds
      *
-     * @var int
+     * @var int|null
      */
     protected $audioDuration;
 
@@ -112,6 +112,8 @@ class Audio extends AbstractInlineQueryResult
 
     /**
      * @param string $audioUrl
+     *
+     * @return void
      */
     public function setAudioUrl($audioUrl)
     {
@@ -119,7 +121,7 @@ class Audio extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPerformer()
     {
@@ -127,7 +129,9 @@ class Audio extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $performer
+     * @param string|null $performer
+     *
+     * @return void
      */
     public function setPerformer($performer)
     {
@@ -135,7 +139,7 @@ class Audio extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getAudioDuration()
     {
@@ -143,7 +147,9 @@ class Audio extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $audioDuration
+     * @param int|null $audioDuration
+     *
+     * @return void
      */
     public function setAudioDuration($audioDuration)
     {

@@ -15,12 +15,12 @@ class ShippingOption extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['id', 'title', 'prices'];
+    protected static $requiredParams = ['id', 'title', 'prices'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'title' => true,
         'prices' => ArrayOfLabeledPrice::class
@@ -58,7 +58,10 @@ class ShippingOption extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $id
+     *
+     * @return void
      */
     public function setId($id)
     {
@@ -76,7 +79,10 @@ class ShippingOption extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -94,7 +100,10 @@ class ShippingOption extends BaseType
 
     /**
      * @author MY
+     *
      * @param array $prices
+     *
+     * @return void
      */
     public function setPrices($prices)
     {

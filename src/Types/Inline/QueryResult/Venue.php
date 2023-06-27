@@ -29,14 +29,14 @@ class Venue extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'latitude', 'longitude', 'title', 'address'];
+    protected static $requiredParams = ['type', 'id', 'latitude', 'longitude', 'title', 'address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'latitude' => true,
@@ -75,35 +75,35 @@ class Venue extends AbstractInlineQueryResult
     /**
      * Optional. Thumbnail width
      *
-     * @var string
+     * @var string|null
      */
     protected $address;
 
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
     protected $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbHeight;
 
     /**
      * Optional. Foursquare identifier of the venue if known
      *
-     * @var int
+     * @var string|null
      */
     protected $foursquareId;
 
@@ -115,10 +115,10 @@ class Venue extends AbstractInlineQueryResult
      * @param float $longitude
      * @param string $title
      * @param string $address
-     * @param string $thumbUrl
-     * @param int $thumbWidth
-     * @param int $thumbHeight
-     * @param string $foursquareId
+     * @param string|null $thumbUrl
+     * @param int|null $thumbWidth
+     * @param int|null $thumbHeight
+     * @param string|null $foursquareId
      * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      * @param InputMessageContent|null $inputMessageContent
      */
@@ -156,6 +156,8 @@ class Venue extends AbstractInlineQueryResult
 
     /**
      * @param float $latitude
+     *
+     * @return void
      */
     public function setLatitude($latitude)
     {
@@ -172,6 +174,8 @@ class Venue extends AbstractInlineQueryResult
 
     /**
      * @param float $longitude
+     *
+     * @return void
      */
     public function setLongitude($longitude)
     {
@@ -179,7 +183,7 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAddress()
     {
@@ -187,7 +191,9 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $address
+     * @param string|null $address
+     *
+     * @return void
      */
     public function setAddress($address)
     {
@@ -195,7 +201,7 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return string|null
      */
     public function getFoursquareId()
     {
@@ -203,7 +209,9 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $foursquareId
+     * @param string|null $foursquareId
+     *
+     * @return void
      */
     public function setFoursquareId($foursquareId)
     {
@@ -211,7 +219,7 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getThumbUrl()
     {
@@ -219,7 +227,9 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -227,7 +237,7 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbWidth()
     {
@@ -235,7 +245,9 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
+     *
+     * @return void
      */
     public function setThumbWidth($thumbWidth)
     {
@@ -243,7 +255,7 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbHeight()
     {
@@ -251,7 +263,9 @@ class Venue extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
+     *
+     * @return void
      */
     public function setThumbHeight($thumbHeight)
     {

@@ -29,14 +29,14 @@ class Location extends AbstractInlineQueryResult
      *
      * @var array
      */
-    static protected $requiredParams = ['type', 'id', 'latitude', 'longitude', 'title'];
+    protected static $requiredParams = ['type', 'id', 'latitude', 'longitude', 'title'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'id' => true,
         'latitude' => true,
@@ -73,21 +73,21 @@ class Location extends AbstractInlineQueryResult
     /**
      * Optional. Url of the thumbnail for the result
      *
-     * @var string
+     * @var string|null
      */
     protected $thumbUrl;
 
     /**
      * Optional. Thumbnail width
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbWidth;
 
     /**
      * Optional. Thumbnail height
      *
-     * @var int
+     * @var int|null
      */
     protected $thumbHeight;
 
@@ -98,9 +98,9 @@ class Location extends AbstractInlineQueryResult
      * @param float $latitude
      * @param float $longitude
      * @param string $title
-     * @param string $thumbUrl
-     * @param int $thumbWidth
-     * @param int $thumbHeight
+     * @param string|null $thumbUrl
+     * @param int|null $thumbWidth
+     * @param int|null $thumbHeight
      * @param InlineKeyboardMarkup|null $inlineKeyboardMarkup
      * @param InputMessageContent|null $inputMessageContent
      */
@@ -134,6 +134,8 @@ class Location extends AbstractInlineQueryResult
 
     /**
      * @param float $latitude
+     *
+     * @return void
      */
     public function setLatitude($latitude)
     {
@@ -150,6 +152,8 @@ class Location extends AbstractInlineQueryResult
 
     /**
      * @param float $longitude
+     *
+     * @return void
      */
     public function setLongitude($longitude)
     {
@@ -157,7 +161,7 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getThumbUrl()
     {
@@ -165,7 +169,9 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @param string $thumbUrl
+     * @param string|null $thumbUrl
+     *
+     * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
@@ -173,7 +179,7 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbWidth()
     {
@@ -181,7 +187,9 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbWidth
+     * @param int|null $thumbWidth
+     *
+     * @return void
      */
     public function setThumbWidth($thumbWidth)
     {
@@ -189,7 +197,7 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getThumbHeight()
     {
@@ -197,7 +205,9 @@ class Location extends AbstractInlineQueryResult
     }
 
     /**
-     * @param int $thumbHeight
+     * @param int|null $thumbHeight
+     *
+     * @return void
      */
     public function setThumbHeight($thumbHeight)
     {

@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types\Payments\Query;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\Payments\ArrayOfLabeledPrice;
 use TelegramBot\Api\Types\Payments\ShippingAddress;
 use TelegramBot\Api\Types\User;
 
@@ -18,14 +17,14 @@ class ShippingQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['id', 'from', 'invoice_payload', 'shipping_address'];
+    protected static $requiredParams = ['id', 'from', 'invoice_payload', 'shipping_address'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'invoice_payload' => true,
@@ -71,7 +70,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $id
+     *
+     * @return void
      */
     public function setId($id)
     {
@@ -89,7 +91,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param User $from
+     *
+     * @return void
      */
     public function setFrom($from)
     {
@@ -107,7 +112,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $invoicePayload
+     *
+     * @return void
      */
     public function setInvoicePayload($invoicePayload)
     {
@@ -125,7 +133,10 @@ class ShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param ShippingAddress $shippingAddress
+     *
+     * @return void
      */
     public function setShippingAddress($shippingAddress)
     {

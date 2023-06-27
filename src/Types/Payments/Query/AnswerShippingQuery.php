@@ -17,12 +17,12 @@ class AnswerShippingQuery extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['shipping_query_id', 'ok'];
+    protected static $requiredParams = ['shipping_query_id', 'ok'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'shipping_query_id' => true,
         'ok' => true,
         'shipping_options' => ArrayOfLabeledPrice::class,
@@ -69,7 +69,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $shippingQueryId
+     *
+     * @return void
      */
     public function setShippingQueryId($shippingQueryId)
     {
@@ -87,7 +90,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param true $ok
+     *
+     * @return void
      */
     public function setOk($ok)
     {
@@ -105,7 +111,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param array $shippingOptions
+     *
+     * @return void
      */
     public function setShippingOptions($shippingOptions)
     {
@@ -123,7 +132,10 @@ class AnswerShippingQuery extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $errorMessage
+     *
+     * @return void
      */
     public function setErrorMessage($errorMessage)
     {

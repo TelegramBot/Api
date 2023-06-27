@@ -21,14 +21,14 @@ class PollAnswer extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['poll_id', 'option_ids', 'user'];
+    protected static $requiredParams = ['poll_id', 'option_ids', 'user'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'option_ids' => true,
         'user' => User::class,
         'poll_id' => true,
@@ -59,6 +59,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param string $id
+     * @return void
      */
     public function setPollId($id)
     {
@@ -75,6 +76,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param User $from
+     * @return void
      */
     public function setUser(User $from)
     {
@@ -82,19 +84,15 @@ class PollAnswer extends BaseType
     }
 
     /**
+     * @deprecated
+     *
      * @return User
      */
     public function getFrom()
     {
-        return $this->getUser();
-    }
+        @trigger_error(sprintf('Access user with %s is deprecated, use "%s::getUser" method', __METHOD__, __CLASS__), \E_USER_DEPRECATED);
 
-    /**
-     * @param User $from
-     */
-    public function setFrom(User $from)
-    {
-        return $this->setUser($from);
+        return $this->getUser();
     }
 
     /**
@@ -107,6 +105,7 @@ class PollAnswer extends BaseType
 
     /**
      * @param int[] $optionIds
+     * @return void
      */
     public function setOptionIds($optionIds)
     {

@@ -19,14 +19,14 @@ class ForceReply extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['force_reply'];
+    protected static $requiredParams = ['force_reply'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'force_reply' => true,
         'selective' => true
     ];
@@ -44,10 +44,14 @@ class ForceReply extends BaseType
      * 1) users that are @mentioned in the text of the Message object;
      * 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $selective;
 
+    /**
+     * @param bool $forceReply
+     * @param bool|null $selective
+     */
     public function __construct($forceReply = true, $selective = null)
     {
         $this->forceReply = $forceReply;
@@ -55,7 +59,7 @@ class ForceReply extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isForceReply()
     {
@@ -63,7 +67,8 @@ class ForceReply extends BaseType
     }
 
     /**
-     * @param boolean $forceReply
+     * @param bool $forceReply
+     * @return void
      */
     public function setForceReply($forceReply)
     {
@@ -71,7 +76,7 @@ class ForceReply extends BaseType
     }
 
     /**
-     * @return boolean
+     * @return bool|null
      */
     public function isSelective()
     {
@@ -79,7 +84,8 @@ class ForceReply extends BaseType
     }
 
     /**
-     * @param boolean $selective
+     * @param bool|null $selective
+     * @return void
      */
     public function setSelective($selective)
     {

@@ -15,7 +15,7 @@ class InputMediaVideo extends InputMedia
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'type' => true,
         'media' => true,
         'caption' => true,
@@ -29,28 +29,28 @@ class InputMediaVideo extends InputMedia
     /**
      * Optional. Video width.
      *
-     * @var string
+     * @var int|null
      */
     protected $width;
 
     /**
      * Optional. Video height.
      *
-     * @var string
+     * @var int|null
      */
     protected $height;
 
     /**
      * Optional. Video duration.
      *
-     * @var string
+     * @var int|null
      */
     protected $duration;
 
     /**
      * Optional. Pass True, if the uploaded video is suitable for streaming.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $supportsStreaming;
 
@@ -85,7 +85,7 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @return string
+     * @return int|null
      */
     public function getWidth()
     {
@@ -93,7 +93,9 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @param string $width
+     * @param int|null $width
+     *
+     * @return void
      */
     public function setWidth($width)
     {
@@ -101,7 +103,7 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @return string
+     * @return int|null
      */
     public function getHeight()
     {
@@ -109,7 +111,9 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @param string $height
+     * @param int|null $height
+     *
+     * @return void
      */
     public function setHeight($height)
     {
@@ -117,7 +121,7 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @return string
+     * @return int|null
      */
     public function getDuration()
     {
@@ -125,7 +129,9 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @param string $duration
+     * @param int|null $duration
+     *
+     * @return void
      */
     public function setDuration($duration)
     {
@@ -133,7 +139,7 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
     public function getSupportsStreaming()
     {
@@ -141,7 +147,9 @@ class InputMediaVideo extends InputMedia
     }
 
     /**
-     * @param bool $supportsStreaming
+     * @param bool|null $supportsStreaming
+     *
+     * @return void
      */
     public function setSupportsStreaming($supportsStreaming)
     {

@@ -19,15 +19,16 @@ class Audio extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'duration'];
+    protected static $requiredParams = ['file_id', 'file_unique_id', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
+        'file_unique_id' => true,
         'duration' => true,
         'performer' => true,
         'title' => true,
@@ -52,30 +53,37 @@ class Audio extends BaseType implements TypeInterface
     /**
      * Optional. Performer of the audio as defined by sender or by audio tags
      *
-     * @var string
+     * @var string|null
      */
     protected $performer;
 
     /**
      * Optional. Title of the audio as defined by sender or by audio tags
      *
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
      * Optional. MIME type of the file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     *
+     * @var string
+     */
+    protected $fileUniqueId;
 
     /**
      * @return int
@@ -86,8 +94,8 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $duration
-     *
+     * @param mixed $duration
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setDuration($duration)
@@ -100,7 +108,7 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getPerformer()
     {
@@ -109,6 +117,7 @@ class Audio extends BaseType implements TypeInterface
 
     /**
      * @param string $performer
+     * @return void
      */
     public function setPerformer($performer)
     {
@@ -116,7 +125,7 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getTitle()
     {
@@ -125,6 +134,7 @@ class Audio extends BaseType implements TypeInterface
 
     /**
      * @param string $title
+     * @return void
      */
     public function setTitle($title)
     {
@@ -141,6 +151,7 @@ class Audio extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -148,7 +159,7 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -156,8 +167,8 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
-     *
+     * @param mixed $fileSize
+     * @return void
      * @throws InvalidArgumentException
      */
     public function setFileSize($fileSize)
@@ -170,7 +181,7 @@ class Audio extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getMimeType()
     {
@@ -179,9 +190,27 @@ class Audio extends BaseType implements TypeInterface
 
     /**
      * @param string $mimeType
+     * @return void
      */
     public function setMimeType($mimeType)
     {
         $this->mimeType = $mimeType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUniqueId()
+    {
+        return $this->fileUniqueId;
+    }
+
+    /**
+     * @param string $fileUniqueId
+     * @return void
+     */
+    public function setFileUniqueId($fileUniqueId)
+    {
+        $this->fileUniqueId = $fileUniqueId;
     }
 }

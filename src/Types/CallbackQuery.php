@@ -23,14 +23,14 @@ class CallbackQuery extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'from'];
+    protected static $requiredParams = ['id', 'from'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'message' => Message::class,
@@ -59,7 +59,7 @@ class CallbackQuery extends BaseType
      * Note that message content and message date will not be available
      * if the message is too old
      *
-     * @var \TelegramBot\Api\Types\Message
+     * @var \TelegramBot\Api\Types\Message|null
      */
     protected $message;
 
@@ -67,7 +67,7 @@ class CallbackQuery extends BaseType
      * Optional. Identifier of the message sent via the bot in inline mode,
      * that originated the query.
      *
-     * @var string
+     * @var string|null
      */
     protected $inlineMessageId;
 
@@ -83,7 +83,7 @@ class CallbackQuery extends BaseType
      * Optional. Data associated with the callback button.
      * Be aware that a bad client can send arbitrary data in this field.
      *
-     * @var string
+     * @var string|null
      */
     protected $data;
 
@@ -91,10 +91,9 @@ class CallbackQuery extends BaseType
      * Optional. Short name of a Game to be returned,
      * serves as the unique identifier for the game
      *
-     * @var string
+     * @var string|null
      */
     protected $gameShortName;
-
 
     /**
      * @return string
@@ -106,6 +105,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param string $id
+     * @return void
      */
     public function setId($id)
     {
@@ -122,6 +122,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param User $from
+     * @return void
      */
     public function setFrom(User $from)
     {
@@ -129,7 +130,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return Message
+     * @return Message|null
      */
     public function getMessage()
     {
@@ -138,6 +139,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param Message $message
+     * @return void
      */
     public function setMessage($message)
     {
@@ -145,7 +147,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getInlineMessageId()
     {
@@ -154,6 +156,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param string $inlineMessageId
+     * @return void
      */
     public function setInlineMessageId($inlineMessageId)
     {
@@ -170,6 +173,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param string $chatInstance
+     * @return void
      */
     public function setChatInstance($chatInstance)
     {
@@ -177,7 +181,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getData()
     {
@@ -186,6 +190,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param string $data
+     * @return void
      */
     public function setData($data)
     {
@@ -193,7 +198,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getGameShortName()
     {
@@ -202,6 +207,7 @@ class CallbackQuery extends BaseType
 
     /**
      * @param string $gameShortName
+     * @return void
      */
     public function setGameShortName($gameShortName)
     {

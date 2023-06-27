@@ -15,12 +15,12 @@ class Invoice extends BaseType
     /**
      * @var array
      */
-    static protected $requiredParams = ['title', 'description', 'start_parameter', 'currency', 'total_amount'];
+    protected static $requiredParams = ['title', 'description', 'start_parameter', 'currency', 'total_amount'];
 
     /**
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'title' => true,
         'description' => true,
         'start_parameter' => true,
@@ -74,7 +74,10 @@ class Invoice extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $title
+     *
+     * @return void
      */
     public function setTitle($title)
     {
@@ -92,7 +95,10 @@ class Invoice extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $description
+     *
+     * @return void
      */
     public function setDescription($description)
     {
@@ -110,7 +116,10 @@ class Invoice extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $startParameter
+     *
+     * @return void
      */
     public function setStartParameter($startParameter)
     {
@@ -128,7 +137,10 @@ class Invoice extends BaseType
 
     /**
      * @author MY
+     *
      * @param string $currency
+     *
+     * @return void
      */
     public function setCurrency($currency)
     {
@@ -146,7 +158,10 @@ class Invoice extends BaseType
 
     /**
      * @author MY
+     *
      * @param int $totalAmount
+     *
+     * @return void
      */
     public function setTotalAmount($totalAmount)
     {

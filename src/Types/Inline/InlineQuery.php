@@ -20,14 +20,14 @@ class InlineQuery extends BaseType
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'from', 'query', 'offset'];
+    protected static $requiredParams = ['id', 'from', 'query', 'offset'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'from' => User::class,
         'location' => Location::class,
@@ -49,11 +49,10 @@ class InlineQuery extends BaseType
      */
     protected $from;
 
-
     /**
      * Optional. Sender location, only for bots that request user location
      *
-     * @var Location
+     * @var Location|null
      */
     protected $location;
 
@@ -81,6 +80,8 @@ class InlineQuery extends BaseType
 
     /**
      * @param string $id
+     *
+     * @return void
      */
     public function setId($id)
     {
@@ -97,6 +98,8 @@ class InlineQuery extends BaseType
 
     /**
      * @param User $from
+     *
+     * @return void
      */
     public function setFrom(User $from)
     {
@@ -104,7 +107,7 @@ class InlineQuery extends BaseType
     }
 
     /**
-     * @return Location
+     * @return Location|null
      */
     public function getLocation()
     {
@@ -113,6 +116,8 @@ class InlineQuery extends BaseType
 
     /**
      * @param Location $location
+     *
+     * @return void
      */
     public function setLocation($location)
     {
@@ -129,6 +134,8 @@ class InlineQuery extends BaseType
 
     /**
      * @param string $query
+     *
+     * @return void
      */
     public function setQuery($query)
     {
@@ -145,6 +152,8 @@ class InlineQuery extends BaseType
 
     /**
      * @param string $offset
+     *
+     * @return void
      */
     public function setOffset($offset)
     {
