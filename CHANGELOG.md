@@ -10,7 +10,8 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Rename `thumb` to `thumbnail` parameter in `Animation`, `Document`, `Sticker`, `StickerSet`, `Video`, `VideoNote` types
 - Rename `thumb_*` to `thumbnail_*` parameter in `Inline/QueryResult` types
 - Add missing phpDoc for `$replyMarkup` parameters
-- 
+- Fix phpDoc for `\TelegramBot\Api\BotApi::setWebhook` `$allowedUpdates` parameter. Automatically serialize if array passed
+
 ### Deprecated
 - Deprecate using `thumb*` methods in `\TelegramBot\Api\BotApi`
 - Deprecate method `\TelegramBot\Api\BotApi::setStickerSetThumb`. Use `\TelegramBot\Api\BotApi::setStickerSetThumbnail` instead
