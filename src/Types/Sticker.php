@@ -42,7 +42,7 @@ class Sticker extends BaseType implements TypeInterface
         'height' => true,
         'is_animated' => true,
         'is_video' => true,
-        'thumb' => PhotoSize::class,
+        'thumbnail' => PhotoSize::class,
         'file_size' => true,
         'premium_animation' => File::class,
         'emoji' => true,
@@ -77,7 +77,7 @@ class Sticker extends BaseType implements TypeInterface
      *
      * @var PhotoSize|null
      */
-    protected $thumb;
+    protected $thumbnail;
 
     /**
      * Optional. File size
@@ -221,19 +221,41 @@ class Sticker extends BaseType implements TypeInterface
     /**
      * @return PhotoSize|null
      */
-    public function getThumb()
+    public function getThumbnail()
     {
-        return $this->thumb;
+        return $this->thumbnail;
     }
 
     /**
+     * @param PhotoSize $thumbnail
+     *
+     * @return void
+     */
+    public function setThumbnail(PhotoSize $thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @deprecated use getThumbnail method
+     *
+     * @return PhotoSize|null
+     */
+    public function getThumb()
+    {
+        return $this->getThumbnail();
+    }
+
+    /**
+     * @deprecated use setThumbnail method
+     *
      * @param PhotoSize $thumb
      *
      * @return void
      */
-    public function setThumb(PhotoSize $thumb)
+    public function setThumb($thumb)
     {
-        $this->thumb = $thumb;
+        $this->setThumbnail($thumb);
     }
 
     /**

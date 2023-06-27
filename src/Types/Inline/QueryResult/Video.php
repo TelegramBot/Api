@@ -18,7 +18,7 @@ class Video extends AbstractInlineQueryResult
      *
      * @var array
      */
-    protected static $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumb_url', 'title'];
+    protected static $requiredParams = ['type', 'id', 'video_url', 'mime_type', 'thumbnail_url', 'title'];
 
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class Video extends AbstractInlineQueryResult
         'id' => true,
         'video_url' => true,
         'mime_type' => true,
-        'thumb_url' => true,
+        'thumbnail_url' => true,
         'title' => true,
         'caption' => true,
         'description' => true,
@@ -88,7 +88,7 @@ class Video extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $thumbUrl;
+    protected $thumbnailUrl;
 
     /**
      * Optional. Short description of the result
@@ -109,7 +109,7 @@ class Video extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $videoUrl
-     * @param string $thumbUrl
+     * @param string $thumbnailUrl
      * @param string $mimeType
      * @param string $title
      * @param string|null $caption
@@ -123,7 +123,7 @@ class Video extends AbstractInlineQueryResult
     public function __construct(
         $id,
         $videoUrl,
-        $thumbUrl,
+        $thumbnailUrl,
         $mimeType,
         $title,
         $caption = null,
@@ -137,7 +137,7 @@ class Video extends AbstractInlineQueryResult
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->videoUrl = $videoUrl;
-        $this->thumbUrl = $thumbUrl;
+        $this->thumbnailUrl = $thumbnailUrl;
         $this->caption = $caption;
         $this->description = $description;
         $this->mimeType = $mimeType;
@@ -237,21 +237,43 @@ class Video extends AbstractInlineQueryResult
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getThumbUrl()
+    public function getThumbnailUrl()
     {
-        return $this->thumbUrl;
+        return $this->thumbnailUrl;
     }
 
     /**
-     * @param mixed $thumbUrl
+     * @param string $thumbnailUrl
+     *
+     * @return void
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+    }
+
+    /**
+     * @deprecated Use getThumbnailUrl
+     *
+     * @return string
+     */
+    public function getThumbUrl()
+    {
+        return $this->getThumbnailUrl();
+    }
+
+    /**
+     * @deprecated Use setThumbnailUrl
+     *
+     * @param string $thumbUrl
      *
      * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
-        $this->thumbUrl = $thumbUrl;
+        $this->setThumbnailUrl($thumbUrl);
     }
 
     /**

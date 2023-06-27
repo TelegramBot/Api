@@ -19,7 +19,7 @@ class Photo extends AbstractInlineQueryResult
      *
      * @var array
      */
-    protected static $requiredParams = ['type', 'id', 'photo_url', 'thumb_url'];
+    protected static $requiredParams = ['type', 'id', 'photo_url', 'thumbnail_url'];
 
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class Photo extends AbstractInlineQueryResult
         'type' => true,
         'id' => true,
         'photo_url' => true,
-        'thumb_url' => true,
+        'thumbnail_url' => true,
         'photo_width' => true,
         'photo_height' => true,
         'title' => true,
@@ -73,7 +73,7 @@ class Photo extends AbstractInlineQueryResult
      *
      * @var string
      */
-    protected $thumbUrl;
+    protected $thumbnailUrl;
 
     /**
      * Optional. Short description of the result
@@ -94,7 +94,7 @@ class Photo extends AbstractInlineQueryResult
      *
      * @param string $id
      * @param string $photoUrl
-     * @param string $thumbUrl
+     * @param string $thumbnailUrl
      * @param int|null $photoWidth
      * @param int|null $photoHeight
      * @param string|null $title
@@ -106,7 +106,7 @@ class Photo extends AbstractInlineQueryResult
     public function __construct(
         $id,
         $photoUrl,
-        $thumbUrl,
+        $thumbnailUrl,
         $photoWidth = null,
         $photoHeight = null,
         $title = null,
@@ -118,7 +118,7 @@ class Photo extends AbstractInlineQueryResult
         parent::__construct($id, $title, $inputMessageContent, $inlineKeyboardMarkup);
 
         $this->photoUrl = $photoUrl;
-        $this->thumbUrl = $thumbUrl;
+        $this->thumbnailUrl = $thumbnailUrl;
         $this->photoWidth = $photoWidth;
         $this->photoHeight = $photoHeight;
         $this->description = $description;
@@ -182,19 +182,41 @@ class Photo extends AbstractInlineQueryResult
     /**
      * @return string
      */
-    public function getThumbUrl()
+    public function getThumbnailUrl()
     {
-        return $this->thumbUrl;
+        return $this->thumbnailUrl;
     }
 
     /**
+     * @param string $thumbnailUrl
+     *
+     * @return void
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
+    }
+
+    /**
+     * @deprecated Use getThumbnailUrl
+     *
+     * @return string
+     */
+    public function getThumbUrl()
+    {
+        return $this->getThumbnailUrl();
+    }
+
+    /**
+     * @deprecated Use setThumbnailUrl
+     *
      * @param string $thumbUrl
      *
      * @return void
      */
     public function setThumbUrl($thumbUrl)
     {
-        $this->thumbUrl = $thumbUrl;
+        $this->setThumbnailUrl($thumbUrl);
     }
 
     /**

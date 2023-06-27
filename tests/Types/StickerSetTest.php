@@ -37,7 +37,7 @@ class StickerSetTest extends AbstractTypeTest
             'stickers' => [
                 StickerTest::getMinResponse(),
             ],
-            'thumb' => PhotoSizeTest::getMinResponse(),
+            'thumbnail' => PhotoSizeTest::getMinResponse(),
         ];
     }
 
@@ -53,7 +53,7 @@ class StickerSetTest extends AbstractTypeTest
         $this->assertEquals(true, $item->getIsAnimated());
         $this->assertEquals(true, $item->getIsVideo());
         $this->assertEquals([StickerTest::createMinInstance()], $item->getStickers());
-        $this->assertNull($item->getThumb());
+        $this->assertNull($item->getThumbnail());
     }
 
     /**
@@ -68,6 +68,6 @@ class StickerSetTest extends AbstractTypeTest
         $this->assertEquals(true, $item->getIsAnimated());
         $this->assertEquals(true, $item->getIsVideo());
         $this->assertEquals([StickerTest::createMinInstance()], $item->getStickers());
-        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumb());
+        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumbnail());
     }
 }

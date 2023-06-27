@@ -39,7 +39,7 @@ class StickerTest extends AbstractTypeTest
             'file_size' => 3,
             'premium_animation' => FileTest::getMinResponse(),
             'emoji' => '🎉',
-            'thumb' => PhotoSizeTest::getMinResponse(),
+            'thumbnail' => PhotoSizeTest::getMinResponse(),
             'set_name' => 'set',
             'custom_emoji_id' => 'custom_emoji_id',
             'mask_position' => MaskPositionTest::getMinResponse(),
@@ -80,7 +80,7 @@ class StickerTest extends AbstractTypeTest
         $this->assertEquals('set', $item->getSetName());
         $this->assertEquals('custom_emoji_id', $item->getCustomEmojiId());
         $this->assertEquals(MaskPositionTest::createMinInstance(), $item->getMaskPosition());
-        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumb());
+        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumbnail());
     }
 
     public function testSetFileSizeException()

@@ -23,7 +23,7 @@ class Document extends BaseType implements TypeInterface
     protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
-        'thumb' => PhotoSize::class,
+        'thumbnail' => PhotoSize::class,
         'file_name' => true,
         'mime_type' => true,
         'file_size' => true
@@ -48,7 +48,7 @@ class Document extends BaseType implements TypeInterface
      *
      * @var PhotoSize
      */
-    protected $thumb;
+    protected $thumbnail;
 
     /**
      * Optional. Original filename as defined by sender
@@ -154,18 +154,40 @@ class Document extends BaseType implements TypeInterface
     /**
      * @return PhotoSize
      */
-    public function getThumb()
+    public function getThumbnail()
     {
-        return $this->thumb;
+        return $this->thumbnail;
     }
 
     /**
-     * @param PhotoSize $thumb
+     * @param PhotoSize $thumbnail
      * @return void
      */
-    public function setThumb(PhotoSize $thumb)
+    public function setThumbnail(PhotoSize $thumbnail)
     {
-        $this->thumb = $thumb;
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @deprecated use getThumbnail method
+     *
+     * @return PhotoSize|null
+     */
+    public function getThumb()
+    {
+        return $this->getThumbnail();
+    }
+
+    /**
+     * @deprecated use setThumbnail method
+     *
+     * @param PhotoSize $thumb
+     *
+     * @return void
+     */
+    public function setThumb($thumb)
+    {
+        $this->setThumbnail($thumb);
     }
 
     /**

@@ -29,7 +29,7 @@ class VideoNoteTest extends AbstractTypeTest
             'file_unique_id' => 'file_unique_id',
             'length' => 1,
             'duration' => 2,
-            'thumb' => PhotoSizeTest::getMinResponse(),
+            'thumbnail' => PhotoSizeTest::getMinResponse(),
             'file_size' => 3,
         ];
     }
@@ -45,7 +45,7 @@ class VideoNoteTest extends AbstractTypeTest
         $this->assertEquals(1, $item->getLength());
         $this->assertEquals(2, $item->getDuration());
         $this->assertNull($item->getFileSize());
-        $this->assertNull($item->getThumb());
+        $this->assertNull($item->getThumbnail());
     }
 
     /**
@@ -59,6 +59,6 @@ class VideoNoteTest extends AbstractTypeTest
         $this->assertEquals(1, $item->getLength());
         $this->assertEquals(2, $item->getDuration());
         $this->assertEquals(3, $item->getFileSize());
-        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumb());
+        $this->assertEquals(PhotoSizeTest::createMinInstance(), $item->getThumbnail());
     }
 }
