@@ -14,6 +14,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Fix phpDoc for `\TelegramBot\Api\Types\Message::$newChatMembers`
 - Add `\TelegramBot\Api\BotApi::getChatMemberCount` method
 - Add `\TelegramBot\Api\BotApi::banChatMember` method
+- Add `$messageId` to `\TelegramBot\Api\BotApi::unpinChatMessage`
 
 ### Deprecated
 - Deprecate using `thumb*` methods in `\TelegramBot\Api\BotApi`
