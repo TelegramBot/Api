@@ -11,6 +11,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Rename `thumb_*` to `thumbnail_*` parameter in `Inline/QueryResult` types
 - Add missing phpDoc for `$replyMarkup` parameters
 - Fix phpDoc for `\TelegramBot\Api\BotApi::setWebhook` `$allowedUpdates` parameter. Automatically serialize if array passed
+- Fix phpDoc for `\TelegramBot\Api\Types\Message::$newChatMembers`
 
 ### Deprecated
 - Deprecate using `thumb*` methods in `\TelegramBot\Api\BotApi`
