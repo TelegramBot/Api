@@ -23,6 +23,7 @@ class ForceReplyTest extends AbstractTypeTest
     {
         return [
             'force_reply' => true,
+            'input_field_placeholder' => 'input_field_placeholder',
             'selective' => true
         ];
     }
@@ -35,6 +36,7 @@ class ForceReplyTest extends AbstractTypeTest
     {
         $this->assertEquals(true, $item->isForceReply());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getInputFieldPlaceholder());
     }
 
     /**
@@ -45,6 +47,7 @@ class ForceReplyTest extends AbstractTypeTest
     {
         $this->assertEquals(true, $item->isForceReply());
         $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals('input_field_placeholder', $item->getInputFieldPlaceholder());
     }
 
     public function testConstructor()
@@ -53,6 +56,7 @@ class ForceReplyTest extends AbstractTypeTest
 
         $this->assertEquals(true, $item->isForceReply());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getInputFieldPlaceholder());
     }
 
     public function testConstructor2()
@@ -61,6 +65,7 @@ class ForceReplyTest extends AbstractTypeTest
 
         $this->assertEquals(true, $item->isForceReply());
         $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(null, $item->getInputFieldPlaceholder());
     }
 
     public function testConstructor3()
@@ -69,6 +74,7 @@ class ForceReplyTest extends AbstractTypeTest
 
         $this->assertEquals(false, $item->isForceReply());
         $this->assertEquals(true, $item->isSelective());
+        $this->assertEquals(null, $item->getInputFieldPlaceholder());
     }
 
     public function testConstructor4()
@@ -77,6 +83,7 @@ class ForceReplyTest extends AbstractTypeTest
 
         $this->assertEquals(true, $item->isForceReply());
         $this->assertEquals(null, $item->isSelective());
+        $this->assertEquals(null, $item->getInputFieldPlaceholder());
     }
 
     public function testSetforceReply()
