@@ -42,10 +42,10 @@ class ForceReply extends BaseType
     /**
      * The placeholder to be shown in the input field when the reply is active; 1-64 characters
      *
-     * @var string
+     * @var string|null
      */
     protected $inputFieldPlaceholder;
-    
+
     /**
      * Optional. Use this parameter if you want to show the keyboard to specific users only.
      * Targets:
@@ -59,12 +59,13 @@ class ForceReply extends BaseType
     /**
      * @param bool $forceReply
      * @param bool|null $selective
+     * @param string|null $inputFieldPlaceholder
      */
-    public function __construct($forceReply = true, $selective = null, $inputFieldPlaceholder = false)
+    public function __construct($forceReply = true, $selective = null, $inputFieldPlaceholder = null)
     {
         $this->forceReply = $forceReply;
-        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
         $this->selective = $selective;
+        $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
 
     /**
@@ -74,7 +75,7 @@ class ForceReply extends BaseType
     {
         return $this->forceReply;
     }
-    
+
     /**
      * @param bool $forceReply
      * @return void
@@ -102,14 +103,14 @@ class ForceReply extends BaseType
     }
 
     /**
-     * @param string $inputFieldPlaceholder
+     * @param string|null $inputFieldPlaceholder
      * @return void
      */
     public function setInputFieldPlaceholder($inputFieldPlaceholder)
     {
         $this->inputFieldPlaceholder = $inputFieldPlaceholder;
     }
-    
+
     /**
      * @return string|null
      */
