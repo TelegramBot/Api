@@ -2227,14 +2227,16 @@ class BotApi
      *
      * @param string|int $chatId Unique identifier for the target chat or username of the target channel
      *                           (in the format @channelusername)
+     * @param int|null $messageId Identifier of a message to pin (optional)
      *
      * @return bool
      * @throws Exception
      */
-    public function unpinChatMessage($chatId)
+    public function unpinChatMessage($chatId, $messageId = null)
     {
         return $this->call('unpinChatMessage', [
-            'chat_id' => $chatId
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
         ]);
     }
 
