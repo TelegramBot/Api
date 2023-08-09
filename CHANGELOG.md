@@ -2,7 +2,7 @@
 
 All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
-## 2.5.0 - YYYY-MM-DD
+## 2.5.0 - 2023-08-09
 
 ### Added
 - Add missing `protect_content` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods
