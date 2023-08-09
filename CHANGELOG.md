@@ -12,11 +12,15 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add missing phpDoc for `$replyMarkup` parameters
 - Fix phpDoc for `\TelegramBot\Api\BotApi::setWebhook` `$allowedUpdates` parameter. Automatically serialize if array passed
 - Fix phpDoc for `\TelegramBot\Api\Types\Message::$newChatMembers`
+- Add `\TelegramBot\Api\BotApi::getChatMemberCount` method
+- Add `\TelegramBot\Api\BotApi::banChatMember` method
 
 ### Deprecated
 - Deprecate using `thumb*` methods in `\TelegramBot\Api\BotApi`
 - Deprecate method `\TelegramBot\Api\BotApi::setStickerSetThumb`. Use `\TelegramBot\Api\BotApi::setStickerSetThumbnail` instead
 - Deprecate `\TelegramBot\Api\Types\ReplyKeyboardHide` class
+- Deprecate `\TelegramBot\Api\BotApi::getChatMembersCount`. Use `\TelegramBot\Api\BotApi::getChatMemberCount` instead
+- Deprecate `\TelegramBot\Api\BotApi::kickChatMember`. Use `\TelegramBot\Api\BotApi::banChatMember` instead 
 
 ## 2.4.0 - 2023-05-11
 

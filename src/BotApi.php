@@ -1515,10 +1515,41 @@ class BotApi
      */
     public function kickChatMember($chatId, $userId, $untilDate = null)
     {
+        @trigger_error(sprintf('Method "%s::%s" is deprecated. Use "banChatMember"', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
         return $this->call('kickChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
             'until_date' => $untilDate
+        ]);
+    }
+
+    /**
+     * Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels,
+     * the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+     * Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target group or username of the
+     *                           target supergroup or channel (in the format @channelusername)
+     * @param int $userId Unique identifier of the target user
+     * @param null|int $untilDate Date when the user will be unbanned, unix time.
+     *                            If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever.
+     *                            Applied for supergroups and channels only.
+     * @param bool|null $revokeMessages Pass True to delete all messages from the chat for the user that is being removed.
+     *                                  If False, the user will be able to see messages in the group that were sent before the user was removed.
+     *                                  Always True for supergroups and channels.
+     *
+     * @return bool
+     * @throws Exception
+     */
+    public function banChatMember($chatId, $userId, $untilDate = null, $revokeMessages = null)
+    {
+        return $this->call('banChatMember', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+            'until_date' => $untilDate,
+            'revoke_messages' => $revokeMessages,
         ]);
     }
 
@@ -2269,12 +2300,27 @@ class BotApi
      */
     public function getChatMembersCount($chatId)
     {
-        return $this->call(
-            'getChatMembersCount',
-            [
-                'chat_id' => $chatId
-            ]
-        );
+        @trigger_error(sprintf('Method "%s::%s" is deprecated. Use "getChatMemberCount"', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
+        return $this->call('getChatMembersCount', [
+            'chat_id' => $chatId
+        ]);
+    }
+
+    /**
+     * Use this method to get the number of members in a chat. Returns Int on success.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup or channel
+     *                           (in the format @channelusername)
+     *
+     * @return int
+     * @throws Exception
+     */
+    public function getChatMemberCount($chatId)
+    {
+        return $this->call('getChatMemberCount', [
+            'chat_id' => $chatId
+        ]);
     }
 
     /**
