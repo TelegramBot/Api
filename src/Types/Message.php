@@ -308,7 +308,7 @@ class Message extends BaseType implements TypeInterface
      * (the bot itself may be one of these members)
      * array of \TelegramBot\Api\Types\User
      *
-     * @var array|null
+     * @var \TelegramBot\Api\Types\User[]|null
      */
     protected $newChatMembers;
 
@@ -1003,7 +1003,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return array|null
+     * @return \TelegramBot\Api\Types\User[]|null
      */
     public function getNewChatMembers()
     {
@@ -1011,7 +1011,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param array $newChatMembers
+     * @param \TelegramBot\Api\Types\User[]|null $newChatMembers
      * @return void
      */
     public function setNewChatMembers($newChatMembers)
