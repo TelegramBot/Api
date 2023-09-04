@@ -42,11 +42,16 @@
         "coverage": "XDEBUG_MODE=coverage vendor/bin/simple-phpunit --coverage-html build/coverage",
         "psalm": "vendor/bin/psalm",
         "cs-fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi",
-        "cs-check": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run"
+        "cs-check": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
+        "checks": [
+            "@cs-fix",
+            "@psalm",
+            "@test"
+        ]
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.5-dev"
+            "dev-master": "2.6-dev"
         }
     }
 }

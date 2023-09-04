@@ -43,6 +43,9 @@ class Update extends BaseType implements TypeInterface
         'pre_checkout_query' => PreCheckoutQuery::class,
         'poll_answer' => PollAnswer::class,
         'poll' => Poll::class,
+        'my_chat_member' => ChatMemberUpdated::class,
+        'chat_member' => ChatMemberUpdated::class,
+        'chat_join_request' => ChatJoinRequest::class,
     ];
 
     /**
@@ -131,6 +134,30 @@ class Update extends BaseType implements TypeInterface
      * @var PreCheckoutQuery|null
      */
     protected $preCheckoutQuery;
+
+    /**
+     * Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only
+     * when the bot is blocked or unblocked by the user.
+     *
+     * @var ChatMemberUpdated|null
+     */
+    protected $myChatMember;
+
+    /**
+     * Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must
+     * explicitly specify “chat_member” in the list of allowed_updates to receive these updates.
+     *
+     * @var ChatMemberUpdated|null
+     */
+    protected $chatMember;
+
+    /**
+     * Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator
+     * right in the chat to receive these updates.
+     *
+     * @var ChatJoinRequest|null
+     */
+    protected $chatJoinRequest;
 
     /**
      * @return int
@@ -354,5 +381,56 @@ class Update extends BaseType implements TypeInterface
     public function setPreCheckoutQuery($preCheckoutQuery)
     {
         $this->preCheckoutQuery = $preCheckoutQuery;
+    }
+
+    /**
+     * @return ChatMemberUpdated|null
+     */
+    public function getMyChatMember()
+    {
+        return $this->myChatMember;
+    }
+
+    /**
+     * @param ChatMemberUpdated|null $myChatMember
+     * @return void
+     */
+    public function setMyChatMember($myChatMember)
+    {
+        $this->myChatMember = $myChatMember;
+    }
+
+    /**
+     * @return ChatMemberUpdated|null
+     */
+    public function getChatMember()
+    {
+        return $this->chatMember;
+    }
+
+    /**
+     * @param ChatMemberUpdated|null $chatMember
+     * @return void
+     */
+    public function setChatMember($chatMember)
+    {
+        $this->chatMember = $chatMember;
+    }
+
+    /**
+     * @return ChatJoinRequest|null
+     */
+    public function getChatJoinRequest()
+    {
+        return $this->chatJoinRequest;
+    }
+
+    /**
+     * @param ChatJoinRequest|null $chatJoinRequest
+     * @return void
+     */
+    public function setChatJoinRequest($chatJoinRequest)
+    {
+        $this->chatJoinRequest = $chatJoinRequest;
     }
 }

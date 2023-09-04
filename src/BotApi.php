@@ -10,6 +10,7 @@ use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\BotCommand;
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatInviteLink;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\ForceReply;
@@ -2123,6 +2124,117 @@ class BotApi
     {
         return $this->call('exportChatInviteLink', [
             'chat_id' => $chatId
+        ]);
+    }
+
+    /**
+     * Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat
+     * for this to work and must have the appropriate administrator rights.
+     * The link can be revoked using the method revokeChatInviteLink.
+     * Returns the new invite link as ChatInviteLink object.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or
+     *                           username of the target channel (in the format @channelusername)
+     * @param string|null $name Invite link name; 0-32 characters
+     * @param int|null $expireDate Point in time (Unix timestamp) when the link will expire
+     * @param int|null $memberLimit The maximum number of users that can be members of the chat simultaneously
+     *                              after joining the chat via this invite link; 1-99999
+     * @param bool|null $createsJoinRequest True, if users joining the chat via the link need to be approved by chat administrators.
+     *                                      If True, member_limit can't be specified
+     * @return ChatInviteLink
+     * @throws Exception
+     */
+    public function createChatInviteLink($chatId, $name = null, $expireDate = null, $memberLimit = null, $createsJoinRequest = null)
+    {
+        return ChatInviteLink::fromResponse($this->call('createChatInviteLink', [
+            'chat_id' => $chatId,
+            'name' => $name,
+            'expire_date' => $expireDate,
+            'member_limit' => $memberLimit,
+            'creates_join_request' => $createsJoinRequest,
+        ]));
+    }
+
+    /**
+     * Use this method to edit a non-primary invite link created by the bot.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+     * Returns the edited invite link as a ChatInviteLink object.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or
+     *                           username of the target channel (in the format @channelusername)
+     * @param string $inviteLink The invite link to edit
+     * @param string|null $name Invite link name; 0-32 characters
+     * @param int|null $expireDate Point in time (Unix timestamp) when the link will expire
+     * @param int|null $memberLimit The maximum number of users that can be members of the chat simultaneously
+     *                              after joining the chat via this invite link; 1-99999
+     * @param bool|null $createsJoinRequest True, if users joining the chat via the link need to be approved by chat administrators.
+     *                                      If True, member_limit can't be specified
+     * @return ChatInviteLink
+     * @throws Exception
+     */
+    public function editChatInviteLink($chatId, $inviteLink, $name = null, $expireDate = null, $memberLimit = null, $createsJoinRequest = null)
+    {
+        return ChatInviteLink::fromResponse($this->call('editChatInviteLink', [
+            'chat_id' => $chatId,
+            'invite_link' => $inviteLink,
+            'name' => $name,
+            'expire_date' => $expireDate,
+            'member_limit' => $memberLimit,
+            'creates_join_request' => $createsJoinRequest,
+        ]));
+    }
+
+    /**
+     * Use this method to revoke an invite link created by the bot.
+     * If the primary link is revoked, a new link is automatically generated.
+     * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
+     * Returns the revoked invite link as ChatInviteLink object.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or
+     *                           username of the target channel (in the format @channelusername)
+     * @param string $inviteLink The invite link to edit
+     * @return ChatInviteLink
+     * @throws Exception
+     */
+    public function revokeChatInviteLink($chatId, $inviteLink)
+    {
+        return ChatInviteLink::fromResponse($this->call('revokeChatInviteLink', [
+            'chat_id' => $chatId,
+            'invite_link' => $inviteLink,
+        ]));
+    }
+
+    /**
+     * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and
+     * must have the can_invite_users administrator right. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int $userId Unique identifier of the target user
+     * @return bool
+     * @throws Exception
+     */
+    public function approveChatJoinRequest($chatId, $userId)
+    {
+        return $this->call('approveChatJoinRequest', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+        ]);
+    }
+
+    /**
+     * Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and
+     * must have the can_invite_users administrator right. Returns True on success.
+     *
+     * @param int|string $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int $userId Unique identifier of the target user
+     * @return bool
+     * @throws Exception
+     */
+    public function declineChatJoinRequest($chatId, $userId)
+    {
+        return $this->call('declineChatJoinRequest', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
         ]);
     }
 
