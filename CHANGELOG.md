@@ -2,6 +2,16 @@
 
 All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
+## 2.6.0 - YYYY-MM-DD
+- Add `\TelegramBot\Api\Types\Update::$myChatMember` field
+- Add `\TelegramBot\Api\Types\Update::$chatMember` field
+- Add `\TelegramBot\Api\Types\Update::$chatJoinRequest` field
+- Add `\TelegramBot\Api\BotApi::createChatInviteLink` api method
+- Add `\TelegramBot\Api\BotApi::editChatInviteLink` api method
+- Add `\TelegramBot\Api\BotApi::revokeChatInviteLink` api method
+- Add `\TelegramBot\Api\BotApi::approveChatJoinRequest` api method
+- Add `\TelegramBot\Api\BotApi::declineChatJoinRequest` api method
+
 ## 2.5.0 - 2023-08-09
 
 ### Added
