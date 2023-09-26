@@ -198,6 +198,29 @@ class CurlHttpClient extends AbstractHttpClient
     }
 
     /**
+     * Enable proxy for curl requests. Empty string will disable proxy.
+     *
+     * @param string $proxyString
+     * @param bool $socks5
+     * @return void
+     */
+    public function setProxy($proxyString = '', $socks5 = false)
+    {
+        if (empty($proxyString)) {
+            unset($this->options[CURLOPT_PROXY], $this->options[CURLOPT_HTTPPROXYTUNNEL], $this->options[CURLOPT_PROXYTYPE]);
+
+            return;
+        }
+
+        $this->options[CURLOPT_PROXY] = $proxyString;
+        $this->options[CURLOPT_HTTPPROXYTUNNEL] = true;
+
+        if ($socks5) {
+            $this->options[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
+        }
+    }
+
+    /**
      * @param string $option
      * @param string|int|bool $value
      * @return void
