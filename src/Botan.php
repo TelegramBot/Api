@@ -34,14 +34,10 @@ class Botan
      *
      * @param string $token
      *
-     * @throws \Exception
+     * @throws InvalidArgumentException
      */
     public function __construct($token)
     {
-        if (!function_exists('curl_version')) {
-            throw new Exception('CURL not installed');
-        }
-
         if (empty($token)) {
             throw new InvalidArgumentException('Token should not be empty');
         }

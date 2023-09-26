@@ -11,6 +11,9 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add `\TelegramBot\Api\BotApi::revokeChatInviteLink` api method
 - Add `\TelegramBot\Api\BotApi::approveChatJoinRequest` api method
 - Add `\TelegramBot\Api\BotApi::declineChatJoinRequest` api method
+- Add support for third party http clients (`psr/http-client` and `symfony/http-client`)
+- Add support for local bot API server
+- Add method `\TelegramBot\Api\BotApi::validateWebAppData` to validate `window.Telegram.WebApp.initData`
 
 ## 2.5.0 - 2023-08-09
 

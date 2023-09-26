@@ -2,6 +2,8 @@
 
 namespace TelegramBot\Api;
 
+use TelegramBot\Api\Http\CurlHttpClient;
+use TelegramBot\Api\Http\HttpClientInterface;
 use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
@@ -41,6 +43,8 @@ use TelegramBot\Api\Types\WebhookInfo;
 class BotApi
 {
     /**
+     * @deprecated
+     *
      * HTTP codes
      *
      * @var array
@@ -113,26 +117,6 @@ class BotApi
     ];
 
     /**
-     * @var array
-     */
-    private $proxySettings = [];
-
-    /**
-     * Default http status code
-     */
-    const DEFAULT_STATUS_CODE = 200;
-
-    /**
-     * Not Modified http status code
-     */
-    const NOT_MODIFIED_STATUS_CODE = 304;
-
-    /**
-     * Limits for tracked ids
-     */
-    const MAX_TRACKED_EVENTS = 200;
-
-    /**
      * Url prefixes
      */
     const URL_PREFIX = 'https://api.telegram.org/bot';
@@ -143,27 +127,49 @@ class BotApi
     const FILE_URL_PREFIX = 'https://api.telegram.org/file/bot';
 
     /**
-     * CURL object
+     * @deprecated
      *
-     * @var resource
+     * Default http status code
      */
-    protected $curl;
+    const DEFAULT_STATUS_CODE = 200;
 
     /**
-     * CURL custom options
+     * @deprecated
      *
-     * @var array
+     * Not Modified http status code
      */
-    protected $customCurlOptions = [];
+    const NOT_MODIFIED_STATUS_CODE = 304;
 
     /**
-     * Bot token
+     * @deprecated
      *
+     * Limits for tracked ids
+     */
+    const MAX_TRACKED_EVENTS = 200;
+
+    /**
+     * @var HttpClientInterface
+     */
+    private $httpClient;
+
+    /**
      * @var string
      */
-    protected $token;
+    private $token;
 
     /**
+     * @var string
+     */
+    private $endpoint;
+
+    /**
+     * @var string|null
+     */
+    private $fileEndpoint;
+
+    /**
+     * @deprecated
+     *
      * Botan tracker
      *
      * @var Botan|null
@@ -171,6 +177,8 @@ class BotApi
     protected $tracker;
 
     /**
+     * @deprecated
+     *
      * list of event ids
      *
      * @var array
@@ -178,23 +186,18 @@ class BotApi
     protected $trackedEvents = [];
 
     /**
-     * Check whether return associative array
-     *
-     * @var bool
-     */
-    protected $returnArray = true;
-
-    /**
-     * Constructor
-     *
      * @param string $token Telegram Bot API token
      * @param string|null $trackerToken Yandex AppMetrica application api_key
-     * @throws \Exception
+     * @param HttpClientInterface|null $httpClient
+     * @param string|null $endpoint
      */
-    public function __construct($token, $trackerToken = null)
+    public function __construct($token, $trackerToken = null, HttpClientInterface $httpClient = null, $endpoint = null)
     {
-        $this->curl = curl_init();
         $this->token = $token;
+        $this->endpoint = ($endpoint ?: self::URL_PREFIX) . $token;
+        $this->fileEndpoint = $endpoint ? null : (self::FILE_URL_PREFIX . $token);
+
+        $this->httpClient = $httpClient ?: new CurlHttpClient();
 
         if ($trackerToken) {
             @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
@@ -203,6 +206,36 @@ class BotApi
     }
 
     /**
+     * @param string $rawData
+     * @param int|null $authDateDiff
+     * @return bool
+     */
+    public function validateWebAppData($rawData, $authDateDiff = null)
+    {
+        parse_str($rawData, $data);
+
+        $sign = $data['hash'];
+        unset($data['hash']);
+
+        if ($authDateDiff && (time() - $data['auth_date'] > $authDateDiff)) {
+            return false;
+        }
+
+        ksort($data);
+        $checkString = '';
+        foreach ($data as $k => $v) {
+            $checkString .= "$k=$v\n";
+        }
+        $checkString = trim($checkString);
+
+        $secret = hash_hmac('sha256', $this->token, 'WebAppData', true);
+
+        return bin2hex(hash_hmac('sha256', $checkString, $secret, true)) === $sign;
+    }
+
+    /**
+     * @deprecated
+     *
      * Set return array
      *
      * @param bool $mode
@@ -211,83 +244,62 @@ class BotApi
      */
     public function setModeObject($mode = true)
     {
-        $this->returnArray = !$mode;
+        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
 
         return $this;
     }
 
     /**
+     * @deprecated
+     *
      * Call method
      *
      * @param string $method
      * @param array|null $data
-     * @param int $timeout
+     * @param int|null $timeout
      *
      * @return mixed
      * @throws Exception
      * @throws HttpException
      * @throws InvalidJsonException
      */
-    public function call($method, array $data = null, $timeout = 10)
+    public function call($method, array $data = null, $timeout = null)
     {
-        $options = $this->proxySettings + [
-            CURLOPT_URL => $this->getUrl().'/'.$method,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => null,
-            CURLOPT_POSTFIELDS => null,
-            CURLOPT_TIMEOUT => $timeout,
-        ];
-
-        if ($data) {
-            $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = $data;
+        if ($timeout !== null) {
+            @trigger_error(sprintf('Passing $timeout parameter in %s::%s is deprecated. Use http client options', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
         }
 
-        if (!empty($this->customCurlOptions)) {
-            $options = $this->customCurlOptions + $options;
-        }
+        $endpoint = $this->endpoint . '/' . $method;
 
-        $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
-
-        if (\is_array($response)) {
-            if (!isset($response['ok']) || !$response['ok']) {
-                throw new Exception($response['description'], $response['error_code']);
-            }
-
-            return $response['result'];
-        }
-
-        if (!$response->ok) {
-            throw new Exception($response->description, $response->error_code);
-        }
-
-        return $response->result;
+        return $this->httpClient->request($endpoint, $data);
     }
 
     /**
-     * curl_exec wrapper for response validation
+     * Get file contents via cURL
      *
-     * @param array $options
+     * @param string $fileId
      *
      * @return string
      *
      * @throws HttpException
+     * @throws Exception
      */
-    protected function executeCurl(array $options)
+    public function downloadFile($fileId)
     {
-        curl_setopt_array($this->curl, $options);
-
-        /** @var string|false $result */
-        $result = curl_exec($this->curl);
-        self::curlValidate($this->curl, $result);
-        if ($result === false) {
-            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+        $file = $this->getFile($fileId);
+        if (!$path = $file->getFilePath()) {
+            throw new Exception('Empty file_path property');
+        }
+        if (!$this->fileEndpoint) {
+            return file_get_contents($path);
         }
 
-        return $result;
+        return $this->httpClient->download($this->fileEndpoint . '/' . $path);
     }
 
     /**
+     * @deprecated
+     *
      * Response validation
      *
      * @param resource $curl
@@ -299,6 +311,8 @@ class BotApi
      */
     public static function curlValidate($curl, $response = null)
     {
+        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
         if ($response) {
             $json = json_decode($response, true) ?: [];
         } else {
@@ -1427,29 +1441,6 @@ class BotApi
     }
 
     /**
-     * Get file contents via cURL
-     *
-     * @param string $fileId
-     *
-     * @return string
-     *
-     * @throws HttpException
-     * @throws Exception
-     */
-    public function downloadFile($fileId)
-    {
-        $file = $this->getFile($fileId);
-        $options = [
-            CURLOPT_HEADER => 0,
-            CURLOPT_HTTPGET => 1,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $this->getFileUrl().'/'.$file->getFilePath(),
-        ];
-
-        return $this->executeCurl($options);
-    }
-
-    /**
      * Use this method to send answers to an inline query. On success, True is returned.
      * No more than 50 results per query are allowed.
      *
@@ -1814,30 +1805,8 @@ class BotApi
     }
 
     /**
-     * Close curl
-     */
-    public function __destruct()
-    {
-        curl_close($this->curl);
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return self::URL_PREFIX.$this->token;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileUrl()
-    {
-        return self::FILE_URL_PREFIX.$this->token;
-    }
-
-    /**
+     * @deprecated
+     *
      * @param Update $update
      * @param string $eventName
      *
@@ -1847,6 +1816,8 @@ class BotApi
      */
     public function trackUpdate(Update $update, $eventName = 'Message')
     {
+        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
         if (!in_array($update->getUpdateId(), $this->trackedEvents)) {
             $message = $update->getMessage();
             if (!$message) {
@@ -1863,6 +1834,8 @@ class BotApi
     }
 
     /**
+     * @deprecated
+     *
      * Wrapper for tracker
      *
      * @param Message $message
@@ -1874,6 +1847,8 @@ class BotApi
      */
     public function track(Message $message, $eventName = 'Message')
     {
+        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
         if ($this->tracker instanceof Botan) {
             $this->tracker->track($message, $eventName);
         }
@@ -2546,32 +2521,6 @@ class BotApi
     }
 
     /**
-     * Enable proxy for curl requests. Empty string will disable proxy.
-     *
-     * @param string $proxyString
-     * @param bool $socks5
-     *
-     * @return BotApi
-     */
-    public function setProxy($proxyString = '', $socks5 = false)
-    {
-        if (empty($proxyString)) {
-            $this->proxySettings = [];
-            return $this;
-        }
-
-        $this->proxySettings = [
-            CURLOPT_PROXY => $proxyString,
-            CURLOPT_HTTPPROXYTUNNEL => true,
-        ];
-
-        if ($socks5) {
-            $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
-        }
-        return $this;
-    }
-
-    /**
      * Use this method to send a native poll. A native poll can't be sent to a private chat.
      * On success, the sent \TelegramBot\Api\Types\Message is returned.
      *
@@ -2883,6 +2832,25 @@ class BotApi
     }
 
     /**
+     * Enable proxy for curl requests. Empty string will disable proxy.
+     *
+     * @param string $proxyString
+     * @param bool $socks5
+     *
+     * @return BotApi
+     */
+    public function setProxy($proxyString = '', $socks5 = false)
+    {
+        @trigger_error(sprintf('Method "%s:%s" is deprecated. Manage options on HttpClient instance', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
+        if (method_exists($this->httpClient, 'setProxy')) {
+            $this->httpClient->setProxy($proxyString, $socks5);
+        }
+
+        return $this;
+    }
+
+    /**
      * Set an option for a cURL transfer
      *
      * @param int $option The CURLOPT_XXX option to set
@@ -2892,7 +2860,11 @@ class BotApi
      */
     public function setCurlOption($option, $value)
     {
-        $this->customCurlOptions[$option] = $value;
+        @trigger_error(sprintf('Method "%s:%s" is deprecated. Manage options on http client instance', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
+        if (method_exists($this->httpClient, 'setOption')) {
+            $this->httpClient->setOption($option, $value);
+        }
     }
 
     /**
@@ -2904,7 +2876,11 @@ class BotApi
      */
     public function unsetCurlOption($option)
     {
-        unset($this->customCurlOptions[$option]);
+        @trigger_error(sprintf('Method "%s:%s" is deprecated. Manage options on http client instance', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
+        if (method_exists($this->httpClient, 'unsetOption')) {
+            $this->httpClient->unsetOption($option);
+        }
     }
 
     /**
@@ -2914,6 +2890,10 @@ class BotApi
      */
     public function resetCurlOptions()
     {
-        $this->customCurlOptions = [];
+        @trigger_error(sprintf('Method "%s:%s" is deprecated. Manage options on http client instance', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
+
+        if (method_exists($this->httpClient, 'resetOptions')) {
+            $this->httpClient->resetOptions();
+        }
     }
 }
