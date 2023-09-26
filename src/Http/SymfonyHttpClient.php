@@ -26,6 +26,12 @@ class SymfonyHttpClient extends AbstractHttpClient
         $options = [];
         if ($data) {
             $method = 'POST';
+            foreach ($data as &$value) {
+                if ($value instanceof \CURLFile) {
+                    $value = fopen($value->getFilename(), 'r');
+                }
+            }
+
             $options['body'] = $data;
         } else {
             $method = 'GET';

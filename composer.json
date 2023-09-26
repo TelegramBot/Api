@@ -28,12 +28,14 @@
         "vimeo/psalm": "^5.9",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
+        "php-http/multipart-stream-builder": "^1.0",
         "symfony/http-client": "^4.3 | ^5.0 | ^6.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "suggest": {
         "psr/http-client": "To use psr/http-client",
         "psr/http-factory": "To use psr/http-client",
+        "php-http/multipart-stream-builder": "To use psr/http-client",
         "guzzlehttp/guzzle": "To use psr/http-client",
         "symfony/http-client": "To use symfony/http-client"
     },
@@ -62,6 +64,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.6-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
         }
     }
 }
