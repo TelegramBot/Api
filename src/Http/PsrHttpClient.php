@@ -2,9 +2,11 @@
 
 namespace TelegramBot\Api\Http;
 
+use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use TelegramBot\Api\HttpException;
 use TelegramBot\Api\InvalidJsonException;
 
@@ -20,10 +22,19 @@ class PsrHttpClient extends AbstractHttpClient
      */
     private $requestFactory;
 
-    public function __construct(ClientInterface $http, RequestFactoryInterface $requestFactory)
-    {
+    /**
+     * @var StreamFactoryInterface
+     */
+    private $streamFactory;
+
+    public function __construct(
+        ClientInterface $http,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory
+    ) {
         $this->http = $http;
         $this->requestFactory = $requestFactory;
+        $this->streamFactory = $streamFactory;
     }
 
     /**
@@ -33,11 +44,39 @@ class PsrHttpClient extends AbstractHttpClient
     {
         if ($data) {
             $method = 'POST';
+            $data = array_filter($data);
         } else {
             $method = 'GET';
         }
 
         $request = $this->requestFactory->createRequest($method, $url);
+        if ($method === 'POST') {
+            $multipart = false;
+
+            /** @var array $data */
+            foreach ($data as &$value) {
+                if ($value instanceof \CURLFile) {
+                    $value = fopen($value->getFilename(), 'r');
+                    $multipart = true;
+                }
+            }
+            unset($value);
+
+            if ($multipart) {
+                $builder = new MultipartStreamBuilder($this->streamFactory);
+                foreach ($data as $name => $value) {
+                    $builder->addResource($name, $value);
+                }
+                $stream = $builder->build();
+                $request = $request->withHeader('Content-Type', "multipart/form-data; boundary={$builder->getBoundary()}");
+            } else {
+                $stream = $this->streamFactory->createStream(http_build_query($data));
+                $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
+            }
+
+            $request = $request->withBody($stream);
+        }
+
         try {
             $response = $this->http->sendRequest($request);
         } catch (ClientExceptionInterface $exception) {

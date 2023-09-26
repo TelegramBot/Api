@@ -61,7 +61,7 @@ jobs:
 
             -
                 name: Remove http client dependencies
-                run: composer remove psr/http-client psr/http-factory symfony/http-client guzzlehttp/guzzle --dev --no-update
+                run: composer remove psr/http-client psr/http-factory php-http/multipart-stream-builder symfony/http-client guzzlehttp/guzzle --dev --no-update
 
             -
                 name: Install dependencies with composer
