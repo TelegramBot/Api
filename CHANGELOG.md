@@ -14,6 +14,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add support for third party http clients (`psr/http-client` and `symfony/http-client`)
 - Add support for local bot API server
 - Add method `\TelegramBot\Api\BotApi::validateWebAppData` to validate `window.Telegram.WebApp.initData`
+- Add `\TelegramBot\Api\Types\Message::$videoNote` field
 
 ## 2.5.0 - 2023-08-09
 

@@ -59,6 +59,7 @@ class MessageTest extends AbstractTypeTest
             ],
             'sticker' => StickerTest::getMinResponse(),
             'video' => VideoTest::getMinResponse(),
+            'video_note' => VideoNoteTest::getMinResponse(),
             'voice' => VoiceTest::getMinResponse(),
             'caption' => 'caption',
             'contact' => ContactTest::getMinResponse(),
@@ -125,6 +126,7 @@ class MessageTest extends AbstractTypeTest
         $this->assertNull($item->getPhoto());
         $this->assertNull($item->getSticker());
         $this->assertNull($item->getVideo());
+        $this->assertNull($item->getVideoNote());
         $this->assertNull($item->getVoice());
         $this->assertNull($item->getCaption());
         $this->assertNull($item->getContact());
@@ -186,6 +188,7 @@ class MessageTest extends AbstractTypeTest
         $this->assertEquals([PhotoSizeTest::createMinInstance()], $item->getPhoto());
         $this->assertEquals(StickerTest::createMinInstance(), $item->getSticker());
         $this->assertEquals(VideoTest::createMinInstance(), $item->getVideo());
+        $this->assertEquals(VideoNoteTest::createMinInstance(), $item->getVideoNote());
         $this->assertEquals(VoiceTest::createMinInstance(), $item->getVoice());
         $this->assertEquals('caption', $item->getCaption());
         $this->assertEquals(ContactTest::createMinInstance(), $item->getContact());

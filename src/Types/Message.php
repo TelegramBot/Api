@@ -48,6 +48,7 @@ class Message extends BaseType implements TypeInterface
         'photo' => ArrayOfPhotoSize::class,
         'sticker' => Sticker::class,
         'video' => Video::class,
+        'video_note' => VideoNote::class,
         'voice' => Voice::class,
         'caption' => true,
         'contact' => Contact::class,
@@ -253,6 +254,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Video|null
      */
     protected $video;
+
+    /**
+     * Optional. Message is a video note, information about the video message
+     *
+     * @var \TelegramBot\Api\Types\VideoNote|null
+     */
+    protected $videoNote;
 
     /**
      * Optional. Message is a voice message, information about the file
@@ -872,6 +880,23 @@ class Message extends BaseType implements TypeInterface
     public function getVideo()
     {
         return $this->video;
+    }
+
+    /**
+     * @return VideoNote|null
+     */
+    public function getVideoNote()
+    {
+        return $this->videoNote;
+    }
+
+    /**
+     * @param VideoNote|null $videoNote
+     * @return void
+     */
+    public function setVideoNote($videoNote)
+    {
+        $this->videoNote = $videoNote;
     }
 
     /**
