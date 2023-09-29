@@ -85,7 +85,16 @@ class PsrHttpClient extends AbstractHttpClient
 
         $content = $response->getBody()->getContents();
 
-        return self::jsonValidate($content);
+        $json = self::jsonValidate($content);
+
+        if (!\in_array($response->getStatusCode(), [200, 304])) {
+            $errorDescription = array_key_exists('description', $json) ? $json['description'] : $response->getReasonPhrase();
+            $errorParameters = array_key_exists('parameters', $json) ? $json['parameters'] : [];
+
+            throw new HttpException($errorDescription, $response->getStatusCode(), null, $errorParameters);
+        }
+
+        return $json;
     }
 
     /**

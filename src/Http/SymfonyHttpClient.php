@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Http;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface as SymfonyHttpClientInterface;
 use TelegramBot\Api\HttpException;
 
@@ -50,7 +51,16 @@ class SymfonyHttpClient extends AbstractHttpClient
         try {
             return $response->toArray();
         } catch (ExceptionInterface $exception) {
-            throw new HttpException($exception->getMessage(), $exception->getCode(), $exception);
+            if ($exception instanceof HttpExceptionInterface) {
+                $response = $exception->getResponse()->toArray(false);
+                $message = array_key_exists('description', $response) ? $response['description'] : $exception->getMessage();
+                $parameters = array_key_exists('parameters', $response) ? $response['parameters'] : [];
+            } else {
+                $message = $exception->getMessage();
+                $parameters = [];
+            }
+
+            throw new HttpException($message, $exception->getCode(), $exception, $parameters);
         }
     }
 
