@@ -136,10 +136,9 @@ class ClientTest extends TestCase
     public function testBadMethodCallException()
     {
         $this->expectException(BadMethodCallException::class);
-        $this->expectErrorMessage('Method testMethod not exists');
+        $this->expectExceptionMessage('Method testMethod not exists');
 
         $item = new Client('testToken');
-
         $item->testMethod();
     }
 

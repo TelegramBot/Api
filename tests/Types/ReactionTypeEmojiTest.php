@@ -3,21 +3,20 @@
 namespace TelegramBot\Api\Test\Types;
 
 use TelegramBot\Api\Test\AbstractTypeTest;
-use TelegramBot\Api\Types\PollAnswer;
+use TelegramBot\Api\Types\ReactionTypeEmoji;
 
-class PollAnswerTest extends AbstractTypeTest
+class ReactionTypeEmojiTest extends AbstractTypeTest
 {
     protected static function getType()
     {
-        return PollAnswer::class;
+        return ReactionTypeEmoji::class;
     }
 
     public static function getMinResponse()
     {
         return [
-            'option_ids' => [1,2,3,4,5,6],
-            'user' => UserTest::getMinResponse(),
-            'poll_id' => 123456789,
+            'type' => 'emoji',
+            'emoji' => '👍'
         ];
     }
 
@@ -27,18 +26,17 @@ class PollAnswerTest extends AbstractTypeTest
     }
 
     /**
-     * @param PollAnswer $item
+     * @param ReactionTypeEmoji $item
      * @return void
      */
     protected function assertMinItem($item)
     {
-        $this->assertEquals(123456789, $item->getPollId());
-        $this->assertEquals(UserTest::createMinInstance(), $item->getUser());
-        $this->assertEquals([1,2,3,4,5,6], $item->getOptionIds());
+        $this->assertEquals('emoji', $item->getType());
+        $this->assertEquals('👍', $item->getEmoji());
     }
 
     /**
-     * @param PollAnswer $item
+     * @param ReactionTypeEmoji $item
      * @return void
      */
     protected function assertFullItem($item)

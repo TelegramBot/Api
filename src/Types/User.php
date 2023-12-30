@@ -32,12 +32,12 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
+        'is_bot' => true,
         'is_premium' => true,
         'added_to_attachment_menu' => true,
         'can_join_groups' => true,
         'can_read_all_group_messages' => true,
-        'supports_inline_queries' => true,
-        'is_bot' => true
+        'supports_inline_queries' => true
     ];
 
     /**
@@ -117,208 +117,116 @@ class User extends BaseType implements TypeInterface
      */
     protected $supportsInlineQueries;
 
-    /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     *
-     * @return void
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return int|float
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return void
-     */
     public function setId($id)
     {
-        if (is_integer($id) || is_float($id)) {
-            $this->id = $id;
-        } else {
-            throw new InvalidArgumentException();
+        if (!is_int($id) && !is_float($id)) {
+            throw new InvalidArgumentException('ID must be an integer or float');
         }
+        $this->id = $id;
     }
 
-    /**
-     * @return null|string
-     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
     public function getLastName()
     {
         return $this->lastName;
     }
 
-    /**
-     * @param string $lastName
-     *
-     * @return void
-     */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return null|string
-     */
     public function getUsername()
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     *
-     * @return void
-     */
     public function setUsername($username)
     {
         $this->username = $username;
     }
 
-    /**
-     * @return null|string
-     */
     public function getLanguageCode()
     {
         return $this->languageCode;
     }
 
-    /**
-     * @param string $languageCode
-     *
-     * @return void
-     */
     public function setLanguageCode($languageCode)
     {
         $this->languageCode = $languageCode;
     }
 
-    /**
-     * @return bool
-     */
     public function isBot()
     {
         return $this->isBot;
     }
 
-    /**
-     * @param bool $isBot
-     *
-     * @return void
-     */
     public function setIsBot($isBot)
     {
         $this->isBot = $isBot;
     }
 
-    /**
-     * @param bool $isPremium
-     *
-     * @return void
-     */
-    public function setIsPremium($isPremium)
-    {
-        $this->isPremium = $isPremium;
-    }
-
-    /**
-     * @return bool|null
-     */
     public function getIsPremium()
     {
         return $this->isPremium;
     }
 
-    /**
-     * @param bool $addedToAttachmentMenu
-     *
-     * @return void
-     */
-    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
+    public function setIsPremium($isPremium)
     {
-        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
+        $this->isPremium = $isPremium;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getAddedToAttachmentMenu()
     {
         return $this->addedToAttachmentMenu;
     }
 
-    /**
-     * @param bool $canJoinGroups
-     *
-     * @return void
-     */
-    public function setCanJoinGroups($canJoinGroups)
+    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
     {
-        $this->canJoinGroups = $canJoinGroups;
+        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanJoinGroups()
     {
         return $this->canJoinGroups;
     }
 
-    /**
-     * @param bool $canReadAllGroupMessages
-     *
-     * @return void
-     */
-    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    public function setCanJoinGroups($canJoinGroups)
     {
-        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+        $this->canJoinGroups = $canJoinGroups;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanReadAllGroupMessages()
     {
         return $this->canReadAllGroupMessages;
     }
 
-    /**
-     * @param bool $supportsInlineQueries
-     *
-     * @return void
-     */
-    public function setSupportsInlineQueries($supportsInlineQueries)
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
     {
-        $this->supportsInlineQueries = $supportsInlineQueries;
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getSupportsInlineQueries()
     {
         return $this->supportsInlineQueries;
     }
 
+    public function setSupportsInlineQueries($supportsInlineQueries)
+    {
+        $this->supportsInlineQueries = $supportsInlineQueries;
+    }
 }
