@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\Payments\Invoice;
 
 /**
  * Class ExternalReplyInfo

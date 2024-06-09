@@ -4,6 +4,9 @@ namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\Types\CallbackGame;
+use TelegramBot\Api\Types\LoginUrl;
+use TelegramBot\Api\Types\WebAppInfo;
 
 /**
  * Class InlineKeyboardButton
