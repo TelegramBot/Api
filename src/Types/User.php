@@ -37,7 +37,8 @@ class User extends BaseType implements TypeInterface
         'added_to_attachment_menu' => true,
         'can_join_groups' => true,
         'can_read_all_group_messages' => true,
-        'supports_inline_queries' => true
+        'supports_inline_queries' => true,
+        'can_connect_to_business' => true
     ];
 
     /**
@@ -116,6 +117,13 @@ class User extends BaseType implements TypeInterface
      * @var bool|null
      */
     protected $supportsInlineQueries;
+
+    /**
+     * Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
+     *
+     * @var bool|null
+     */
+    protected $canConnectToBusiness;
 
     public function getId()
     {
@@ -228,5 +236,15 @@ class User extends BaseType implements TypeInterface
     public function setSupportsInlineQueries($supportsInlineQueries)
     {
         $this->supportsInlineQueries = $supportsInlineQueries;
+    }
+
+    public function getCanConnectToBusiness()
+    {
+        return $this->canConnectToBusiness;
+    }
+
+    public function setCanConnectToBusiness($canConnectToBusiness)
+    {
+        $this->canConnectToBusiness = $canConnectToBusiness;
     }
 }

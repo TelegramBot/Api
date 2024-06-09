@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: YaroslavMolchan
- * Date: 16/03/17
- * Time: 22:15
- */
 
 namespace TelegramBot\Api\Types\Inline;
 

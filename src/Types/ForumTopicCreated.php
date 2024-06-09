@@ -6,7 +6,7 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
 /**
- * class ForumTopicCreated.
+ * Class ForumTopicCreated
  * This object represents a service message about a new forum topic created in the chat.
  *
  * @package TelegramBot\Api\Types
@@ -42,14 +42,14 @@ class ForumTopicCreated extends BaseType implements TypeInterface
     /**
      * Color of the forum topic
      *
-     * @var string
+     * @var int
      */
     protected $iconColor;
 
     /**
-     * Custom emoji of the forum topic
+     * Optional. Unique identifier of the custom emoji shown as the topic icon
      *
-     * @var string
+     * @var string|null
      */
     protected $iconCustomEmojiId;
 
@@ -71,7 +71,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getIconColor()
     {
@@ -79,7 +79,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $iconColor
+     * @param int $iconColor
      * @return void
      */
     public function setIconColor($iconColor)
@@ -88,7 +88,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getIconCustomEmojiId()
     {
@@ -96,7 +96,7 @@ class ForumTopicCreated extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $iconCustomEmojiId
+     * @param string|null $iconCustomEmojiId
      * @return void
      */
     public function setIconCustomEmojiId($iconCustomEmojiId)

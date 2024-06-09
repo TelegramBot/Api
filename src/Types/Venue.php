@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 13/04/16
- * Time: 13:55
- */
 
 namespace TelegramBot\Api\Types;
 
@@ -13,7 +7,7 @@ use TelegramBot\Api\TypeInterface;
 
 /**
  * Class Venue
- * This object represents a venue
+ * This object represents a venue.
  *
  * @package TelegramBot\Api\Types
  */
@@ -153,7 +147,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $foursquareId
+     * @param string|null $foursquareId
      *
      * @return void
      */
@@ -171,7 +165,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $foursquareType
+     * @param string|null $foursquareType
      *
      * @return void
      */
@@ -189,7 +183,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $googlePlaceId
+     * @param string|null $googlePlaceId
      *
      * @return void
      */
@@ -207,7 +201,7 @@ class Venue extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $googlePlaceType
+     * @param string|null $googlePlaceType
      *
      * @return void
      */

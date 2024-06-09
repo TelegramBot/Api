@@ -9,6 +9,12 @@ use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 use TelegramBot\Api\Types\Payments\Invoice;
 use TelegramBot\Api\Types\Payments\SuccessfulPayment;
 
+/**
+ * Class Message
+ * This object represents a message.
+ *
+ * @package TelegramBot\Api\Types
+ */
 class Message extends BaseType implements TypeInterface
 {
     /**
@@ -25,37 +31,50 @@ class Message extends BaseType implements TypeInterface
      */
     protected static $map = [
         'message_id' => true,
+        'message_thread_id' => true,
         'from' => User::class,
+        'sender_chat' => Chat::class,
+        'sender_boost_count' => true,
+        'sender_business_bot' => User::class,
         'date' => true,
+        'business_connection_id' => true,
         'chat' => Chat::class,
-        'forward_from' => User::class,
-        'forward_from_chat' => Chat::class,
-        'forward_from_message_id' => true,
-        'forward_date' => true,
-        'forward_signature' => true,
-        'forward_sender_name' => true,
-        'reply_to_message' => Message::class,
+        'forward_origin' => MessageOrigin::class,
+        'is_topic_message' => true,
+        'is_automatic_forward' => true,
+        'reply_to_message' => self::class,
+        'external_reply' => ExternalReplyInfo::class,
+        'quote' => TextQuote::class,
+        'reply_to_story' => Story::class,
         'via_bot' => User::class,
         'edit_date' => true,
+        'has_protected_content' => true,
+        'is_from_offline' => true,
         'media_group_id' => true,
         'author_signature' => true,
         'text' => true,
         'entities' => ArrayOfMessageEntity::class,
-        'caption_entities' => ArrayOfMessageEntity::class,
+        'link_preview_options' => LinkPreviewOptions::class,
+        'effect_id' => true,
+        'animation' => Animation::class,
         'audio' => Audio::class,
         'document' => Document::class,
-        'animation' => Animation::class,
         'photo' => ArrayOfPhotoSize::class,
         'sticker' => Sticker::class,
+        'story' => Story::class,
         'video' => Video::class,
         'video_note' => VideoNote::class,
         'voice' => Voice::class,
         'caption' => true,
+        'caption_entities' => ArrayOfMessageEntity::class,
+        'show_caption_above_media' => true,
+        'has_media_spoiler' => true,
         'contact' => Contact::class,
-        'location' => Location::class,
-        'venue' => Venue::class,
-        'poll' => Poll::class,
         'dice' => Dice::class,
+        'game' => Game::class,
+        'poll' => Poll::class,
+        'venue' => Venue::class,
+        'location' => Location::class,
         'new_chat_members' => ArrayOfUser::class,
         'left_chat_member' => User::class,
         'new_chat_title' => true,
@@ -64,104 +83,159 @@ class Message extends BaseType implements TypeInterface
         'group_chat_created' => true,
         'supergroup_chat_created' => true,
         'channel_chat_created' => true,
+        'message_auto_delete_timer_changed' => MessageAutoDeleteTimerChanged::class,
         'migrate_to_chat_id' => true,
         'migrate_from_chat_id' => true,
-        'pinned_message' => Message::class,
+        'pinned_message' => MaybeInaccessibleMessage::class,
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
+        'users_shared' => UsersShared::class,
+        'chat_shared' => ChatShared::class,
         'connected_website' => true,
+        'write_access_allowed' => WriteAccessAllowed::class,
+        'passport_data' => PassportData::class,
+        'proximity_alert_triggered' => ProximityAlertTriggered::class,
+        'boost_added' => ChatBoostAdded::class,
+        'chat_background_set' => ChatBackground::class,
         'forum_topic_created' => ForumTopicCreated::class,
+        'forum_topic_edited' => ForumTopicEdited::class,
         'forum_topic_closed' => ForumTopicClosed::class,
         'forum_topic_reopened' => ForumTopicReopened::class,
-        'is_topic_message' => true,
-        'message_thread_id' => true,
+        'general_forum_topic_hidden' => GeneralForumTopicHidden::class,
+        'general_forum_topic_unhidden' => GeneralForumTopicUnhidden::class,
+        'giveaway_created' => GiveawayCreated::class,
+        'giveaway' => Giveaway::class,
+        'giveaway_winners' => GiveawayWinners::class,
+        'giveaway_completed' => GiveawayCompleted::class,
+        'video_chat_scheduled' => VideoChatScheduled::class,
+        'video_chat_started' => VideoChatStarted::class,
+        'video_chat_ended' => VideoChatEnded::class,
+        'video_chat_participants_invited' => VideoChatParticipantsInvited::class,
         'web_app_data' => WebAppData::class,
         'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**
-     * Unique message identifier
+     * Unique message identifier inside this chat
      *
-     * @var int|float
+     * @var int
      */
     protected $messageId;
 
     /**
-     * Optional. Sender name. Can be empty for messages sent to channels
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     *
+     * @var int|null
+     */
+    protected $messageThreadId;
+
+    /**
+     * Optional. Sender of the message; empty for messages sent to channels. For backward compatibility,
+     * the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
      *
      * @var \TelegramBot\Api\Types\User|null
      */
     protected $from;
 
     /**
-     * Date the message was sent in Unix time
+     * Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts,
+     * the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group.
+     * For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+     *
+     * @var \TelegramBot\Api\Types\Chat|null
+     */
+    protected $senderChat;
+
+    /**
+     * Optional. If the sender of the message boosted the chat, the number of boosts added by the user
+     *
+     * @var int|null
+     */
+    protected $senderBoostCount;
+
+    /**
+     * Optional. The bot that actually sent the message on behalf of the business account.
+     * Available only for outgoing messages sent on behalf of the connected business account.
+     *
+     * @var \TelegramBot\Api\Types\User|null
+     */
+    protected $senderBusinessBot;
+
+    /**
+     * Date the message was sent in Unix time. It is always a positive number, representing a valid date.
      *
      * @var int
      */
     protected $date;
 
     /**
-     * Conversation the message belongs to — user in case of a private message, GroupChat in case of a group
+     * Optional. Unique identifier of the business connection from which the message was received.
+     * If non-empty, the message belongs to a chat of the corresponding business account that is independent
+     * from any potential bot chat which might share the same identifier.
+     *
+     * @var string|null
+     */
+    protected $businessConnectionId;
+
+    /**
+     * Chat the message belongs to
      *
      * @var \TelegramBot\Api\Types\Chat
      */
     protected $chat;
 
     /**
-     * Optional. For forwarded messages, sender of the original message
+     * Optional. Information about the original message for forwarded messages
      *
-     * @var \TelegramBot\Api\Types\User|null
+     * @var \TelegramBot\Api\Types\MessageOrigin|null
      */
-    protected $forwardFrom;
+    protected $forwardOrigin;
 
     /**
-     * Optional. For messages forwarded from channels, information about
-     * the original channel
+     * Optional. True, if the message is sent to a forum topic
      *
-     * @var \TelegramBot\Api\Types\Chat|null
+     * @var bool|null
      */
-    protected $forwardFromChat;
+    protected $isTopicMessage;
 
     /**
-     * Optional. For messages forwarded from channels, identifier of
-     * the original message in the channel
+     * Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group
      *
-     * @var int|null
+     * @var bool|null
      */
-    protected $forwardFromMessageId;
+    protected $isAutomaticForward;
 
     /**
-     * Optional. For messages forwarded from channels, signature of the post author if present
-     *
-     * @var string|null
-     */
-    protected $forwardSignature;
-
-    /**
-     * Optional. Sender's name for messages forwarded from users who disallow adding a link to their account
-     * in forwarded messages
-     *
-     * @var string|null
-     */
-    protected $forwardSenderName;
-
-    /**
-     * Optional. For forwarded messages, date the original message was sent in Unix time
-     *
-     * @var int|null
-     */
-    protected $forwardDate;
-
-    /**
-     * Optional. For replies, the original message. Note that the Message object in this field will not contain further
-     * reply_to_message fields even if it itself is a reply.
+     * Optional. For replies in the same chat and message thread, the original message.
+     * Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
      *
      * @var \TelegramBot\Api\Types\Message|null
      */
     protected $replyToMessage;
 
     /**
-     * Optional. Bot through which the message was sent.
+     * Optional. Information about the message that is being replied to, which may come from another chat or forum topic
+     *
+     * @var \TelegramBot\Api\Types\ExternalReplyInfo|null
+     */
+    protected $externalReply;
+
+    /**
+     * Optional. For replies that quote part of the original message, the quoted part of the message
+     *
+     * @var \TelegramBot\Api\Types\TextQuote|null
+     */
+    protected $quote;
+
+    /**
+     * Optional. For replies to a story, the original story
+     *
+     * @var \TelegramBot\Api\Types\Story|null
+     */
+    protected $replyToStory;
+
+    /**
+     * Optional. Bot through which the message was sent
      *
      * @var \TelegramBot\Api\Types\User|null
      */
@@ -175,15 +249,29 @@ class Message extends BaseType implements TypeInterface
     protected $editDate;
 
     /**
-     * Optional. The unique identifier of a media message group
-     * this message belongs to
+     * Optional. True, if the message can't be forwarded
      *
-     * @var int|null
+     * @var bool|null
+     */
+    protected $hasProtectedContent;
+
+    /**
+     * Optional. True, if the message was sent by an implicit action, for example, as an away or a greeting business message,
+     * or as a scheduled message
+     *
+     * @var bool|null
+     */
+    protected $isFromOffline;
+
+    /**
+     * Optional. The unique identifier of a media message group this message belongs to
+     *
+     * @var string|null
      */
     protected $mediaGroupId;
 
     /**
-     * Optional. Signature of the post author for messages in channels
+     * Optional. Signature of the post author for messages in channels, or the custom title of an anonymous group administrator
      *
      * @var string|null
      */
@@ -197,20 +285,33 @@ class Message extends BaseType implements TypeInterface
     protected $text;
 
     /**
-     * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
-     * array of \TelegramBot\Api\Types\MessageEntity
+     * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
      *
-     * @var array|null
+     * @var \TelegramBot\Api\Types\ArrayOfMessageEntity|null
      */
     protected $entities;
 
     /**
-     * Optional. For messages with a caption, special entities like usernames,
-     * URLs, bot commands, etc. that appear in the caption
+     * Optional. Options used for link preview generation for the message, if it is a text message and link preview options were changed
      *
-     * @var ArrayOfMessageEntity|null
+     * @var \TelegramBot\Api\Types\LinkPreviewOptions|null
      */
-    protected $captionEntities;
+    protected $linkPreviewOptions;
+
+    /**
+     * Optional. Unique identifier of the message effect added to the message
+     *
+     * @var string|null
+     */
+    protected $effectId;
+
+    /**
+     * Optional. Message is an animation, information about the animation.
+     * For backward compatibility, when this field is set, the document field will also be set
+     *
+     * @var \TelegramBot\Api\Types\Animation|null
+     */
+    protected $animation;
 
     /**
      * Optional. Message is an audio file, information about the file
@@ -227,17 +328,9 @@ class Message extends BaseType implements TypeInterface
     protected $document;
 
     /**
-     * Optional. Message is a animation, information about the animation
-     *
-     * @var \TelegramBot\Api\Types\Animation|null
-     */
-    protected $animation;
-
-    /**
      * Optional. Message is a photo, available sizes of the photo
-     * array of \TelegramBot\Api\Types\Photo
      *
-     * @var array|null
+     * @var \TelegramBot\Api\Types\ArrayOfPhotoSize|null
      */
     protected $photo;
 
@@ -247,6 +340,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\Sticker|null
      */
     protected $sticker;
+
+    /**
+     * Optional. Message is a forwarded story
+     *
+     * @var \TelegramBot\Api\Types\Story|null
+     */
+    protected $story;
 
     /**
      * Optional. Message is a video, information about the video
@@ -270,11 +370,32 @@ class Message extends BaseType implements TypeInterface
     protected $voice;
 
     /**
-     * Optional. Text description of the video (usually empty)
+     * Optional. Caption for the animation, audio, document, photo, video or voice
      *
      * @var string|null
      */
     protected $caption;
+
+    /**
+     * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+     *
+     * @var \TelegramBot\Api\Types\ArrayOfMessageEntity|null
+     */
+    protected $captionEntities;
+
+    /**
+     * Optional. True, if the caption must be shown above the message media
+     *
+     * @var bool|null
+     */
+    protected $showCaptionAboveMedia;
+
+    /**
+     * Optional. True, if the message media is covered by a spoiler animation
+     *
+     * @var bool|null
+     */
+    protected $hasMediaSpoiler;
 
     /**
      * Optional. Message is a shared contact, information about the contact
@@ -284,18 +405,18 @@ class Message extends BaseType implements TypeInterface
     protected $contact;
 
     /**
-     * Optional. Message is a shared location, information about the location
+     * Optional. Message is a dice with random value
      *
-     * @var \TelegramBot\Api\Types\Location|null
+     * @var \TelegramBot\Api\Types\Dice|null
      */
-    protected $location;
+    protected $dice;
 
     /**
-     * Optional. Message is a venue, information about the venue
+     * Optional. Message is a game, information about the game
      *
-     * @var \TelegramBot\Api\Types\Venue|null
+     * @var \TelegramBot\Api\Types\Game|null
      */
-    protected $venue;
+    protected $game;
 
     /**
      * Optional. Message is a native poll, information about the poll
@@ -305,166 +426,300 @@ class Message extends BaseType implements TypeInterface
     protected $poll;
 
     /**
-     * Optional. Message is a dice with random value from 1 to 6
+     * Optional. Message is a venue, information about the venue.
+     * For backward compatibility, when this field is set, the location field will also be set
      *
-     * @var \TelegramBot\Api\Types\Dice|null
+     * @var \TelegramBot\Api\Types\Venue|null
      */
-    protected $dice;
+    protected $venue;
+
+    /**
+     * Optional. Message is a shared location, information about the location
+     *
+     * @var \TelegramBot\Api\Types\Location|null
+     */
+    protected $location;
 
     /**
      * Optional. New members that were added to the group or supergroup and information about them
      * (the bot itself may be one of these members)
-     * array of \TelegramBot\Api\Types\User
      *
-     * @var \TelegramBot\Api\Types\User[]|null
+     * @var \TelegramBot\Api\Types\ArrayOfUser|null
      */
     protected $newChatMembers;
 
     /**
-     * Optional. A member was removed from the group, information about them (this member may be bot itself)
+     * Optional. A member was removed from the group, information about them (this member may be the bot itself)
      *
      * @var \TelegramBot\Api\Types\User|null
      */
     protected $leftChatMember;
 
     /**
-     * Optional. A group title was changed to this value
+     * Optional. A chat title was changed to this value
      *
      * @var string|null
      */
     protected $newChatTitle;
 
     /**
-     * Optional. A group photo was change to this value
+     * Optional. A chat photo was change to this value
      *
-     * @var PhotoSize[]|null
+     * @var \TelegramBot\Api\Types\ArrayOfPhotoSize|null
      */
     protected $newChatPhoto;
 
     /**
-     * Optional. Informs that the group photo was deleted
+     * Optional. Service message: the chat photo was deleted
      *
      * @var bool|null
      */
     protected $deleteChatPhoto;
 
     /**
-     * Optional. Informs that the group has been created
+     * Optional. Service message: the group has been created
      *
      * @var bool|null
      */
     protected $groupChatCreated;
 
     /**
-     * Optional. Service message: the supergroup has been created
+     * Optional. Service message: the supergroup has been created.
+     * This field can't be received in a message coming through updates,
+     * because bot can't be a member of a supergroup when it is created.
+     * It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
      *
      * @var bool|null
      */
     protected $supergroupChatCreated;
 
     /**
-     * Optional. Service message: the channel has been created
+     * Optional. Service message: the channel has been created.
+     * This field can't be received in a message coming through updates,
+     * because bot can't be a member of a channel when it is created.
+     * It can only be found in reply_to_message if someone replies to a very first message in a channel.
      *
      * @var bool|null
      */
     protected $channelChatCreated;
 
     /**
-     * Optional. The group has been migrated to a supergroup with the specified identifier,
-     * not exceeding 1e13 by absolute value
+     * Optional. Service message: auto-delete timer settings changed in the chat
+     *
+     * @var \TelegramBot\Api\Types\MessageAutoDeleteTimerChanged|null
+     */
+    protected $messageAutoDeleteTimerChanged;
+
+    /**
+     * Optional. The group has been migrated to a supergroup with the specified identifier.
+     * This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
+     * But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
      *
      * @var int|null
      */
     protected $migrateToChatId;
 
     /**
-     * Optional. The supergroup has been migrated from a group with the specified identifier,
-     * not exceeding 1e13 by absolute value
+     * Optional. The supergroup has been migrated from a group with the specified identifier.
+     * This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
+     * But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
      *
      * @var int|null
      */
     protected $migrateFromChatId;
 
     /**
-     * Optional. Specified message was pinned.Note that the Message object in this field
-     * will not contain further reply_to_message fields even if it is itself a reply.
+     * Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
      *
-     * @var Message|null
+     * @var \TelegramBot\Api\Types\MaybeInaccessibleMessage|null
      */
     protected $pinnedMessage;
 
     /**
-     * Optional. Message is an invoice for a payment, information about the invoice.
+     * Optional. Message is an invoice for a payment, information about the invoice
      *
-     * @var Invoice|null
+     * @var \TelegramBot\Api\Types\Invoice|null
      */
     protected $invoice;
 
     /**
-     * Optional. Message is a service message about a successful payment, information about the payment.
+     * Optional. Message is a service message about a successful payment, information about the payment
      *
-     * @var SuccessfulPayment|null
+     * @var \TelegramBot\Api\Types\SuccessfulPayment|null
      */
     protected $successfulPayment;
 
     /**
-     * Optional. The domain name of the website on which the user has logged in.
+     * Optional. Service message: users were shared with the bot
+     *
+     * @var \TelegramBot\Api\Types\UsersShared|null
+     */
+    protected $usersShared;
+
+    /**
+     * Optional. Service message: a chat was shared with the bot
+     *
+     * @var \TelegramBot\Api\Types\ChatShared|null
+     */
+    protected $chatShared;
+
+    /**
+     * Optional. The domain name of the website on which the user has logged in
      *
      * @var string|null
      */
     protected $connectedWebsite;
 
     /**
-     * Optional. Service message: data sent by a Web App
+     * Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu,
+     * launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess
      *
-     * @var WebAppData|null
+     * @var \TelegramBot\Api\Types\WriteAccessAllowed|null
      */
-    protected $webAppData;
+    protected $writeAccessAllowed;
 
     /**
-     * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
+     * Optional. Telegram Passport data
      *
-     * @var InlineKeyboardMarkup|null
+     * @var \TelegramBot\Api\Types\PassportData|null
      */
-    protected $replyMarkup;
+    protected $passportData;
+
+    /**
+     * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location
+     *
+     * @var \TelegramBot\Api\Types\ProximityAlertTriggered|null
+     */
+    protected $proximityAlertTriggered;
+
+    /**
+     * Optional. Service message: user boosted the chat
+     *
+     * @var \TelegramBot\Api\Types\ChatBoostAdded|null
+     */
+    protected $boostAdded;
+
+    /**
+     * Optional. Service message: chat background set
+     *
+     * @var \TelegramBot\Api\Types\ChatBackground|null
+     */
+    protected $chatBackgroundSet;
 
     /**
      * Optional. Service message: forum topic created
      *
-     * @var ForumTopicCreated|null
+     * @var \TelegramBot\Api\Types\ForumTopicCreated|null
      */
     protected $forumTopicCreated;
 
     /**
-     * Optional. Service message: forum topic closed
+     * Optional. Service message: forum topic edited
      *
-     * @var ForumTopicReopened|null
+     * @var \TelegramBot\Api\Types\ForumTopicEdited|null
      */
-    protected $forumTopicReopened;
+    protected $forumTopicEdited;
 
     /**
-     * Optional. Service message: forum topic reopened
+     * Optional. Service message: forum topic closed
      *
-     * @var ForumTopicClosed|null
+     * @var \TelegramBot\Api\Types\ForumTopicClosed|null
      */
     protected $forumTopicClosed;
 
     /**
-     * Optional. True, if the message is sent to a forum topic
+     * Optional. Service message: forum topic reopened
      *
-     * @var bool|null
+     * @var \TelegramBot\Api\Types\ForumTopicReopened|null
      */
-    protected $isTopicMessage;
+    protected $forumTopicReopened;
 
     /**
-     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     * Optional. Service message: the 'General' forum topic hidden
      *
-     * @var int|null
+     * @var \TelegramBot\Api\Types\GeneralForumTopicHidden|null
      */
-    protected $messageThreadId;
+    protected $generalForumTopicHidden;
 
     /**
-     * @return int|float
+     * Optional. Service message: the 'General' forum topic unhidden
+     *
+     * @var \TelegramBot\Api\Types\GeneralForumTopicUnhidden|null
+     */
+    protected $generalForumTopicUnhidden;
+
+    /**
+     * Optional. Service message: a scheduled giveaway was created
+     *
+     * @var \TelegramBot\Api\Types\GiveawayCreated|null
+     */
+    protected $giveawayCreated;
+
+    /**
+     * Optional. The message is a scheduled giveaway message
+     *
+     * @var \TelegramBot\Api\Types\Giveaway|null
+     */
+    protected $giveaway;
+
+    /**
+     * Optional. A giveaway with public winners was completed
+     *
+     * @var \TelegramBot\Api\Types\GiveawayWinners|null
+     */
+    protected $giveawayWinners;
+
+    /**
+     * Optional. Service message: a giveaway without public winners was completed
+     *
+     * @var \TelegramBot\Api\Types\GiveawayCompleted|null
+     */
+    protected $giveawayCompleted;
+
+    /**
+     * Optional. Service message: video chat scheduled
+     *
+     * @var \TelegramBot\Api\Types\VideoChatScheduled|null
+     */
+    protected $videoChatScheduled;
+
+    /**
+     * Optional. Service message: video chat started
+     *
+     * @var \TelegramBot\Api\Types\VideoChatStarted|null
+     */
+    protected $videoChatStarted;
+
+    /**
+     * Optional. Service message: video chat ended
+     *
+     * @var \TelegramBot\Api\Types\VideoChatEnded|null
+     */
+    protected $videoChatEnded;
+
+    /**
+     * Optional. Service message: new participants invited to a video chat
+     *
+     * @var \TelegramBot\Api\Types\VideoChatParticipantsInvited|null
+     */
+    protected $videoChatParticipantsInvited;
+
+    /**
+     * Optional. Service message: data sent by a Web App
+     *
+     * @var \TelegramBot\Api\Types\WebAppData|null
+     */
+    protected $webAppData;
+
+    /**
+     * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons
+     *
+     * @var \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup|null
+     */
+    protected $replyMarkup;
+
+    /**
+     * @return int
      */
     public function getMessageId()
     {
@@ -486,6 +741,23 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
+     * @return int|null
+     */
+    public function getMessageThreadId()
+    {
+        return $this->messageThreadId;
+    }
+
+    /**
+     * @param int|null $messageThreadId
+     * @return void
+     */
+    public function setMessageThreadId($messageThreadId)
+    {
+        $this->messageThreadId = $messageThreadId;
+    }
+
+    /**
      * @return User|null
      */
     public function getFrom()
@@ -503,20 +775,52 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return Chat
+     * @return Chat|null
      */
-    public function getChat()
+    public function getSenderChat()
     {
-        return $this->chat;
+        return $this->senderChat;
     }
 
     /**
-     * @param Chat $chat
+     * @param Chat $senderChat
      * @return void
      */
-    public function setChat(Chat $chat)
+    public function setSenderChat(Chat $senderChat)
     {
-        $this->chat = $chat;
+        $this->senderChat = $senderChat;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSenderBoostCount()
+    {
+        return $this->senderBoostCount;
+    }
+
+    /**
+     * @param int|null $senderBoostCount
+     */
+    public function setSenderBoostCount($senderBoostCount)
+    {
+        $this->senderBoostCount = $senderBoostCount;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getSenderBusinessBot()
+    {
+        return $this->senderBusinessBot;
+    }
+
+    /**
+     * @param User|null $senderBusinessBot
+     */
+    public function setSenderBusinessBot($senderBusinessBot)
+    {
+        $this->senderBusinessBot = $senderBusinessBot;
     }
 
     /**
@@ -542,114 +846,88 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return User|null
+     * @return string|null
      */
-    public function getForwardFrom()
+    public function getBusinessConnectionId()
     {
-        return $this->forwardFrom;
+        return $this->businessConnectionId;
     }
 
     /**
-     * @param User $forwardFrom
+     * @param string|null $businessConnectionId
+     */
+    public function setBusinessConnectionId($businessConnectionId)
+    {
+        $this->businessConnectionId = $businessConnectionId;
+    }
+
+    /**
+     * @return Chat
+     */
+    public function getChat()
+    {
+        return $this->chat;
+    }
+
+    /**
+     * @param Chat $chat
      * @return void
      */
-    public function setForwardFrom(User $forwardFrom)
+    public function setChat(Chat $chat)
     {
-        $this->forwardFrom = $forwardFrom;
+        $this->chat = $chat;
     }
 
     /**
-     * @return Chat|null
+     * @return MessageOrigin|null
      */
-    public function getForwardFromChat()
+    public function getForwardOrigin()
     {
-        return $this->forwardFromChat;
+        return $this->forwardOrigin;
     }
 
     /**
-     * @param Chat $forwardFromChat
-     * @return void
+     * @param MessageOrigin|null $forwardOrigin
      */
-    public function setForwardFromChat(Chat $forwardFromChat)
+    public function setForwardOrigin($forwardOrigin)
     {
-        $this->forwardFromChat = $forwardFromChat;
+        $this->forwardOrigin = $forwardOrigin;
     }
 
     /**
-     * @return int|null
+     * @return bool|null
      */
-    public function getForwardFromMessageId()
+    public function getIsTopicMessage()
     {
-        return $this->forwardFromMessageId;
+        return $this->isTopicMessage;
     }
 
     /**
-     * @param int $forwardFromMessageId
-     * @return void
+     * @param bool|null $isTopicMessage
      */
-    public function setForwardFromMessageId($forwardFromMessageId)
+    public function setIsTopicMessage($isTopicMessage)
     {
-        $this->forwardFromMessageId = $forwardFromMessageId;
+        $this->isTopicMessage = $isTopicMessage;
     }
 
     /**
-     * @return null|string
+     * @return bool|null
      */
-    public function getForwardSignature()
+    public function getIsAutomaticForward()
     {
-        return $this->forwardSignature;
+        return $this->isAutomaticForward;
     }
 
     /**
-     * @param string $forwardSignature
-     * @return void
+     * @param bool|null $isAutomaticForward
      */
-    public function setForwardSignature($forwardSignature)
+    public function setIsAutomaticForward($isAutomaticForward)
     {
-        $this->forwardSignature = $forwardSignature;
+        $this->isAutomaticForward = $isAutomaticForward;
     }
 
     /**
-     * @return null|string
-     */
-    public function getForwardSenderName()
-    {
-        return $this->forwardSenderName;
-    }
-
-    /**
-     * @param string $forwardSenderName
-     * @return void
-     */
-    public function setForwardSenderName($forwardSenderName)
-    {
-        $this->forwardSenderName = $forwardSenderName;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getForwardDate()
-    {
-        return $this->forwardDate;
-    }
-
-    /**
-     * @param mixed $forwardDate
-     * @return void
-     * @throws InvalidArgumentException
-     */
-    public function setForwardDate($forwardDate)
-    {
-        if (is_int($forwardDate)) {
-            $this->forwardDate = $forwardDate;
-        } else {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    /**
-     * @return null|self
+     * @return Message|null
      */
     public function getReplyToMessage()
     {
@@ -657,12 +935,59 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Message $replyToMessage
-     * @return void
+     * @param Message|null $replyToMessage
      */
-    public function setReplyToMessage(Message $replyToMessage)
+    public function setReplyToMessage($replyToMessage)
     {
         $this->replyToMessage = $replyToMessage;
+    }
+
+    /**
+     * @return ExternalReplyInfo|null
+     */
+    public function getExternalReply()
+    {
+        return $this->externalReply;
+    }
+
+    /**
+     * @param ExternalReplyInfo|null $externalReply
+     */
+    public function setExternalReply($externalReply)
+    {
+        $this->externalReply = $externalReply;
+    }
+
+    /**
+     * @return TextQuote|null
+     */
+    public function getQuote()
+    {
+        return $this->quote;
+    }
+
+    /**
+     * @param TextQuote|null $quote
+     */
+    public function setQuote($quote)
+    {
+        $this->quote = $quote;
+    }
+
+    /**
+     * @return Story|null
+     */
+    public function getReplyToStory()
+    {
+        return $this->replyToStory;
+    }
+
+    /**
+     * @param Story|null $replyToStory
+     */
+    public function setReplyToStory($replyToStory)
+    {
+        $this->replyToStory = $replyToStory;
     }
 
     /**
@@ -674,10 +999,9 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param User $viaBot
-     * @return void
+     * @param User|null $viaBot
      */
-    public function setViaBot(User $viaBot)
+    public function setViaBot($viaBot)
     {
         $this->viaBot = $viaBot;
     }
@@ -705,7 +1029,39 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int|null
+     * @return bool|null
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool|null $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsFromOffline()
+    {
+        return $this->isFromOffline;
+    }
+
+    /**
+     * @param bool|null $isFromOffline
+     */
+    public function setIsFromOffline($isFromOffline)
+    {
+        $this->isFromOffline = $isFromOffline;
+    }
+
+    /**
+     * @return string|null
      */
     public function getMediaGroupId()
     {
@@ -713,8 +1069,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $mediaGroupId
-     * @return void
+     * @param string|null $mediaGroupId
      */
     public function setMediaGroupId($mediaGroupId)
     {
@@ -722,7 +1077,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAuthorSignature()
     {
@@ -730,8 +1085,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $authorSignature
-     * @return void
+     * @param string|null $authorSignature
      */
     public function setAuthorSignature($authorSignature)
     {
@@ -739,7 +1093,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getText()
     {
@@ -747,8 +1101,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $text
-     * @return void
+     * @param string|null $text
      */
     public function setText($text)
     {
@@ -764,8 +1117,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param array $entities
-     * @return void
+     * @param array|null $entities
      */
     public function setEntities($entities)
     {
@@ -773,20 +1125,51 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ArrayOfMessageEntity|null
+     * @return LinkPreviewOptions|null
      */
-    public function getCaptionEntities()
+    public function getLinkPreviewOptions()
     {
-        return $this->captionEntities;
+        return $this->linkPreviewOptions;
     }
 
     /**
-     * @param ArrayOfMessageEntity $captionEntities
-     * @return void
+     * @param LinkPreviewOptions|null $linkPreviewOptions
      */
-    public function setCaptionEntities($captionEntities)
+    public function setLinkPreviewOptions($linkPreviewOptions)
     {
-        $this->captionEntities = $captionEntities;
+        $this->linkPreviewOptions = $linkPreviewOptions;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEffectId()
+    {
+        return $this->effectId;
+    }
+
+    /**
+     * @param string|null $effectId
+     */
+    public function setEffectId($effectId)
+    {
+        $this->effectId = $effectId;
+    }
+
+    /**
+     * @return Animation|null
+     */
+    public function getAnimation()
+    {
+        return $this->animation;
+    }
+
+    /**
+     * @param Animation|null $animation
+     */
+    public function setAnimation($animation)
+    {
+        $this->animation = $animation;
     }
 
     /**
@@ -798,10 +1181,9 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Audio $audio
-     * @return void
+     * @param Audio|null $audio
      */
-    public function setAudio(Audio $audio)
+    public function setAudio($audio)
     {
         $this->audio = $audio;
     }
@@ -815,29 +1197,11 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Document $document
-     * @return void
+     * @param Document|null $document
      */
     public function setDocument($document)
     {
         $this->document = $document;
-    }
-
-    /**
-     * @return Animation|null
-     */
-    public function getAnimation()
-    {
-        return $this->animation;
-    }
-
-    /**
-     * @param Animation $animation
-     * @return void
-     */
-    public function setAnimation(Animation $animation)
-    {
-        $this->animation = $animation;
     }
 
     /**
@@ -849,10 +1213,9 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param array $photo
-     * @return void
+     * @param array|null $photo
      */
-    public function setPhoto(array $photo)
+    public function setPhoto($photo)
     {
         $this->photo = $photo;
     }
@@ -866,12 +1229,27 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Sticker $sticker
-     * @return void
+     * @param Sticker|null $sticker
      */
-    public function setSticker(Sticker $sticker)
+    public function setSticker($sticker)
     {
         $this->sticker = $sticker;
+    }
+
+    /**
+     * @return Story|null
+     */
+    public function getStory()
+    {
+        return $this->story;
+    }
+
+    /**
+     * @param Story|null $story
+     */
+    public function setStory($story)
+    {
+        $this->story = $story;
     }
 
     /**
@@ -880,6 +1258,14 @@ class Message extends BaseType implements TypeInterface
     public function getVideo()
     {
         return $this->video;
+    }
+
+    /**
+     * @param Video|null $video
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
     }
 
     /**
@@ -892,20 +1278,10 @@ class Message extends BaseType implements TypeInterface
 
     /**
      * @param VideoNote|null $videoNote
-     * @return void
      */
     public function setVideoNote($videoNote)
     {
         $this->videoNote = $videoNote;
-    }
-
-    /**
-     * @param Video $video
-     * @return void
-     */
-    public function setVideo(Video $video)
-    {
-        $this->video = $video;
     }
 
     /**
@@ -917,8 +1293,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Voice $voice
-     * @return void
+     * @param Voice|null $voice
      */
     public function setVoice($voice)
     {
@@ -934,12 +1309,59 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param string $caption
-     * @return void
+     * @param string|null $caption
      */
     public function setCaption($caption)
     {
         $this->caption = $caption;
+    }
+
+    /**
+     * @return ArrayOfMessageEntity|null
+     */
+    public function getCaptionEntities()
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param ArrayOfMessageEntity|null $captionEntities
+     */
+    public function setCaptionEntities($captionEntities)
+    {
+        $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getShowCaptionAboveMedia()
+    {
+        return $this->showCaptionAboveMedia;
+    }
+
+    /**
+     * @param bool|null $showCaptionAboveMedia
+     */
+    public function setShowCaptionAboveMedia($showCaptionAboveMedia)
+    {
+        $this->showCaptionAboveMedia = $showCaptionAboveMedia;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHasMediaSpoiler()
+    {
+        return $this->hasMediaSpoiler;
+    }
+
+    /**
+     * @param bool|null $hasMediaSpoiler
+     */
+    public function setHasMediaSpoiler($hasMediaSpoiler)
+    {
+        $this->hasMediaSpoiler = $hasMediaSpoiler;
     }
 
     /**
@@ -951,63 +1373,11 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Contact $contact
-     * @return void
+     * @param Contact|null $contact
      */
-    public function setContact(Contact $contact)
+    public function setContact($contact)
     {
         $this->contact = $contact;
-    }
-
-    /**
-     * @return Location|null
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     * @return void
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-    }
-
-    /**
-     * @return Venue|null
-     */
-    public function getVenue()
-    {
-        return $this->venue;
-    }
-
-    /**
-     * @param Venue $venue
-     * @return void
-     */
-    public function setVenue($venue)
-    {
-        $this->venue = $venue;
-    }
-
-    /**
-     * @return Poll|null
-     */
-    public function getPoll()
-    {
-        return $this->poll;
-    }
-
-    /**
-     * @param Poll $poll
-     * @return void
-     */
-    public function setPoll($poll)
-    {
-        $this->poll = $poll;
     }
 
     /**
@@ -1019,12 +1389,75 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param Dice $dice
-     * @return void
+     * @param Dice|null $dice
      */
-    public function setDice(Dice $dice)
+    public function setDice($dice)
     {
         $this->dice = $dice;
+    }
+
+    /**
+     * @return Game|null
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game|null $game
+     */
+    public function setGame($game)
+    {
+        $this->game = $game;
+    }
+
+    /**
+     * @return Poll|null
+     */
+    public function getPoll()
+    {
+        return $this->poll;
+    }
+
+    /**
+     * @param Poll|null $poll
+     */
+    public function setPoll($poll)
+    {
+        $this->poll = $poll;
+    }
+
+    /**
+     * @return Venue|null
+     */
+    public function getVenue()
+    {
+        return $this->venue;
+    }
+
+    /**
+     * @param Venue|null $venue
+     */
+    public function setVenue($venue)
+    {
+        $this->venue = $venue;
+    }
+
+    /**
+     * @return Location|null
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location|null $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
     }
 
     /**
@@ -1215,8 +1648,6 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @author MY
-     *
      * @return Invoice|null
      */
     public function getInvoice()
@@ -1225,7 +1656,6 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @author MY
      * @param Invoice $invoice
      * @return void
      */
@@ -1235,8 +1665,6 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @author MY
-     *
      * @return SuccessfulPayment|null
      */
     public function getSuccessfulPayment()
@@ -1245,7 +1673,6 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @author MY
      * @param SuccessfulPayment $successfulPayment
      * @return void
      */
@@ -1354,39 +1781,5 @@ class Message extends BaseType implements TypeInterface
     public function setForumTopicReopened($forumTopicReopened)
     {
         $this->forumTopicReopened = $forumTopicReopened;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsTopicMessage()
-    {
-        return $this->isTopicMessage;
-    }
-
-    /**
-     * @param bool $isTopicMessage
-     * @return void
-     */
-    public function setIsTopicMessage($isTopicMessage)
-    {
-        $this->isTopicMessage = $isTopicMessage;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getMessageThreadId()
-    {
-        return $this->messageThreadId;
-    }
-
-    /**
-     * @param int|null $messageThreadId
-     * @return void
-     */
-    public function setMessageThreadId($messageThreadId)
-    {
-        $this->messageThreadId = $messageThreadId;
     }
 }

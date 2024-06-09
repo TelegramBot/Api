@@ -57,8 +57,7 @@ class Location extends BaseType implements TypeInterface
     protected $horizontalAccuracy;
 
     /**
-     * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For
-     * active live locations only.
+     * Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For active live locations only.
      *
      * @var int|null
      */
@@ -72,8 +71,7 @@ class Location extends BaseType implements TypeInterface
     protected $heading;
 
     /**
-     * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live
-     * locations only.
+     * Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only.
      *
      * @var int|null
      */
@@ -88,7 +86,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param mixed $latitude
+     * @param float $latitude
      * @return void
      * @throws InvalidArgumentException
      */
@@ -110,7 +108,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param mixed $longitude
+     * @param float $longitude
      * @return void
      * @throws InvalidArgumentException
      */
@@ -132,7 +130,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param mixed $horizontalAccuracy
+     * @param float|null $horizontalAccuracy
      * @return void
      * @throws InvalidArgumentException
      */
@@ -154,7 +152,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $livePeriod
+     * @param int|null $livePeriod
      * @return void
      */
     public function setLivePeriod($livePeriod)
@@ -171,7 +169,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $heading
+     * @param int|null $heading
      * @return void
      */
     public function setHeading($heading)
@@ -188,7 +186,7 @@ class Location extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $proximityAlertRadius
+     * @param int|null $proximityAlertRadius
      * @return void
      */
     public function setProximityAlertRadius($proximityAlertRadius)

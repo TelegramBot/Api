@@ -11,7 +11,6 @@ use TelegramBot\Api\BaseType;
  *
  * This object represents an answer of a user in a non-anonymous poll.
  *
- *
  * @package TelegramBot\Api\Types
  */
 class PollAnswer extends BaseType
@@ -21,7 +20,7 @@ class PollAnswer extends BaseType
      *
      * @var array
      */
-    protected static $requiredParams = ['poll_id', 'option_ids', 'user'];
+    protected static $requiredParams = ['poll_id', 'option_ids'];
 
     /**
      * {@inheritdoc}
@@ -29,22 +28,36 @@ class PollAnswer extends BaseType
      * @var array
      */
     protected static $map = [
-        'option_ids' => true,
-        'user' => User::class,
         'poll_id' => true,
+        'voter_chat' => Chat::class,
+        'user' => User::class,
+        'option_ids' => true,
     ];
 
     /**
-     * @var \TelegramBot\Api\Types\User
-     */
-    protected $user;
-
-    /**
+     * Unique poll identifier
+     *
      * @var string
      */
     protected $pollId;
 
     /**
+     * Optional. The chat that changed the answer to the poll, if the voter is anonymous
+     *
+     * @var Chat|null
+     */
+    protected $voterChat;
+
+    /**
+     * Optional. The user that changed the answer to the poll, if the voter isn't anonymous
+     *
+     * @var User|null
+     */
+    protected $user;
+
+    /**
+     * 0-based identifiers of chosen answer options. May be empty if the vote was retracted
+     *
      * @var int[]
      */
     protected $optionIds;
@@ -58,16 +71,33 @@ class PollAnswer extends BaseType
     }
 
     /**
-     * @param string $id
+     * @param string $pollId
      * @return void
      */
-    public function setPollId($id)
+    public function setPollId($pollId)
     {
-        $this->pollId = $id;
+        $this->pollId = $pollId;
     }
 
     /**
-     * @return User
+     * @return Chat|null
+     */
+    public function getVoterChat()
+    {
+        return $this->voterChat;
+    }
+
+    /**
+     * @param Chat|null $voterChat
+     * @return void
+     */
+    public function setVoterChat($voterChat)
+    {
+        $this->voterChat = $voterChat;
+    }
+
+    /**
+     * @return User|null
      */
     public function getUser()
     {
@@ -75,24 +105,12 @@ class PollAnswer extends BaseType
     }
 
     /**
-     * @param User $from
+     * @param User|null $user
      * @return void
      */
-    public function setUser(User $from)
+    public function setUser($user)
     {
-        $this->user = $from;
-    }
-
-    /**
-     * @deprecated
-     *
-     * @return User
-     */
-    public function getFrom()
-    {
-        @trigger_error(sprintf('Access user with %s is deprecated, use "%s::getUser" method', __METHOD__, __CLASS__), \E_USER_DEPRECATED);
-
-        return $this->getUser();
+        $this->user = $user;
     }
 
     /**
@@ -107,7 +125,7 @@ class PollAnswer extends BaseType
      * @param int[] $optionIds
      * @return void
      */
-    public function setOptionIds($optionIds)
+    public function setOptionIds(array $optionIds)
     {
         $this->optionIds = $optionIds;
     }

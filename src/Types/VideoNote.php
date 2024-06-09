@@ -13,8 +13,18 @@ use TelegramBot\Api\TypeInterface;
  */
 class VideoNote extends BaseType implements TypeInterface
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
     protected static $requiredParams = ['file_id', 'file_unique_id', 'length', 'duration'];
 
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
     protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
