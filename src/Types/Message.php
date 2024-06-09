@@ -1108,9 +1108,7 @@ class Message extends BaseType implements TypeInterface
         $this->text = $text;
     }
 
-    /**
-     * @return array|null
-     */
+
     public function getEntities()
     {
         return $this->entities;
@@ -1204,9 +1202,6 @@ class Message extends BaseType implements TypeInterface
         $this->document = $document;
     }
 
-    /**
-     * @return array|null
-     */
     public function getPhoto()
     {
         return $this->photo;
@@ -1460,9 +1455,6 @@ class Message extends BaseType implements TypeInterface
         $this->location = $location;
     }
 
-    /**
-     * @return \TelegramBot\Api\Types\User[]|null
-     */
     public function getNewChatMembers()
     {
         return $this->newChatMembers;
@@ -1511,9 +1503,6 @@ class Message extends BaseType implements TypeInterface
         $this->newChatTitle = $newChatTitle;
     }
 
-    /**
-     * @return PhotoSize[]|null
-     */
     public function getNewChatPhoto()
     {
         return $this->newChatPhoto;
@@ -1630,9 +1619,6 @@ class Message extends BaseType implements TypeInterface
         $this->migrateFromChatId = $migrateFromChatId;
     }
 
-    /**
-     * @return null|self
-     */
     public function getPinnedMessage()
     {
         return $this->pinnedMessage;
