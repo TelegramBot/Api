@@ -93,7 +93,7 @@ class Message extends BaseType implements TypeInterface
         'chat_shared' => ChatShared::class,
         'connected_website' => true,
         'write_access_allowed' => WriteAccessAllowed::class,
-        'passport_data' => PassportData::class,
+//        'passport_data' => PassportData::class,
         'proximity_alert_triggered' => ProximityAlertTriggered::class,
         'boost_added' => ChatBoostAdded::class,
         'chat_background_set' => ChatBackground::class,
@@ -538,14 +538,14 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. Message is an invoice for a payment, information about the invoice
      *
-     * @var \TelegramBot\Api\Types\Invoice|null
+     * @var Invoice
      */
     protected $invoice;
 
     /**
      * Optional. Message is a service message about a successful payment, information about the payment
      *
-     * @var \TelegramBot\Api\Types\SuccessfulPayment|null
+     * @var SuccessfulPayment
      */
     protected $successfulPayment;
 
