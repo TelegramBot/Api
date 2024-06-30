@@ -98,7 +98,7 @@ class Chat extends BaseType implements TypeInterface
      * @return void
      * @throws InvalidArgumentException
      */
-    public function setId($id)
+    public function setId($id): void
     {
         if (is_integer($id) || is_float($id)) {
             $this->id = $id;
@@ -118,7 +118,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -134,7 +134,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param string|null $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -150,7 +150,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param string|null $username
      */
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
@@ -166,7 +166,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param string|null $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -182,7 +182,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param string|null $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -198,7 +198,7 @@ class Chat extends BaseType implements TypeInterface
     /**
      * @param bool|null $isForum
      */
-    public function setIsForum($isForum)
+    public function setIsForum($isForum): void
     {
         $this->isForum = $isForum;
     }
