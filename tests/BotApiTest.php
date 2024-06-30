@@ -143,6 +143,6 @@ class BotApiTest extends TestCase
 
     private function createBotApi(HttpClientInterface $httpClient)
     {
-        return new BotApi('token', null, $httpClient);
+        return new BotApi('token', $httpClient);
     }
 }
