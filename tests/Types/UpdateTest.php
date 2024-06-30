@@ -38,8 +38,6 @@ class UpdateTest extends AbstractTypeTest
             'pre_checkout_query' => PreCheckoutQueryTest::getMinResponse(),
             'poll_answer' => PollAnswerTest::getMinResponse(),
             'poll' => PollTest::getMinResponse(),
-            'my_chat_member' => ChatMemberUpdatedTest::getMinResponse(),
-            'chat_member' => ChatMemberUpdatedTest::getMinResponse(),
             'chat_join_request' => ChatJoinRequestTest::getMinResponse(),
         ];
     }
@@ -85,8 +83,6 @@ class UpdateTest extends AbstractTypeTest
         $this->assertEquals(PreCheckoutQueryTest::createMinInstance(), $item->getPreCheckoutQuery());
         $this->assertEquals(PollAnswerTest::createMinInstance(), $item->getPollAnswer());
         $this->assertEquals(PollTest::createMinInstance(), $item->getPoll());
-        $this->assertEquals(ChatMemberUpdatedTest::createMinInstance(), $item->getMyChatMember());
-        $this->assertEquals(ChatMemberUpdatedTest::createMinInstance(), $item->getChatMember());
         $this->assertEquals(ChatJoinRequestTest::createMinInstance(), $item->getChatJoinRequest());
     }
 }

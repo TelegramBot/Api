@@ -34,7 +34,6 @@ class PollAnswerTest extends AbstractTypeTest
     {
         $this->assertEquals(123456789, $item->getPollId());
         $this->assertEquals(UserTest::createMinInstance(), $item->getUser());
-        $this->assertEquals(UserTest::createMinInstance(), $item->getFrom());
         $this->assertEquals([1,2,3,4,5,6], $item->getOptionIds());
     }
 

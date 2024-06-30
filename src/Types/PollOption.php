@@ -27,7 +27,8 @@ class PollOption extends BaseType implements TypeInterface
      */
     protected static $map = [
         'text' => true,
-        'voter_count' => true
+        'voter_count' => true,
+        'text_entities' => ArrayOfMessageEntity::class
     ];
 
     /**
@@ -43,6 +44,13 @@ class PollOption extends BaseType implements TypeInterface
      * @var integer
      */
     protected $voterCount;
+
+    /**
+     * Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts
+     *
+     * @var array|null
+     */
+    protected $textEntities;
 
     /**
      * @return string
@@ -76,5 +84,22 @@ class PollOption extends BaseType implements TypeInterface
     public function setVoterCount($voterCount)
     {
         $this->voterCount = $voterCount;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getTextEntities()
+    {
+        return $this->textEntities;
+    }
+
+    /**
+     * @param array|null $textEntities
+     * @return void
+     */
+    public function setTextEntities($textEntities)
+    {
+        $this->textEntities = $textEntities;
     }
 }

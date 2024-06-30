@@ -2,13 +2,15 @@
 
 namespace TelegramBot\Api\Types;
 
-use TelegramBot\Api\BaseType;
-use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
+ * Class MessageId
  * This object represents a unique message identifier.
+ *
+ * @package TelegramBot\Api\Types
  */
-class MessageId extends BaseType implements TypeInterface
+class MessageId extends MaybeInaccessibleMessage
 {
     /**
      * {@inheritdoc}
@@ -29,7 +31,7 @@ class MessageId extends BaseType implements TypeInterface
     /**
      * Unique message identifier
      *
-     * @var integer
+     * @var int
      */
     protected $messageId;
 
@@ -44,9 +46,13 @@ class MessageId extends BaseType implements TypeInterface
     /**
      * @param int $messageId
      * @return void
+     * @throws InvalidArgumentException
      */
     public function setMessageId($messageId)
     {
+        if (!is_int($messageId)) {
+            throw new InvalidArgumentException('MessageId must be an integer');
+        }
         $this->messageId = $messageId;
     }
 }

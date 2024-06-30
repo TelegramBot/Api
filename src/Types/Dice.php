@@ -8,6 +8,8 @@ use TelegramBot\Api\TypeInterface;
 /**
  * Class Dice
  * This object represents an animated emoji that displays a random value.
+ *
+ * @package TelegramBot\Api\Types
  */
 class Dice extends BaseType implements TypeInterface
 {

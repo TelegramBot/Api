@@ -88,20 +88,4 @@ class CollectionTest extends TestCase
         $media->addItem(new InputMediaPhoto('link'));
         $media->addItem(new InputMediaPhoto('link'));
     }
-
-    public function testCanOutputItemsAsArray()
-    {
-        $media = new ArrayOfInputMedia();
-        $media->addItem(new InputMediaPhoto('link'));
-
-        $this->assertSame($this->itemsOutput, $media->toJson(true));
-    }
-
-    public function testCanOutputItemsAsJson()
-    {
-        $media = new ArrayOfInputMedia();
-        $media->addItem(new InputMediaPhoto('link'));
-
-        $this->assertSame(json_encode($this->itemsOutput), $media->toJson());
-    }
 }

@@ -114,4 +114,74 @@ class UserTest extends AbstractTypeTest
         ]);
     }
 
+    public function testSetAndGetFirstName()
+    {
+        $item = new User();
+        $item->setFirstName('John');
+        $this->assertEquals('John', $item->getFirstName());
+    }
+
+    public function testSetAndGetLastName()
+    {
+        $item = new User();
+        $item->setLastName('Doe');
+        $this->assertEquals('Doe', $item->getLastName());
+    }
+
+    public function testSetAndGetUsername()
+    {
+        $item = new User();
+        $item->setUsername('johndoe');
+        $this->assertEquals('johndoe', $item->getUsername());
+    }
+
+    public function testSetAndGetLanguageCode()
+    {
+        $item = new User();
+        $item->setLanguageCode('en');
+        $this->assertEquals('en', $item->getLanguageCode());
+    }
+
+    public function testSetAndGetIsBot()
+    {
+        $item = new User();
+        $item->setIsBot(true);
+        $this->assertTrue($item->isBot());
+    }
+
+    public function testSetAndGetIsPremium()
+    {
+        $item = new User();
+        $item->setIsPremium(true);
+        $this->assertTrue($item->getIsPremium());
+    }
+
+    public function testSetAndGetAddedToAttachmentMenu()
+    {
+        $item = new User();
+        $item->setAddedToAttachmentMenu(true);
+        $this->assertTrue($item->getAddedToAttachmentMenu());
+    }
+
+    public function testSetAndGetCanJoinGroups()
+    {
+        $item = new User();
+        $item->setCanJoinGroups(true);
+        $this->assertTrue($item->getCanJoinGroups());
+    }
+
+    public function testSetAndGetCanReadAllGroupMessages()
+    {
+        $item = new User();
+        $item->setCanReadAllGroupMessages(true);
+        $this->assertTrue($item->getCanReadAllGroupMessages());
+    }
+
+    public function testSetAndGetSupportsInlineQueries()
+    {
+        $item = new User();
+        $item->setSupportsInlineQueries(true);
+        $this->assertTrue($item->getSupportsInlineQueries());
+    }
+
 }

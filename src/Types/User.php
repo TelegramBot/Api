@@ -32,12 +32,13 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
+        'is_bot' => true,
         'is_premium' => true,
         'added_to_attachment_menu' => true,
         'can_join_groups' => true,
         'can_read_all_group_messages' => true,
         'supports_inline_queries' => true,
-        'is_bot' => true
+        'can_connect_to_business' => true
     ];
 
     /**
@@ -118,207 +119,132 @@ class User extends BaseType implements TypeInterface
     protected $supportsInlineQueries;
 
     /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
+     * Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
      *
-     * @return void
+     * @var bool|null
      */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
+    protected $canConnectToBusiness;
 
-    /**
-     * @return int|float
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return void
-     */
-    public function setId($id)
+    public function setId($id): void
     {
-        if (is_integer($id) || is_float($id)) {
-            $this->id = $id;
-        } else {
-            throw new InvalidArgumentException();
+        if (!is_int($id) && !is_float($id)) {
+            throw new InvalidArgumentException('ID must be an integer or float');
         }
+        $this->id = $id;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getLastName()
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * @param string $lastName
-     *
-     * @return void
-     */
-    public function setLastName($lastName)
+    public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     *
-     * @return void
-     */
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
 
-    /**
-     * @return null|string
-     */
     public function getLanguageCode()
     {
         return $this->languageCode;
     }
 
-    /**
-     * @param string $languageCode
-     *
-     * @return void
-     */
-    public function setLanguageCode($languageCode)
+    public function setLanguageCode($languageCode): void
     {
         $this->languageCode = $languageCode;
     }
 
-    /**
-     * @return bool
-     */
-    public function isBot()
+    public function isBot(): bool
     {
         return $this->isBot;
     }
 
-    /**
-     * @param bool $isBot
-     *
-     * @return void
-     */
-    public function setIsBot($isBot)
+    public function setIsBot($isBot): void
     {
         $this->isBot = $isBot;
     }
 
-    /**
-     * @param bool $isPremium
-     *
-     * @return void
-     */
-    public function setIsPremium($isPremium)
-    {
-        $this->isPremium = $isPremium;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsPremium()
+    public function getIsPremium(): ?bool
     {
         return $this->isPremium;
     }
 
-    /**
-     * @param bool $addedToAttachmentMenu
-     *
-     * @return void
-     */
-    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
+    public function setIsPremium($isPremium): void
     {
-        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
+        $this->isPremium = $isPremium;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAddedToAttachmentMenu()
+    public function getAddedToAttachmentMenu(): ?bool
     {
         return $this->addedToAttachmentMenu;
     }
 
-    /**
-     * @param bool $canJoinGroups
-     *
-     * @return void
-     */
-    public function setCanJoinGroups($canJoinGroups)
+    public function setAddedToAttachmentMenu($addedToAttachmentMenu): void
     {
-        $this->canJoinGroups = $canJoinGroups;
+        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getCanJoinGroups()
+    public function getCanJoinGroups(): ?bool
     {
         return $this->canJoinGroups;
     }
 
-    /**
-     * @param bool $canReadAllGroupMessages
-     *
-     * @return void
-     */
-    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    public function setCanJoinGroups($canJoinGroups): void
     {
-        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+        $this->canJoinGroups = $canJoinGroups;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getCanReadAllGroupMessages()
+    public function getCanReadAllGroupMessages(): ?bool
     {
         return $this->canReadAllGroupMessages;
     }
 
-    /**
-     * @param bool $supportsInlineQueries
-     *
-     * @return void
-     */
-    public function setSupportsInlineQueries($supportsInlineQueries)
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages): void
     {
-        $this->supportsInlineQueries = $supportsInlineQueries;
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getSupportsInlineQueries()
+    public function getSupportsInlineQueries(): ?bool
     {
         return $this->supportsInlineQueries;
     }
 
+    public function setSupportsInlineQueries($supportsInlineQueries): void
+    {
+        $this->supportsInlineQueries = $supportsInlineQueries;
+    }
+
+    public function getCanConnectToBusiness(): ?bool
+    {
+        return $this->canConnectToBusiness;
+    }
+
+    public function setCanConnectToBusiness($canConnectToBusiness): void
+    {
+        $this->canConnectToBusiness = $canConnectToBusiness;
+    }
 }

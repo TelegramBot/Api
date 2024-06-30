@@ -4,134 +4,43 @@ namespace TelegramBot\Api\Types\InputMedia;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Collection\CollectionItemInterface;
+use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class InputMedia
  * This object represents the content of a media message to be sent.
+ * It should be one of InputMediaAnimation, InputMediaDocument, InputMediaAudio, InputMediaPhoto, InputMediaVideo.
  *
- * @package TelegramBot\Api
+ * @package TelegramBot\Api\Types
  */
-class InputMedia extends BaseType implements CollectionItemInterface
+class InputMedia extends BaseType implements TypeInterface, CollectionItemInterface
 {
     /**
-     * {@inheritdoc}
+     * Factory method to create an instance of the appropriate InputMedia subclass based on the type.
      *
-     * @var array
+     * @param array $data
+     * @return InputMediaAnimation|InputMediaDocument|InputMediaAudio|InputMediaPhoto|InputMediaVideo
+     * @throws InvalidArgumentException
      */
-    protected static $requiredParams = ['type', 'media'];
-
-    /**
-     * {@inheritdoc}
-     *
-     * @var array
-     */
-    protected static $map = [
-        'type' => true,
-        'media' => true,
-        'caption' => true,
-        'parse_mode' => true,
-    ];
-
-    /**
-     * Type of the result.
-     *
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended),
-     * pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>"
-     * to upload a new one using multipart/form-data under <file_attach_name> name.
-     *
-     * @var string
-     */
-    protected $media;
-
-    /**
-     * Optional. Caption of the photo to be sent, 0-200 characters.
-     *
-     * @var string|null
-     */
-    protected $caption;
-
-    /**
-     * Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic,
-     * fixed-width text or inline URLs in the media caption.
-     *
-     * @var string|null
-     */
-    protected $parseMode;
-
-    /**
-     * @return string
-     */
-    public function getType()
+    public static function fromResponse($data)
     {
-        return $this->type;
-    }
+        self::validate($data);
+        $type = $data['type'];
 
-    /**
-     * @param string $type
-     *
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMedia()
-    {
-        return $this->media;
-    }
-
-    /**
-     * @param string $media
-     *
-     * @return void
-     */
-    public function setMedia($media)
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCaption()
-    {
-        return $this->caption;
-    }
-
-    /**
-     * @param string|null $caption
-     *
-     * @return void
-     */
-    public function setCaption($caption)
-    {
-        $this->caption = $caption;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getParseMode()
-    {
-        return $this->parseMode;
-    }
-
-    /**
-     * @param string|null $parseMode
-     *
-     * @return void
-     */
-    public function setParseMode($parseMode)
-    {
-        $this->parseMode = $parseMode;
+        switch ($type) {
+            case 'animation':
+                return InputMediaAnimation::fromResponse($data);
+            case 'document':
+                return InputMediaDocument::fromResponse($data);
+            case 'audio':
+                return InputMediaAudio::fromResponse($data);
+            case 'photo':
+                return InputMediaPhoto::fromResponse($data);
+            case 'video':
+                return InputMediaVideo::fromResponse($data);
+            default:
+                throw new InvalidArgumentException('Unknown media type: ' . $data['type']);
+        }
     }
 }

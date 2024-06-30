@@ -40,17 +40,13 @@ class Client
      * Client constructor
      *
      * @param string $token Telegram Bot API token
-     * @param string|null $trackerToken Yandex AppMetrica application api_key
      * @param HttpClientInterface|null $httpClient
      * @param string|null $endpoint
      */
-    public function __construct($token, $trackerToken = null, HttpClientInterface $httpClient = null, $endpoint = null)
+    public function __construct($token, HttpClientInterface $httpClient = null, $endpoint = null)
     {
-        if ($trackerToken) {
-            @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
-        }
-        $this->api = new BotApi($token, $trackerToken, $httpClient, $endpoint);
-        $this->events = new EventCollection($trackerToken);
+        $this->api = new BotApi($token, $httpClient, $endpoint);
+        $this->events = new EventCollection();
     }
 
     /**

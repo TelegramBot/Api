@@ -26,8 +26,19 @@ class ChatMemberUpdated extends BaseType implements TypeInterface
         'old_chat_member' => ChatMember::class,
         'new_chat_member' => ChatMember::class,
         'invite_link' => ChatInviteLink::class,
+        'via_join_request' => true,
         'via_chat_folder_invite_link' => true,
     ];
+
+    public static function fromResponse($data)
+    {
+        self::validate($data);
+        /** @psalm-suppress UnsafeInstantiation */
+        $instance = new static();
+        $instance->map($data);
+
+        return $instance;
+    }
 
     /**
      * Chat the user belongs to
@@ -77,6 +88,13 @@ class ChatMemberUpdated extends BaseType implements TypeInterface
      * @var bool|null
      */
     protected $viaChatFolderInviteLink;
+
+    /**
+     * Optional. True, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator
+     *
+     * @var bool|null
+     */
+    protected $viaJoinRequest;
 
     /**
      * @return Chat
@@ -195,5 +213,22 @@ class ChatMemberUpdated extends BaseType implements TypeInterface
     public function setViaChatFolderInviteLink($viaChatFolderInviteLink)
     {
         $this->viaChatFolderInviteLink = $viaChatFolderInviteLink;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getViaJoinRequest()
+    {
+        return $this->viaJoinRequest;
+    }
+
+    /**
+     * @param bool|null $viaJoinRequest
+     * @return void
+     */
+    public function setViaJoinRequest($viaJoinRequest)
+    {
+        $this->viaJoinRequest = $viaJoinRequest;
     }
 }

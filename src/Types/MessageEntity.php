@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iGusev
- * Date: 13/04/16
- * Time: 04:10
- */
 
 namespace TelegramBot\Api\Types;
 
@@ -12,7 +6,7 @@ use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 
 /**
- * class MessageEntity.
+ * Class MessageEntity
  * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  *
  * @package TelegramBot\Api\Types
@@ -63,7 +57,7 @@ class MessageEntity extends BaseType implements TypeInterface
      * One of mention (@username), hashtag (#hashtag), cashtag ($USD), bot_command, url, email, phone_number,
      * bold (bold text), italic (italic text), underline (underlined text), strikethrough (strikethrough text),
      * code (monowidth string), pre (monowidth block), text_link (for clickable text URLs),
-     * text_mention (for users without usernames)
+     * text_mention (for users without usernames), custom_emoji (for inline custom emoji stickers)
      *
      * @var string
      */
@@ -84,7 +78,7 @@ class MessageEntity extends BaseType implements TypeInterface
     protected $length;
 
     /**
-     * Optional. For “text_link” only, url that will be opened after user taps on the text
+     * Optional. For “text_link” only, URL that will be opened after user taps on the text
      *
      * @var string|null
      */

@@ -168,41 +168,17 @@ class BotApi
     private $fileEndpoint;
 
     /**
-     * @deprecated
-     *
-     * Botan tracker
-     *
-     * @var Botan|null
-     */
-    protected $tracker;
-
-    /**
-     * @deprecated
-     *
-     * list of event ids
-     *
-     * @var array
-     */
-    protected $trackedEvents = [];
-
-    /**
      * @param string $token Telegram Bot API token
-     * @param string|null $trackerToken Yandex AppMetrica application api_key
      * @param HttpClientInterface|null $httpClient
      * @param string|null $endpoint
      */
-    public function __construct($token, $trackerToken = null, HttpClientInterface $httpClient = null, $endpoint = null)
+    public function __construct($token, HttpClientInterface $httpClient = null, $endpoint = null)
     {
         $this->token = $token;
         $this->endpoint = ($endpoint ?: self::URL_PREFIX) . $token;
         $this->fileEndpoint = $endpoint ? null : (self::FILE_URL_PREFIX . $token);
 
         $this->httpClient = $httpClient ?: new CurlHttpClient();
-
-        if ($trackerToken) {
-            @trigger_error(sprintf('Passing $trackerToken to %s is deprecated', self::class), \E_USER_DEPRECATED);
-            $this->tracker = new Botan($trackerToken);
-        }
     }
 
     /**
@@ -642,12 +618,6 @@ class BotApi
             'limit' => $limit,
             'timeout' => $timeout,
         ]));
-
-        if ($this->tracker instanceof Botan) {
-            foreach ($updates as $update) {
-                $this->trackUpdate($update);
-            }
-        }
 
         return $updates;
     }
@@ -1802,56 +1772,6 @@ class BotApi
             'chat_id' => $chatId,
             'message_id' => $messageId,
         ]);
-    }
-
-    /**
-     * @deprecated
-     *
-     * @param Update $update
-     * @param string $eventName
-     *
-     * @throws Exception
-     *
-     * @return void
-     */
-    public function trackUpdate(Update $update, $eventName = 'Message')
-    {
-        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
-
-        if (!in_array($update->getUpdateId(), $this->trackedEvents)) {
-            $message = $update->getMessage();
-            if (!$message) {
-                return;
-            }
-            $this->trackedEvents[] = $update->getUpdateId();
-
-            $this->track($message, $eventName);
-
-            if (count($this->trackedEvents) > self::MAX_TRACKED_EVENTS) {
-                $this->trackedEvents = array_slice($this->trackedEvents, (int) round(self::MAX_TRACKED_EVENTS / 4));
-            }
-        }
-    }
-
-    /**
-     * @deprecated
-     *
-     * Wrapper for tracker
-     *
-     * @param Message $message
-     * @param string $eventName
-     *
-     * @throws Exception
-     *
-     * @return void
-     */
-    public function track(Message $message, $eventName = 'Message')
-    {
-        @trigger_error(sprintf('Method "%s::%s" is deprecated', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
-
-        if ($this->tracker instanceof Botan) {
-            $this->tracker->track($message, $eventName);
-        }
     }
 
     /**

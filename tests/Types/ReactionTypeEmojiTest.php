@@ -3,19 +3,20 @@
 namespace TelegramBot\Api\Test\Types;
 
 use TelegramBot\Api\Test\AbstractTypeTest;
-use TelegramBot\Api\Types\MessageId;
+use TelegramBot\Api\Types\ReactionTypeEmoji;
 
-class MessageIdTest extends AbstractTypeTest
+class ReactionTypeEmojiTest extends AbstractTypeTest
 {
     protected static function getType()
     {
-        return MessageId::class;
+        return ReactionTypeEmoji::class;
     }
 
     public static function getMinResponse()
     {
         return [
-            'message_id' => 100,
+            'type' => 'emoji',
+            'emoji' => '👍'
         ];
     }
 
@@ -25,16 +26,17 @@ class MessageIdTest extends AbstractTypeTest
     }
 
     /**
-     * @param MessageId $item
+     * @param ReactionTypeEmoji $item
      * @return void
      */
     protected function assertMinItem($item)
     {
-        $this->assertEquals(100, $item->getMessageId());
+        $this->assertEquals('emoji', $item->getType());
+        $this->assertEquals('👍', $item->getEmoji());
     }
 
     /**
-     * @param MessageId $item
+     * @param ReactionTypeEmoji $item
      * @return void
      */
     protected function assertFullItem($item)

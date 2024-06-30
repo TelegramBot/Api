@@ -6,8 +6,7 @@ use TelegramBot\Api\BaseType;
 
 /**
  * Class CallbackQuery
- * This object represents an incoming callback query from a callback
- * button in an inline keyboard.
+ * This object represents an incoming callback query from a callback button in an inline keyboard.
  * If the button that originated the query was attached to a message sent by the bot,
  * the field message will be present.
  * If the button was attached to a message sent via the bot (in inline mode),
@@ -33,7 +32,7 @@ class CallbackQuery extends BaseType
     protected static $map = [
         'id' => true,
         'from' => User::class,
-        'message' => Message::class,
+        'message' => MaybeInaccessibleMessage::class,
         'inline_message_id' => true,
         'chat_instance' => true,
         'data' => true,
@@ -59,7 +58,7 @@ class CallbackQuery extends BaseType
      * Note that message content and message date will not be available
      * if the message is too old
      *
-     * @var \TelegramBot\Api\Types\Message|null
+     * @var \TelegramBot\Api\Types\MaybeInaccessibleMessage|null
      */
     protected $message;
 
@@ -130,7 +129,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return Message|null
+     * @return MaybeInaccessibleMessage|null
      */
     public function getMessage()
     {
@@ -138,7 +137,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @param Message $message
+     * @param MaybeInaccessibleMessage $message
      * @return void
      */
     public function setMessage($message)

@@ -106,12 +106,6 @@ class MessageTest extends AbstractTypeTest
         $this->assertEquals(ChatTest::createMinInstance(), $item->getChat());
 
         $this->assertNull($item->getFrom());
-        $this->assertNull($item->getForwardFrom());
-        $this->assertNull($item->getForwardFromChat());
-        $this->assertNull($item->getForwardFromMessageId());
-        $this->assertNull($item->getForwardDate());
-        $this->assertNull($item->getForwardSignature());
-        $this->assertNull($item->getForwardSenderName());
         $this->assertNull($item->getReplyToMessage());
         $this->assertNull($item->getViaBot());
         $this->assertNull($item->getEditDate());
@@ -168,12 +162,6 @@ class MessageTest extends AbstractTypeTest
         $this->assertEquals(ChatTest::createMinInstance(), $item->getChat());
 
         $this->assertEquals(UserTest::createMinInstance(), $item->getFrom());
-        $this->assertEquals(UserTest::createMinInstance(), $item->getForwardFrom());
-        $this->assertEquals(ChatTest::createMinInstance(), $item->getForwardFromChat());
-        $this->assertEquals(2, $item->getForwardFromMessageId());
-        $this->assertEquals(1682343645, $item->getForwardDate());
-        $this->assertEquals('forward_signature', $item->getForwardSignature());
-        $this->assertEquals('forward_sender_name', $item->getForwardSenderName());
         $this->assertEquals(MessageTest::createMinInstance(), $item->getReplyToMessage());
         $this->assertEquals(UserTest::createMinInstance(), $item->getViaBot());
         $this->assertEquals(1682343643, $item->getEditDate());
@@ -248,14 +236,6 @@ class MessageTest extends AbstractTypeTest
 
         $item = new Message();
         $item->setEditDate('s');
-    }
-
-    public function testSetForwardDateException()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $item = new Message();
-        $item->setForwardDate('s');
     }
 
     public function testToJson1()

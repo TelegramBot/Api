@@ -2,11 +2,13 @@
 
 namespace TelegramBot\Api\Types\InputMedia;
 
+use TelegramBot\Api\InvalidArgumentException;
+
 /**
  * Class InputMediaVideo
  * Represents a video to be sent.
  *
- * @package TelegramBot\Api
+ * @package TelegramBot\Api\Types
  */
 class InputMediaVideo extends InputMedia
 {
@@ -15,89 +17,251 @@ class InputMediaVideo extends InputMedia
      *
      * @var array
      */
+    protected static $requiredParams = ['type', 'media'];
+
+    /**
+     * {@inheritdoc}
+     *
+     * @var array
+     */
     protected static $map = [
         'type' => true,
         'media' => true,
+        'thumbnail' => true,
         'caption' => true,
         'parse_mode' => true,
+        'caption_entities' => true,
+        'show_caption_above_media' => true,
         'width' => true,
         'height' => true,
         'duration' => true,
-        'supports_streaming' => true
+        'supports_streaming' => true,
+        'has_spoiler' => true
     ];
 
     /**
-     * Optional. Video width.
+     * Type of the result, must be video
+     *
+     * @var string
+     */
+    protected $type = 'video';
+
+    /**
+     * File to send
+     *
+     * @var string
+     */
+    protected $media;
+
+    /**
+     * Optional. Thumbnail of the file sent
+     *
+     * @var string|null
+     */
+    protected $thumbnail;
+
+    /**
+     * Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
+     *
+     * @var string|null
+     */
+    protected $caption;
+
+    /**
+     * Optional. Mode for parsing entities in the video caption
+     *
+     * @var string|null
+     */
+    protected $parseMode;
+
+    /**
+     * Optional. List of special entities that appear in the caption
+     *
+     * @var array|null
+     */
+    protected $captionEntities;
+
+    /**
+     * Optional. Pass True, if the caption must be shown above the message media
+     *
+     * @var bool|null
+     */
+    protected $showCaptionAboveMedia;
+
+    /**
+     * Optional. Video width
      *
      * @var int|null
      */
     protected $width;
 
     /**
-     * Optional. Video height.
+     * Optional. Video height
      *
      * @var int|null
      */
     protected $height;
 
     /**
-     * Optional. Video duration.
+     * Optional. Video duration in seconds
      *
      * @var int|null
      */
     protected $duration;
 
     /**
-     * Optional. Pass True, if the uploaded video is suitable for streaming.
+     * Optional. Pass True if the uploaded video is suitable for streaming
      *
      * @var bool|null
      */
     protected $supportsStreaming;
 
     /**
-     * InputMediaVideo constructor.
+     * Optional. Pass True if the video needs to be covered with a spoiler animation
      *
-     * @param string $media
-     * @param string|null $caption
-     * @param string|null $parseMode
-     * @param int|null $width
-     * @param int|null $height
-     * @param int|null $duration
-     * @param bool $supportsStreaming
+     * @var bool|null
      */
-    public function __construct(
-        $media,
-        $caption = null,
-        $parseMode = null,
-        $width = null,
-        $height = null,
-        $duration = null,
-        $supportsStreaming = false
-    ) {
-        $this->type = 'video';
+    protected $hasSpoiler;
+
+    /**
+     * @param array $data
+     * @return static
+     * @throws InvalidArgumentException
+     */
+    public static function fromResponse($data)
+    {
+        self::validate($data);
+        /** @psalm-suppress UnsafeInstantiation */
+        $instance = new static();
+        $instance->map($data);
+
+        return $instance;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMedia(): string
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param string $media
+     */
+    public function setMedia(string $media): void
+    {
         $this->media = $media;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @param string|null $thumbnail
+     */
+    public function setThumbnail(?string $thumbnail): void
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCaption(): ?string
+    {
+        return $this->caption;
+    }
+
+    /**
+     * @param string|null $caption
+     */
+    public function setCaption(?string $caption): void
+    {
         $this->caption = $caption;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getParseMode(): ?string
+    {
+        return $this->parseMode;
+    }
+
+    /**
+     * @param string|null $parseMode
+     */
+    public function setParseMode(?string $parseMode): void
+    {
         $this->parseMode = $parseMode;
-        $this->width = $width;
-        $this->height = $height;
-        $this->duration = $duration;
-        $this->supportsStreaming = $supportsStreaming;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCaptionEntities(): ?array
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param array|null $captionEntities
+     */
+    public function setCaptionEntities(?array $captionEntities): void
+    {
+        $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getShowCaptionAboveMedia(): ?bool
+    {
+        return $this->showCaptionAboveMedia;
+    }
+
+    /**
+     * @param bool|null $showCaptionAboveMedia
+     */
+    public function setShowCaptionAboveMedia(?bool $showCaptionAboveMedia): void
+    {
+        $this->showCaptionAboveMedia = $showCaptionAboveMedia;
     }
 
     /**
      * @return int|null
      */
-    public function getWidth()
+    public function getWidth(): ?int
     {
         return $this->width;
     }
 
     /**
      * @param int|null $width
-     *
-     * @return void
      */
-    public function setWidth($width)
+    public function setWidth(?int $width): void
     {
         $this->width = $width;
     }
@@ -105,17 +269,15 @@ class InputMediaVideo extends InputMedia
     /**
      * @return int|null
      */
-    public function getHeight()
+    public function getHeight(): ?int
     {
         return $this->height;
     }
 
     /**
      * @param int|null $height
-     *
-     * @return void
      */
-    public function setHeight($height)
+    public function setHeight(?int $height): void
     {
         $this->height = $height;
     }
@@ -123,17 +285,15 @@ class InputMediaVideo extends InputMedia
     /**
      * @return int|null
      */
-    public function getDuration()
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
     /**
      * @param int|null $duration
-     *
-     * @return void
      */
-    public function setDuration($duration)
+    public function setDuration(?int $duration): void
     {
         $this->duration = $duration;
     }
@@ -141,18 +301,33 @@ class InputMediaVideo extends InputMedia
     /**
      * @return bool|null
      */
-    public function getSupportsStreaming()
+    public function getSupportsStreaming(): ?bool
     {
         return $this->supportsStreaming;
     }
 
     /**
      * @param bool|null $supportsStreaming
-     *
-     * @return void
      */
-    public function setSupportsStreaming($supportsStreaming)
+    public function setSupportsStreaming(?bool $supportsStreaming): void
     {
         $this->supportsStreaming = $supportsStreaming;
     }
+
+    /**
+     * @return bool|null
+     */
+    public function getHasSpoiler(): ?bool
+    {
+        return $this->hasSpoiler;
+    }
+
+    /**
+     * @param bool|null $hasSpoiler
+     */
+    public function setHasSpoiler(?bool $hasSpoiler): void
+    {
+        $this->hasSpoiler = $hasSpoiler;
+    }
+
 }
