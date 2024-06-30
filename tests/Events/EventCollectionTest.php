@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Test\Events;
 
 use PHPUnit\Framework\TestCase;
-use TelegramBot\Api\Botan;
 use TelegramBot\Api\Events\Event;
 use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\Update;
@@ -99,38 +98,6 @@ class EventCollectionTest extends TestCase
      *
      * @dataProvider data
      */
-    public function testHandle1($action, $checker, $update)
-    {
-        $item = new EventCollection('testToken');
-        $name = 'test';
-        $item->add($action, function ($update) use ($name) {
-            return true;
-        });
-
-        $mockedTracker = $this->getMockBuilder(Botan::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        // Configure the stub.
-
-        $mockedTracker->expects($this->once())->method('track')->willReturn(null);
-
-        $reflection = new \ReflectionClass($item);
-        $reflectionProperty = $reflection->getProperty('tracker');
-        $reflectionProperty->setAccessible(true);
-        $reflectionProperty->setValue($item, $mockedTracker);
-        $reflectionProperty->setAccessible(false);
-
-        $item->handle($update);
-    }
-
-    /**
-     * @param \Closure $action
-     * @param \Closure $checker
-     * @param Update $update
-     *
-     * @dataProvider data
-     */
     public function testHandle2($action, $checker, $update)
     {
         $item = new EventCollection();
@@ -139,16 +106,12 @@ class EventCollectionTest extends TestCase
             return true;
         });
 
-        $mockedTracker = $this->getMockBuilder(Botan::class)
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $mockedEvent = $this->getMockBuilder(Event::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         // Configure the stub.
-        $mockedTracker->expects($this->exactly(0))->method('track')->willReturn(null);
         $mockedEvent->expects($this->once())->method('executeChecker')->willReturn(true);
         $mockedEvent->expects($this->once())->method('executeAction')->willReturn(true);
 
