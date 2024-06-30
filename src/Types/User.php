@@ -125,12 +125,12 @@ class User extends BaseType implements TypeInterface
      */
     protected $canConnectToBusiness;
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         if (!is_int($id) && !is_float($id)) {
             throw new InvalidArgumentException('ID must be an integer or float');
@@ -138,32 +138,32 @@ class User extends BaseType implements TypeInterface
         $this->id = $id;
     }
 
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setLastName($lastName)
+    public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
@@ -173,77 +173,77 @@ class User extends BaseType implements TypeInterface
         return $this->languageCode;
     }
 
-    public function setLanguageCode($languageCode)
+    public function setLanguageCode($languageCode): void
     {
         $this->languageCode = $languageCode;
     }
 
-    public function isBot()
+    public function isBot(): bool
     {
         return $this->isBot;
     }
 
-    public function setIsBot($isBot)
+    public function setIsBot($isBot): void
     {
         $this->isBot = $isBot;
     }
 
-    public function getIsPremium()
+    public function getIsPremium(): ?bool
     {
         return $this->isPremium;
     }
 
-    public function setIsPremium($isPremium)
+    public function setIsPremium($isPremium): void
     {
         $this->isPremium = $isPremium;
     }
 
-    public function getAddedToAttachmentMenu()
+    public function getAddedToAttachmentMenu(): ?bool
     {
         return $this->addedToAttachmentMenu;
     }
 
-    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
+    public function setAddedToAttachmentMenu($addedToAttachmentMenu): void
     {
         $this->addedToAttachmentMenu = $addedToAttachmentMenu;
     }
 
-    public function getCanJoinGroups()
+    public function getCanJoinGroups(): ?bool
     {
         return $this->canJoinGroups;
     }
 
-    public function setCanJoinGroups($canJoinGroups)
+    public function setCanJoinGroups($canJoinGroups): void
     {
         $this->canJoinGroups = $canJoinGroups;
     }
 
-    public function getCanReadAllGroupMessages()
+    public function getCanReadAllGroupMessages(): ?bool
     {
         return $this->canReadAllGroupMessages;
     }
 
-    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages): void
     {
         $this->canReadAllGroupMessages = $canReadAllGroupMessages;
     }
 
-    public function getSupportsInlineQueries()
+    public function getSupportsInlineQueries(): ?bool
     {
         return $this->supportsInlineQueries;
     }
 
-    public function setSupportsInlineQueries($supportsInlineQueries)
+    public function setSupportsInlineQueries($supportsInlineQueries): void
     {
         $this->supportsInlineQueries = $supportsInlineQueries;
     }
 
-    public function getCanConnectToBusiness()
+    public function getCanConnectToBusiness(): ?bool
     {
         return $this->canConnectToBusiness;
     }
 
-    public function setCanConnectToBusiness($canConnectToBusiness)
+    public function setCanConnectToBusiness($canConnectToBusiness): void
     {
         $this->canConnectToBusiness = $canConnectToBusiness;
     }
