@@ -47,7 +47,7 @@ class UserChatBoosts extends BaseType implements TypeInterface
     /**
      * @param ArrayOfChatBoost $boosts
      */
-    public function setBoosts($boosts)
+    public function setBoosts($boosts): void
     {
         $this->boosts = $boosts;
     }

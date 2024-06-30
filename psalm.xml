@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="2"
-    phpVersion="5.5"
+    phpVersion="8.1"
     findUnusedBaselineEntry="false"
     findUnusedCode="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
