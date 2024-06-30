@@ -24,32 +24,32 @@ class MessageOriginChannel extends MessageOrigin
     protected $messageId;
     protected $authorSignature;
 
-    public function getChat()
+    public function getChat(): ?Chat
     {
         return $this->chat;
     }
 
-    public function setChat($chat)
+    public function setChat($chat): void
     {
         $this->chat = $chat;
     }
 
-    public function getMessageId()
+    public function getMessageId(): ?int
     {
         return $this->messageId;
     }
 
-    public function setMessageId($messageId)
+    public function setMessageId($messageId): void
     {
         $this->messageId = $messageId;
     }
 
-    public function getAuthorSignature()
+    public function getAuthorSignature(): ?string
     {
         return $this->authorSignature;
     }
 
-    public function setAuthorSignature($authorSignature)
+    public function setAuthorSignature($authorSignature): void
     {
         $this->authorSignature = $authorSignature;
     }
