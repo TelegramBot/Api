@@ -281,7 +281,3 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
         $this->pay = $pay;
     }
 }
-
-
-
-

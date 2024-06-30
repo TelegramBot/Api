@@ -93,7 +93,7 @@ class Message extends BaseType implements TypeInterface
         'chat_shared' => ChatShared::class,
         'connected_website' => true,
         'write_access_allowed' => WriteAccessAllowed::class,
-//        'passport_data' => PassportData::class,
+        //        'passport_data' => PassportData::class,
         'proximity_alert_triggered' => ProximityAlertTriggered::class,
         'boost_added' => ChatBoostAdded::class,
         'chat_background_set' => ChatBackground::class,
@@ -1107,7 +1107,6 @@ class Message extends BaseType implements TypeInterface
     {
         $this->text = $text;
     }
-
 
     public function getEntities()
     {

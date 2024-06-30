@@ -146,7 +146,3 @@ class SwitchInlineQueryChosenChat extends BaseType implements TypeInterface
         $this->allowChannelChats = $allowChannelChats;
     }
 }
-
-
-
-

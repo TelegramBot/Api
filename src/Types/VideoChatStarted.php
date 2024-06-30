@@ -7,5 +7,4 @@ use TelegramBot\Api\TypeInterface;
 
 class VideoChatStarted extends BaseType implements TypeInterface
 {
-
 }

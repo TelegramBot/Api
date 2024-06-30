@@ -53,4 +53,3 @@ class ReactionTypeEmoji extends ReactionType
         $this->emoji = $emoji;
     }
 }
-

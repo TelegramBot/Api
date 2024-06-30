@@ -7,5 +7,4 @@ use TelegramBot\Api\TypeInterface;
 
 class GiveawayCreated extends BaseType implements TypeInterface
 {
-
 }

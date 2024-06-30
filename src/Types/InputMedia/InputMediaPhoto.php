@@ -2,7 +2,6 @@
 
 namespace TelegramBot\Api\Types\InputMedia;
 
-use TelegramBot\Api\Collection\CollectionItemInterface;
 use TelegramBot\Api\InvalidArgumentException;
 
 /**

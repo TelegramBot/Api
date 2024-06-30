@@ -2,9 +2,7 @@
 
 namespace TelegramBot\Api\Types;
 
-use TelegramBot\Api\BaseType;
 use TelegramBot\Api\InvalidArgumentException;
-use TelegramBot\Api\TypeInterface;
 
 /**
  * This object represents a unique message identifier.

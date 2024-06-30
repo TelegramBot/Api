@@ -38,7 +38,6 @@ class ChatMemberAdministrator extends ChatMember
         'custom_title' => true,
     ];
 
-
     /**
      * True, if the bot is allowed to edit administrator privileges of that user
      *

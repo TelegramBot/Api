@@ -45,7 +45,7 @@ class Client
      */
     public function __construct($token, HttpClientInterface $httpClient = null, $endpoint = null)
     {
-        $this->api = new BotApi($token , $httpClient, $endpoint);
+        $this->api = new BotApi($token, $httpClient, $endpoint);
         $this->events = new EventCollection();
     }
 

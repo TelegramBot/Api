@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Events;
 
 use Closure;
-use ReflectionFunction;
 use TelegramBot\Api\Types\Update;
 
 class EventCollection

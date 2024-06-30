@@ -51,7 +51,3 @@ class BackgroundTypeChatTheme extends BackgroundType
         $this->themeName = $themeName;
     }
 }
-
-
-
-

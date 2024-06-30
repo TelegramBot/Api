@@ -114,7 +114,6 @@ class UserTest extends AbstractTypeTest
         ]);
     }
 
-
     public function testSetAndGetFirstName()
     {
         $item = new User();

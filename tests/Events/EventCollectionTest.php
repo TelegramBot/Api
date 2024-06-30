@@ -106,7 +106,6 @@ class EventCollectionTest extends TestCase
             return true;
         });
 
-
         $mockedEvent = $this->getMockBuilder(Event::class)
             ->disableOriginalConstructor()
             ->getMock();

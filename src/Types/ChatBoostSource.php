@@ -62,8 +62,6 @@ class ChatBoostSource extends BaseType implements TypeInterface
      */
     protected $user;
 
-
-
     /**
      * @return string
      */

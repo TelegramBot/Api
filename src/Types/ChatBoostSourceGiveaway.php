@@ -101,8 +101,3 @@ class ChatBoostSourceGiveaway extends ChatBoostSource
         $this->isUnclaimed = $isUnclaimed;
     }
 }
-
-
-
-
-

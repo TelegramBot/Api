@@ -210,7 +210,3 @@ class InputMediaDocument extends InputMedia
         $this->disableContentTypeDetection = $disableContentTypeDetection;
     }
 }
-
-
-
-

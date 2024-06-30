@@ -24,4 +24,3 @@ class MaybeInaccessibleMessage extends BaseType implements TypeInterface
         }
     }
 }
-
