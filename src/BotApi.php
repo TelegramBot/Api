@@ -752,6 +752,8 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
+     * @param string|null $googlePlaceId
+     * @param string|null $googlePlaceType
      *
      * @return Message
      * @throws Exception
@@ -768,7 +770,9 @@ class BotApi
         $disableNotification = false,
         $messageThreadId = null,
         $protectContent = null,
-        $allowSendingWithoutReply = null
+        $allowSendingWithoutReply = null,
+        $googlePlaceId = null,
+        $googlePlaceType = null
     ) {
         return Message::fromResponse($this->call('sendVenue', [
             'chat_id' => $chatId,
@@ -777,6 +781,8 @@ class BotApi
             'title' => $title,
             'address' => $address,
             'foursquare_id' => $foursquareId,
+            'google_place_id' => $googlePlaceId,
+            'google_place_type' => $googlePlaceType,
             'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
