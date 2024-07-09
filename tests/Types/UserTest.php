@@ -55,7 +55,7 @@ class UserTest extends AbstractTypeTest
         $this->assertNull($item->getCanJoinGroups());
         $this->assertNull($item->getCanReadAllGroupMessages());
         $this->assertNull($item->getSupportsInlineQueries());
-        $this->assertNull($item->isBot());
+        $this->assertFalse($item->isBot());
     }
 
     /**

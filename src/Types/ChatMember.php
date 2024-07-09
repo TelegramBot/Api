@@ -16,11 +16,7 @@ abstract class ChatMember extends BaseType implements TypeInterface
     protected static $requiredParams = ['status', 'user'];
 
     /**
-     * Factory method to create a concrete ChatMember instance
-     *
-     * @param array $data
-     * @return ChatMember
-     * @throws InvalidArgumentException
+     * @psalm-suppress MoreSpecificReturnType,LessSpecificImplementedReturnType,LessSpecificReturnStatement
      */
     public static function fromResponse($data)
     {

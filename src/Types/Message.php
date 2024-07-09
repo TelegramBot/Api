@@ -118,7 +118,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Unique message identifier inside this chat
      *
-     * @var int
+     * @var int|float
      */
     protected $messageId;
 
@@ -287,7 +287,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
      *
-     * @var \TelegramBot\Api\Types\ArrayOfMessageEntity|null
+     * @var MessageEntity[]|null
      */
     protected $entities;
 
@@ -330,7 +330,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. Message is a photo, available sizes of the photo
      *
-     * @var \TelegramBot\Api\Types\ArrayOfPhotoSize|null
+     * @var PhotoSize[]|null
      */
     protected $photo;
 
@@ -379,7 +379,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
      *
-     * @var \TelegramBot\Api\Types\ArrayOfMessageEntity|null
+     * @var MessageEntity[]|null
      */
     protected $captionEntities;
 
@@ -444,7 +444,7 @@ class Message extends BaseType implements TypeInterface
      * Optional. New members that were added to the group or supergroup and information about them
      * (the bot itself may be one of these members)
      *
-     * @var \TelegramBot\Api\Types\ArrayOfUser|null
+     * @var User[]|null
      */
     protected $newChatMembers;
 
@@ -465,7 +465,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. A chat photo was change to this value
      *
-     * @var \TelegramBot\Api\Types\ArrayOfPhotoSize|null
+     * @var PhotoSize[]|null
      */
     protected $newChatPhoto;
 
@@ -531,7 +531,7 @@ class Message extends BaseType implements TypeInterface
     /**
      * Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
      *
-     * @var \TelegramBot\Api\Types\MaybeInaccessibleMessage|null
+     * @var Message|InaccessibleMessage|null
      */
     protected $pinnedMessage;
 
@@ -578,12 +578,12 @@ class Message extends BaseType implements TypeInterface
      */
     protected $writeAccessAllowed;
 
-    /**
-     * Optional. Telegram Passport data
-     *
-     * @var \TelegramBot\Api\Types\PassportData|null
-     */
-    protected $passportData;
+    // /**
+    //  * Optional. Telegram Passport data
+    //  *
+    //  * @var \TelegramBot\Api\Types\PassportData|null
+    //  */
+    // protected $passportData;
 
     /**
      * Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location
@@ -719,7 +719,7 @@ class Message extends BaseType implements TypeInterface
     protected $replyMarkup;
 
     /**
-     * @return int
+     * @return int|float
      */
     public function getMessageId()
     {
@@ -1311,7 +1311,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @return ArrayOfMessageEntity|null
+     * @return MessageEntity[]|null
      */
     public function getCaptionEntities()
     {
@@ -1319,7 +1319,7 @@ class Message extends BaseType implements TypeInterface
     }
 
     /**
-     * @param ArrayOfMessageEntity|null $captionEntities
+     * @param MessageEntity[]|null $captionEntities
      */
     public function setCaptionEntities($captionEntities)
     {

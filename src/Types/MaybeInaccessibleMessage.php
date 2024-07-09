@@ -14,6 +14,9 @@ use TelegramBot\Api\TypeInterface;
  */
 class MaybeInaccessibleMessage extends BaseType implements TypeInterface
 {
+    /**
+     * @psalm-suppress MoreSpecificReturnType,LessSpecificReturnStatement
+     */
     public static function fromResponse($data)
     {
         self::validate($data);

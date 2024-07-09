@@ -58,7 +58,7 @@ class CallbackQuery extends BaseType
      * Note that message content and message date will not be available
      * if the message is too old
      *
-     * @var \TelegramBot\Api\Types\MaybeInaccessibleMessage|null
+     * @var Message|InaccessibleMessage|null
      */
     protected $message;
 
@@ -129,7 +129,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @return MaybeInaccessibleMessage|null
+     * @return Message|InaccessibleMessage|null
      */
     public function getMessage()
     {
@@ -137,7 +137,7 @@ class CallbackQuery extends BaseType
     }
 
     /**
-     * @param MaybeInaccessibleMessage $message
+     * @param Message|InaccessibleMessage|null $message
      * @return void
      */
     public function setMessage($message)

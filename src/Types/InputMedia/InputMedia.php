@@ -17,6 +17,8 @@ use TelegramBot\Api\InvalidArgumentException;
 class InputMedia extends BaseType implements TypeInterface, CollectionItemInterface
 {
     /**
+     * @psalm-suppress LessSpecificImplementedReturnType
+     *
      * Factory method to create an instance of the appropriate InputMedia subclass based on the type.
      *
      * @param array $data

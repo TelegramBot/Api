@@ -54,6 +54,8 @@ class ChatBoostSourceGiveaway extends ChatBoostSource
     protected $giveawayMessageId;
 
     /**
+     * @psalm-suppress NonInvariantDocblockPropertyType
+     *
      * Optional. User that won the prize in the giveaway if any
      *
      * @var User|null

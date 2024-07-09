@@ -92,7 +92,7 @@ class CurlHttpClient extends AbstractHttpClient
     /**
      * CURL object
      *
-     * @var resource
+     * @var \CurlHandle
      */
     private $curl;
 
@@ -178,7 +178,7 @@ class CurlHttpClient extends AbstractHttpClient
     }
 
     /**
-     * @param resource $curl
+     * @param \CurlHandle $curl
      * @param string|null $response
      * @return void
      * @throws HttpException

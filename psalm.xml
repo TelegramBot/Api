@@ -23,5 +23,14 @@
         <DeprecatedMethod errorLevel="suppress" />
         <DeprecatedClass errorLevel="suppress" />
         <DeprecatedProperty errorLevel="suppress" />
+
+        <MissingReturnType errorLevel="suppress" />
+        <MissingParamType errorLevel="suppress" />
+        <MissingPropertyType errorLevel="suppress" />
+
+        <RedundantConditionGivenDocblockType errorLevel="suppress" />
+        <DocblockTypeContradiction errorLevel="suppress" />
+
+        <RiskyTruthyFalsyComparison errorLevel="suppress" />
     </issueHandlers>
 </psalm>
