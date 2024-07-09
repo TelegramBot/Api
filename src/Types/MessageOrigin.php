@@ -23,6 +23,26 @@ class MessageOrigin extends BaseType implements TypeInterface
     protected $type;
     protected $date;
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType,LessSpecificReturnStatement
+     */
+    public static function fromResponse($data)
+    {
+        self::validate($data);
+        $class = match ($data['type']) {
+            'user' => MessageOriginUser::class,
+            'hidden_user' => MessageOriginHiddenUser::class,
+            'chat' => MessageOriginChat::class,
+            'channel' => MessageOriginChannel::class,
+            default => MessageOrigin::class
+        };
+
+        $instance = new $class();
+        $instance->map($data);
+
+        return $instance;
+    }
+
     public function getType()
     {
         return $this->type;

@@ -31,6 +31,9 @@ class ChatBoostSource extends BaseType implements TypeInterface
         'user' => User::class,
     ];
 
+    /**
+     * @psalm-suppress LessSpecificReturnStatement,MoreSpecificReturnType
+     */
     public static function fromResponse($data)
     {
         self::validate($data);

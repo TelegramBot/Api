@@ -125,7 +125,7 @@ class User extends BaseType implements TypeInterface
      */
     protected $canConnectToBusiness;
 
-    public function getId(): int
+    public function getId(): int|float
     {
         return $this->id;
     }
@@ -180,7 +180,7 @@ class User extends BaseType implements TypeInterface
 
     public function isBot(): bool
     {
-        return $this->isBot;
+        return (bool) $this->isBot;
     }
 
     public function setIsBot($isBot): void

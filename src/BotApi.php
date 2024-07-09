@@ -12,6 +12,7 @@ use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\BotCommand;
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatFullInfo;
 use TelegramBot\Api\Types\ChatInviteLink;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
@@ -278,7 +279,7 @@ class BotApi
      *
      * Response validation
      *
-     * @param resource $curl
+     * @param \CurlHandle $curl
      * @param string|false|null $response
      *
      * @throws HttpException
@@ -2254,12 +2255,12 @@ class BotApi
      * @param string|int $chatId Unique identifier for the target chat or username of the target channel
      *                           (in the format @channelusername)
      *
-     * @return Chat
+     * @return ChatFullInfo
      * @throws Exception
      */
     public function getChat($chatId)
     {
-        return Chat::fromResponse($this->call('getChat', [
+        return ChatFullInfo::fromResponse($this->call('getChat', [
             'chat_id' => $chatId
         ]));
     }
