@@ -36,7 +36,6 @@ class MessageReactionCountUpdatedTest extends AbstractTypeTest
         ];
     }
 
-
     protected function assertMinItem($item)
     {
         $this->assertEquals(ChatTest::createMinInstance(), $item->getChat());

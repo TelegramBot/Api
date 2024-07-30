@@ -39,7 +39,7 @@ class MessageReactionUpdatedTest extends AbstractTypeTest
                 ReactionTypeEmojiTest::getMinResponse()
             ],
             'new_reaction' => [
-                 ReactionTypeCustomEmojiTest::getMinResponse()
+                ReactionTypeCustomEmojiTest::getMinResponse()
             ]
         ];
     }
@@ -50,7 +50,7 @@ class MessageReactionUpdatedTest extends AbstractTypeTest
         $this->assertEquals(1, $item->getMessageId());
         $this->assertEquals(1682343644, $item->getDate());
         $this->assertEquals([ReactionTypeEmojiTest::createMinInstance()], $item->getOldReaction());
-        $this->assertEquals([ReactionTypeCustomEmojiTest::createMinInstance()],$item->getNewReaction());
+        $this->assertEquals([ReactionTypeCustomEmojiTest::createMinInstance()], $item->getNewReaction());
 
         $this->assertNull($item->getUser());
         $this->assertNull($item->getActorChat());
@@ -63,6 +63,6 @@ class MessageReactionUpdatedTest extends AbstractTypeTest
         $this->assertEquals(UserTest::createMinInstance(), $item->getUser());
         $this->assertEquals(ChatTest::createMinInstance(), $item->getActorChat());
         $this->assertEquals([ReactionTypeEmojiTest::createMinInstance()], $item->getOldReaction());
-        $this->assertEquals([ReactionTypeCustomEmojiTest::createMinInstance()],$item->getNewReaction());
+        $this->assertEquals([ReactionTypeCustomEmojiTest::createMinInstance()], $item->getNewReaction());
     }
 }

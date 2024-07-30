@@ -20,6 +20,10 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add `\TelegramBot\Api\Types\Update::$messageReactionCount` field
 - Add `\TelegramBot\Api\BotApi::setMessageReaction` api method
 
+### Deprecated
+- Deprecate `reply_to_message_id` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods. Use `reply_parameters` instead.
+- Deprecate `disable_web_page_preview` parameter to `\TelegramBot\Api\BotApi` methods. Use `link_preview_options` instead.
+
 ## 2.5.0 - 2023-08-09
 
 ### Added

@@ -23,10 +23,10 @@ class ArrayOfReactionTypeTest extends TestCase
         ]);
 
         $expected = [
-           ReactionTypeEmoji::fromResponse([
-               'emoji' => '👍',
-               'type' => 'emoji'
-           ]),
+            ReactionTypeEmoji::fromResponse([
+                'emoji' => '👍',
+                'type' => 'emoji'
+            ]),
             ReactionTypeCustomEmoji::fromResponse([
                 'custom_emoji_id' => 'custom_emoji_123',
                 'type' => 'custom_emoji'

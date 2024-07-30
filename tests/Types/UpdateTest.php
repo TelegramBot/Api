@@ -3,8 +3,6 @@
 namespace TelegramBot\Api\Test\Types;
 
 use TelegramBot\Api\Test\AbstractTypeTest;
-use TelegramBot\Api\Types\MessageReactionUpdated;
-use TelegramBot\Api\Types\MessageReactionCountUpdated;
 use TelegramBot\Api\Test\Types\Inline\ChosenInlineResultTest;
 use TelegramBot\Api\Test\Types\Inline\InlineQueryTest;
 use TelegramBot\Api\Test\Types\Payments\Query\PreCheckoutQueryTest;
