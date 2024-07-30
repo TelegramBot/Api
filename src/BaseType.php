@@ -40,7 +40,7 @@ abstract class BaseType
         }
 
         $missingParams = implode(', ', array_diff(static::$requiredParams, array_keys($data)));
-        throw new InvalidArgumentException(sprintf('Validation failed. Missing required parameters: %s', $missingParams));
+        throw new InvalidArgumentException(sprintf('%s Validation failed. Missing required parameters: %s', static::class, $missingParams));
     }
 
     /**

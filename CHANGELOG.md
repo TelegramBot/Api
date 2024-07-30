@@ -22,6 +22,7 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add `\TelegramBot\Api\BotApi::deleteMessages` api method
 - Add `\TelegramBot\Api\BotApi::copyMessages` api method
 - Add `\TelegramBot\Api\BotApi::forwardMessages` api method
+- Add `\TelegramBot\Api\BotApi::getUserChatBoosts` api method
 
 ### Deprecated
 - Deprecate `reply_to_message_id` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods. Use `reply_parameters` instead.

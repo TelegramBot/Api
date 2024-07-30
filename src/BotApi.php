@@ -3,6 +3,7 @@
 namespace TelegramBot\Api;
 
 use TelegramBot\Api\Http\CurlHttpClient;
+use TelegramBot\Api\Types\UserChatBoosts;
 use TelegramBot\Api\Types\ReplyParameters;
 use TelegramBot\Api\Http\HttpClientInterface;
 use TelegramBot\Api\Types\ArrayOfBotCommand;
@@ -3158,6 +3159,26 @@ class BotApi
             'protect_content' => (bool) $protectContent,
             'remove_caption' => (bool) $removeCaption
         ]);
+    }
+
+    /**
+     * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat.
+     * Returns a UserChatBoosts object.
+     *
+     * @param string|int $chatId Unique identifier for the chat or username of the channel (in the format @channelusername)
+     * @param int $userId Unique identifier of the target user
+     *
+     * @return UserChatBoosts
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function getUserChatBoosts($chatId, $userId)
+    {
+        return UserChatBoosts::fromResponse($this->call('getUserChatBoosts', [
+            'chat_id' => $chatId,
+            'user_id' => $userId
+        ]));
     }
 
     /**

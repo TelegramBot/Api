@@ -47,7 +47,9 @@ class Update extends BaseType implements TypeInterface
         'chat_member' => ChatMemberUpdated::class,
         'chat_join_request' => ChatJoinRequest::class,
         'message_reaction' => MessageReactionUpdated::class,
-        'message_reaction_count' => MessageReactionCountUpdated::class
+        'message_reaction_count' => MessageReactionCountUpdated::class,
+        'chat_boost' => ChatBoostUpdated::class,
+        'chat_boost_removed' => ChatBoostRemoved::class,
     ];
 
     /**
@@ -179,6 +181,22 @@ class Update extends BaseType implements TypeInterface
      * @var MessageReactionCountUpdated|null
      */
     protected $messageReactionCount;
+
+    /**
+     * Optional. A chat boost was added or changed.
+     * The bot must be an administrator in the chat to receive these updates.
+     *
+     * @var ChatBoostUpdated|null
+     */
+    protected $chatBoost;
+
+    /**
+     * Optional. A boost was removed from a chat.
+     * The bot must be an administrator in the chat to receive these updates.
+     *
+     * @var ChatBoostRemoved|null
+     */
+    protected $removedChatBoost;
 
     /**
      * @return int
@@ -487,5 +505,39 @@ class Update extends BaseType implements TypeInterface
     public function setMessageReactionCount(?MessageReactionCountUpdated $messageReactionCount)
     {
         $this->messageReactionCount = $messageReactionCount;
+    }
+
+    /**
+     * @return ChatBoostUpdated|null
+     */
+    public function getChatBoost()
+    {
+        return $this->chatBoost;
+    }
+
+    /**
+     * @param ChatBoostUpdated|null $chatBoost
+     * @return void
+     */
+    public function setChatBoost($chatBoost)
+    {
+        $this->chatBoost = $chatBoost;
+    }
+
+    /**
+     * @return ChatBoostRemoved|null
+     */
+    public function getChatBoostRemoved()
+    {
+        return $this->removedChatBoost;
+    }
+
+    /**
+     * @param ChatBoostRemoved|null $removedChatBoost
+     * @return void
+     */
+    public function setChatBoostRemoved($removedChatBoost)
+    {
+        $this->removedChatBoost = $removedChatBoost;
     }
 }
