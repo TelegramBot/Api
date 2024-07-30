@@ -3060,6 +3060,107 @@ class BotApi
     }
 
     /**
+     * Use this method to delete multiple messages simultaneously.
+     * If some of the specified messages can't be found, they are skipped.
+     * Returns True on success.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int[] $messageIds A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function deleteMessages($chatId, $messageIds)
+    {
+        return $this->call('deleteMessages', [
+            'chat_id' => $chatId,
+            'message_ids' => $messageIds
+        ]);
+    }
+
+    /**
+     * Use this method to forward multiple messages of any kind.
+     * If some of the specified messages can't be found or forwarded, they are skipped.
+     * Service messages and messages with protected content can't be forwarded.
+     * Album grouping is kept for forwarded messages.
+     * On success, an array of MessageId of the sent messages is returned.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $fromChatId Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
+     * @param int[] $messageIds A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
+     * @param bool $disableNotification Sends the messages silently. Users will receive a notification with no sound.
+     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @param bool $protectContent Protects the contents of the forwarded messages from forwarding and saving
+     *
+     * @return int[]
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function forwardMessages(
+        $chatId,
+        $fromChatId,
+        $messageIds,
+        $messageThreadId = null,
+        $disableNotification = false,
+        $protectContent = false
+    ) {
+        return $this->call('forwardMessages', [
+            'chat_id' => $chatId,
+            'from_chat_id' => $fromChatId,
+            'message_ids' => $messageIds,
+            'message_thread_id' => $messageThreadId,
+            'disable_notification' => (bool) $disableNotification,
+            'protect_content' => (bool) $protectContent
+        ]);
+    }
+
+    /**
+     * Use this method to copy messages of any kind.
+     * If some of the specified messages can't be found or copied, they are skipped.
+     * Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied
+     *
+     * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot.
+     * The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages.
+     *
+     * On success, an array of MessageId of the sent messages is returned.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param string|int $fromChatId Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
+     * @param int[] $messageIds A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @param bool $disableNotification Sends the messages silently. Users will receive a notification with no sound.
+     * @param bool $protectContent Protects the contents of the copied messages from forwarding and saving
+     * @param bool $removeCaption Pass True to copy the messages without their captions
+     *
+     * @return int[]
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function copyMessages(
+        $chatId,
+        $fromChatId,
+        $messageIds,
+        $messageThreadId,
+        $disableNotification = false,
+        $protectContent = false,
+        $removeCaption = false
+    ) {
+        return $this->call('copyMessages', [
+            'chat_id' => $chatId,
+            'from_chat_id' => $fromChatId,
+            'message_ids' => $messageIds,
+            'message_thread_id' => $messageThreadId,
+            'disable_notification' => (bool) $disableNotification,
+            'protect_content' => (bool) $protectContent,
+            'remove_caption' => (bool) $removeCaption
+        ]);
+    }
+
+    /**
      * Set an option for a cURL transfer
      *
      * @param int $option The CURLOPT_XXX option to set
