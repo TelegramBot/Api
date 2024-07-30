@@ -16,6 +16,9 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add method `\TelegramBot\Api\BotApi::validateWebAppData` to validate `window.Telegram.WebApp.initData`
 - Add `\TelegramBot\Api\Types\Message::$videoNote` field
 - Drop php < 8.1
+- Add `\TelegramBot\Api\Types\Update::$messageReaction` field
+- Add `\TelegramBot\Api\Types\Update::$messageReactionCount` field
+- Add `\TelegramBot\Api\BotApi::setMessageReaction` api method
 
 ## 2.5.0 - 2023-08-09
 

@@ -5,6 +5,7 @@ namespace TelegramBot\Api;
 use TelegramBot\Api\Http\CurlHttpClient;
 use TelegramBot\Api\Http\HttpClientInterface;
 use TelegramBot\Api\Types\ArrayOfBotCommand;
+use TelegramBot\Api\Types\ArrayOfReactionType;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
@@ -2769,6 +2770,31 @@ class BotApi
         }
 
         return $this;
+    }
+
+    /**
+     * Use this method to change the chosen reactions on a message.
+     * Service messages can't be reacted to.
+     * Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel.
+     *
+     * @param string|int $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int $messageId Identifier of the target message.
+     * @param ArrayOfReactionType $reaction A list of reaction types to set on the message.
+     * @param bool $isBig Pass `true` to set the reaction with a big animation
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function setMessageReaction($chatId, $messageId, $reaction, $isBig = false)
+    {
+        return $this->call('setMessageReaction', [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'reaction' => $reaction,
+            'is_big' => $isBig
+        ]);
     }
 
     /**

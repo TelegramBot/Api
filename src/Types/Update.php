@@ -46,6 +46,8 @@ class Update extends BaseType implements TypeInterface
         'my_chat_member' => ChatMemberUpdated::class,
         'chat_member' => ChatMemberUpdated::class,
         'chat_join_request' => ChatJoinRequest::class,
+        'message_reaction' => MessageReactionUpdated::class,
+        'message_reaction_count' => MessageReactionCountUpdated::class
     ];
 
     /**
@@ -158,6 +160,25 @@ class Update extends BaseType implements TypeInterface
      * @var ChatJoinRequest|null
      */
     protected $chatJoinRequest;
+
+    /**
+     * Optional. A reaction to a message was changed by a user.
+     * The bot must be an administrator in the chat and must explicitly specify 'message_reaction'
+     * in the list of allowed_updates to receive these updates. The update isn't received for reactions set by bots.
+     *
+     * @var MessageReactionUpdated|null
+     */
+    protected $messageReaction;
+
+    /**
+     * Optional. Reactions to a message with anonymous reactions were changed.
+     * The bot must be an administrator in the chat and must explicitly specify 'message_reaction_count'
+     * in the list of allowed_updates to receive these updates.
+     * The updates are grouped and can be sent with delay up to a few minutes.
+     *
+     * @var MessageReactionCountUpdated|null
+     */
+    protected $messageReactionCount;
 
     /**
      * @return int
@@ -432,5 +453,39 @@ class Update extends BaseType implements TypeInterface
     public function setChatJoinRequest($chatJoinRequest)
     {
         $this->chatJoinRequest = $chatJoinRequest;
+    }
+
+    /**
+     * @return MessageReactionUpdated|null
+     */
+    public function getMessageReaction()
+    {
+        return $this->messageReaction;
+    }
+
+    /**
+     * @param MessageReactionUpdated|null $messageReaction
+     * @return void
+     */
+    public function setMessageReaction(?MessageReactionUpdated $messageReaction)
+    {
+        $this->messageReaction = $messageReaction;
+    }
+
+    /**
+     * @return MessageReactionCountUpdated|null
+     */
+    public function getMessageReactionCount()
+    {
+        return $this->messageReactionCount;
+    }
+
+    /**
+     * @param MessageReactionCountUpdated|null $messageReactionCount
+     * @return void
+     */
+    public function setMessageReactionCount(?MessageReactionCountUpdated $messageReactionCount)
+    {
+        $this->messageReactionCount = $messageReactionCount;
     }
 }

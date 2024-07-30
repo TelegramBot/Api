@@ -3,6 +3,8 @@
 namespace TelegramBot\Api\Test\Types;
 
 use TelegramBot\Api\Test\AbstractTypeTest;
+use TelegramBot\Api\Types\MessageReactionUpdated;
+use TelegramBot\Api\Types\MessageReactionCountUpdated;
 use TelegramBot\Api\Test\Types\Inline\ChosenInlineResultTest;
 use TelegramBot\Api\Test\Types\Inline\InlineQueryTest;
 use TelegramBot\Api\Test\Types\Payments\Query\PreCheckoutQueryTest;
@@ -39,6 +41,8 @@ class UpdateTest extends AbstractTypeTest
             'poll_answer' => PollAnswerTest::getMinResponse(),
             'poll' => PollTest::getMinResponse(),
             'chat_join_request' => ChatJoinRequestTest::getMinResponse(),
+            'message_reaction' => MessageReactionUpdatedTest::getMinResponse(),
+            'message_reaction_count' => MessageReactionCountUpdatedTest::getMinResponse(),
         ];
     }
 
@@ -63,6 +67,8 @@ class UpdateTest extends AbstractTypeTest
         $this->assertNull($item->getMyChatMember());
         $this->assertNull($item->getChatMember());
         $this->assertNull($item->getChatJoinRequest());
+        $this->assertNull($item->getMessageReaction());
+        $this->assertNull($item->getMessageReactionCount());
     }
 
     /**
@@ -84,5 +90,7 @@ class UpdateTest extends AbstractTypeTest
         $this->assertEquals(PollAnswerTest::createMinInstance(), $item->getPollAnswer());
         $this->assertEquals(PollTest::createMinInstance(), $item->getPoll());
         $this->assertEquals(ChatJoinRequestTest::createMinInstance(), $item->getChatJoinRequest());
+        $this->assertEquals(MessageReactionUpdatedTest::createMinInstance(), $item->getMessageReaction());
+        $this->assertEquals(MessageReactionCountUpdatedTest::createMinInstance(), $item->getMessageReactionCount());
     }
 }

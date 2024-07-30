@@ -39,7 +39,8 @@ abstract class BaseType
             return true;
         }
 
-        throw new InvalidArgumentException();
+        $missingParams = implode(', ', array_diff(static::$requiredParams, array_keys($data)));
+        throw new InvalidArgumentException(sprintf("Validation failed. Missing required parameters: %s", $missingParams));
     }
 
     /**
