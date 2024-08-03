@@ -15,7 +15,7 @@ abstract class ArrayOfReactionType
     {
         $arrayOfReactionTypes = [];
         foreach ($data as $reactionTypeData) {
-            // В зависимости от типа реакции, создаем соответствующий объект
+            // Depending on the type of reaction, create an appropriate object
             if ($reactionTypeData['type'] === 'emoji') {
                 $arrayOfReactionTypes[] = ReactionTypeEmoji::fromResponse($reactionTypeData);
             } elseif ($reactionTypeData['type'] === 'custom_emoji') {

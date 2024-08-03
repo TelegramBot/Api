@@ -16,6 +16,17 @@ All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 - Add method `\TelegramBot\Api\BotApi::validateWebAppData` to validate `window.Telegram.WebApp.initData`
 - Add `\TelegramBot\Api\Types\Message::$videoNote` field
 - Drop php < 8.1
+- Add `\TelegramBot\Api\Types\Update::$messageReaction` field
+- Add `\TelegramBot\Api\Types\Update::$messageReactionCount` field
+- Add `\TelegramBot\Api\BotApi::setMessageReaction` api method
+- Add `\TelegramBot\Api\BotApi::deleteMessages` api method
+- Add `\TelegramBot\Api\BotApi::copyMessages` api method
+- Add `\TelegramBot\Api\BotApi::forwardMessages` api method
+- Add `\TelegramBot\Api\BotApi::getUserChatBoosts` api method
+
+### Deprecated
+- Deprecate `reply_to_message_id` and `allow_sending_without_reply` parameters to `\TelegramBot\Api\BotApi` methods. Use `reply_parameters` instead.
+- Deprecate `disable_web_page_preview` parameter to `\TelegramBot\Api\BotApi` methods. Use `link_preview_options` instead.
 
 ## 2.5.0 - 2023-08-09
 
