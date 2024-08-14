@@ -196,7 +196,7 @@ class Update extends BaseType implements TypeInterface
      *
      * @var ChatBoostRemoved|null
      */
-    protected $removedChatBoost;
+    protected $chatBoostRemoved;
 
     /**
      * @return int
@@ -529,15 +529,15 @@ class Update extends BaseType implements TypeInterface
      */
     public function getChatBoostRemoved()
     {
-        return $this->removedChatBoost;
+        return $this->chatBoostRemoved;
     }
 
     /**
-     * @param ChatBoostRemoved|null $removedChatBoost
+     * @param ChatBoostRemoved|null $chatBoostRemoved
      * @return void
      */
-    public function setChatBoostRemoved($removedChatBoost)
+    public function setChatBoostRemoved($chatBoostRemoved)
     {
-        $this->removedChatBoost = $removedChatBoost;
+        $this->chatBoostRemoved = $chatBoostRemoved;
     }
 }
