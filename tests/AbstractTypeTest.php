@@ -58,6 +58,10 @@ abstract class AbstractTypeTest extends TestCase
 
         $this->assertInstanceOf(static::getType(), $item);
         $this->assertFullItem($item);
+
+        $innerJson = $item->toJson();
+
+        $this->assertIsString($innerJson);
     }
 
     /**
