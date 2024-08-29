@@ -25,7 +25,7 @@ class MessageOriginHiddenUser extends MessageOrigin
         return $this->senderUserName;
     }
 
-    public function setSenderUserName(User $senderUserName)
+    public function setSenderUserName(string $senderUserName)
     {
         $this->senderUserName = $senderUserName;
     }
