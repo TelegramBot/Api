@@ -9,7 +9,6 @@ use TelegramBot\Api\Types\BusinessConnection;
 
 class BusinessConnectionTest extends AbstractTypeTest
 {
-
     protected static function getType()
     {
         return BusinessConnection::class;

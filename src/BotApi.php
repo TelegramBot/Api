@@ -344,6 +344,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
      * @param LinkPreviewOptions|null $linkPreviewOptions Link preview generation options for the message.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -361,7 +362,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $replyParameters = null,
-        $linkPreviewOptions = null
+        $linkPreviewOptions = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -394,7 +396,8 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
             'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
-            'link_preview_options' => is_null($linkPreviewOptions) ? $linkPreviewOptions : $linkPreviewOptions->toJson()
+            'link_preview_options' => is_null($linkPreviewOptions) ? $linkPreviewOptions : $linkPreviewOptions->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -475,6 +478,7 @@ class BotApi
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws Exception
@@ -490,7 +494,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -514,7 +519,8 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -532,15 +538,17 @@ class BotApi
      *
      * @param int $chatId
      * @param string $action
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return bool
      * @throws Exception
      */
-    public function sendChatAction($chatId, $action)
+    public function sendChatAction($chatId, $action, $businessConnectionId = null)
     {
         return $this->call('sendChatAction', [
             'chat_id' => $chatId,
             'action' => $action,
+            'business_connection_id' => $businessConnectionId
         ]);
     }
 
@@ -695,6 +703,7 @@ class BotApi
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      *
@@ -711,7 +720,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -735,7 +745,8 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -826,6 +837,7 @@ class BotApi
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws Exception
@@ -843,7 +855,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -869,7 +882,8 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -885,6 +899,7 @@ class BotApi
      * @param bool $allowSendingWithoutReply Pass True if the message should be sent even if the specified replied-to message is not found
      * @param string|null $messageThreadId
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -899,7 +914,8 @@ class BotApi
         $protectContent = false,
         $allowSendingWithoutReply = false,
         $messageThreadId = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -921,7 +937,8 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1161,6 +1178,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1180,7 +1198,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1207,7 +1226,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1229,6 +1249,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1247,7 +1268,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1273,7 +1295,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1298,6 +1321,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1315,7 +1339,8 @@ class BotApi
         $parseMode = null,
         $messageThreadId = null,
         $protectContent = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1340,7 +1365,8 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1403,6 +1429,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1425,7 +1452,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1451,7 +1479,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1469,6 +1498,7 @@ class BotApi
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1485,7 +1515,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1509,7 +1540,8 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -1529,6 +1561,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -1546,7 +1579,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1571,7 +1605,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -2581,6 +2616,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param \CURLFile|\CURLStringFile|string|null $thumbnail
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws InvalidArgumentException
@@ -2598,7 +2634,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -2623,7 +2660,8 @@ class BotApi
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -2640,6 +2678,7 @@ class BotApi
      * @param bool|null $allowSendingWithoutReply
      * @param array<string, \CURLFile|\CURLStringFile> $attachments Attachments to use in attach://<attachment>
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message[]
      * @throws Exception
@@ -2653,7 +2692,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $attachments = [],
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -2674,7 +2714,8 @@ class BotApi
             'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool) $disableNotification,
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ] + $attachments));
     }
 
@@ -2701,6 +2742,7 @@ class BotApi
      * @param bool|null $protectContent
      * @param bool|null $allowSendingWithoutReply
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws Exception
@@ -2722,7 +2764,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -2750,7 +2793,8 @@ class BotApi
             'message_thread_id' => $messageThreadId,
             'reply_markup' => $replyMarkup === null ? $replyMarkup : $replyMarkup->toJson(),
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -2774,6 +2818,7 @@ class BotApi
      * @param int|null $messageThreadId
      * @param bool|null $protectContent
      * @param ReplyParameters|null $replyParameters Description of the message to reply to.
+     * @param string|null $businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      *
      * @return Message
      * @throws Exception
@@ -2789,7 +2834,8 @@ class BotApi
         $replyMarkup = null,
         $messageThreadId = null,
         $protectContent = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $businessConnectionId = null
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -2811,7 +2857,8 @@ class BotApi
             'message_thread_id' => $messageThreadId,
             'reply_markup' => $replyMarkup === null ? $replyMarkup : $replyMarkup->toJson(),
             'protect_content' => (bool) $protectContent,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 
@@ -3191,6 +3238,7 @@ class BotApi
      * @return BusinessConnection
      * @throws Exception
      *
+     * @since Bot API 7.2
      * @author bernard-ng <bernard@devscast.tech>
      */
     public function getBusinessConnection($businessConnectionId)
