@@ -3,6 +3,11 @@
 All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
 ## 3.0.0 - YYYY-MM-DD
+- Add `\TelegramBot\Api\BotApi::getBusinessConnection` api method
+- Add `\TelegramBot\Api\Types\Update::$deletedBusinessMessages` field
+- Add `\TelegramBot\Api\Types\Update::$editedBusinessMessage` field
+- Add `\TelegramBot\Api\Types\Update::$businessMessage` field
+- Add `\TelegramBot\Api\Types\Update::$businessConnection` field
 - Add `\TelegramBot\Api\Types\Update::$myChatMember` field
 - Add `\TelegramBot\Api\Types\Update::$chatMember` field
 - Add `\TelegramBot\Api\Types\Update::$chatJoinRequest` field

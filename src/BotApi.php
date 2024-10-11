@@ -8,6 +8,7 @@ use TelegramBot\Api\Types\ReplyParameters;
 use TelegramBot\Api\Http\HttpClientInterface;
 use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\LinkPreviewOptions;
+use TelegramBot\Api\Types\BusinessConnection;
 use TelegramBot\Api\Types\ArrayOfReactionType;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
@@ -3178,6 +3179,24 @@ class BotApi
         return UserChatBoosts::fromResponse($this->call('getUserChatBoosts', [
             'chat_id' => $chatId,
             'user_id' => $userId
+        ]));
+    }
+
+    /**
+     * Use this method to get information about the connection of the bot with a business account.
+     * Returns a BusinessConnection object on success.
+     *
+     * @param string $businessConnectionId Unique identifier for the business connection
+     *
+     * @return BusinessConnection
+     * @throws Exception
+     *
+     * @author bernard-ng <bernard@devscast.tech>
+     */
+    public function getBusinessConnection($businessConnectionId)
+    {
+        return BusinessConnection::fromResponse($this->call('getBusinessConnection', [
+            'business_connection_id' => $businessConnectionId
         ]));
     }
 

@@ -50,6 +50,10 @@ class Update extends BaseType implements TypeInterface
         'message_reaction_count' => MessageReactionCountUpdated::class,
         'chat_boost' => ChatBoostUpdated::class,
         'chat_boost_removed' => ChatBoostRemoved::class,
+        'business_connection' => BusinessConnection::class,
+        'business_message' => Message::class,
+        'edited_business_message' => Message::class,
+        'deleted_business_messages' => BusinessMessagesDeleted::class
     ];
 
     /**
@@ -197,6 +201,35 @@ class Update extends BaseType implements TypeInterface
      * @var ChatBoostRemoved|null
      */
     protected $chatBoostRemoved;
+
+    /**
+     * Optional. The bot was connected to or disconnected from a business account,
+     * or a user edited an existing connection with the bot
+     *
+     * @var BusinessConnection|null
+     */
+    protected $businessConnection;
+
+    /**
+     * Optional. New message from a connected business account
+     *
+     * @var Message|null
+     */
+    protected $businessMessage;
+
+    /**
+     * Optional. New version of a message from a connected business account
+     *
+     * @var Message|null
+     */
+    protected $editedBusinessMessage;
+
+    /**
+     * Optional. Messages were deleted from a connected business account
+     *
+     * @var BusinessMessagesDeleted|null
+     */
+    protected $deletedBusinessMessages;
 
     /**
      * @return int
@@ -539,5 +572,73 @@ class Update extends BaseType implements TypeInterface
     public function setChatBoostRemoved($chatBoostRemoved)
     {
         $this->chatBoostRemoved = $chatBoostRemoved;
+    }
+
+    /**
+     * @return BusinessConnection|null
+     */
+    public function getBusinessConnection()
+    {
+        return $this->businessConnection;
+    }
+
+    /**
+     * @param BusinessConnection|null $businessConnection
+     * @return void
+     */
+    public function setBusinessConnection($businessConnection)
+    {
+        $this->businessConnection = $businessConnection;
+    }
+
+    /**
+     * @return Message|null
+     */
+    public function getBusinessMessage()
+    {
+        return $this->businessMessage;
+    }
+
+    /**
+     * @param Message|null $businessMessage
+     * @return void
+     */
+    public function setBusinessMessage($businessMessage)
+    {
+        $this->businessMessage = $businessMessage;
+    }
+
+    /**
+     * @return Message|null
+     */
+    public function getEditedBusinessMessage()
+    {
+        return $this->editedBusinessMessage;
+    }
+
+    /**
+     * @param Message|null $editedBusinessMessage
+     * @return void
+     */
+    public function setEditedBusinessMessage($editedBusinessMessage)
+    {
+        $this->editedBusinessMessage = $editedBusinessMessage;
+    }
+
+    /**
+     * @return BusinessMessagesDeleted|null
+     */
+    public function getDeletedBusinessMessages()
+    {
+        return $this->deletedBusinessMessages;
+    }
+
+    /**
+     * @param BusinessMessagesDeleted|null $deletedBusinessMessages
+     * @return void
+     */
+    public function setDeletedBusinessMessages($deletedBusinessMessages)
+    {
+        $this->deletedBusinessMessages = $deletedBusinessMessages;
     }
 }
