@@ -3,6 +3,7 @@
 All Notable changes to `PHP Telegram Bot Api` will be documented in this file
 
 ## 3.0.0 - YYYY-MM-DD
+- Add `\TelegramBot\Api\BotApi::replaceStickerInSet` api method
 - Add  Added the parameter `business_connection_id` to `\TelegramBot\Api\BotApi` send methods
 - Add `\TelegramBot\Api\BotApi::getBusinessConnection` api method
 - Add `\TelegramBot\Api\Types\Update::$deletedBusinessMessages` field

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace TelegramBot\Api\Test\Types;
 
 use TelegramBot\Api\Test\AbstractTypeTest;

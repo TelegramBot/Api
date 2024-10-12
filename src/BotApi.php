@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api;
 
+use TelegramBot\Api\Types\InputSticker;
 use TelegramBot\Api\Http\CurlHttpClient;
 use TelegramBot\Api\Types\UserChatBoosts;
 use TelegramBot\Api\Types\ReplyParameters;
@@ -3246,6 +3247,33 @@ class BotApi
         return BusinessConnection::fromResponse($this->call('getBusinessConnection', [
             'business_connection_id' => $businessConnectionId
         ]));
+    }
+
+    /**
+     * Use this method to replace an existing sticker in a sticker set with a new one.
+     * The method is equivalent to calling deleteStickerFromSet, then addStickerToSet, then setStickerPositionInSet.
+     * Returns True on success.
+     *
+     * @param int $userId User identifier of the sticker set owner
+     * @param string $name Sticker set name
+     * @param string $oldSticker File identifier of the replaced sticker
+     * @param InputSticker $sticker A JSON-serialized object with information about the added sticker.
+     *                              If exactly the same sticker had already been added to the set, then the set remains unchanged.
+     *
+     * @return bool
+     * @throws Exception
+     *
+     * @since Bot API 7.2
+     * @auther bernard-ng <bernard@devscast.tech>
+     */
+    public function replaceStickerInSet($userId, $name, $oldSticker, $sticker)
+    {
+        return $this->call('replaceStickerInSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'old_sticker' => $oldSticker,
+            'sticker' => $sticker
+        ]);
     }
 
     /**
