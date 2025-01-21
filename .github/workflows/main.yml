@@ -1,0 +1,76 @@
+{
+    "name": "telegram-bot/api",
+    "description": "PHP Wrapper for Telegram Bot API",
+    "keywords": [
+        "php",
+        "telegram",
+        "bot",
+        "7547355316:AAF2XAkqpYYBGJ2DXoh4RhdTxeZVmpN94wY"
+    ],
+    "homepage": "https://github.com/TelegramBot/Api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya Gusev",
+            "email": "mail@igusev.ru",
+            "homepage": "https://php-cat.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge" : "*",
+        "friendsofphp/php-cs-fixer": "~3.28.0",
+        "vimeo/psalm": "^5.9",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "php-http/multipart-stream-builder": "^1.0",
+        "symfony/http-client": "^4.3 | ^5.0 | ^6.0",
+        "symfony/mime": "^4.3 | ^5.0 | ^6.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "suggest": {
+        "psr/http-client": "To use psr/http-client",
+        "psr/http-factory": "To use psr/http-client",
+        "php-http/multipart-stream-builder": "To use psr/http-client",
+        "guzzlehttp/guzzle": "To use guzzlehttp/guzzle psr implementation",
+        "symfony/http-client": "To use symfony/http-client",
+        "symfony/mime": "To use symfony/http-client"
+    },
+    "autoload": {
+        "psr-4": {
+            "TelegramBot\\Api\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TelegramBot\\Api\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/simple-phpunit --colors=always",
+        "coverage": "XDEBUG_MODE=coverage vendor/bin/simple-phpunit --coverage-html build/coverage",
+        "psalm": "vendor/bin/psalm",
+        "cs-fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi",
+        "cs-check": "vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
+        "checks": [
+            "@cs-fix",
+            "@psalm",
+            "@test"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.6-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
+}
