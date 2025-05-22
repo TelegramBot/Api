@@ -6,7 +6,7 @@ use TelegramBot\Api\Exception;
 
 abstract class AbstractHttpClient implements HttpClientInterface
 {
-    public function request($url, array $data = null)
+    public function request($url, ?array $data = null)
     {
         $response = $this->doRequest($url, $data);
 
@@ -27,7 +27,7 @@ abstract class AbstractHttpClient implements HttpClientInterface
      * @param array|null $data
      * @return array
      */
-    abstract protected function doRequest($url, array $data = null);
+    abstract protected function doRequest($url, ?array $data = null);
 
     /**
      * @param string $url
