@@ -22,7 +22,7 @@ class Event
      * @param \Closure $action
      * @param \Closure|null $checker
      */
-    public function __construct(\Closure $action, \Closure $checker = null)
+    public function __construct(\Closure $action, ?\Closure $checker = null)
     {
         $this->action = $action;
         $this->checker = $checker;

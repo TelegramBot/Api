@@ -177,7 +177,7 @@ class BotApi
      * @param HttpClientInterface|null $httpClient
      * @param string|null $endpoint
      */
-    public function __construct($token, HttpClientInterface $httpClient = null, $endpoint = null)
+    public function __construct($token, ?HttpClientInterface $httpClient = null, $endpoint = null)
     {
         $this->token = $token;
         $this->endpoint = ($endpoint ?: self::URL_PREFIX) . $token;

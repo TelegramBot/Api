@@ -110,7 +110,7 @@ class CurlHttpClient extends AbstractHttpClient
     /**
      * @inheritDoc
      */
-    protected function doRequest($url, array $data = null)
+    protected function doRequest($url, ?array $data = null)
     {
         $options = $this->options + [
             CURLOPT_URL => $url,
