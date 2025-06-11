@@ -43,6 +43,10 @@ class UpdateTest extends AbstractTypeTest
             'message_reaction_count' => MessageReactionCountUpdatedTest::getMinResponse(),
             'chat_boost' => ChatBoostUpdatedTest::getMinResponse(),
             'chat_boost_removed' => ChatBoostRemovedTest::getMinResponse(),
+            'business_connection' => BusinessConnectionTest::getMinResponse(),
+            'business_message' => MessageTest::getMinResponse(),
+            'edited_business_message' => MessageTest::getMinResponse(),
+            'deleted_business_messages' => BusinessMessagesDeletedTest::getMinResponse(),
         ];
     }
 
@@ -71,6 +75,10 @@ class UpdateTest extends AbstractTypeTest
         $this->assertNull($item->getMessageReactionCount());
         $this->assertNull($item->getChatBoost());
         $this->assertNull($item->getChatBoostRemoved());
+        $this->assertNull($item->getBusinessConnection());
+        $this->assertNull($item->getBusinessMessage());
+        $this->assertNull($item->getEditedBusinessMessage());
+        $this->assertNull($item->getDeletedBusinessMessages());
     }
 
     /**
@@ -96,5 +104,9 @@ class UpdateTest extends AbstractTypeTest
         $this->assertEquals(MessageReactionCountUpdatedTest::createMinInstance(), $item->getMessageReactionCount());
         $this->assertEquals(ChatBoostUpdatedTest::createMinInstance(), $item->getChatBoost());
         $this->assertEquals(ChatBoostRemovedTest::createMinInstance(), $item->getChatBoostRemoved());
+        $this->assertEquals(BusinessConnectionTest::createMinInstance(), $item->getBusinessConnection());
+        $this->assertEquals(MessageTest::createMinInstance(), $item->getBusinessMessage());
+        $this->assertEquals(MessageTest::createMinInstance(), $item->getEditedBusinessMessage());
+        $this->assertEquals(BusinessMessagesDeletedTest::createMinInstance(), $item->getDeletedBusinessMessages());
     }
 }
