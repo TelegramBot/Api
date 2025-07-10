@@ -15,7 +15,7 @@ interface HttpClientInterface
      * @return mixed
      * @throws Exception
      */
-    public function request($url, array $data = null);
+    public function request($url, ?array $data = null);
 
     /**
      * Get file contents
