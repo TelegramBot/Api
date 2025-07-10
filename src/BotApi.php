@@ -244,7 +244,7 @@ class BotApi
      * @throws HttpException
      * @throws InvalidJsonException
      */
-    public function call($method, array $data = null, $timeout = null)
+    public function call($method, ?array $data = null, $timeout = null)
     {
         if ($timeout !== null) {
             @trigger_error(sprintf('Passing $timeout parameter in %s::%s is deprecated. Use http client options', __CLASS__, __METHOD__), \E_USER_DEPRECATED);
