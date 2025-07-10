@@ -1,10 +1,10 @@
 <?php
 
-namespace TelegramBot\\Api\\Types;
+namespace TelegramBot\Api\Types;
 
-use TelegramBot\\Api\\BaseType;
-use TelegramBot\\Api\\TypeInterface;
-use TelegramBot\\Api\\InvalidArgumentException;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 class OwnedGift extends BaseType implements TypeInterface
 {
@@ -23,6 +23,10 @@ class OwnedGift extends BaseType implements TypeInterface
     protected $ownedGiftId;
     protected $senderUser;
     protected $sendDate;
+
+    final public function __construct()
+    {
+    }
 
     /**
      * @psalm-suppress LessSpecificReturnStatement,MoreSpecificReturnType

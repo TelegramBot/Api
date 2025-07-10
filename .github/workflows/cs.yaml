@@ -32,7 +32,7 @@ jobs:
 
             -
                 name: Cache dependencies installed with composer
-                uses: actions/cache@v2
+                uses: actions/cache@v4
                 with:
                     path: ${{ env.COMPOSER_CACHE_DIR }}
                     key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
