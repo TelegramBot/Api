@@ -90,6 +90,7 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'users_shared' => UsersShared::class,
+        'user_shared' => UserShared::class,
         'chat_shared' => ChatShared::class,
         'connected_website' => true,
         'write_access_allowed' => WriteAccessAllowed::class,
@@ -555,6 +556,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\UsersShared|null
      */
     protected $usersShared;
+
+    /**
+     * Optional. Service message: user were shared with the bot
+     *
+     * @var UserShared|null
+     */
+    protected $userShared;
 
     /**
      * Optional. Service message: a chat was shared with the bot
@@ -1766,5 +1774,39 @@ class Message extends BaseType implements TypeInterface
     public function setForumTopicReopened($forumTopicReopened)
     {
         $this->forumTopicReopened = $forumTopicReopened;
+    }
+
+    /**
+     * @param UserShared $data
+     * @return void
+     */
+    public function setUserShared(UserShared $data)
+    {
+        $this->userShared = $data;
+    }
+
+    /**
+     * @return UserShared
+     */
+    public function getUserShared()
+    {
+        return $this->userShared;
+    }
+
+    /**
+     * @param UsersShared $data
+     * @return void
+     */
+    public function setUsersShared(UsersShared $data)
+    {
+        $this->usersShared = $data;
+    }
+
+    /**
+     * @return UsersShared
+     */
+    public function getUsersShared()
+    {
+        return $this->usersShared;
     }
 }
