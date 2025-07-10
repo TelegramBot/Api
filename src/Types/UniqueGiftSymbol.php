@@ -1,9 +1,9 @@
 <?php
 
-namespace TelegramBot\\Api\\Types;
+namespace TelegramBot\Api\Types;
 
-use TelegramBot\\Api\\BaseType;
-use TelegramBot\\Api\\TypeInterface;
+use TelegramBot\Api\BaseType;
+use TelegramBot\Api\TypeInterface;
 
 class UniqueGiftSymbol extends BaseType implements TypeInterface
 {

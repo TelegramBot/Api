@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramBot\\Api\\Types;
+namespace TelegramBot\Api\Types;
 
 class OwnedGiftUnique extends OwnedGift
 {
